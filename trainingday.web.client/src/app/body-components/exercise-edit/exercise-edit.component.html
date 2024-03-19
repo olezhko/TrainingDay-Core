@@ -1,0 +1,49 @@
+<div class="container">
+    <form [formGroup]="editExerciseForm" (ngSubmit)="save()">
+        <div class="form-group">
+            <label class="required" for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Name" formControlName="name">
+        </div>
+    
+        <div class="form-group">
+            <label class="required" for="code">Code</label>
+            <input type="text" class="form-control" id="code" placeholder="Code Number" formControlName="code">
+        </div>
+    
+        <div class="form-group">
+            <label class="col-sm-2 control" for="startDescription">Start Position</label>
+            <input type="text" class="form-control" id="startDescription" placeholder="Start Position Description" formControlName="startDescription">
+        </div>
+    
+        <div class="form-group">
+            <label class="required" for="executionDescription">Execution</label>
+            <input type="text" class="form-control" id="executionDescription" placeholder="Execution Description" formControlName="executionDescription">
+        </div>
+    
+        <div class="form-group">
+            <label class="required" for="adviceDescription">Advice</label>
+            <input type="text" class="form-control" id="adviceDescription" placeholder="Advice Description" formControlName="adviceDescription">
+        </div>
+    
+        <div class="form-group">
+            <label class="required" for="muscles">Muscles</label>
+            <select class="form-control" multiple id="muscles" [value]="selectedMuscles" formControlName="selectedMuscles">
+                <option *ngFor="let tag of muscles" [ngValue]="tag">{{tag.text}}</option>
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label class="required" for="tags">Tags</label>
+            <select class="form-control" multiple id="tags" [value]="selectedTags" formControlName="selectedTags">
+                <option *ngFor="let tag of tags" [ngValue]="tag">{{tag.text}}</option>
+            </select>
+        </div>
+    
+        <div>
+            <button class="btn btn-default" [routerLink]="['/exercises']">Cancel</button>
+            <button class="btn btn-success save" type="submit">Save</button>
+        </div>
+    
+    </form>
+    
+</div>

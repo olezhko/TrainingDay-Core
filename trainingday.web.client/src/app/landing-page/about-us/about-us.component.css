@@ -1,0 +1,23 @@
+div {
+  margin: 50px;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: stretch;
+}
+
+h1 {
+  font-weight: bold;
+  width: 50%;
+}
+
+#about-description {
+  text-align: start;
+}
+
+#about-img {
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 0% 20% 0% 20%;
+}

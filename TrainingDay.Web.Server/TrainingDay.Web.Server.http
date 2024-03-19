@@ -1,0 +1,6 @@
+@TrainingDay.Web.Server_HostAddress = http://localhost:5237
+
+GET {{TrainingDay.Web.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

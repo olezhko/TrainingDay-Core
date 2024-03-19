@@ -1,0 +1,50 @@
+﻿using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
+using Microsoft.Extensions.Configuration;
+using TrainingDay.Web.Services;
+using TrainingDay.Web.Services.Blogs;
+using TrainingDay.Web.Services.Email;
+using TrainingDay.Web.Services.Exercises;
+using TrainingDay.Web.Services.Firebase;
+using TrainingDay.Web.Services.Rabbit;
+using TrainingDay.Web.Services.Support;
+using TrainingDay.Web.Services.UserTokens;
+using TrainingDay.Web.Services.YoutubeVideo;
+
+namespace TrainingDay.Web.Server.Extensions
+{
+    public static class DependenciesInjection
+    {
+        public static void InstallServices(this IServiceCollection services, ConfigurationManager configuration)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("default", corsPolicyBuilder => corsPolicyBuilder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
+
+            services.Configure<ApiSettings>(configuration.GetSection("ApiSettings"));
+            services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddTransient<IYoutubeVideoCatalog, YoutubeVideoCatalog>();
+            services.AddScoped<IExerciseManager, ExerciseManager>();
+            //services.AddScoped<IUserTokenManager, UserTokenManager>();
+            services.AddScoped<IBlogPostsManager, BlogPostsManager>();
+            services.AddScoped<IFirebaseService, FirebaseService>();
+            //services.AddScoped<IMessageProducer, RabbitMQProducer>();
+
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<ISupportManager, SupportManager>();
+
+            //FirebaseApp.Create(new AppOptions()
+            //{
+            //    Credential = GoogleCredential.FromFile(GetPathToSettingsFile("firebase.json"))
+            //});
+
+            //services.AddHostedService<ConsumeScopedServiceHostedService>();
+        }
+    }
+}

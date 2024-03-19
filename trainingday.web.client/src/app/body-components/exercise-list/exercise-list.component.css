@@ -1,0 +1,8 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#search-input {
+    width: 400px;
+}

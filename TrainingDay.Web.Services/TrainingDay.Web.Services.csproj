@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="FirebaseAdmin" Version="2.4.0" />
+    <PackageReference Include="Google.Apis.YouTube.v3" Version="1.67.0.3343" />
+    <PackageReference Include="MailKit" Version="4.3.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TrainingDay.Web.Database\TrainingDay.Web.Database.csproj" />
+    <ProjectReference Include="..\TrainingDay.Web.Data\TrainingDay.Web.Data.csproj" />
+    <ProjectReference Include="..\TrainingDay.Web.Entities\TrainingDay.Web.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

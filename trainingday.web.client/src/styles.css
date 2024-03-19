@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+body {
+  font-family: 'Inter';
+  margin-top: 80px;
+  margin-bottom: 120px;
+}
+
+.horizontal-container {
+  display: flex;
+  gap: 10px; /* Adjust the gap between divs as needed */
+}
+
+.wrap-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-around;
+}
+
+.vertical-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Adjust the gap between divs as needed */
+  align-items: center;
+}
+
+.space {
+  flex: 1;
+}
+
+.w-300 {
+  width: 300px;
+}
+
+.page-title {
+  color: Orange;
+}
+
+.required:after {
+  content: "*";
+  color: red;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('assets/fonts/Inter/Inter-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

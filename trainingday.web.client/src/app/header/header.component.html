@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light header-padding fixed-top">
+  <a class="navbar-brand" href="/" >
+    <img src="../../assets/main.png" style="width: 200px"/>
+  </a>
+  <div class="space">
+
+  </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" 
+  (click)="openMenu()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div [class.collapse]="isMenuOpen" class="navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active nav-title-text">
+        <a class="nav-link" href="/blogs">Blogs</a>
+      </li>
+      <li class="nav-item nav-title-text">
+        <a class="nav-link" href="/exercises">Exercises</a>
+      </li>
+    </ul>
+  </div>
+</nav>
