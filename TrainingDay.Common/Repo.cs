@@ -80,7 +80,6 @@
         public string MusclesString { get; set; } // text, by "," enum collection
         public int TagsValue { get; set; }
         public int CodeNum { get; set; }
-        public string ExerciseImageUrl { get; set; }
     }
 
     public class LastTraining
@@ -98,8 +97,6 @@
         public int LastTrainingId { get; set; }
         public string ExerciseName { get; set; }
         public string Description { get; set; }
-        public string ExerciseImageUrl { get; set; }
-
         public int OrderNumber { get; set; }
         public int SuperSetId { get; set; }
 
