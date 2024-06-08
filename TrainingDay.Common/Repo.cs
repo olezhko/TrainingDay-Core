@@ -103,6 +103,7 @@
         public string MusclesString { get; set; }
         public string WeightAndRepsString { get; set; }
         public int TagsValue { get; set; }
+        public int CodeNum { get; set; }
     }
 
     [Serializable]
