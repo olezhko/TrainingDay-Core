@@ -4,7 +4,7 @@ using TrainingDay.Web.Entities;
 
 namespace TrainingDay.Web.Database;
 
-public class ExercisesInitializer
+public static class ExercisesInitializer
 {
     public static void Initialize(TrainingDayContext context)
     {
@@ -20,12 +20,10 @@ public class ExercisesInitializer
                     context.Exercises.Add(new WebExercise(srcExercise)
                     {
                         Culture = culture,
-                        ExerciseImageUrl = string.Format(Consts.ExerciseImageFormat, srcExercise.CodeNum),
                     });
                 }
                 else
                 {
-                    dbExercise.ExerciseImageUrl = string.Format(Consts.ExerciseImageFormat, srcExercise.CodeNum);
                     dbExercise.Description = JsonConvert.SerializeObject(srcExercise.Description);
                     dbExercise.MusclesString = srcExercise.MusclesString;
                     dbExercise.ExerciseItemName = srcExercise.ExerciseItemName;

@@ -4,5 +4,5 @@ namespace TrainingDay.Web.Services.Support;
 
 public interface ISupportManager
 {
-    Task SendContactMe(ContactMeModel model);
+    Task SendContactMe(ContactMeModel model, CancellationToken cancellationToken);
 }

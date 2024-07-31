@@ -9,14 +9,14 @@ namespace TrainingDay.Web.Server.Controllers
     public class SupportController(ISupportManager manager) : ControllerBase
     {
         [HttpPost("contact-me")]
-        public async Task<IActionResult> Contact([FromBody] ContactMeModel request)
+        public async Task<IActionResult> Contact([FromBody] ContactMeModel request, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(request);
             }
 
-            await manager.SendContactMe(request);
+            await manager.SendContactMe(request, cancellationToken);
 
             return Ok();
         }

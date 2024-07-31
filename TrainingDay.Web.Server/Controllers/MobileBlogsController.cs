@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Globalization;
 using TrainingDay.Common;
 using TrainingDay.Web.Database;
-using TrainingDay.Web.Entities;
 using TrainingDay.Web.Server.Extensions;
 
 namespace TrainingDay.Web.Server.Controllers;
@@ -19,22 +17,45 @@ public class MobileBlogsController : ControllerBase
         _context = context;
     }
 
-    [HttpGet]
-    public async Task<IEnumerable<MobileBlog>> GetMobileBlogs([FromQuery] int cultureId, int page = 1, int pageSize = 10)
+    [HttpGet("blogs")]
+    public async Task<IActionResult> GetMobileBlogs([FromQuery] int cultureId, int page, int pageSize, CancellationToken token)
     {
-        IEnumerable<MobileBlog> dataPage = _context.PostCultures
+        IEnumerable<MobileBlog> dataPage = await _context.PostCultures
             .Where(post => post.CultureId == cultureId)
             .Include(item => item.BlogPost)
             .AsNoTracking()
             .Page(page, pageSize)
             .Select(item => new MobileBlog()
             {
+                Id = item.Id,
                 Title = item.BlogPost.Title,
                 DateTime = item.BlogPost.Date,
-                ShortText = item.BlogPost.Description,
-                Text = item.BlogPost.View
-            });
+            })
+            .ToListAsync(token);
 
-        return dataPage;
+        return Ok(dataPage);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetMobileBlog([FromQuery] int id, CancellationToken token)
+    {
+        var blog = await _context.PostCultures
+            .Include(item => item.BlogPost)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(post => post.Id == id, token);
+
+        if (blog == null)
+        {
+            return NotFound();
+        }
+
+        var result = new MobileBlog()
+        {
+            Title = blog.BlogPost.Title,
+            DateTime = blog.BlogPost.Date,
+            Text = blog.BlogPost.View
+        };
+
+        return Ok(result);
     }
 }

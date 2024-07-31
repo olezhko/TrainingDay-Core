@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrainingDay.Web.Database;
 
@@ -11,9 +12,11 @@ using TrainingDay.Web.Database;
 namespace TrainingDay.Web.Database.Migrations
 {
     [DbContext(typeof(TrainingDayContext))]
-    partial class TrainingDayContextModelSnapshot : ModelSnapshot
+    [Migration("20240731134123_RemoveWebImage")]
+    partial class RemoveWebImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

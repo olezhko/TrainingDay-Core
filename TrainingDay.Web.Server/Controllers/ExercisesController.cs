@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using System.Globalization;
 using TrainingDay.Common;
 using TrainingDay.Web.Database;
@@ -15,7 +14,6 @@ namespace TrainingDay.Web.Server.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class ExercisesController(TrainingDayContext context,
-            IOptions<RequestLocalizationOptions> locOptions,
             IExerciseManager mngExercise,
             IWebHostEnvironment environment,
             IMapper mapper) : ControllerBase
@@ -59,7 +57,7 @@ namespace TrainingDay.Web.Server.Controllers
                 return NotFound();
             }
 
-            var exerciseViewModel = new ExerciseViewModel(exercise);
+            var exerciseViewModel = mapper.Map<ExerciseViewModel>(exercise);
             return Ok(exerciseViewModel);
         }
 
@@ -72,43 +70,41 @@ namespace TrainingDay.Web.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (model.File != null)
+            var exercise = mapper.Map<WebExercise>(model);
+            context.Exercises.Add(exercise);
+            await context.SaveChangesAsync();
+            return Ok(exercise);
+        }
+
+        [HttpPost("image")]
+        public async Task<IActionResult> SetImage(UploadImageModel model, CancellationToken token)
+        {
+            if (model.ImageFile != null)
             {
                 using (var memoryStream = new MemoryStream())
                 {
-                    await model.File.CopyToAsync(memoryStream);
+                    await model.ImageFile.CopyToAsync(memoryStream);
 
                     // Upload the file if less than 2 MB
                     if (memoryStream.Length < 2097152)
                     {
-                        var file = new WebExerciseImageFile()
-                        {
-                            ExerciseCodeNum = model.CodeNum,
-                            Content = memoryStream.ToArray()
-                        };
-
-                        var folder = Path.Combine(environment.ContentRootPath, "exercise_images");
+                        var folder = Path.Combine(environment.WebRootPath, "exercise_images");
                         string filePath = Path.Combine(folder, model.CodeNum + ".jpg");
                         using (Stream fileStream = new FileStream(filePath, FileMode.Create))
                         {
-                            await model.File.CopyToAsync(fileStream);
+                            await model.ImageFile.CopyToAsync(fileStream);
                         }
-
-                        context.ExerciseImageFiles.Add(file);
-                        await context.SaveChangesAsync();
                     }
                     else
                     {
                         ModelState.AddModelError("File", "The file is too large.");
                     }
                 }
+
+                return Ok();
             }
 
-            var exercise = mapper.Map<WebExercise>(model);
-            exercise.ExerciseImageUrl = string.Format(Consts.ExerciseImageFormat, exercise.CodeNum);
-            context.Exercises.Add(exercise);
-            await context.SaveChangesAsync();
-            return Ok(exercise);
+            return BadRequest();
         }
 
         [HttpGet("editor")]

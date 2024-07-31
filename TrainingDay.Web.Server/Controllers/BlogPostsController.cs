@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TrainingDay.Web.Data.BlogPosts;
+using TrainingDay.Web.Entities;
 using TrainingDay.Web.Services.Blogs;
 
 namespace TrainingDay.Web.Server.Controllers
@@ -9,9 +10,9 @@ namespace TrainingDay.Web.Server.Controllers
     public class BlogPostsController(ILogger<BlogPostsController> logger, IBlogPostsManager manager) : ControllerBase
     {
         [HttpGet("search")]
-        public async Task<IActionResult> Get(int cultureId, int page, int pageSize, CancellationToken token)
+        public async Task<IActionResult> Get(BlogsCultureTypes culture, int page, int pageSize, CancellationToken token)
         {
-            return Ok(await manager.Get(cultureId, page, pageSize, token));
+            return Ok(await manager.Get(culture, page, pageSize, token));
         }
 
         [HttpGet]

@@ -23,11 +23,6 @@ namespace TrainingDay.Web.Server.ViewModels.Exercises
         [DisplayName("Advice")]
         public string? AdviceDescription { get; set; }
 
-        [DisplayName("Image")]
-        public string? ExerciseImageUrl { get; set; }
-
-        public IFormFile? File { get; set; }
-
         [DisplayName("Muscles")]
         public ObservableCollection<MusclesEnum> Muscles { get; set; }
 
@@ -61,7 +56,6 @@ namespace TrainingDay.Web.Server.ViewModels.Exercises
                 StartingPositionDescription = descriptionsStrings.StartPosition;
             }
 
-            ExerciseImageUrl = string.Format(Consts.ExerciseImageFormat, CodeNum);
             Muscles = new ObservableCollection<MusclesEnum>(ExerciseTools.ConvertMuscleStringToList(model.MusclesString));
             Tags = ExerciseTools.ConvertFromIntToTagList(model.TagsValue);
             Culture = model.Culture;

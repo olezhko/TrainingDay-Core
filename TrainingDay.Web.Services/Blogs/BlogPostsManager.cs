@@ -100,10 +100,10 @@ namespace TrainingDay.Web.Services.Blogs
             return false;
         }
 
-        public async Task<IEnumerable<BlogPostEditViewModel>> Get(int cultureId, int page, int pageSize, CancellationToken token)
+        public async Task<IEnumerable<BlogPostEditViewModel>> Get(BlogsCultureTypes culture, int page, int pageSize, CancellationToken token)
         {
             var result = await context.PostCultures
-                .Where(item => item.CultureId == cultureId)
+                .Where(item => item.CultureId == (int)culture)
                 .Include(item => item.BlogPost)
                 .AsNoTracking()
                 .OrderByDescending(item => item.BlogPost.Date)

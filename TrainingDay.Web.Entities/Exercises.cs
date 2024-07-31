@@ -22,12 +22,4 @@ namespace TrainingDay.Web.Entities
         {
         }
     }
-
-    public class WebExerciseImageFile
-    {
-        [Key]
-        public int Id { get; set; }
-        public int ExerciseCodeNum { get; set; }
-        public byte[] Content { get; set; }
-    }
 }

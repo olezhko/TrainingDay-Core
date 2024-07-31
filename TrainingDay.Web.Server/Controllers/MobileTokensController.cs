@@ -23,25 +23,97 @@ namespace TrainingDay.Web.Server.Controllers
             _logger = logger;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> PostMobileToken([FromBody] FirebaseToken mobileTokenConnection)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var token = _context.MobileTokens.FirstOrDefault(item => item.Token == mobileTokenConnection.Token);
+                if (token != null)
+                {
+                    token.Language = mobileTokenConnection.Language;
+                    token.Zone = mobileTokenConnection.Zone;
+                    token.LastSend = DateTime.Now;
+                    _context.Update(token);
+                    await _context.SaveChangesAsync();
+                    return Ok();
+                }
+
+                MobileToken newItem = new MobileToken();
+                newItem.Token = mobileTokenConnection.Token;
+                newItem.Zone = mobileTokenConnection.Zone;
+                newItem.Language = mobileTokenConnection.Language;
+                newItem.LastSend = DateTime.Now;
+
+                _context.MobileTokens.Add(newItem);
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "PostMobileToken error");
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("mobile-action")]
+        public async Task<IActionResult> PostMobileAction([FromBody] MobilenAction token)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var mobileToken = await _context.MobileTokens.SingleOrDefaultAsync(m => m.Token == token.Token);
+            if (mobileToken == null)
+            {
+                return NotFound(token);
+            }
+
+            switch (token.Action)
+            {
+                case MobileActions.Enter:
+                    mobileToken.LastSend = DateTime.UtcNow;
+                    break;
+                case MobileActions.Workout:
+                    mobileToken.LastWorkoutDateTime = DateTime.UtcNow;
+                    break;
+                case MobileActions.Weight:
+                    mobileToken.LastBodyControlDateTime = DateTime.UtcNow;
+                    break;
+                default:
+                    break;
+            }
+            
+            _context.Update(mobileToken);
+            await _context.SaveChangesAsync();
+
+            return Ok(mobileToken);
+        }
 
         // GET: api/MobileTokens
         [HttpGet("all")]
+        [Authorize(Roles = "admin")]
         public IEnumerable<MobileToken> GetMobileTokens()
         {
             try
             {
                 var items = _context.MobileTokens.ToList();
-                _logger.LogInformation("GetMobileTokens");
                 return items;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
                 return new List<MobileToken>();
             }
         }
 
         [HttpGet("all={days}")]
+        [Authorize(Roles = "admin")]
         public IEnumerable<MobileToken> GetMobileTokens(int days)
         {
             try
@@ -58,6 +130,7 @@ namespace TrainingDay.Web.Server.Controllers
 
         // GET: api/MobileTokens/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetMobileToken([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -75,85 +148,6 @@ namespace TrainingDay.Web.Server.Controllers
             return Ok(mobileToken);
         }
 
-        // PUT: api/MobileTokens/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutMobileToken([FromRoute] int id, [FromBody] MobileToken mobileToken)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != mobileToken.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(mobileToken).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MobileTokenExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/MobileTokens
-        [HttpPost]
-        public async Task<IActionResult> PostMobileToken([FromBody] MobileToken mobileTokenConnection)
-        {
-            try
-            {
-                _logger.LogInformation("PostMobileToken start " + mobileTokenConnection.Token);
-
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
-                var token = _context.MobileTokens.FirstOrDefault(item => item.Token == mobileTokenConnection.Token);
-                if (token != null)
-                {
-                    token.Language = mobileTokenConnection.Language;
-                    token.Zone = mobileTokenConnection.Zone;
-                    token.Frequency = mobileTokenConnection.Frequency;
-                    token.LastSend = DateTime.Now;
-                    _context.Update(token);
-                    await _context.SaveChangesAsync();
-                    return CreatedAtAction("GetMobileToken", new { id = token.Id }, token);
-                }
-                MobileToken newItem = new MobileToken();
-                newItem.Token = mobileTokenConnection.Token;
-                newItem.Frequency = mobileTokenConnection.Frequency;
-                newItem.Zone = mobileTokenConnection.Zone;
-                newItem.Language = mobileTokenConnection.Language;
-                newItem.LastSend = DateTime.Now;
-
-                _context.MobileTokens.Add(newItem);
-                await _context.SaveChangesAsync();
-                _logger.LogInformation("PostMobileToken end");
-                return CreatedAtAction("GetMobileToken", new { id = newItem.Id }, newItem);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "PostMobileToken error");
-                Console.WriteLine(e);
-                return NotFound();
-            }
-        }
-
         [HttpPost("delete/{token}")]
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete([FromRoute] string token)
@@ -165,47 +159,6 @@ namespace TrainingDay.Web.Server.Controllers
             }
 
             _context.MobileTokens.Remove(mobileToken);
-            await _context.SaveChangesAsync();
-
-            return Ok(mobileToken);
-        }
-
-        [HttpPost("workout")]
-        public async Task<IActionResult> PostFinishedWorkout([FromBody] MobileToken token)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var mobileToken = await _context.MobileTokens.SingleOrDefaultAsync(m => m.Token == token.Token);
-            if (mobileToken == null)
-            {
-                return NotFound(token);
-            }
-
-            mobileToken.LastWorkoutDateTime = DateTime.UtcNow;
-            _context.Update(mobileToken);
-            await _context.SaveChangesAsync();
-
-            return Ok(mobileToken);
-        }
-
-        [HttpPost("bodycontrol")]
-        public async Task<IActionResult> PostBodyControl([FromBody] MobileToken token)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var mobileToken = await _context.MobileTokens.SingleOrDefaultAsync(m => m.Token == token.Token);
-            if (mobileToken == null)
-            {
-                return NotFound(token);
-            }
-            mobileToken.LastBodyControlDateTime = DateTime.UtcNow;
-            _context.Update(mobileToken);
             await _context.SaveChangesAsync();
 
             return Ok(mobileToken);
@@ -478,7 +431,6 @@ namespace TrainingDay.Web.Server.Controllers
             data.Exercises = userExercises.Select(item => new Entities.WebExercise()
             {
                 Id = item.DatabaseId,
-                ExerciseImageUrl = string.Format(Consts.ExerciseImageFormat, item.CodeNum),
                 Description = JsonConvert.SerializeObject(item.Description),
                 ExerciseItemName = item.ExerciseItemName,
                 MusclesString = item.MusclesString,
@@ -529,7 +481,6 @@ namespace TrainingDay.Web.Server.Controllers
                 SuperSetId = item.SuperSetId,
                 WeightAndRepsString = item.WeightAndRepsString,
                 OrderNumber = item.OrderNumber,
-                ExerciseImageUrl = item.ExerciseImageUrl,
                 Description = item.Description,
                 MusclesString = item.MusclesString,
                 TagsValue = item.TagsValue
@@ -574,10 +525,10 @@ namespace TrainingDay.Web.Server.Controllers
                     return NotFound(repo.Token);
                 }
 
-                var user = await _context.Users.FirstOrDefaultAsync(a => a.Email == repo.GoogleEmail);
+                var user = await _context.Users.FirstOrDefaultAsync(a => a.Id == repo.UserId);
                 if (user == null)
                 {
-                    return NotFound(repo.GoogleEmail);
+                    return NotFound();
                 }
 
                 var userExist = _context.UserTokens.FirstOrDefault(item => item.UserId == user.Id);

@@ -13,8 +13,9 @@ public class UserTokenManager(TrainingDayContext context, ILogger<UserTokenManag
     {
         List<UserTokenModel> result = new List<UserTokenModel>();
         List<UserMobileToken> userTokens = await context.UserTokens.AsNoTracking()
-            .Skip((page-1)*pageSize).Take(pageSize)
+            .Skip((page - 1) * pageSize).Take(pageSize)
             .ToListAsync();
+
         foreach (UserMobileToken userToken in userTokens)
         {
             var user = await context.Users.FirstOrDefaultAsync(a => a.Id == userToken.UserId);

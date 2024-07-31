@@ -6,7 +6,8 @@
 		public int PrimaryPort { get; set; }
 		public String UsernameEmail { get; set; }
 		public String UsernamePassword { get; set; }
-	}
+		public string SupportEmail { get; set; }
+    }
 
 	public class YouTubeSettings
 	{

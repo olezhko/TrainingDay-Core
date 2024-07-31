@@ -28,7 +28,7 @@ namespace TrainingDay.Web.Services.Firebase
             {
                 var message = new Message()
                 {
-                    Notification = new Notification()
+                    Notification = new FirebaseAdmin.Messaging.Notification()
                     {
                         Title = title,
                         Body = body,
@@ -66,7 +66,7 @@ namespace TrainingDay.Web.Services.Firebase
 	        {
 		        var message = new MulticastMessage()
 		        {
-			        Notification = new Notification()
+			        Notification = new FirebaseAdmin.Messaging.Notification()
 			        {
 				        Title = title,
 				        Body = body,

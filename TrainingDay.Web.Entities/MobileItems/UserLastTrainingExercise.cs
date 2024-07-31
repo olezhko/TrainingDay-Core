@@ -17,7 +17,6 @@ public class UserLastTrainingExercise : TrainingDay.Common.LastTrainingExercise,
         OrderNumber = item.OrderNumber;
         MusclesString = item.MusclesString;
         ExerciseName = item.ExerciseName;
-        ExerciseImageUrl = item.ExerciseImageUrl;
         SuperSetId = item.SuperSetId;
     }
     [Key]

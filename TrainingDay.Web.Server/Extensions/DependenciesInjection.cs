@@ -1,12 +1,14 @@
 ﻿using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity;
+using TrainingDay.Web.Data.Repositories;
+using TrainingDay.Web.Entities;
 using TrainingDay.Web.Services;
 using TrainingDay.Web.Services.Blogs;
 using TrainingDay.Web.Services.Email;
 using TrainingDay.Web.Services.Exercises;
 using TrainingDay.Web.Services.Firebase;
-using TrainingDay.Web.Services.Rabbit;
+using TrainingDay.Web.Services.Repositories;
 using TrainingDay.Web.Services.Support;
 using TrainingDay.Web.Services.UserTokens;
 using TrainingDay.Web.Services.YoutubeVideo;
@@ -31,7 +33,7 @@ namespace TrainingDay.Web.Server.Extensions
 
             services.AddTransient<IYoutubeVideoCatalog, YoutubeVideoCatalog>();
             services.AddScoped<IExerciseManager, ExerciseManager>();
-            //services.AddScoped<IUserTokenManager, UserTokenManager>();
+            services.AddScoped<IUserTokenManager, UserTokenManager>();
             services.AddScoped<IBlogPostsManager, BlogPostsManager>();
             services.AddScoped<IFirebaseService, FirebaseService>();
             //services.AddScoped<IMessageProducer, RabbitMQProducer>();
@@ -39,12 +41,27 @@ namespace TrainingDay.Web.Server.Extensions
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<ISupportManager, SupportManager>();
 
-            //FirebaseApp.Create(new AppOptions()
-            //{
-            //    Credential = GoogleCredential.FromFile(GetPathToSettingsFile("firebase.json"))
-            //});
+            services.AddTransient<ISupportRepository, SupportRepository>();
+
+            FirebaseApp.Create(new AppOptions()
+            {
+                Credential = GoogleCredential.FromFile(GetPathToSettingsFile("firebase.json"))
+            });
 
             //services.AddHostedService<ConsumeScopedServiceHostedService>();
+            //services.AddHostedService<RabbitBackgroundReceiver>();
+
+            //services.AddScoped<IScopedProcessingService, ScopedProcessingService>();
+        }
+
+        private static string GetPathToSettingsFile(string settingsFileName)
+        {
+            var customFile = "Settings" + Path.DirectorySeparatorChar + settingsFileName;
+            if (File.Exists(customFile))
+            {
+                return customFile;
+            }
+            return "Settings" + Path.DirectorySeparatorChar + settingsFileName;
         }
     }
 }

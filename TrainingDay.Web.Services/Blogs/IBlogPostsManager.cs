@@ -11,6 +11,6 @@ public interface IBlogPostsManager
     Task<BlogPost> Create(BlogPostEditViewModel blogPost);
     Task<BlogPost> Edit(BlogPostEditViewModel blogPost);
     Task<bool> Delete(int id);
-    Task<IEnumerable<BlogPostEditViewModel>> Get(int cultureId, int page, int pageSize, CancellationToken token);
+    Task<IEnumerable<BlogPostEditViewModel>> Get(BlogsCultureTypes culture, int page, int pageSize, CancellationToken token);
     Task<BlogPostEditViewModel> Get(int id, CancellationToken token);
 }
