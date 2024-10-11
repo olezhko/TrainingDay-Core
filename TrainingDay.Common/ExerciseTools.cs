@@ -78,14 +78,12 @@ namespace TrainingDay.Common
                 var attr = c2 as DescriptionAttribute;
 
                 string attribute = string.Empty;
-                switch (ci.Name)
+                switch (ci.TwoLetterISOLanguageName)
                 {
                     case "ru":
-                    case "ru-RU":
                         attribute = attr.InfoRu;
                         break;
                     case "de":
-                    case "de-DE":
                         attribute = attr.InfoDe;
                         break;
                     default:
