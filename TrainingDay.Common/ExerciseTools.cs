@@ -127,11 +127,11 @@ namespace TrainingDay.Common
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static int ConvertFromTagStringToInt(string value)
+        public static IEnumerable<ExerciseTags> ConvertTagFromStringToList(string value)
         {
             if (string.IsNullOrEmpty(value))
             {
-                return 0;
+                return Enumerable.Empty<ExerciseTags>();
             }
 
             var tagsString = value.Split(',');
@@ -142,7 +142,7 @@ namespace TrainingDay.Common
                 enumLists.Add(res);
             }
 
-            return ConvertTagListToInt(enumLists);
+            return enumLists;
         }
 
         /// <summary>
@@ -172,9 +172,9 @@ namespace TrainingDay.Common
             return result;
         }
 
-        public static int ConvertTagListToInt(List<ExerciseTags> tagsList)
+        public static int ConvertTagListToInt(IEnumerable<ExerciseTags> tagsList)
         {
-            if (tagsList.Count == 0)
+            if (tagsList.Count() == 0)
             {
                 return 0;
             }
@@ -188,6 +188,16 @@ namespace TrainingDay.Common
 
             array.CopyTo(res, 0);
             return res[0];
+        }
+
+        public static string ConvertTagFromListToString(List<ExerciseTags> tagsList)
+        {
+            if (tagsList.Count == 0)
+            {
+                return string.Empty;
+            }
+
+            return string.Join(",",tagsList);
         }
 
         public static List<MusclesEnum> ConvertMuscleStringToList(string value)

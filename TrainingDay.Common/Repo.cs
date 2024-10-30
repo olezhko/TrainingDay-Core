@@ -14,8 +14,7 @@
     }
     public class RepoMobileItem
     {
-        public string itemString { get; set; }
-        public SyncItemType type { get; set; }
+        public string data { get; set; }
         public string mail { get; set; }
         public string token { get; set; }
     }
@@ -62,7 +61,7 @@
         public string ExerciseItemName { get; set; }
         public Description Description { get; set; }
         public string MusclesString { get; set; } // text, by "," enum collection
-        public int TagsValue { get; set; }
+        public string Tags { get; set; }
         public int CodeNum { get; set; }
     }
 
@@ -112,19 +111,5 @@
         public int Id { get; set; }
         public int Count { get; set; }
         public int TrainingId { get; set; }
-    }
-
-
-    public enum SyncItemType
-    {
-        BodyControl,
-        Alarm,
-        Exercise,
-        TrainingExercise,
-        TrainingItem,
-        SuperSets,
-        LastTrainingExercise,
-        LastTraining,
-        TrainingGroup
     }
 }
