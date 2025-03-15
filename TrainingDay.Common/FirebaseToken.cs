@@ -14,7 +14,7 @@ public enum MobileActions
     Weight
 }
 
-public class MobilenAction
+public class MobileAction
 {
     public string Token { get; set; }
     public MobileActions Action { get; set; }

@@ -97,30 +97,6 @@ namespace TrainingDay.Common
                 return value.ToString();
             }
         }
-        public static ObservableCollection<BaseExercise> InitExercises(string ci)
-        {
-            try
-            {
-                string filename = $"TrainingDay.Common.Resources.exercises_{ci}.json";
-                var assembly = typeof(ExerciseTools).GetTypeInfo().Assembly;
-                Stream stream = assembly.GetManifestResourceStream(filename) ?? assembly.GetManifestResourceStream(@"TrainingDay.Common.Resources.exercises_en.json");
-
-                if (stream == null)
-                {
-                    return new ObservableCollection<BaseExercise>();
-                }
-
-                StreamReader reader = new StreamReader(stream);
-                var data = reader.ReadToEnd();
-                var exercises = JsonConvert.DeserializeObject<IEnumerable<BaseExercise>>(data);
-
-                return new ObservableCollection<BaseExercise>(exercises);
-            }
-            catch (Exception e)
-            {
-                return new ObservableCollection<BaseExercise>();
-            }
-        }
 
         /// <summary>
         /// Convert from base to value

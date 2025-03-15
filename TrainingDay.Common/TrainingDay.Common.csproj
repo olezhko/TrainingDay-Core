@@ -9,11 +9,15 @@
   <ItemGroup>
     <None Remove="Resources\exercises_en.json" />
     <None Remove="Resources\exercises_ru.json" />
+    <None Remove="Resources\questions_ru.json" />
+    <None Remove="Resources\questions_en.json" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\exercises_en.json" />
     <EmbeddedResource Include="Resources\exercises_ru.json" />
+    <EmbeddedResource Include="Resources\questions_ru.json" />
+    <EmbeddedResource Include="Resources\questions_en.json" />
   </ItemGroup>
 
   <ItemGroup>
