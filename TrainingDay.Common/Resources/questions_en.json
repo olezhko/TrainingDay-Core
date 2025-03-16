@@ -1,4 +1,60 @@
-﻿{
-
-}
-
+﻿[
+  {
+    "title": "Your fitness level",
+    "number": 1,
+    "isMultiple": false,
+    "answers": [
+      "Beginner",
+      "Intermediate",
+      "Advanced"
+    ]
+  },
+  {
+    "title": "What are your fitness goals?",
+    "number": 2,
+    "isMultiple": true,
+    "answers": [
+      "Weight loss",
+      "Muscle gain",
+      "Endurance improvement",
+      "Strength increase",
+      "Overall fitness"
+    ]
+  },
+  {
+    "title": "What equipment do you have?",
+    "number": 3,
+    "isMultiple": true,
+    "answers": [
+      "Dumbbells",
+      "Barbell",
+      "Pull-up bar",
+      "Machines",
+      "Bench",
+      "Yoga mat",
+      "Bodyweight only"
+    ]
+  },
+  {
+    "title": "What types of exercises interest you the most?",
+    "number": 4,
+    "isMultiple": true,
+    "answers": [
+      "Cardio",
+      "Strength training",
+      "Yoga",
+      "Stretching"
+    ]
+  },
+  {
+    "title": "How much time are you willing to dedicate to workouts?",
+    "number": 5,
+    "isMultiple": false,
+    "answers": [
+      "Around 30 minutes",
+      "30-60 minutes",
+      "60-90 minutes",
+      "More than 90 minutes"
+    ]
+  }
+]

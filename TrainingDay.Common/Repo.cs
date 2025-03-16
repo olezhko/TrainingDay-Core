@@ -10,13 +10,6 @@
         public IEnumerable<LastTraining> LastTrainings { get; set; }
         public IEnumerable<LastTrainingExercise> LastTrainingExercises { get; set; }
         public IEnumerable<WeightNote> BodyControl { get; set; }
-        public IEnumerable<Alarm> Alarms { get; set; }
-    }
-    public class RepoMobileItem
-    {
-        public string data { get; set; }
-        public string mail { get; set; }
-        public string token { get; set; }
     }
 
     public class TrainingUnion
