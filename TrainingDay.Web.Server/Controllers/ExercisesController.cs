@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
-using TrainingDay.Common;
+using TrainingDay.Common.Extensions;
+using TrainingDay.Common.Models;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Entities;
 using TrainingDay.Web.Server.ViewModels.Exercises;
@@ -118,7 +119,7 @@ namespace TrainingDay.Web.Server.Controllers
                 model.AllMuscles.Add(new SelectListItem
                 {
                     Value = i.ToString(),
-                    Text = $"{ExerciseTools.GetEnumDescription((MusclesEnum)i, culture)}"
+                    Text = $"{ExerciseExtensions.GetEnumDescription((MusclesEnum)i, culture)}"
                 });
             }
 
@@ -128,7 +129,7 @@ namespace TrainingDay.Web.Server.Controllers
                 model.AllTags.Add(new SelectListItem
                 {
                     Value = i.ToString(),
-                    Text = $"{ExerciseTools.GetEnumDescription((ExerciseTags)i, culture)}"
+                    Text = $"{ExerciseExtensions.GetEnumDescription((ExerciseTags)i, culture)}"
                 });
             }
 

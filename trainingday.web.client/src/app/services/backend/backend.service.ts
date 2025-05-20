@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient , HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ExercisePreview } from 'src/app/data/exercises/exercise-preview.model';
 import { ExerciseEditParams } from 'src/app/data/exercises/exercise-params.model';
 import { catchError } from 'rxjs/operators';
+import { BlogPostEditViewModel, BlogPreview } from '../../data/blog/blog-preview.model';
+import { BlogDetails } from '../../data/blog/blog-details.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,8 @@ export class BackendService {
   private exerciseSearchUrl = 'https://localhost:7081/api/exercises/search';
   private exerciseEditorUrl = 'https://localhost:7081/api/exercises/editor';
   private exerciseApiUrl = 'https://localhost:7081/api/exercises';
+
+  private baseUrl = 'https://localhost:7081/api/BlogPosts';
 
   constructor(private http: HttpClient) {}
 
@@ -68,6 +72,30 @@ export class BackendService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  getBlogPosts(culture: string, page: number, pageSize: number): Observable<BlogPreview[]> {
+    let params = new HttpParams()
+      .set('culture', 1)
+      .set('page', page)
+      .set('pageSize', pageSize);
+    return this.http.get<BlogPreview[]>(`${this.baseUrl}/search`, { params });
+  }
+
+  getBlogPost(id: number): Observable<BlogDetails> {
+    return this.http.get<BlogDetails>(`${this.baseUrl}?id=${id}`);
+  }
+
+  createBlogPost(blogPost: BlogPostEditViewModel): Observable<BlogDetails> {
+    return this.http.post<BlogDetails>(this.baseUrl, blogPost);
+  }
+
+  editBlogPost(id: number, blogPost: BlogPostEditViewModel): Observable<BlogDetails> {
+    return this.http.put<BlogDetails>(`${this.baseUrl}?id=${id}`, blogPost);
+  }
+
+  deleteBlogPost(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}?id=${id}`);
   }
 
   private handleError(error: any): Promise<any> {

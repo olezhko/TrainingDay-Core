@@ -2,14 +2,14 @@
 
 namespace TrainingDay.Web.Entities.MobileItems;
 
-public class UserTrainingGroup : TrainingDay.Common.TrainingUnion, IUserEntity
+public class UserTrainingGroup : Common.Models.TrainingUnion, IUserEntity
 {
     public UserTrainingGroup()
     {
 
     }
 
-    public UserTrainingGroup(TrainingDay.Common.TrainingUnion item)
+    public UserTrainingGroup(Common.Models.TrainingUnion item)
     {
         DatabaseId = item.Id;
         Name = item.Name;

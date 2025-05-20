@@ -1,7 +1,7 @@
 ﻿using FirebaseAdmin.Messaging;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using TrainingDay.Common;
+using TrainingDay.Common.Communication;
 
 namespace TrainingDay.Web.Services.Firebase
 {
@@ -14,7 +14,7 @@ namespace TrainingDay.Web.Services.Firebase
 			_logger = logger;
         }
 
-        public async Task<FirebaseMessagingException> SendMessage(string token, string title, string body, string type, PushNotificationData pushData = null)
+        public async Task<FirebaseMessagingException> SendMessage(string token, string title, string body, string type, PushNotificationItem pushData = null)
         {
 	        var data = new Dictionary<string, string>
 	        {
@@ -52,7 +52,7 @@ namespace TrainingDay.Web.Services.Firebase
             return null;
         }
 
-        public async Task SendGroupMessage(List<string> tokens, string title, string body, string type, PushNotificationData pushData)
+        public async Task SendGroupMessage(List<string> tokens, string title, string body, string type, PushNotificationItem pushData)
         {
 	        var data = new Dictionary<string, string>
 	        {

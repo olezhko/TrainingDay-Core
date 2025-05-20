@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using TrainingDay.Common;
+using TrainingDay.Common.Communication;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Entities;
 using TrainingDay.Web.Services.YoutubeVideo;

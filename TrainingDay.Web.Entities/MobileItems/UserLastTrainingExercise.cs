@@ -2,13 +2,13 @@
 
 namespace TrainingDay.Web.Entities.MobileItems;
 
-public class UserLastTrainingExercise : TrainingDay.Common.LastTrainingExercise, IUserEntity
+public class UserLastTrainingExercise : Common.Models.LastTrainingExercise, IUserEntity
 {
     public UserLastTrainingExercise()
     {
 
     }
-    public UserLastTrainingExercise(TrainingDay.Common.LastTrainingExercise item)
+    public UserLastTrainingExercise(Common.Models.LastTrainingExercise item)
     {
         DatabaseId = item.Id;
         Description = item.Description;

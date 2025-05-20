@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using TrainingDay.Common;
+using TrainingDay.Common.Communication;
 using TrainingDay.Web.Data.BlogPosts;
 using TrainingDay.Web.Data.Blogs;
 using TrainingDay.Web.Database;
@@ -68,7 +68,7 @@ namespace TrainingDay.Web.Services.Blogs
                     try
                     {
                         var title = "New Blog";
-                        await firebaseService.SendMessage(tokenItem.Token, title, message, PushNotificationData.BlogType, null);
+                        await firebaseService.SendMessage(tokenItem.Token, title, message, PushNotificationItem.BlogType, null);
                     }
                     catch (Exception e)
                     {

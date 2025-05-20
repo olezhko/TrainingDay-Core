@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Localization;
 using System.Collections;
 using System.Globalization;
-using TrainingDay.Common;
+using TrainingDay.Common.Communication;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Entities;
 using TrainingDay.Web.Services.Firebase;
@@ -35,7 +35,6 @@ public class ScopedProcessingService : IScopedProcessingService
 
         await SendWorkoutNotification(dateTimeNow, stoppingToken);
         await SendWeightNotification(dateTimeNow, stoppingToken);
-        await SendAlarmNotification(dateTimeNow, stoppingToken);
     }
 
     private async Task SendWeightNotification(DateTime dateTimeNow, CancellationToken stoppingToken)
@@ -55,13 +54,13 @@ public class ScopedProcessingService : IScopedProcessingService
                     var item = new RabbitMessage();
                     item.Message = weightMessage;
                     item.Token = contextMobileToken.Token;
-                    item.Type = PushNotificationData.WeightType;
+                    item.Type = PushNotificationItem.WeightType;
                     item.Title = "TrainingDay";
-                    item.Data = new PushNotificationData()
+                    item.Data = new PushNotificationItem()
                     {
-                        Step1 = new PushNotificationData.PushNotificationActionItem(
-                            PushNotificationData.PushNotificationDataAction.OpenPage,
-                            PushNotificationData.BodyControlPage),
+                        Step1 = new PushNotificationItem.PushNotificationActionItem(
+                            PushNotificationItem.PushNotificationDataAction.OpenPage,
+                            PushNotificationItem.BodyControlPage),
                     };
                     //_messagePublisher.SendMessage(item);
 
@@ -92,13 +91,13 @@ public class ScopedProcessingService : IScopedProcessingService
                     var item = new RabbitMessage();
                     item.Message = workoutMessage;
                     item.Token = contextMobileToken.Token;
-                    item.Type = PushNotificationData.WorkoutType;
+                    item.Type = PushNotificationItem.WorkoutType;
                     item.Title = "TrainingDay";
-                    item.Data = new PushNotificationData()
+                    item.Data = new PushNotificationItem()
                     {
-                        Step1 = new PushNotificationData.PushNotificationActionItem(
-                            PushNotificationData.PushNotificationDataAction.OpenPage,
-                            PushNotificationData.TrainingsPage),
+                        Step1 = new PushNotificationItem.PushNotificationActionItem(
+                            PushNotificationItem.PushNotificationDataAction.OpenPage,
+                            PushNotificationItem.TrainingsPage),
                     };
                     //_messagePublisher.SendMessage(item);
 
@@ -108,71 +107,6 @@ public class ScopedProcessingService : IScopedProcessingService
                         await _userTokenManager.RemoveNotExistToken(contextMobileToken);
                     }
                 }
-            }
-        }
-    }
-
-    private async Task SendAlarmNotification(DateTime dateTimeNow, CancellationToken stoppingToken)
-    {
-        var alarms = await _context.UserAlarm.ToListAsync(cancellationToken: stoppingToken);
-        foreach (var userAlarm in alarms)
-        {
-            try
-            {
-                MobileToken token;
-                if (userAlarm.User.UserMobileToken is not null)
-                {
-                    var userToken = await _context.UserTokens.FirstOrDefaultAsync(a => a.UserId == userAlarm.UserId, cancellationToken: stoppingToken);
-                    if (userToken == null)
-                    {
-                        continue;
-                    }
-
-                    token = await _context.MobileTokens.FirstOrDefaultAsync(item => item.Id == userToken.TokenId, cancellationToken: stoppingToken);
-                    if (token == null)
-                    {
-                        continue;
-                    }
-                }
-                else
-                {
-                    token = await _context.MobileTokens.SingleOrDefaultAsync(item => item.Id == userAlarm.User.UserMobileToken.TokenId, cancellationToken: stoppingToken);
-                }
-
-                var locale = CultureInfo.GetCultureInfo(token.Language).TwoLetterISOLanguageName;
-                var checkDay = CheckDay(userAlarm.Days, dateTimeNow);
-                if (checkDay)
-                {
-                    var time = CheckTime(dateTimeNow, "00:00:00", userAlarm.TimeOffset.TimeOfDay);
-                    if (time)
-                    {
-                        var alarmMessage = _localizer[locale, "AlarmMessageFormat"];
-                        if (alarmMessage != null)
-                        {
-                            var item = new RabbitMessage();
-                            item.Message = alarmMessage;
-                            item.Token = token.Token;
-                            item.Title = "TrainingDay";
-                            item.Type = PushNotificationData.AlarmType;
-                            item.Data = new PushNotificationData()
-                            {
-                                Step1 = new PushNotificationData.PushNotificationActionItem(PushNotificationData.PushNotificationDataAction.OpenPage, PushNotificationData.TrainingsPage),
-                                Step2 = new PushNotificationData.PushNotificationActionItem(PushNotificationData.PushNotificationDataAction.OpenItem, userAlarm.DatabaseId),
-                            };
-                            //_messagePublisher.SendMessage(item);
-
-                            var exc = await _firebaseService.SendMessage(item.Token, item.Title, item.Message, item.Type, item.Data);
-                            if (exc != null)
-                            {
-                                await _userTokenManager.RemoveNotExistToken(token);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
             }
         }
     }

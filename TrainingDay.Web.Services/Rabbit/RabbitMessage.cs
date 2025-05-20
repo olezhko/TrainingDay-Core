@@ -1,4 +1,4 @@
-﻿using TrainingDay.Common;
+﻿using TrainingDay.Common.Communication;
 
 namespace TrainingDay.Web.Services.Rabbit
 {
@@ -8,6 +8,6 @@ namespace TrainingDay.Web.Services.Rabbit
         public string Message { get; set; }
         public string Type { get; set; }
         public string Token { get; set; }
-        public PushNotificationData Data { get; set; }
+        public PushNotificationItem Data { get; set; }
     }
 }

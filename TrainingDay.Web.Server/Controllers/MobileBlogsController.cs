@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TrainingDay.Common;
+using TrainingDay.Common.Communication;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Server.Extensions;
 

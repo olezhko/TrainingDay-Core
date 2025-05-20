@@ -1,19 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
 using TrainingDay.Web.Entities.MobileItems;
 
 namespace TrainingDay.Web.Entities;
 
-public class User
+public class User : IdentityUser<Guid>
 {
-    [Key]
-    public Guid Id { get; set; }
-    public string Name { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
     public virtual UserMobileToken UserMobileToken { get; set; }
 
-    public virtual ICollection<UserAlarm> UserAlarms { get; set; }
     public virtual ICollection<UserSuperSet> UserSuperSets { get; set; }
     public virtual ICollection<UserExercise> UserExercises { get; set; }
     public virtual ICollection<UserLastTraining> UserLastTrainings { get; set; }

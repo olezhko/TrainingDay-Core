@@ -1,8 +1,8 @@
 ﻿using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
-using Microsoft.AspNetCore.Identity;
+using TrainingDay.Web.Data.Common.Files;
 using TrainingDay.Web.Data.Repositories;
-using TrainingDay.Web.Entities;
+using TrainingDay.Web.Server.Managers;
 using TrainingDay.Web.Services;
 using TrainingDay.Web.Services.Blogs;
 using TrainingDay.Web.Services.Email;
@@ -36,6 +36,7 @@ namespace TrainingDay.Web.Server.Extensions
             services.AddScoped<IUserTokenManager, UserTokenManager>();
             services.AddScoped<IBlogPostsManager, BlogPostsManager>();
             services.AddScoped<IFirebaseService, FirebaseService>();
+            services.AddScoped<IFileUploadService, FileUploadService>();
             //services.AddScoped<IMessageProducer, RabbitMQProducer>();
 
             services.AddTransient<IEmailSender, EmailSender>();

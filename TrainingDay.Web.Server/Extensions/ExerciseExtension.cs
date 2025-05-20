@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Globalization;
 using System.Reflection;
-using TrainingDay.Common;
+using TrainingDay.Common.Models;
 
 namespace TrainingDay.Web.Server.Extensions;
 

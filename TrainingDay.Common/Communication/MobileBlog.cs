@@ -1,4 +1,4 @@
-﻿namespace TrainingDay.Common;
+﻿namespace TrainingDay.Common.Communication;
 
 public class MobileBlog
 {

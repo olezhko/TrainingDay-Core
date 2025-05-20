@@ -77,7 +77,7 @@ namespace TrainingDay.Web.Server.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { Name = model.Nick, Email = model.Email };
+                var user = new User { UserName = model.Nick, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -134,7 +134,7 @@ namespace TrainingDay.Web.Server.Controllers
                     return BadRequest("User not confirmed.");
                 }
 
-                SignInResult result = await _signInManager.PasswordSignInAsync(user.Name, model.Password, true, lockoutOnFailure: false);
+                SignInResult result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, true, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");

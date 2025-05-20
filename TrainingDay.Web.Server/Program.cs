@@ -37,9 +37,9 @@ app.MapFallbackToFile("/index.html");
 
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<TrainingDayContext>();
+    TrainingDayContext db = scope.ServiceProvider.GetRequiredService<TrainingDayContext>();
     db.Database.Migrate();
-    ExercisesInitializer.Initialize(db);
+    ExercisesInitializer.Initialize(db).Wait();
 }
 
 app.Run();

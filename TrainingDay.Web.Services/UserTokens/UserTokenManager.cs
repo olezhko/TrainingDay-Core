@@ -24,7 +24,7 @@ public class UserTokenManager(TrainingDayContext context, ILogger<UserTokenManag
             {
                 Tokens = tokens,
                 UserMail = user.Email,
-                UserName = user.Name,
+                UserName = user.UserName,
                 UserId = user.Id,
             });
         }

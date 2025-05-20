@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Newtonsoft.Json;
-using TrainingDay.Common;
+using TrainingDay.Common.Extensions;
+using TrainingDay.Common.Models;
 using TrainingDay.Web.Data.Support;
 using TrainingDay.Web.Entities;
 using TrainingDay.Web.Server.ViewModels.Exercises;
@@ -18,8 +19,8 @@ public class MappingProfiles : Profile
                 Advice = viewModel.AdviceDescription,
                 Execution = viewModel.ExecutionDescription,
             })))
-            .ForMember(dest => dest.MusclesString, (src) => src.MapFrom(viewModel => ExerciseTools.ConvertFromMuscleListToString(viewModel.Muscles.ToList())))
-            .ForMember(dest => dest.TagsValue, (src) => src.MapFrom(viewModel => ExerciseTools.ConvertTagListToInt(viewModel.Tags.ToList())));
+            .ForMember(dest => dest.MusclesString, (src) => src.MapFrom(viewModel => ExerciseExtensions.ConvertFromMuscleListToString(viewModel.Muscles.ToList())))
+            .ForMember(dest => dest.TagsValue, (src) => src.MapFrom(viewModel => ExerciseExtensions.ConvertTagListToInt(viewModel.Tags.ToList())));
 
 
         CreateMap<ContactMeModel, SupportRequest>();

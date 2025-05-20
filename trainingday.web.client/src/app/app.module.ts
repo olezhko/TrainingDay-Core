@@ -25,6 +25,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { BackendService } from './services/backend/backend.service';
 import { ExerciseEditComponent } from './body-components/exercise-edit/exercise-edit.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,7 @@ import { ExerciseEditComponent } from './body-components/exercise-edit/exercise-
     ExerciseEditComponent,
   ],
   imports: [
-    BrowserModule, RouterOutlet, HttpClientModule, AppRoutingComponent, FormsModule, ReactiveFormsModule, NgbModule, StoreModule.forRoot({}, {}), EffectsModule.forRoot([]), StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
+    BrowserModule, MaterialModule, RouterOutlet, HttpClientModule, AppRoutingComponent, FormsModule, ReactiveFormsModule, NgbModule, StoreModule.forRoot({}, {}), EffectsModule.forRoot([]), StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }), BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

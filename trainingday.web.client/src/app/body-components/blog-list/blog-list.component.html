@@ -1,1 +1,29 @@
-<p>blog-list works!</p>
+<mat-toolbar color="primary">
+  <span>Blog List</span>
+</mat-toolbar>
+
+<div class="blog-list-container">
+  <mat-card *ngFor="let post of blogPosts" class="blog-card">
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>
+          <a [routerLink]="['/blog', post.id]">{{ post.title }}</a>
+        </mat-card-title>
+        <mat-card-subtitle>{{ post.author }} | {{ post.date | date }}</mat-card-subtitle>
+      </mat-card-title-group>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div [innerHTML]="post.description"></div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary" [routerLink]="['/blog', post.id]">Read More</button>
+    </mat-card-actions>
+</mat-card>
+
+  <mat-paginator [length]="100"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 (page)="onPageChange($event)">
+  </mat-paginator>
+</div>

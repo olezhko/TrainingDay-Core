@@ -2,13 +2,13 @@
 
 namespace TrainingDay.Web.Entities.MobileItems;
 
-public class UserSuperSet : TrainingDay.Common.SuperSet, IUserEntity
+public class UserSuperSet : Common.Models.SuperSet, IUserEntity
 {
     public UserSuperSet()
     {
 
     }
-    public UserSuperSet(TrainingDay.Common.SuperSet superSet)
+    public UserSuperSet(Common.Models.SuperSet superSet)
     {
         TrainingId = superSet.TrainingId;
         Count = superSet.Count;

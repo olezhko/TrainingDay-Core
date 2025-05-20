@@ -1,18 +1,19 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using TrainingDay.Common.Extensions;
 
 namespace TrainingDay.Web.Entities
 {
-    public class WebExercise : TrainingDay.Common.Exercise
+    public class WebExercise : Common.Models.Exercise
     {
         [Key]
         public new int Id { get; set; }
         [MaxLength(2)]
         public string Culture { get; set; }
-        public WebExercise(TrainingDay.Common.BaseExercise baseExercise)
+        public WebExercise(Common.Models.BaseExercise baseExercise)
         {
             Description = JsonConvert.SerializeObject(baseExercise.Description);
-            TagsValue = baseExercise.TagsValue;
+            TagsValue = ExerciseExtensions.ConvertTagStringToInt(baseExercise.Tags);
             CodeNum = baseExercise.CodeNum;
             MusclesString = baseExercise.MusclesString;
             ExerciseItemName = baseExercise.ExerciseItemName;

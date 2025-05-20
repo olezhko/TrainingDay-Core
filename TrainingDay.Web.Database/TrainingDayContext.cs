@@ -21,7 +21,6 @@ public class TrainingDayContext : DbContext
     public DbSet<UserLastTraining> UserLastTrainings { get; set; }
     public DbSet<UserLastTrainingExercise> UserLastTrainingExercises { get; set; }
     public DbSet<UserWeightNote> UserWeightNotes { get; set; }
-    public DbSet<UserAlarm> UserAlarm { get; set; }
     public DbSet<UserTraining> UserTrainings { get; set; }
     public DbSet<UserSuperSet> UserSuperSets { get; set; }
     public DbSet<UserTrainingExercise> UserTrainingExercises { get; set; }

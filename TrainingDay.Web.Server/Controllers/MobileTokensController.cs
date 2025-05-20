@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using TrainingDay.Common;
+using TrainingDay.Common.Communication;
+using TrainingDay.Common.Models;
 using TrainingDay.Web.Database;
-using TrainingDay.Web.Entities.MobileItems;
 using TrainingDay.Web.Entities;
+using TrainingDay.Web.Entities.MobileItems;
 
 namespace TrainingDay.Web.Server.Controllers
 {
@@ -62,7 +62,7 @@ namespace TrainingDay.Web.Server.Controllers
         }
 
         [HttpPost("mobile-action")]
-        public async Task<IActionResult> PostMobileAction([FromBody] MobilenAction token)
+        public async Task<IActionResult> PostMobileAction([FromBody] MobileAction token)
         {
             if (!ModelState.IsValid)
             {
@@ -185,199 +185,6 @@ namespace TrainingDay.Web.Server.Controllers
             return Ok();
         }
 
-        [HttpPost("repo_sync")]
-        public async Task<IActionResult> SyncUserRepo([FromBody] RepoMobileItem repo)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest();
-                }
-                var token = await _context.MobileTokens.FirstOrDefaultAsync(a => a.Token == repo.token);
-                var user = await _context.Users.FirstOrDefaultAsync(a => a.Email == repo.mail);
-                if (user == null)
-                {
-                    user = GetUserOrCreate(token.Id);
-                }
-
-                int serverId = 0;
-                switch (repo.type)
-                {
-                    case SyncItemType.BodyControl:
-                        WeightNote item = JsonConvert.DeserializeObject<WeightNote>(repo.itemString);
-                        UserWeightNote newItem = new UserWeightNote();
-                        newItem.Date = item.Date;
-                        newItem.Type = item.Type;
-                        newItem.Weight = item.Weight;
-                        newItem.DatabaseId = item.Id;
-                        newItem.UserId = user.Id;
-                        _context.UserWeightNotes.Add(newItem);
-                        await _context.SaveChangesAsync();
-                        serverId = newItem.Id;
-                        break;
-                    case SyncItemType.Alarm:
-                        Alarm alarm = JsonConvert.DeserializeObject<Alarm>(repo.itemString, new JsonSerializerSettings
-                        {
-                            DateParseHandling = DateParseHandling.DateTimeOffset,
-                        });
-                        var userAlarms = _context.UserAlarm.Where(item => item.UserId == user.Id);
-                        var updateItem = userAlarms.FirstOrDefault(alarm1 => alarm1.DatabaseId == alarm.Id);
-                        if (updateItem != null)
-                        {
-                            updateItem.Days = alarm.Days;
-                            updateItem.TimeOffset = alarm.TimeOffset;
-                            updateItem.TrainingId = alarm.TrainingId;
-                            updateItem.Name = alarm.Name;
-                            await _context.SaveChangesAsync();
-                            serverId = updateItem.Id;
-                        }
-                        else
-                        {
-                            UserAlarm userAlarm = new UserAlarm(alarm);
-                            userAlarm.UserId = user.Id;
-                            _context.UserAlarm.Add(userAlarm);
-                            await _context.SaveChangesAsync();
-                            serverId = userAlarm.Id;
-                        }
-
-                        break;
-                    case SyncItemType.Exercise:
-                        var exercise = JsonConvert.DeserializeObject<Entities.WebExercise>(repo.itemString);
-                        UserExercise userExercise = new UserExercise(exercise);
-                        userExercise.UserId = user.Id;
-                        _context.UserExercises.Add(userExercise);
-                        await _context.SaveChangesAsync();
-                        serverId = userExercise.Id;
-                        break;
-                    case SyncItemType.TrainingExercise:
-                        var exerciseTraining = JsonConvert.DeserializeObject<TrainingExerciseComm>(repo.itemString);
-                        UserTrainingExercise userExerciseTraining = new UserTrainingExercise(exerciseTraining);
-                        userExerciseTraining.UserId = user.Id;
-                        _context.UserTrainingExercises.Add(userExerciseTraining);
-                        await _context.SaveChangesAsync();
-                        serverId = userExerciseTraining.Id;
-                        break;
-                    case SyncItemType.TrainingItem:
-                        var training = JsonConvert.DeserializeObject<Training>(repo.itemString);
-                        UserTraining userTraining = new UserTraining(training);
-                        userTraining.UserId = user.Id;
-                        _context.UserTrainings.Add(userTraining);
-                        await _context.SaveChangesAsync();
-                        serverId = userTraining.Id;
-                        break;
-                    case SyncItemType.LastTrainingExercise:
-                        var lastTrainingExercise = JsonConvert.DeserializeObject<LastTrainingExercise>(repo.itemString);
-                        UserLastTrainingExercise userLastTrainingExercise = new UserLastTrainingExercise(lastTrainingExercise);
-                        userLastTrainingExercise.UserId = user.Id;
-                        _context.UserLastTrainingExercises.Add(userLastTrainingExercise);
-                        await _context.SaveChangesAsync();
-                        serverId = userLastTrainingExercise.Id;
-                        break;
-                    case SyncItemType.LastTraining:
-                        var lastTraining = JsonConvert.DeserializeObject<LastTraining>(repo.itemString);
-                        UserLastTraining userLastTraining = new UserLastTraining(lastTraining);
-                        userLastTraining.UserId = user.Id;
-                        _context.UserLastTrainings.Add(userLastTraining);
-                        await _context.SaveChangesAsync();
-                        serverId = userLastTraining.Id;
-                        break;
-                    case SyncItemType.SuperSets:
-                        var superSet = JsonConvert.DeserializeObject<SuperSet>(repo.itemString);
-                        UserSuperSet userSuperSet = new UserSuperSet(superSet);
-                        userSuperSet.UserId = user.Id;
-                        _context.UserSuperSets.Add(userSuperSet);
-                        await _context.SaveChangesAsync();
-                        serverId = userSuperSet.Id;
-                        break;
-                    case SyncItemType.TrainingGroup:
-                        var union = JsonConvert.DeserializeObject<TrainingUnion>(repo.itemString);
-                        UserTrainingGroup userUnion = new UserTrainingGroup(union);
-                        userUnion.UserId = user.Id;
-                        _context.UserTrainingGroups.Add(userUnion);
-                        try
-                        {
-                            await _context.SaveChangesAsync();
-                            serverId = userUnion.Id;
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e);
-                            return BadRequest(new Tuple<Exception, UserTrainingGroup>(e, userUnion));
-                        }
-                        break;
-                }
-                return Ok(serverId);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return BadRequest(new Tuple<Exception, RepoMobileItem>(e, repo));
-            }
-        }
-
-        [HttpPost("repo_delete")]
-        public async Task<IActionResult> DeleteUserRepo([FromQuery] int type, string mail, string token)
-        {
-            try
-            {
-                var user = await _context.Users.FirstOrDefaultAsync(a => a.Email == mail);
-                if (user == null)
-                {
-                    var tokenItem = await _context.MobileTokens.FirstOrDefaultAsync(a => a.Token == token);
-                    user = GetUserOrCreate(tokenItem.Id);
-                }
-
-                switch ((SyncItemType)type)
-                {
-                    case SyncItemType.BodyControl:
-                        var userWeights = _context.UserWeightNotes.Where(item => item.UserId == user.Id);
-                        _context.UserWeightNotes.RemoveRange(userWeights);
-                        break;
-                    case SyncItemType.Alarm:
-                        var userAlarms = _context.UserAlarm.Where(item => item.UserId == user.Id);
-                        _context.UserAlarm.RemoveRange(userAlarms);
-                        break;
-                    case SyncItemType.Exercise:
-                        var userExercises = _context.UserExercises.Where(item => item.UserId == user.Id);
-                        _context.UserExercises.RemoveRange(userExercises);
-                        break;
-                    case SyncItemType.TrainingExercise:
-                        var userTrainingExercises = _context.UserTrainingExercises.Where(item => item.UserId == user.Id);
-                        _context.UserTrainingExercises.RemoveRange(userTrainingExercises);
-                        break;
-                    case SyncItemType.TrainingItem:
-                        var userTrainings = _context.UserTrainings.Where(item => item.UserId == user.Id);
-                        _context.UserTrainings.RemoveRange(userTrainings);
-                        break;
-                    case SyncItemType.SuperSets:
-                        var userSuperSets = _context.UserSuperSets.Where(item => item.UserId == user.Id);
-                        _context.UserSuperSets.RemoveRange(userSuperSets);
-                        break;
-                    case SyncItemType.LastTrainingExercise:
-                        var userLastTrainingExercise = _context.UserLastTrainingExercises.Where(item => item.UserId == user.Id);
-                        _context.UserLastTrainingExercises.RemoveRange(userLastTrainingExercise);
-                        break;
-                    case SyncItemType.LastTraining:
-                        var userLastTraining = _context.UserLastTrainings.Where(item => item.UserId == user.Id);
-                        _context.UserLastTrainings.RemoveRange(userLastTraining);
-                        break;
-                    case SyncItemType.TrainingGroup:
-                        var userTrainingGroups = _context.UserTrainingGroups.Where(item => item.UserId == user.Id);
-                        _context.UserTrainingGroups.RemoveRange(userTrainingGroups);
-                        break;
-                }
-
-                await _context.SaveChangesAsync();
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return BadRequest("Exception");
-            }
-        }
-
         private User GetUserOrCreate(int tokenId)
         {
             var userToken = _context.UserTokens.FirstOrDefault(item => item.TokenId == tokenId);
@@ -417,9 +224,8 @@ namespace TrainingDay.Web.Server.Controllers
                 return NotFound(mail);
             }
 
-            RepoMobileSite data = new RepoMobileSite();
+            RepositoryBase data = new RepositoryBase();
             var userWeights = _context.UserWeightNotes.Where(item => item.UserId == user.Id);
-            var userAlarms = _context.UserAlarm.Where(item => item.UserId == user.Id);
             var userExercises = _context.UserExercises.Where(item => item.UserId == user.Id);
             var userTrainingExercises = _context.UserTrainingExercises.Where(item => item.UserId == user.Id);
             var userTrainings = _context.UserTrainings.Where(item => item.UserId == user.Id);
@@ -443,15 +249,6 @@ namespace TrainingDay.Web.Server.Controllers
                 Date = item.Date,
                 Weight = item.Weight,
                 Type = item.Type
-            }).ToList();
-            data.Alarms = userAlarms.Select(item => new Alarm()
-            {
-                Days = item.Days,
-                Id = item.DatabaseId,
-                Name = item.Name,
-                TimeOffset = item.TimeOffset,
-                TrainingId = item.TrainingId,
-                IsActive = item.IsActive
             }).ToList();
             data.TrainingExercise = userTrainingExercises.Select(item => new TrainingExerciseComm()
             {

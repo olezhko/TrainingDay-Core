@@ -2,7 +2,7 @@
 
 namespace TrainingDay.Web.Entities.MobileItems;
 
-public class UserWeightNote : TrainingDay.Common.WeightNote, IUserEntity
+public class UserWeightNote : Common.Models.WeightNote, IUserEntity
 {
     [Key]
     public new int Id { get; set; }

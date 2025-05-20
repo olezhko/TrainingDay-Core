@@ -1,0 +1,51 @@
+.blog-list-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.blog-card {
+  margin-bottom: 20px;
+}
+
+.mat-card {
+  margin: 16px;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+  .mat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+  }
+
+.mat-card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 12px;
+  color: #333;
+}
+
+.mat-card-subtitle {
+  font-size: 0.95rem;
+  color: #777;
+  margin-bottom: 16px;
+}
+
+.mat-card-content {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+.mat-card-actions {
+  margin-top: 16px;
+}
+
+.mat-card-actions button {
+  text-transform: uppercase;
+  font-weight: 500;
+}

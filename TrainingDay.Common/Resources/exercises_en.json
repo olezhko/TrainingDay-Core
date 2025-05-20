@@ -1439,5 +1439,60 @@
     "MusclesString": "Abdominal",
     "Tags": "CanDoAtHome,DatabaseExercise,ExerciseByReps",
     "CodeNum": 138
+  },
+  {
+    "ExerciseItemName": "Standing Knee Raises",
+    "Description": {
+      "StartPosition": "Stand upright with feet shoulder-width apart. Keep your back straight, shoulders relaxed, and arms either at your sides or bent at the elbows. Look straight ahead and engage your core.",
+      "Execution": "Lift your right knee toward your chest while bringing your left arm forward, then return to the starting position and repeat on the opposite side, alternating knees in a controlled, rhythmic motion.",
+      "Advice": "Keep your back straight and your core engaged throughout. Exhale as you lift your knee, inhale as you lower it. Start slowly and increase speed gradually for more intensity. Use a wall or chair for balance if needed. Aim to lift your knees as high as possible to engage your core and hip flexors."
+    },
+    "MusclesString": "Abdominal,Thighs",
+    "Tags": "CanDoAtHome,DatabaseExercise,ExerciseByReps",
+    "CodeNum": 139
+  },
+  {
+    "ExerciseItemName": "Shoulder Rolls",
+    "Description": {
+      "StartPosition": "Stand tall with feet shoulder-width apart and arms relaxed by your sides.",
+      "Execution": "Roll your shoulders forward in a circular motion several times, then reverse the direction.",
+      "Advice": "Keep your movements smooth. Don’t shrug your shoulders too high or force the motion."
+    },
+    "MusclesString": "Trapezium,ShouldersFront",
+    "Tags": "CanDoAtHome,DatabaseExercise,ExerciseByReps",
+    "CodeNum": 140
+  },
+  {
+    "ExerciseItemName": "Side Bends",
+    "Description": {
+      "StartPosition": "Stand straight with your feet shoulder-width apart and arms resting at your sides.",
+      "Execution": "Slowly bend to the right, sliding your hand down your leg, then return to center and repeat on the left.",
+      "Advice": "Move slowly and avoid twisting your torso. Keep your core engaged."
+    },
+    "MusclesString": "WidestBack,ErectorSpinae,Abdominal",
+    "Tags": "CanDoAtHome,DatabaseExercise,ExerciseByReps",
+    "CodeNum": 141
+  },
+  {
+    "ExerciseItemName": "Leg Raises Backward",
+    "Description": {
+      "StartPosition": "Stand upright with feet hip-width apart and hands on your hips or resting on a stable surface for balance.",
+      "Execution": "Lift one straight leg backward, squeezing the glutes, then lower and repeat with the other leg.",
+      "Advice": "Avoid arching your back. Focus on controlled movement and glute activation."
+    },
+    "MusclesString": "Buttocks,Thighs,Quadriceps",
+    "Tags": "CanDoAtHome,DatabaseExercise,ExerciseByReps",
+    "CodeNum": 142
+  },
+  {
+    "ExerciseItemName": "Alternating Arm Swings Up and Down",
+    "Description": {
+      "StartPosition": "Stand upright with feet shoulder-width apart, arms relaxed at your sides.",
+      "Execution": "Lift one arm straight up while simultaneously lowering the other. Alternate sides rhythmically, keeping arms extended.",
+      "Advice": "Keep your torso still and avoid twisting. Perform the movement smoothly and in control."
+    },
+    "MusclesString": "Trapezium,ShouldersFront,Abdominal",
+    "Tags": "CanDoAtHome,DatabaseExercise,ExerciseByReps",
+    "CodeNum": 143
   }
 ]

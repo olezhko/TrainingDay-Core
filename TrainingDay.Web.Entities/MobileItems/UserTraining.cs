@@ -2,13 +2,13 @@
 
 namespace TrainingDay.Web.Entities.MobileItems;
 
-public class UserTraining : TrainingDay.Common.Training, IUserEntity
+public class UserTraining : Common.Models.Training, IUserEntity
 {
     public UserTraining()
     {
 
     }
-    public UserTraining(TrainingDay.Common.Training training)
+    public UserTraining(Common.Models.Training training)
     {
         DatabaseId = training.Id;
         Title = training.Title;

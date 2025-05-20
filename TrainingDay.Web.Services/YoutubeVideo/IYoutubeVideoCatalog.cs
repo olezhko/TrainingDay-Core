@@ -1,4 +1,4 @@
-﻿using TrainingDay.Common;
+﻿using TrainingDay.Common.Communication;
 
 namespace TrainingDay.Web.Services.YoutubeVideo
 {

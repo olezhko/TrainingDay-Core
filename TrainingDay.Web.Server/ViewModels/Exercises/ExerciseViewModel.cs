@@ -2,7 +2,8 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using TrainingDay.Common;
+using TrainingDay.Common.Extensions;
+using TrainingDay.Common.Models;
 using WebExercise = TrainingDay.Web.Entities.WebExercise;
 
 namespace TrainingDay.Web.Server.ViewModels.Exercises
@@ -56,8 +57,8 @@ namespace TrainingDay.Web.Server.ViewModels.Exercises
                 StartingPositionDescription = descriptionsStrings.StartPosition;
             }
 
-            Muscles = new ObservableCollection<MusclesEnum>(ExerciseTools.ConvertMuscleStringToList(model.MusclesString));
-            Tags = ExerciseTools.ConvertFromIntToTagList(model.TagsValue);
+            Muscles = new ObservableCollection<MusclesEnum>(ExerciseExtensions.ConvertMuscleStringToList(model.MusclesString));
+            Tags = [.. ExerciseExtensions.ConvertTagIntToList(model.TagsValue)];
             Culture = model.Culture;
         }
     }

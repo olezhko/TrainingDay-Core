@@ -118,43 +118,6 @@ namespace TrainingDay.Web.Database.Migrations
                         });
                 });
 
-            modelBuilder.Entity("TrainingDay.Web.Entities.MobileItems.UserAlarm", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("DatabaseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Days")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset>("TimeOffset")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int>("TrainingId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserAlarm");
-                });
-
             modelBuilder.Entity("TrainingDay.Web.Entities.MobileItems.UserExercise", b =>
                 {
                     b.Property<int>("Id")
@@ -521,16 +484,46 @@ namespace TrainingDay.Web.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -615,17 +608,6 @@ namespace TrainingDay.Web.Database.Migrations
                     b.Navigation("BlogPost");
 
                     b.Navigation("Culture");
-                });
-
-            modelBuilder.Entity("TrainingDay.Web.Entities.MobileItems.UserAlarm", b =>
-                {
-                    b.HasOne("TrainingDay.Web.Entities.User", "User")
-                        .WithMany("UserAlarms")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TrainingDay.Web.Entities.MobileItems.UserExercise", b =>
@@ -737,8 +719,6 @@ namespace TrainingDay.Web.Database.Migrations
 
             modelBuilder.Entity("TrainingDay.Web.Entities.User", b =>
                 {
-                    b.Navigation("UserAlarms");
-
                     b.Navigation("UserExercises");
 
                     b.Navigation("UserLastTrainingExercises");

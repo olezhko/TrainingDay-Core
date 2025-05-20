@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Reflection;
 
-namespace TrainingDay.Common.Resources
+namespace TrainingDay.Common.Extensions
 {
 	public static class ResourceExtension
 	{
@@ -11,7 +11,7 @@ namespace TrainingDay.Common.Resources
             try
             {
                 string filename = $"TrainingDay.Common.Resources.{category}_{ci}.json";
-                var assembly = typeof(ExerciseTools).GetTypeInfo().Assembly;
+                var assembly = typeof(ExerciseExtensions).GetTypeInfo().Assembly;
                 Stream stream = assembly.GetManifestResourceStream(filename) ?? assembly.GetManifestResourceStream(@"TrainingDay.Common.Resources.{category}_en.json");
 
                 if (stream == null)

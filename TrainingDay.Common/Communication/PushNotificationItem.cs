@@ -1,6 +1,6 @@
-﻿namespace TrainingDay.Common
+﻿namespace TrainingDay.Common.Communication
 {
-    public class PushNotificationData
+    public class PushNotificationItem
     {
         public const string AlarmType = "alarm";
         public const string WeightType = "weight";

@@ -1,6 +1,6 @@
-﻿namespace TrainingDay.Common
+﻿namespace TrainingDay.Common.Models
 {
-    public class RepoMobileSite
+    public class RepositoryBase
     {
         public IEnumerable<Training> Trainings { get; set; }
         public IEnumerable<Exercise> Exercises { get; set; }
@@ -18,16 +18,6 @@
         public string Name { get; set; }
         public string TrainingIDsString { get; set; }
         public bool IsExpanded { get; set; }
-    }
-
-    public class Alarm
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public DateTimeOffset TimeOffset { get; set; } // UTC
-        public bool IsActive { get; set; }// need
-        public int Days { get; set; }// need
-        public int TrainingId { get; set; }// need
     }
 
     public class WeightNote
@@ -98,7 +88,6 @@
         public int CodeNum { get; set; }
     }
 
-    [Serializable]
     public class SuperSet
     {
         public int Id { get; set; }

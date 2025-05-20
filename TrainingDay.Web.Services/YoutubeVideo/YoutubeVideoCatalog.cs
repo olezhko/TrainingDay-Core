@@ -2,7 +2,7 @@
 using Google.Apis.YouTube.v3;
 using Microsoft.Extensions.Options;
 using System.Text;
-using TrainingDay.Common;
+using TrainingDay.Common.Communication;
 
 namespace TrainingDay.Web.Services.YoutubeVideo
 {
