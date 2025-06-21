@@ -2,7 +2,7 @@
 using TrainingDay.Common.Extensions;
 using TrainingDay.Common.Models;
 using TrainingDay.Web.Database;
-using WebExercise = TrainingDay.Web.Entities.WebExercise;
+using TrainingDay.Web.Entities;
 
 namespace TrainingDay.Web.Services.Exercises;
 
@@ -19,6 +19,12 @@ public class ExerciseManager(TrainingDayContext context) : IExerciseManager
                 ExerciseTags.DatabaseExercise
             ]),
         };
+    }
+
+    public IEnumerable<WebExercise> GetExercises()
+    {
+        return context.Exercises.AsNoTracking()
+            .Where(item => item.Culture == "en");
     }
 
     public int GetLastCode(string cu)

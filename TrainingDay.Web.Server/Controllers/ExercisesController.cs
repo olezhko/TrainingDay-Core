@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using TrainingDay.Common.Extensions;
 using TrainingDay.Common.Models;
+using TrainingDay.Web.Data.OpenAI;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Entities;
 using TrainingDay.Web.Server.ViewModels.Exercises;
@@ -16,6 +17,7 @@ namespace TrainingDay.Web.Server.Controllers
     [ApiController]
     public class ExercisesController(TrainingDayContext context,
             IExerciseManager mngExercise,
+            IOpenAIService geminiService,
             IWebHostEnvironment environment,
             IMapper mapper) : ControllerBase
     {
@@ -175,6 +177,19 @@ namespace TrainingDay.Web.Server.Controllers
         private bool ExerciseExists(int id)
         {
             return context.Exercises.Any(e => e.Id == id);
+        }
+
+        [HttpPost("query")]
+        public async Task<ActionResult<IEnumerable<ExerciseOpenAIResponse>>> GetExercisesByQuery([FromBody] string query, CancellationToken token)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return BadRequest("Query parameter is required.");
+            }
+
+            var response = await geminiService.GetExercisesByQuery(query, token);
+
+            return Ok(response);
         }
     }
 }

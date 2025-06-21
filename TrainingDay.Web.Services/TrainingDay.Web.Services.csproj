@@ -14,17 +14,15 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.7" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.1" />
+    <PackageReference Include="OpenAI-DotNet" Version="8.7.1" />
     <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
+    <PackageReference Include="RestSharp" Version="112.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TrainingDay.Web.Database\TrainingDay.Web.Database.csproj" />
     <ProjectReference Include="..\TrainingDay.Web.Data\TrainingDay.Web.Data.csproj" />
     <ProjectReference Include="..\TrainingDay.Web.Entities\TrainingDay.Web.Entities.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Common\" />
   </ItemGroup>
 
 </Project>
