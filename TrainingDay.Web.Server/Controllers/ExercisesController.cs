@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using TrainingDay.Common.Communication;
 using TrainingDay.Common.Extensions;
 using TrainingDay.Common.Models;
 using TrainingDay.Web.Data.OpenAI;
@@ -180,14 +181,14 @@ namespace TrainingDay.Web.Server.Controllers
         }
 
         [HttpPost("query")]
-        public async Task<ActionResult<IEnumerable<ExerciseOpenAIResponse>>> GetExercisesByQuery([FromBody] string query, CancellationToken token)
+        public async Task<ActionResult<IEnumerable<ExerciseQueryResponse>>> GetExercisesByQuery(ExerciseQueryRequest query, CancellationToken token)
         {
-            if (string.IsNullOrWhiteSpace(query))
+            if (string.IsNullOrWhiteSpace(query.Query))
             {
                 return BadRequest("Query parameter is required.");
             }
 
-            var response = await geminiService.GetExercisesByQuery(query, token);
+            var response = await geminiService.GetExercisesByQuery(query.Query, token);
 
             return Ok(response);
         }

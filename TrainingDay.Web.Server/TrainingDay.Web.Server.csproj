@@ -84,7 +84,12 @@
     <None Include="wwwroot\exercise_images\136.jpg" />
     <None Include="wwwroot\exercise_images\137.jpg" />
     <None Include="wwwroot\exercise_images\138.jpg" />
+    <None Include="wwwroot\exercise_images\139.png" />
     <None Include="wwwroot\exercise_images\14.jpg" />
+    <None Include="wwwroot\exercise_images\140.png" />
+    <None Include="wwwroot\exercise_images\141.png" />
+    <None Include="wwwroot\exercise_images\142.png" />
+    <None Include="wwwroot\exercise_images\143.png" />
     <None Include="wwwroot\exercise_images\15.jpg" />
     <None Include="wwwroot\exercise_images\16.jpg" />
     <None Include="wwwroot\exercise_images\17.jpg" />
@@ -174,6 +179,11 @@
     <None Include="wwwroot\exercise_images\93.jpg" />
     <None Include="wwwroot\exercise_images\94.jpg" />
     <None Include="wwwroot\exercise_images\95.jpg" />
+    <None Remove="wwwroot\exercise_images\139.png" />
+    <None Remove="wwwroot\exercise_images\140.png" />
+    <None Remove="wwwroot\exercise_images\141.png" />
+    <None Remove="wwwroot\exercise_images\142.png" />
+    <None Remove="wwwroot\exercise_images\143.png" />
   </ItemGroup>
 
 </Project>

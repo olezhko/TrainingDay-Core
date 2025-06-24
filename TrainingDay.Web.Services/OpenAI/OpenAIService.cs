@@ -8,6 +8,7 @@ using OpenAI.VectorStores;
 using System.Data;
 using System.Diagnostics;
 using System.Text;
+using TrainingDay.Common.Communication;
 using TrainingDay.Common.Extensions;
 using TrainingDay.Common.Models;
 using TrainingDay.Web.Data.OpenAI;
@@ -51,7 +52,7 @@ public class OpenAIService(IOptions<Data.OpenAI.OpenAISettings> options) : IOpen
                $"Guid: {e.CodeNum} | " +
                $"Tags: {e.Tags}.";
 
-    public async Task<IEnumerable<ExerciseOpenAIResponse>> GetExercisesByQuery(string query, CancellationToken token)
+    public async Task<IEnumerable<ExerciseQueryResponse>> GetExercisesByQuery(string query, CancellationToken token)
     {
         if (vectorStoreId is null)
         {
@@ -63,16 +64,11 @@ public class OpenAIService(IOptions<Data.OpenAI.OpenAISettings> options) : IOpen
             await CreateAssistantRequestAsync(token);
         }
 
-        Stopwatch stopwatch = new Stopwatch();
-        stopwatch.Start();
-
         var thread = await client.ThreadsEndpoint.CreateThreadAsync(cancellationToken: token);
-        Debug.WriteLine($"OpenAI response1: {stopwatch.ElapsedMilliseconds}");
 
         // user asks a question
         var message = new Message(query, Role.User);
         await client.ThreadsEndpoint.CreateMessageAsync(thread.Id, message, cancellationToken: token);
-        Debug.WriteLine($"OpenAI response2: {stopwatch.ElapsedMilliseconds}");
 
         // run the assistant (it will invoke file_search under the hood)
         RunResponse run = await client.ThreadsEndpoint.CreateRunAsync(
@@ -80,13 +76,11 @@ public class OpenAIService(IOptions<Data.OpenAI.OpenAISettings> options) : IOpen
             new CreateRunRequest(assistant.Id),
             (IServerSentEvent eventData) => Task.CompletedTask, // Explicitly specify the delegate type
             cancellationToken: token);
-        Debug.WriteLine($"OpenAI response3: {stopwatch.ElapsedMilliseconds}");
 
         // read the answer
         var messages = await client.ThreadsEndpoint.ListMessagesAsync(thread.Id, cancellationToken: token);
-        Debug.WriteLine($"OpenAI response4: {stopwatch.ElapsedMilliseconds}");
 
-        var result = new List<ExerciseOpenAIResponse>();
+        var result = new List<ExerciseQueryResponse>();
         foreach (var m in messages.Items)
         {
             if (m.Role == Role.Assistant)
@@ -102,10 +96,7 @@ public class OpenAIService(IOptions<Data.OpenAI.OpenAISettings> options) : IOpen
                     }
                 }
 
-                Debug.WriteLine($"OpenAI response5: {stopwatch.ElapsedMilliseconds}");
-
-                stopwatch.Stop();
-                IEnumerable<ExerciseOpenAIResponse> response = JsonConvert.DeserializeObject<IEnumerable<ExerciseOpenAIResponse>>(sb.ToString());
+                IEnumerable<ExerciseQueryResponse> response = JsonConvert.DeserializeObject<IEnumerable<ExerciseQueryResponse>>(sb.ToString());
                 return response;
             }
         }
@@ -117,9 +108,9 @@ public class OpenAIService(IOptions<Data.OpenAI.OpenAISettings> options) : IOpen
     {
         assistant = await client.AssistantsEndpoint.CreateAssistantAsync(new CreateAssistantRequest(name: "Workout Coach",
             instructions: "Use for exercises source only Exercise KB Vector Store, no additional sources. " +
-            "Get exercises that followed these questions and answers. Return json format for result with properties: Guid, CountOfSets, CountOfRepsOrTime.",
+            $"Get exercises that followed these questions and answers. Return json format for result with properties: {nameof(ExerciseQueryResponse.Guid)}, {nameof(ExerciseQueryResponse.CountOfSets)}, {nameof(ExerciseQueryResponse.CountOfRepsOrTime)}, {nameof(ExerciseQueryResponse.WorkingWeight)} (in kilograms, if applicable).",
             model: "gpt-4o-mini",
-            responseFormat: TextResponseFormat.JsonSchema,
+            responseFormat: ChatResponseFormat.Json,
             tools: new[] { Tool.FileSearch },
             toolResources: new ToolResources(fileSearch: new FileSearchResources(vectorStoreId), null)), cancellationToken: token);
     }

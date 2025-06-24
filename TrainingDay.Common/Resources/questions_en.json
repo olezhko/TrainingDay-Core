@@ -41,20 +41,35 @@
     "isMultiple": true,
     "answers": [
       "Cardio",
-      "Strength training",
+      "Strength",
       "Yoga",
-      "Stretching"
+      "Stretching",
+      "Fitness"
+    ]
+  },
+  {
+    "title": "What part of your body do you want to work out today?",
+    "number": 5,
+    "isMultiple": true,
+    "answers": [
+      "Chest",
+      "Back",
+      "Shoulders",
+      "Arms",
+      "Abdominals",
+      "Legs"
     ]
   },
   {
     "title": "How much time are you willing to dedicate to workouts?",
-    "number": 5,
+    "number": 6,
     "isMultiple": false,
     "answers": [
       "Around 30 minutes",
       "30-60 minutes",
       "60-90 minutes",
-      "More than 90 minutes"
+      "near 2 hours",
+      "near 3 hours"
     ]
   }
 ]
