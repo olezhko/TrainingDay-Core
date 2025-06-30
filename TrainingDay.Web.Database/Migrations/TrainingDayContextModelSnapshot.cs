@@ -125,11 +125,11 @@ namespace TrainingDay.Web.Database.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ExerciseItemName")
+                    b.Property<string>("MusclesString")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("MusclesString")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -520,11 +520,11 @@ namespace TrainingDay.Web.Database.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ExerciseItemName")
+                    b.Property<string>("MusclesString")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("MusclesString")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 

@@ -1,0 +1,67 @@
+<br>
+<br>
+<br>
+<br>
+
+<div class="container mt-4" *ngIf="exercise">
+  <div class="card shadow-sm">
+    <div class="card-body">
+
+      <div class="d-flex justify-content-center my-3">
+        <img [src]="imageSrc"
+             alt="Exercise Image"
+             class="img-fluid rounded exercise-image" />
+      </div>
+
+      <h2 class="card-title mb-3">{{ exercise.name }}</h2>
+
+      <div class="mb-4">
+        <h5>Start</h5>
+        <p>{{ exercise.startingPositionDescription }}</p>
+      </div>
+
+      <div class="mb-4">
+        <h5>Execution</h5>
+        <p>{{ exercise.executionDescription }}</p>
+      </div>
+
+      <div class="mb-4">
+        <h5>Advice</h5>
+        <p>{{ exercise.adviceDescription }}</p>
+      </div>
+
+      <div class="mb-3">
+        <h5>Target Muscles</h5>
+        <ng-container *ngIf="exercise.muscles?.length; else noMuscles">
+          <span *ngFor="let muscle of exercise.muscles"
+                class="badge bg-primary me-2 mb-2">
+            {{ muscleLabel(muscle) }}
+          </span>
+        </ng-container>
+        <ng-template #noMuscles>
+          <p class="text-muted">No muscles listed.</p>
+        </ng-template>
+      </div>
+
+      <div class="mb-3">
+        <h5>Tags</h5>
+        <ng-container *ngIf="exercise.tags?.length; else noTags">
+          <span *ngFor="let tag of exercise.tags"
+                class="badge bg-secondary me-2 mb-2">
+            {{ tagLabel(tag) }}
+          </span>
+        </ng-container>
+        <ng-template #noTags>
+          <p class="text-muted">No tags provided.</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Optional loading state -->
+<div class="container mt-4" *ngIf="!exercise">
+  <div class="alert alert-info text-center">
+    Loading exercise details...
+  </div>
+</div>

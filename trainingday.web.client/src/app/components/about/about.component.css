@@ -1,0 +1,91 @@
+.center {
+    margin: auto;
+    width: 50%;
+}
+
+img {
+    max-width: 100%;
+}
+
+section {
+    margin: 10px;
+}
+
+
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.feature-card {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+ul li::marker {
+  color: #4CAF50;
+}
+
+.cta-button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+  .cta-button:hover {
+    background-color: #45a049;
+  }
+
+
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px auto;
+}
+
+.carousel-slide {
+  text-align: center;
+  max-width: 300px;
+}
+
+  .carousel-slide img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+.nav-button {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.carousel-dots {
+  text-align: center;
+  margin-top: 10px;
+}
+
+  .carousel-dots span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 4px;
+    background-color: gray;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+    .carousel-dots span.active {
+      background-color: black;
+    }
+

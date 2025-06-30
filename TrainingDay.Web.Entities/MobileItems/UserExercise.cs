@@ -12,7 +12,7 @@ public class UserExercise : Common.Models.Exercise, IUserEntity
     {
         DatabaseId = item.Id;
         Description = item.Description;
-        ExerciseItemName = item.ExerciseItemName;
+        Name = item.Name;
         MusclesString = item.MusclesString;
         TagsValue = item.TagsValue;
         CodeNum = item.CodeNum;

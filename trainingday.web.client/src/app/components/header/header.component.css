@@ -1,0 +1,17 @@
+.header-padding {
+  padding: 20px 400px;
+}
+
+.nav-title-text {
+  text-decoration: underline;
+}
+
+.nav-link {
+    font-size: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+  .header-padding {
+    padding: 20px;
+  }
+}

@@ -1,0 +1,15 @@
+<section>
+    <div class="container">
+        <h1 class="page-title">Exercises</h1>
+        <hr>
+
+        <!--<div class="header">
+            <input type="text" placeholder="Search" class="form-control" id="search-input" />
+            <button type="button" class="btn btn-secondary" (click)="createNew()">Create a new</button>
+        </div>-->
+
+        <div class="wrap-container">
+            <app-exercise-preview *ngFor="let exercise of exercisePreviews" [exercise]="exercise"></app-exercise-preview>
+        </div>
+    </div>
+</section>

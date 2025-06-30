@@ -27,7 +27,7 @@ public static class ExercisesInitializer
                 {
                     dbExercise.Description = JsonConvert.SerializeObject(srcExercise.Description);
                     dbExercise.MusclesString = srcExercise.MusclesString;
-                    dbExercise.ExerciseItemName = srcExercise.ExerciseItemName;
+                    dbExercise.Name = srcExercise.Name;
                     context.Exercises.Update(dbExercise);
                 }
             }

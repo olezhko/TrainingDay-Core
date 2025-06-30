@@ -13,7 +13,7 @@ namespace TrainingDay.Web.Server.ViewModels.Exercises
         public int Id { get; set; }
         [Required]
         [DisplayName("Name")]
-        public string ExerciseItemName { get; set; }
+        public string Name { get; set; }
 
         [DisplayName("Starting Position")]
         public string? StartingPositionDescription { get; set; }
@@ -45,7 +45,7 @@ namespace TrainingDay.Web.Server.ViewModels.Exercises
 
         public ExerciseViewModel(WebExercise model)
         {
-            ExerciseItemName = model.ExerciseItemName;
+            Name = model.Name;
             CodeNum = model.CodeNum;
             Id = model.Id;
 

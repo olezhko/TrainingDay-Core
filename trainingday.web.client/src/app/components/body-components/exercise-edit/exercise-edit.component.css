@@ -1,0 +1,18 @@
+.save {
+    margin: 10px 20px;
+}
+
+.required:after {
+  content: "*";
+  color: red;
+  margin-left: 4px;
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}

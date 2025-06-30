@@ -1,0 +1,29 @@
+.footer {
+    position: relative;
+  bottom: 0;
+  width: 100%;
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 1% 10%
+}
+
+.column-header {
+  font-size: large;
+  font-weight: bold;
+}
+
+img {
+  width: 20px;
+  height: 20px;
+  align-self: center;
+}
+
+a {
+  color: black;
+}
+
+@media screen and (max-width: 1000px) {
+  .footer {
+    padding: 20px;
+  }
+}

@@ -16,7 +16,7 @@ namespace TrainingDay.Web.Entities
             TagsValue = ExerciseExtensions.ConvertTagStringToInt(baseExercise.Tags);
             CodeNum = baseExercise.CodeNum;
             MusclesString = baseExercise.MusclesString;
-            ExerciseItemName = baseExercise.ExerciseItemName;
+            Name = baseExercise.Name;
         }
 
         public WebExercise()

@@ -238,7 +238,7 @@ namespace TrainingDay.Web.Server.Controllers
             {
                 Id = item.DatabaseId,
                 Description = JsonConvert.SerializeObject(item.Description),
-                ExerciseItemName = item.ExerciseItemName,
+                Name = item.Name,
                 MusclesString = item.MusclesString,
                 TagsValue = item.TagsValue,
                 CodeNum = item.CodeNum,

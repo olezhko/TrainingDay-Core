@@ -16,7 +16,8 @@ public class BlogPostEditViewModel
     [Required]
     public string View { get; set; }
 
-    [Required] public DateTime Date { get; set; }
+    [Required] 
+    public DateTime Date { get; set; }
 
     public int CultureId { get; set; }
     public int BlogId { get; set; }

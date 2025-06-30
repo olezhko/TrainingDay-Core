@@ -1,6 +1,6 @@
 [
   {
-    "ExerciseItemName": "Barbell Shrug",
+    "Name": "Barbell Shrug",
     "Description": {
       "StartPosition": "Stand up straight with your feet at shoulder width as you hold a barbell with both hands in front of you using a pronated grip (palms facing the thighs). Tip: Your hands should be a little wider than shoulder width apart. You can use wrist wraps for this exercise for a better grip.",
       "Execution": "Raise your shoulders up as far as you can go as you breathe out and hold the contraction for a second.",
@@ -11,7 +11,7 @@
     "CodeNum": 1
   },
   {
-    "ExerciseItemName": "Barbell Shrug Behind The Back",
+    "Name": "Barbell Shrug Behind The Back",
     "Description": {
       "StartPosition": "Stand up straight with your feet at shoulder width as you hold a barbell with both hands behind your back using a pronated grip (palms facing back). Tip: Your hands should be a little wider than shoulder width apart. You can use wrist wraps for this exercise for better grip.",
       "Execution": "Raise your shoulders up as far as you can go as you breathe out and hold the contraction for a second. Tip: Refrain from trying to lift the barbell by using your biceps. The arms should remain stretched out at all times. Slowly return to the starting position as you breathe in.Repeat for the recommended amount of repetitions.",
@@ -22,7 +22,7 @@
     "CodeNum": 2
   },
   {
-    "ExerciseItemName": "Upright Barbell Row",
+    "Name": "Upright Barbell Row",
     "Description": {
       "StartPosition": "Grasp a barbell with an overhand grip that is slightly less than shoulder width. The bar should be resting on the top of your thighs with your arms extended and a slight bend in your elbows. Your back should also be straight. ",
       "Execution": "Now exhale and use the sides of your shoulders to lift the bar, raising your elbows up and to the side. Keep the bar close to your body as you raise it. Continue to lift the bar until it nearly touches your chin. Tip: Your elbows should drive the motion, and should always be higher than your forearms. Remember to keep your torso stationary and pause for a second at the top of the movement. Lower the bar back down slowly to the starting position. Inhale as you perform this portion of the movement. Repeat for the recommended amount of repetitions.",
@@ -33,7 +33,7 @@
     "CodeNum": 3
   },
   {
-    "ExerciseItemName": "Standing barbell Press",
+    "Name": "Standing barbell Press",
     "Description": {
       "StartPosition": "Start by placing a barbell that is about chest high on a squat rack. Once you have selected the weights, grab the barbell using a pronated (palms facing forward) grip. Make sure to grip the bar wider than shoulder width apart from each other. Slightly bend the knees and place the barbell on your collar bone. Lift the barbell up keeping it lying on your chest. Take a step back and position your feet shoulder width apart from each other. Once you pick up the barbell with the correct grip length, lift the bar up over your head by locking your arms. Hold at about shoulder level and slightly in front of your head.  ",
       "Execution": "Lower the bar down to the collarbone slowly as you inhale. Lift the bar back up to the starting position as you exhale. Repeat for the recommended amount of repetitions.",
@@ -44,7 +44,7 @@
     "CodeNum": 4
   },
   {
-    "ExerciseItemName": "Barbell Shoulder Press",
+    "Name": "Barbell Shoulder Press",
     "Description": {
       "StartPosition": "Sit on a bench with back support in a squat rack. Position a barbell at a height that is just above your head. Grab the barbell with a pronated grip (palms facing forward). Once you pick up the barbell with the correct grip width, lift the bar up over your head by locking your arms. Hold at about shoulder level and slightly in front of your head.",
       "Execution": "Lower the bar down to the shoulders slowly as you inhale. Lift the bar back up to the starting position as you exhale. Repeat for the recommended amount of repetitions.",
@@ -55,7 +55,7 @@
     "CodeNum": 5
   },
   {
-    "ExerciseItemName": "Seated Dumbbell Press",
+    "Name": "Seated Dumbbell Press",
     "Description": {
       "StartPosition": "Grab a couple of dumbbells and sit on a military press bench or a utility bench that has a back support on it as you place the dumbbells upright on top of your thighs. Clean the dumbbells up one at a time by using your thighs to bring the dumbbells up to shoulder height at each side. Rotate the wrists so that the palms of your hands are facing forward. ",
       "Execution": "As you exhale, push the dumbbells up until they touch at the top. After a second pause, slowly come down back to the starting position as you inhale. Repeat for the recommended amount of repetitions.",
@@ -66,7 +66,7 @@
     "CodeNum": 6
   },
   {
-    "ExerciseItemName": "Arnold Dumbbell Press",
+    "Name": "Arnold Dumbbell Press",
     "Description": {
       "StartPosition": "Sit on an exercise bench with back support and hold two dumbbells in front of you at about upper chest level with your palms facing your body and your elbows bent. Tip: Your arms should be next to your torso. The starting position should look like the contracted portion of a dumbbell curl. ",
       "Execution": "Now to perform the movement, raise the dumbbells as you rotate the palms of your hands until they are facing forward. Continue lifting the dumbbells until your arms are extended above you in straight arm position. Breathe out as you perform this portion of the movement. After a second pause at the top, begin to lower the dumbbells to the original position by rotating the palms of your hands towards you. Tip: The left arm will be rotated in a counter clockwise manner while the right one will be rotated clockwise. Breathe in as you perform this portion of the movement. Repeat for the recommended amount of repetitions.",
@@ -77,7 +77,7 @@
     "CodeNum": 7
   },
   {
-    "ExerciseItemName": "Standing Dumbbell Side Lateral Raise",
+    "Name": "Standing Dumbbell Side Lateral Raise",
     "Description": {
       "StartPosition": "Stand with your feet hip-width apart spaced evenly on the center of a resistance band (not shown). Hold your heaviest set of dumbbells at your sides with your palms facing inward; place the other two dumbbell sets within easy reach. ",
       "Execution": "Lift your arms up and out to the sides, keeping a slight bend in your elbows and raising them to shoulder height and turning your pinkie upward as you reach the top. Pause briefly before lowering slowly back to the start for a count of two. Do all your reps, then place the weights on the floor.",
@@ -88,7 +88,7 @@
     "CodeNum": 8
   },
   {
-    "ExerciseItemName": "Front Dumbbell Raise",
+    "Name": "Front Dumbbell Raise",
     "Description": {
       "StartPosition": "Pick a couple of dumbbells and stand with a straight torso and the dumbbells on front of your thighs at arms length with the palms of the hand facing your thighs. This will be your starting position. ",
       "Execution": "While maintaining the torso stationary (no swinging), lift the left dumbbell to the front with a slight bend on the elbow and the palms of the hands always facing down. Continue to go up until you arm is slightly above parallel to the floor. Exhale as you execute this portion of the movement and pause for a second at the top. Inhale after the second pause. Now lower the dumbbell back down slowly to the starting position as you simultaneously lift the right dumbbell. Continue alternating in this fashion until all of the recommended amount of repetitions have been performed for each arm.",
@@ -99,7 +99,7 @@
     "CodeNum": 9
   },
   {
-    "ExerciseItemName": "Dumbbell bent-over lateral raise",
+    "Name": "Dumbbell bent-over lateral raise",
     "Description": {
       "StartPosition": "Holding a dumbbell in each hand, bend at the hips and knees until your torso is parallel to the floor. Your back should be straight and your arms should be hanging in front of you, with your palms facing inwards (neutral grip). ",
       "Execution": "Keeping your elbows slightly bent, raise both arms out to the sides until the dumbbells are level with the height of your shoulders. Don’t forget to exhale. Hold for a count of two. Inhale as you lower the dumbbells to the starting position in a controlled manner. Repeat for the desired number of repetitions. ",
@@ -110,7 +110,7 @@
     "CodeNum": 10
   },
   {
-    "ExerciseItemName": "Reverse Machine Flyes",
+    "Name": "Reverse Machine Flyes",
     "Description": {
       "StartPosition": "Adjust the handles so that they are fully to the rear. Make an appropriate weight selection and adjust the seat height so the handles are at shoulder level. Grasp the handles with your hands facing inwards. This will be your starting position. ",
       "Execution": "In a semicircular motion, pull your hands out to your side and back, contracting your rear delts. Keep your arms slightly bent throughout the movement, with all of the motion occurring at the shoulder joint. Pause at the rear of the movement, and slowly return the weight to the starting position.",
@@ -121,7 +121,7 @@
     "CodeNum": 11
   },
   {
-    "ExerciseItemName": "Dumbbell lateral raise",
+    "Name": "Dumbbell lateral raise",
     "Description": {
       "StartPosition": "Stand holding a dumbbell in each hand, with the dumbbells hanging down by your sides. Bend forward a little at the hips. rotate your shoulders so that your thumbs point out diagonally.",
       "Execution": "Keeping your elbows slightly bent, exhale as you raise both upper arms out to the sides until your elbows are level with your shoulders. Hold for a count of two. Inhale as you lower the dumbbells to the starting position. Repeat for the recommended number of repetitions. ",
@@ -132,7 +132,7 @@
     "CodeNum": 12
   },
   {
-    "ExerciseItemName": "Wide-Grip Standing Barbell Curl",
+    "Name": "Wide-Grip Standing Barbell Curl",
     "Description": {
       "StartPosition": "Stand up with your torso upright while holding a barbell at the wide outer handle. The palm of your hands should be facing forward. The elbows should be close to the torso. This will be your starting position. ",
       "Execution": "While holding the upper arms stationary, curl the weights forward while contracting the biceps as you breathe out. Tip: Only the forearms should move. Continue the movement until your biceps are fully contracted and the bar is at shoulder level. Hold the contracted position for a second and squeeze the biceps hard. Slowly begin to bring the bar back to starting position as your breathe in. Repeat for the recommended amount of repetitions.",
@@ -143,7 +143,7 @@
     "CodeNum": 13
   },
   {
-    "ExerciseItemName": "Hammer Curls",
+    "Name": "Hammer Curls",
     "Description": {
       "StartPosition": "Stand up with your torso upright and a dumbbell on each hand being held at arms length. The elbows should be close to the torso. The palms of the hands should be facing your torso. This will be your starting position. ",
       "Execution": "Now, while holding your upper arm stationary, exhale and curl the weight forward while contracting the biceps. Continue to raise the weight until the biceps are fully contracted and the dumbbell is at shoulder level. Hold the contracted position for a brief moment as you squeeze the biceps. After the brief pause, inhale and slowly begin the lower the dumbbells back down to the starting position. Repeat for the recommended amount of repetitions.",
@@ -154,7 +154,7 @@
     "CodeNum": 14
   },
   {
-    "ExerciseItemName": "Dumbbell preacher curl",
+    "Name": "Dumbbell preacher curl",
     "Description": {
       "StartPosition": "Sit on the preacher bench with a dumbbell in your hand. Supinate your forearm (turn your palm upward), bend your elbow so that the dumbbell faces your shoulder, and rest your upper arm flat on the bench. ",
       "Execution": "Inhale as you lower the dumbbell until your arm is almost fully extended. Exhale as you curl the dumbbell to the starting position. Repeat for the desired number of repetitions. Repeat with your opposite arm. ",
@@ -165,7 +165,7 @@
     "CodeNum": 15
   },
   {
-    "ExerciseItemName": "Biceps Cable curl",
+    "Name": "Biceps Cable curl",
     "Description": {
       "StartPosition": "Attach a bar to a low cable pulley. Grasp the bar using a shoulder-width supinated (underhand) grip. Stand approximately one foot away from the pulley and lean backward a little. Your elbows should be by your sides, your arms should be almost fully extended, and the cable should be pulled taut. ",
       "Execution": "Keeping your elbows by your sides, exhale as you curl the bar towards your shoulders until your elbows are fully flexed. Hold for a count of two and squeeze your biceps. Inhale as you lower the bar to the starting position, with your arms almost fully extended. Repeat. ",
@@ -176,7 +176,7 @@
     "CodeNum": 16
   },
   {
-    "ExerciseItemName": "Overhead cable curl",
+    "Name": "Overhead cable curl",
     "Description": {
       "StartPosition": "Stand between two overhead pulleys and grasp a stirrup in each hand. Raise your arms so that they are parallel to the floor. Supinate your forearms (turn your palms upward). ",
       "Execution": "Keeping your upper arms still, exhale as you flex your elbows and curl the stirrups toward your ears. Hold the contracted position and squeeze your biceps. Inhale as you return the stirrups to the starting position. Repeat. ",
@@ -187,7 +187,7 @@
     "CodeNum": 17
   },
   {
-    "ExerciseItemName": "Concentration biceps curl",
+    "Name": "Concentration biceps curl",
     "Description": {
       "StartPosition": "Sit on a bench with your legs apart, with a dumbbell in front of you. Pick up the dumbbell with your right hand and rest your right arm against the inside of your right thigh. Your elbow should be lower than the top of your thigh so that your elbow doesn’t pivot, and your right arm should be almost fully extended, with your palm facing away from your right thigh. Rest your left arm on your left thigh to support your back",
       "Execution": "Exhale as you curl the dumbbell up towards your shoulder. At the top of the movement, hold the contracted position and squeeze your biceps for a count of two. Inhale as you lower the dumbbell to the starting position. Repeat for the desired number of repetitions. Repeat with your left arm. ",
@@ -198,7 +198,7 @@
     "CodeNum": 18
   },
   {
-    "ExerciseItemName": "Barbell reverse curl",
+    "Name": "Barbell reverse curl",
     "Description": {
       "StartPosition": "Stand holding a barbell using a shoulder-width pronated (overhand) grip. ",
       "Execution": "Keeping your elbows by your sides, exhale as you curl the barbell up until your forearms are nearly vertical. Inhale as you lower the barbell back to the starting position in a controlled manner. Repeat. ",
@@ -209,7 +209,7 @@
     "CodeNum": 19
   },
   {
-    "ExerciseItemName": "Dumbbell Standing Biceps Curl",
+    "Name": "Dumbbell Standing Biceps Curl",
     "Description": {
       "StartPosition": "Stand up straight with a dumbbell in each hand, arms fully extended, and palms facing forward. Keep your feet shoulder-width apart for stability. Engage your core muscles to maintain a stable posture throughout the exercise.",
       "Execution": "With a firm grip on the dumbbells, exhale and slowly curl the weights toward your shoulders. Keep your elbows close to your torso during the movement to isolate the biceps. Continue lifting until your biceps are fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a brief pause, squeezing your biceps. Inhale and slowly begin to lower the dumbbells back to the starting position in a controlled manner.",
@@ -220,7 +220,7 @@
     "CodeNum": 20
   },
   {
-    "ExerciseItemName": "Seated Dumbbell Curl",
+    "Name": "Seated Dumbbell Curl",
     "Description": {
       "StartPosition": "Sit on a flat bench with a dumbbell on each hand being held at arms length. The elbows should be close to the torso. Rotate the palms of the hands so that they are facing your torso. This will be your starting position.",
       "Execution": "While holding the upper arm stationary, curl the weights and start twisting the wrists once the dumbbells pass your thighs so that the palms of your hands face forward at the end of the movement. Make sure that you contract the biceps as you breathe out and make sure that only the forearms move. Continue the movement until your biceps are fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a second as you squeeze the biceps. Slowly begin to bring the dumbbells back to the starting position as your breathe in and as you rotate the wrists back to a neutral grip. Repeat for the recommended amount of repetitions.",
@@ -231,7 +231,7 @@
     "CodeNum": 21
   },
   {
-    "ExerciseItemName": "Close-grip barbell bench press",
+    "Name": "Close-grip barbell bench press",
     "Description": {
       "StartPosition": "Lie supine (on your back) on a flat bench, spread your legs, and plant your feet flat on the floor. Dismount the barbell using a shoulder-width grip. Straighten your wrists.",
       "Execution": "Keeping your elbows close to your body, inhale as you lower the barbell to your chest. Exhale as you press the barbell back up to the starting position.\tRepeat. ",
@@ -242,7 +242,7 @@
     "CodeNum": 22
   },
   {
-    "ExerciseItemName": "Bench dip",
+    "Name": "Bench dip",
     "Description": {
       "StartPosition": "Position two benches parallel and stand between them. Place your hands on the inside edge of one bench and your heels on the other so that your bottom is suspended between the benches. ",
       "Execution": "Exhale as you bend your elbows and lower your body until either you feel a slight stretch in your shoulders or your elbows make a 90-degree angle. Inhale as you extend your elbows and raise your body to the starting position. Repeat. ",
@@ -253,7 +253,7 @@
     "CodeNum": 23
   },
   {
-    "ExerciseItemName": "Decline EZ bar skull crusher",
+    "Name": "Decline EZ bar skull crusher",
     "Description": {
       "StartPosition": "Position a loaded EZ bar by the head of a declined bench. Hook your feet firmly under the foot pads of the bench and lie supine (on your back). Grasp the EZ bar using a close pronated grip (palms facing away from you) and press it up over your chest until your arms are straight. Allow your arms to tilt backwards a little. (Note: This is not expressed in the illustration, in which the arms are kept vertical.) ",
       "Execution": "Keeping your upper arms fixed, inhale as you flex your elbows and carefully lower the EZ bar toward your face in a circular motion. Exhale as you extend your elbows and return the EZ bar to the starting position. Repeat for the prescribed number of repetitions. ",
@@ -264,7 +264,7 @@
     "CodeNum": 24
   },
   {
-    "ExerciseItemName": "Overhead EZ bar triceps extension",
+    "Name": "Overhead EZ bar triceps extension",
     "Description": {
       "StartPosition": " Holding a loaded EZ bar using a narrow pronated (overhand) grip, sit on a bench or a chair that supports your back. Press the EZ bar over your head. ",
       "Execution": "Keeping your upper arms fixed and your elbows close to your head, inhale as you flex your elbows and lower the EZ bar behind your head in a semicircular motion. Exhale as you reverse the motion and push the EZ bar back over your head. Repeat. ",
@@ -275,7 +275,7 @@
     "CodeNum": 25
   },
   {
-    "ExerciseItemName": "Seated cable triceps extension",
+    "Name": "Seated cable triceps extension",
     "Description": {
       "StartPosition": "Place an inclined bench in front of a low cable pulley. The bench should be inclined at 90 degrees. Sit on the bench and grasp the cable bar from behind you. Hold it behind your head using a narrow pronated (overhand) grip. Your elbows should be raised high. ",
       "Execution": "Keeping your upper arms fixed and your elbows close to your head, exhale as you extend your elbows and raise the bar over your head in a semicircular motion. Inhale as you reverse the motion and lower the bar back behind your head. Repeat. ",
@@ -286,7 +286,7 @@
     "CodeNum": 26
   },
   {
-    "ExerciseItemName": "Triceps rope push-down",
+    "Name": "Triceps rope push-down",
     "Description": {
       "StartPosition": "Stand under the pulley and grasp each end of the rope with a neutral grip (palms facing each other). Pull your elbows down to your sides and lean forward a little at the hips, keeping your back straight.",
       "Execution": "Exhale as you extend your elbows and push the rope all the way down. As your arms extend, twist your wrists so that your palms face down at the end of the movement. Inhale as you reverse the motion and return the rope to the starting position.",
@@ -297,7 +297,7 @@
     "CodeNum": 27
   },
   {
-    "ExerciseItemName": "Cable one-arm reverse-grip triceps push-down",
+    "Name": "Cable one-arm reverse-grip triceps push-down",
     "Description": {
       "StartPosition": "Stand under a high cable pulley. Grasp the stirrup using a reverse (underhand) grip. Tuck your elbow into your side. ",
       "Execution": "Keeping your elbow fixed against your side, exhale as you extend your elbow and push the stirrup downward until your arm is almost fully extended. Inhale as you flex your elbow and allow the stirrup to rise to the starting position in a controlled manner. Repeat for the prescribed number of repetitions. Repeat the exercise with your opposite arm. ",
@@ -308,7 +308,7 @@
     "CodeNum": 28
   },
   {
-    "ExerciseItemName": "Dumbbell One-Arm Triceps",
+    "Name": "Dumbbell One-Arm Triceps",
     "Description": {
       "StartPosition": "Grab a dumbbell and either sit on a military press bench or a utility bench that has a back support on it as you place the dumbbells upright on top of your thighs or stand up straight. Clean the dumbbell up to bring it to shoulder height and then extend the arm over your head so that the whole arm is perpendicular to the floor and next to your head. The dumbbell should be on top of you. The other hand can be kept fully extended to the side, by the waist, supporting the upper arm that has the dumbbell or grabbing a fixed surface. Rotate the wrist so that the palm of your hand is facing forward and the pinkie is facing the ceiling. This will be your starting position.",
       "Execution": "Slowly lower the dumbbell behind your head as you hold the upper arm stationary. Inhale as you perform this movement and pause when your triceps are fully stretched. Return to the starting position by flexing your triceps as you breathe out. Tip: It is imperative that only the forearm moves. The upper arm should remain at all times stationary next to your head. Repeat for the recommended amount of repetitions and switch arms.",
@@ -319,7 +319,7 @@
     "CodeNum": 29
   },
   {
-    "ExerciseItemName": "Dumbbell kickback",
+    "Name": "Dumbbell kickback",
     "Description": {
       "StartPosition": "With a dumbbell in your right hand, kneel over a bench with your left knee, and support your body with your left arm. Position your torso and right upper arm parallel to the floor, with your right elbow bent at a 90-degree angle. The dumbbell should be hanging straight down below your elbow. ",
       "Execution": "Keeping your right upper arm stationary, exhale as you extend your right arm backward until it is straight. Hold for a count of two. Inhale as you slowly lower the dumbbell back to the starting position. Repeat for the prescribed number of repetitions. Repeat the repetitions with your left arm. ",
@@ -330,7 +330,7 @@
     "CodeNum": 30
   },
   {
-    "ExerciseItemName": "Barbell bench press",
+    "Name": "Barbell bench press",
     "Description": {
       "StartPosition": "Lie supine (on your back) on a flat bench. Spread your legs, bring your feet back, and place them firmly on the ground. Either your toes or your heels should be planted on the floor. Arch your back. Dismount the barbell using a grip that is a little over shoulder-width apart. While holding the barbell, retract (push together) your shoulder blades and straighten your wrists. ",
       "Execution": "Inhale as you lower the barbell to your chest, keeping your elbows tucked in at a 45-degree angle. Exhale as you press the barbell back up to the starting position. Repeat. ",
@@ -341,7 +341,7 @@
     "CodeNum": 31
   },
   {
-    "ExerciseItemName": "Incline barbell bench press",
+    "Name": "Incline barbell bench press",
     "Description": {
       "StartPosition": "Lie supine (on your back) on a bench inclined at 45 degrees. Spread your legs, bring your feet back, and place them firmly on the ground. Arch your back. Dismount the barbell using a wider-than-shoulder-width grip. Retract (push together) your shoulder blades and straighten your wrists.",
       "Execution": "Inhale as you lower the barbell to your chest, keeping your elbows tucked in. Exhale as you press the barbell back up to the starting position. Repeat.",
@@ -352,7 +352,7 @@
     "CodeNum": 32
   },
   {
-    "ExerciseItemName": "Decline barbell bench press",
+    "Name": "Decline barbell bench press",
     "Description": {
       "StartPosition": "Lock your feet under the leg brace of a declined bench and lie on your back. Using a grip that is a little wider than shoulder width, dismount the barbell from the rack. While holding the barbell, retract your shoulder blades (push them together) and straighten your wrists. ",
       "Execution": "Keeping your elbows tucked in a little, inhale as you lower the barbell to your chest. Exhale as you press the barbell back up to the starting position. Repeat.",
@@ -363,7 +363,7 @@
     "CodeNum": 33
   },
   {
-    "ExerciseItemName": "Dumbbell Bench Press",
+    "Name": "Dumbbell Bench Press",
     "Description": {
       "StartPosition": "Lie down on a flat bench with a dumbbell in each hand resting on top of your thighs. The palms of your hands will be facing each other. Then, using your thighs to help raise the dumbbells up, lift the dumbbells one at a time so that you can hold them in front of you at shoulder width. Once at shoulder width, rotate your wrists forward so that the palms of your hands are facing away from you. The dumbbells should be just to the sides of your chest, with your upper arm and forearm creating a 90 degree angle. Be sure to maintain full control of the dumbbells at all times. This will be your starting position. ",
       "Execution": "Then, as you breathe out, use your chest to push the dumbbells up. Lock your arms at the top of the lift and squeeze your chest, hold for a second and then begin coming down slowly. Repeat the movement for the prescribed amount of repetitions of your training program. ",
@@ -374,7 +374,7 @@
     "CodeNum": 34
   },
   {
-    "ExerciseItemName": "Machine chest press",
+    "Name": "Machine chest press",
     "Description": {
       "StartPosition": " Adjust the seat so that the handles are approximately chest height. Sit in the chest press machine with your back pressed firmly against the back rest. Grasp the handles with a pronated (overhand) grip. Plant your feet firmly on the ground. ",
       "Execution": "Exhale as you press the handles out until your arms are fully extended. Inhale as you reverse the motion until you feel a mild stretch in your chest. Repeat. ",
@@ -385,7 +385,7 @@
     "CodeNum": 37
   },
   {
-    "ExerciseItemName": "Dumbbell Flyes",
+    "Name": "Dumbbell Flyes",
     "Description": {
       "StartPosition": "Lie down on a flat bench with a dumbbell on each hand resting on top of your thighs. The palms of your hand will be facing each other. Then using your thighs to help raise the dumbbells, lift the dumbbells one at a time so you can hold them in front of you at shoulder width with the palms of your hands facing each other. Raise the dumbbells up like you're pressing them, but stop and hold just before you lock out. This will be your starting position. ",
       "Execution": "With a slight bend on your elbows in order to prevent stress at the biceps tendon, lower your arms out at both sides in a wide arc until you feel a stretch on your chest. Breathe in as you perform this portion of the movement. Tip: Keep in mind that throughout the movement, the arms should remain stationary; the movement should only occur at the shoulder joint. Return your arms back to the starting position as you squeeze your chest muscles and breathe out.",
@@ -396,7 +396,7 @@
     "CodeNum": 38
   },
   {
-    "ExerciseItemName": "Incline dumbbell fly",
+    "Name": "Incline dumbbell fly",
     "Description": {
       "StartPosition": "Holding a dumbbell in each hand, sit on a bench inclined at 45 degrees and rest each dumbbell on a knee. Lie backward, and as you do so, kick the dumbbells up into position over your chest, one at a time. Spread your legs and plant your feet flat on the floor. Flex your elbows slightly, and internally rotate your shoulders so that your elbows point out to the sides.",
       "Execution": "Keeping your elbows locked, inhale as you lower the dumbbells to your sides in an arcing motion until you feel a mild stretch in your chest or shoulders. Exhale as you reverse the motion and press the dumbbells back up to the starting position. Repeat for the prescribed number of repetitions.",
@@ -407,7 +407,7 @@
     "CodeNum": 39
   },
   {
-    "ExerciseItemName": "Machine fly",
+    "Name": "Machine fly",
     "Description": {
       "StartPosition": "Sit on the fly machine with your back pressed firmly against the back support. Grasp the levers at shoulder height. Internally rotate your shoulders so that your wrists, elbows, and shoulders are level. ",
       "Execution": "Keeping your elbows slightly bent, exhale as you push the levers together. Inhale as you reverse the motion until you feel a mild stretch in your chest or shoulders. Repeat. ",
@@ -418,7 +418,7 @@
     "CodeNum": 40
   },
   {
-    "ExerciseItemName": "Cable Crossover",
+    "Name": "Cable Crossover",
     "Description": {
       "StartPosition": "To get yourself into the starting position, place the pulleys on a high position (above your head), select the resistance to be used and hold the pulleys in each hand. Step forward in front of an imaginary straight line between both pulleys while pulling your arms together in front of you. Your torso should have a small forward bend from the waist. This will be your starting position. ",
       "Execution": "With a slight bend on your elbows in order to prevent stress at the biceps tendon, extend your arms to the side (straight out at both sides) in a wide arc until you feel a stretch on your chest. Breathe in as you perform this portion of the movement. Tip: Keep in mind that throughout the movement, the arms and torso should remain stationary; the movement should only occur at the shoulder joint. Return your arms back to the starting position as you breathe out. Make sure to use the same arc of motion used to lower the weights. Hold for a second at the starting position and repeat the movement for the prescribed amount of repetitions.",
@@ -429,7 +429,7 @@
     "CodeNum": 41
   },
   {
-    "ExerciseItemName": "Low Cable Crossover",
+    "Name": "Low Cable Crossover",
     "Description": {
       "StartPosition": "To move into the starting position, place the pulleys at the low position, select the resistance to be used and grasp a handle in each hand. ",
       "Execution": "Step forward, gaining tension in the pulleys. Your palms should be facing forward, hands below the waist, and your arms straight. This will be your starting position. With a slight bend in your arms, draw your hands upward and toward the midline of your body. Your hands should come together in front of your chest, palms facing up. Return your arms back to the starting position after a brief pause.",
@@ -440,7 +440,7 @@
     "CodeNum": 42
   },
   {
-    "ExerciseItemName": "Crunch on the bench",
+    "Name": "Crunch on the bench",
     "Description": {
       "StartPosition": "Lie supine (on your back) with your legs bent and your feet flat on the bench. Place your hands lightly either behind or by the sides of your head, keeping your elbows out.",
       "Execution": "Keeping your lower back flat on the floor, raise your head and shoulders a few inches off the ground by flexing your abdomen. Exhale as you do so. Hold the contracted position for a count of two. Inhale as you lower your head and shoulders to the starting position. Repeat. ",
@@ -451,7 +451,7 @@
     "CodeNum": 43
   },
   {
-    "ExerciseItemName": "Roman Chair Sit ups",
+    "Name": "Roman Chair Sit ups",
     "Description": {
       "StartPosition": "Hook your feet under the pad and get a comfortable position in the chair. Make sure your legs are anchored under the foot pad. ",
       "Execution": "Slowly allow the trunk of your body to sink below parallel, than raise back up to the starting position. Movement can be made easier by placing arms further down away from head. ",
@@ -462,7 +462,7 @@
     "CodeNum": 44
   },
   {
-    "ExerciseItemName": "Decline twisting sit-up",
+    "Name": "Decline twisting sit-up",
     "Description": {
       "StartPosition": "Hook your feet under the foot pads of a declined bench and lie supine (on your back). Place your hands behind neck.",
       "Execution": "Exhale as you raise your torso by flexing your waist and hips. As your torso rises, twist your waist to one side. Inhale as you reverse the motion and lower your torso to the starting position. Repeat, this time twisting your waist to the opposite side. Keep repeating and alternating the side to which you twist your waist.",
@@ -473,7 +473,7 @@
     "CodeNum": 45
   },
   {
-    "ExerciseItemName": "Kneeling cable crunch",
+    "Name": "Kneeling cable crunch",
     "Description": {
       "StartPosition": "Kneel in front of a high pulley. Grasp one end of the rope attachment in each hand and place your wrists against the sides of your head. Lower your torso by flexing your hips, but allow the weight of the rope to lift your upper torso so that your lower back is extended (curved upward). ",
       "Execution": "Keeping your hips fixed, exhale as you pull the rope downward by flexing your abdomen so that your back becomes arched. Hold for a count of two. Inhale as you relax your abdomen and allow the rope to lift your upper torso so that your lower back goes back to being extended. Repeat.",
@@ -484,7 +484,7 @@
     "CodeNum": 46
   },
   {
-    "ExerciseItemName": "Reverse crunch",
+    "Name": "Reverse crunch",
     "Description": {
       "StartPosition": "Lie supine (on your back) on the floor with your feet together. Place your hands alongside your body, with your palms flat on the floor. Lift your legs a little off the floor and bend your knees 90 degrees. To support your lower back, press it against the floor. ",
       "Execution": "Exhale as you flex your abdomen and curl your hips off the floor. Try to hold the contracted position for two seconds. Inhale as you relax your abdomen and lower your hips to the starting position in a controlled manner. Repeat for the prescribed number of repetitions. ",
@@ -495,7 +495,7 @@
     "CodeNum": 47
   },
   {
-    "ExerciseItemName": "Hanging leg and hip raise",
+    "Name": "Hanging leg and hip raise",
     "Description": {
       "StartPosition": "Hang from a high bar with your hands shoulder-with apart, your arms fully extended, and your legs straight. Straighten your lower back by tilting your pelvis backward. ",
       "Execution": "Exhale as you slowly raise your knees as high as possible by flexing your hips and your abdomen. Hold for a count of two. Inhale as you slowly lower your legs to the starting position. Repeat. ",
@@ -506,7 +506,7 @@
     "CodeNum": 48
   },
   {
-    "ExerciseItemName": "Hanging straight leg raise",
+    "Name": "Hanging straight leg raise",
     "Description": {
       "StartPosition": "Using a shoulder-width pronated (overhand) grip, hang from a secure bar. Straighten your lower back by tilting your pelvis backward. ",
       "Execution": "Keeping your back and knees straight, and your feet together, exhale as you slowly raise your legs by flexing your hips. Hold for a count of two. Inhale as you slowly lower your legs in a controlled manner by extending your hips. Repeat. ",
@@ -517,7 +517,7 @@
     "CodeNum": 49
   },
   {
-    "ExerciseItemName": "Crunch",
+    "Name": "Crunch",
     "Description": {
       "StartPosition": "Lie supine (on your back) with your legs bent and your feet flat on the ground. Place your hands lightly either behind or by the sides of your head, keeping your elbows out. ",
       "Execution": "Keeping your lower back flat on the floor, raise your head and shoulders a few inches off the ground by flexing your abdomen. Exhale as you do so. Hold the contracted position for a count of two. Inhale as you lower your head and shoulders to the starting position. Repeat.",
@@ -528,7 +528,7 @@
     "CodeNum": 50
   },
   {
-    "ExerciseItemName": "Pull-up",
+    "Name": "Pull-up",
     "Description": {
       "StartPosition": " Grasp the bar with a wider-than-shoulder-width pronated (overhand) grip. Hang with your arms and shoulders fully stretched. ",
       "Execution": "Exhale as you pull your body up until your chin rises above the bar. Hold for a count of two and squeeze your back muscles. Inhale as you lower your body until your arms and shoulders are fully stretched. Repeat. ",
@@ -539,7 +539,7 @@
     "CodeNum": 51
   },
   {
-    "ExerciseItemName": "Bent Over Barbell Row",
+    "Name": "Bent Over Barbell Row",
     "Description": {
       "StartPosition": "Holding a barbell with a pronated grip (palms facing down), bend your knees slightly and bring your torso forward, by bending at the waist, while keeping the back straight until it is almost parallel to the floor. Tip: Make sure that you keep the head up. The barbell should hang directly in front of you as your arms hang perpendicular to the floor and your torso. This is your starting position.",
       "Execution": "Now, while keeping the torso stationary, breathe out and lift the barbell to you. Keep the elbows close to the body and only use the forearms to hold the weight. At the top contracted position, squeeze the back muscles and hold for a brief pause. Then inhale and slowly lower the barbell back to the starting position. Repeat for the recommended amount of repetitions.",
@@ -550,7 +550,7 @@
     "CodeNum": 52
   },
   {
-    "ExerciseItemName": "Reverse Grip Bent-Over Rows",
+    "Name": "Reverse Grip Bent-Over Rows",
     "Description": {
       "StartPosition": "Stand erect while holding a barbell with a supinated grip (palms facing up). Bend your knees slightly and bring your torso forward, by bending at the waist, while keeping the back straight until it is almost parallel to the floor. Tip: Make sure that you keep the head up. The barbell should hang directly in front of you as your arms hang perpendicular to the floor and your torso. This is your starting position. ",
       "Execution": "While keeping the torso stationary, lift the barbell as you breathe out, keeping the elbows close to the body and not doing any force with the forearm other than holding the weights. On the top contracted position, squeeze the back muscles and hold for a second. Slowly lower the weight again to the starting position as you inhale. Repeat for the recommended amount of repetitions.",
@@ -561,7 +561,7 @@
     "CodeNum": 53
   },
   {
-    "ExerciseItemName": "Lying T-Bar Row",
+    "Name": "Lying T-Bar Row",
     "Description": {
       "StartPosition": "Load up the T-bar Row Machine with the desired weight and adjust the leg height so that your upper chest is at the top of the pad. Tip: In some machines all you can do is stand on the appropriate step that allows you to be at a height that has the upper chest at the top of the pad. Lay face down on the pad and grab the handles. You can either use a palms down, palms up, or palms in position depending on what part of your back you want to emphasize. Lift the bar off the rack and extend your arms in front of you. This will be your starting position. ",
       "Execution": "As you exhale slowly pull the weight up and squeeze your back at the top of the movement. Also, do not lift your body off of the pad at any time and refrain from using the biceps to lift the weight. After a second contraction at the top of the movement, as you inhale, slowly go back down to the starting position. Repeat for the recommended amount of repetitions.",
@@ -572,7 +572,7 @@
     "CodeNum": 54
   },
   {
-    "ExerciseItemName": "One-Arm Dumbbell Row",
+    "Name": "One-Arm Dumbbell Row",
     "Description": {
       "StartPosition": "Choose a flat bench and place a dumbbell on each side of it. Place the right leg on top of the end of the bench, bend your torso forward from the waist until your upper body is parallel to the floor, and place your right hand on the other end of the bench for support. Use the left hand to pick up the dumbbell on the floor and hold the weight while keeping your lower back straight. The palm of the hand should be facing your torso. This will be your starting position. ",
       "Execution": "Pull the resistance straight up to the side of your chest, keeping your upper arm close to your side and keeping the torso stationary. Breathe out as you perform this step. Also, make sure that the force is performed with the back muscles and not the arms. Finally, the upper torso should remain stationary and only the arms should move. The forearms should do no other work except for holding the dumbbell; therefore do not try to pull the dumbbell up using the forearms. Lower the resistance straight down to the starting position. Breathe in as you perform this step. Repeat the movement for the specified amount of repetitions. Switch sides and repeat again with the other arm.",
@@ -583,7 +583,7 @@
     "CodeNum": 55
   },
   {
-    "ExerciseItemName": "Wide-grip lat pull-down",
+    "Name": "Wide-grip lat pull-down",
     "Description": {
       "StartPosition": "Choose your weight and sit on the lat pull-down machine, adjusting it so that your thighs fit under the supports. Grasp the bar with a pronated (overhand) grip, with your hands more than shoulder-width apart. ",
       "Execution": "Exhale as you slowly pull the bar down until it touches the upper part of your chest. Squeeze your shoulder blades together and hold for a count of two. Inhale as you slowly return the bar to the starting position. Repeat for the recommended number of repetitions. ",
@@ -594,7 +594,7 @@
     "CodeNum": 56
   },
   {
-    "ExerciseItemName": "Reverse-grip lat pull-down",
+    "Name": "Reverse-grip lat pull-down",
     "Description": {
       "StartPosition": "Sit on the lat pull-down machine, adjusting it so that your thighs fit snugly under the supports. Grasp the bar using a shoulder-width supinated (reverse or underhand) grip (palms facing you).",
       "Execution": "Exhale as you pull the bar down until it touches your upper chest. Squeeze your back muscles and hold for a count of two. Inhale as you return the bar to the starting position. Repeat. ",
@@ -605,7 +605,7 @@
     "CodeNum": 57
   },
   {
-    "ExerciseItemName": "Seated Cable Rows",
+    "Name": "Seated Cable Rows",
     "Description": {
       "StartPosition": "For this exercise you will need access to a low pulley row machine with a V-bar. Note: The V-bar will enable you to have a neutral grip where the palms of your hands face each other. To get into the starting position, first sit down on the machine and place your feet on the front platform or crossbar provided making sure that your knees are slightly bent and not locked. Lean over as you keep the natural alignment of your back and grab the V-bar handles. With your arms extended pull back until your torso is at a 90-degree angle from your legs. Your back should be slightly arched and your chest should be sticking out. You should be feeling a nice stretch on your lats as you hold the bar in front of you. This is the starting position of the exercise. ",
       "Execution": "Keeping the torso stationary, pull the handles back towards your torso while keeping the arms close to it until you touch the abdominals. Breathe out as you perform that movement. At that point you should be squeezing your back muscles hard. Hold that contraction for a second and slowly go back to the original position while breathing in. Repeat for the recommended amount of repetitions. ",
@@ -616,7 +616,7 @@
     "CodeNum": 58
   },
   {
-    "ExerciseItemName": "Incline straight-arm pull-down",
+    "Name": "Incline straight-arm pull-down",
     "Description": {
       "StartPosition": "Lie on an inclined bench positioned under, and facing away from, a high cable pulley. Grasp the straight bar using a shoulder-width pronated (overhand) grip. ",
       "Execution": "Keeping your elbows slightly bent, exhale as you pull the bar forward and downward to your thighs in a wide arcing motion. Hold for a count of two and squeeze your back muscles.\tInhale as you reverse the motion and return the bar to the starting position. Repeat for the prescribed number of repetitions. ",
@@ -627,7 +627,7 @@
     "CodeNum": 59
   },
   {
-    "ExerciseItemName": "Barbell straight back stiff leg deadlift",
+    "Name": "Barbell straight back stiff leg deadlift",
     "Description": {
       "StartPosition": "Grasp a barbell using a shoulder-width pronated (overhand) grip or a mixed grip. Keeping your back straight, head up, and hips low, lift the barbell into a standing position. Flex your knees a little. ",
       "Execution": "Keeping your back straight and your knees slightly flexed (stiff), inhale as you push your hips backward and slowly lower the barbell down the front of your legs. Descend until you feel a mild stretch in your hamstrings. Exhale as you pull the barbell back up to the starting position by pushing your hips forward. Repeat.",
@@ -638,7 +638,7 @@
     "CodeNum": 60
   },
   {
-    "ExerciseItemName": "Slopes with a barbell on the shoulders",
+    "Name": "Slopes with a barbell on the shoulders",
     "Description": {
       "StartPosition": "We put the feet on the width of the shoulders, slightly bent at the knees. Foot socks need to be slightly diluted in the sides. The upper back should be tense, and the waist to maintain a natural deflection. ",
       "Execution": "Griff from the bar is located on the back just below the neck. Tilt forward: With a flat back we lean forward until the body becomes parallel to the floor. Buttocks need to be pulled back. Watch for movement to occur only at the expense of the hip joint and a natural deflection in the lower back was maintained. We return to the starting position: By reducing gluteal muscles, lower back and popliteal joints, we return to the starting position. Repeat the required number of times.",
@@ -649,7 +649,7 @@
     "CodeNum": 61
   },
   {
-    "ExerciseItemName": "Barbell squat",
+    "Name": "Barbell squat",
     "Description": {
       "StartPosition": "Load a barbell on a rack at upper-chest height. Step under the barbell so that it rests on the back of your shoulders, and grasp the bar at each side. Dismount the barbell and step backward carefully. Your feet should be shoulder-width apart and pointing slightly outwards. ",
       "Execution": "Inhale as you squat down by pushing your butt backward and bending your knees forward. Keep your torso upright, and descend at least until your knees are bent at a 90-degree angle. Exhale as you push your body back up to the starting position, driving from your heels and keeping your torso upright. Repeat. ",
@@ -660,7 +660,7 @@
     "CodeNum": 62
   },
   {
-    "ExerciseItemName": "Smith Machine Squat",
+    "Name": "Smith Machine Squat",
     "Description": {
       "StartPosition": "First set the bar on the height that best matches your height. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it. Hold on to the bar using both arms at each side (palms facing forward), unlock it and lift it off the rack by first pushing with your legs and at the same time straightening your torso. Position your legs using a shoulder width medium stance with the toes slightly pointed out. Keep your head up at all times and also maintain a straight back. This will be your starting position. ",
       "Execution": "Begin to slowly lower the bar by bending the knees as you maintain a straight posture with the head up. Continue down until the angle between the upper leg and the calves becomes slightly less than 90-degrees (which is the point in which the upper legs are below parallel to the floor). Inhale as you perform this portion of the movement. Begin to raise the bar as you exhale by pushing the floor with the heel of your foot as you straighten the legs again and go back to the starting position. Repeat.",
@@ -671,7 +671,7 @@
     "CodeNum": 63
   },
   {
-    "ExerciseItemName": "Zercher squat",
+    "Name": "Zercher squat",
     "Description": {
       "StartPosition": "Place a barbell on a waist-high rack and load it. Keeping your elbows tucked in to your sides, scoop the barbell up with the crooks of your elbows, pull it into your body, and cross your wrists over the bar to hold it in place. Carefully step backward from the rack and stand with a wide stance, with your knees and feet pointing out diagonally in the same direction. ",
       "Execution": "Keeping your back straight and body upright, inhale as you squat down until the bar touches your thighs. Exhale as you stand back up into the starting position, driving through your heels. Repeat. ",
@@ -682,7 +682,7 @@
     "CodeNum": 64
   },
   {
-    "ExerciseItemName": "SJC-squats",
+    "Name": "SJC-squats",
     "Description": {
       "StartPosition": "Substitute your shoulders under the upper rollers and firmly press the back to the support. Feet spread shoulder width apart, feet out slightly forward, so that they were closer to the upper edge of the platform (they should be located at a distance of about 30cm from the plane of the body). Keep the legs slightly bent at the knees, torso straight, and the chin lock so that it is parallel with the platform. All the time of the exercise of SARS must keep in constant tension and never for a moment to tear it from the support, while maintaining the natural bend in the lower back. ",
       "Execution": "Taking a deep breath, hold your breath and stoop to until thighs will not be in the position parallel to the platform (in the knee joints at this point will be a right angle). Not taking a breath, struggling to force quadriceps and with force, but without a jerk, push yourself up. Squats and lifting should merge into one continuous movement. Exhale when you overcome the most difficult part of the ascent. ",
@@ -693,7 +693,7 @@
     "CodeNum": 65
   },
   {
-    "ExerciseItemName": "Incline leg press",
+    "Name": "Incline leg press",
     "Description": {
       "StartPosition": "Sit in the leg press machine. Make sure your back is pressed firmly against the back support. Place your feet hip-width apart on the platform. Release the safety bars, grasp the side handles for support, and extend your legs without locking your knees. Your torso and legs should make a 90-degree angle.",
       "Execution": "Inhale as you bend your legs and lower the platform until your knees are almost fully flexed. Driving with your heels, press the platform back up to the starting position as you exhale. Repeat. When you have finished, lock the safety bars properly. Otherwise, the platform may slide down onto your legs!",
@@ -704,7 +704,7 @@
     "CodeNum": 66
   },
   {
-    "ExerciseItemName": "Barbell lunge",
+    "Name": "Barbell lunge",
     "Description": {
       "StartPosition": " Stand holding a barbell on the back of your shoulders.",
       "Execution": "Exhale as you take a large step (lunge) forward with one leg, landing on your heel first and then lowering your forefoot. At the same time, keeping your torso upright, lower your body until the knee of your supporting leg almost touches the floor. Inhale as you drive back up with your heel and step back into the starting position. Repeat with your other leg. ",
@@ -715,7 +715,7 @@
     "CodeNum": 67
   },
   {
-    "ExerciseItemName": "Dumbbell step-up",
+    "Name": "Dumbbell step-up",
     "Description": {
       "StartPosition": "Holding a pair of dumbbells by your sides, stand facing a raised platform, such as a bench. Execution",
       "Execution": "Exhale as you slowly step up onto the bench, leading with your right leg. Bring your feet together on the bench. Inhale as you slowly step down off the bench, leading with your right leg. Bring your feet together on the floor. Repeat, alternating the leg with which you step up and down off the bench.",
@@ -726,7 +726,7 @@
     "CodeNum": 68
   },
   {
-    "ExerciseItemName": "Leg extension",
+    "Name": "Leg extension",
     "Description": {
       "StartPosition": "Choose your weight and sit on the leg extension machine. Make the necessary adjustments so that the backs of your thighs are fully supported by the seat and your back is fully supported by the back rest. Hook your feet under the foot pads of the lever with the pads resting just above your ankles. Grasp the side handles for support. ",
       "Execution": "Exhale as you lift the lever forwards and upwards by straightening your legs until they are fully extended. Hold for a count of two. Inhale as you return the lever to the starting position by bending your knees. Repeat.",
@@ -737,7 +737,7 @@
     "CodeNum": 69
   },
   {
-    "ExerciseItemName": "Pull of the bar on the chest",
+    "Name": "Pull of the bar on the chest",
     "Description": {
       "StartPosition": " Standing with the weight racked on the front of the shoulders, begin with the dip. ",
       "Execution": "With your feet directly under your hips, flex the knees without moving the hips backward. Go down only slightly, and reverse direction as powerfully as possible. Drive through the heels create as much speed and force as possible, and be sure to move your head out of the way as the bar leaves the shoulders. At this moment as the feet leave the floor, the feet must be placed into the receiving position as quickly as possible. In the brief moment the feet are not actively driving against the platform, the athletes effort to push the bar up will drive them down. The feet should be moved to a slightly wider stance, with the knees partially bent. Receive the bar with the arms locked out overhead. Return to a standing position.",
@@ -748,7 +748,7 @@
     "CodeNum": 70
   },
   {
-    "ExerciseItemName": "Deadlift on straight legs",
+    "Name": "Deadlift on straight legs",
     "Description": {
       "StartPosition": "Grasp a barbell using a shoulder-width pronated (overhand) grip or a mixed grip. Keeping your back straight, head up, and hips low, lift the barbell into a standing position. Flex your knees a little. ",
       "Execution": "Keeping your back straight and your knees slightly flexed (stiff), inhale as you push your hips backward and slowly lower the barbell down the front of your legs. Descend until you feel a mild stretch in your hamstrings. Exhale as you pull the barbell back up to the starting position by pushing your hips forward. Repeat. ",
@@ -759,7 +759,7 @@
     "CodeNum": 71
   },
   {
-    "ExerciseItemName": "Barbell Romanian deadlift",
+    "Name": "Barbell Romanian deadlift",
     "Description": {
       "StartPosition": "Using a shoulder-width pronated (overhand) grip, deadlift a barbell from the floor. You should be standing with your arms extended, the bar resting against the front of your thighs, your knees slightly bent, and your feet approximately shoulder-width apart. ",
       "Execution": "Inhale as you push your butt back, hinge forward at your hips, and lower the barbell down your thighs until you feel a slight stretch in your hamstrings. Exhale as you extend your hips and pull the barbell back up your legs to the starting position. Repeat. ",
@@ -770,7 +770,7 @@
     "CodeNum": 72
   },
   {
-    "ExerciseItemName": "Hyperextension",
+    "Name": "Hyperextension",
     "Description": {
       "StartPosition": "Lie prone (face down) on a hyperextension bench with your legs tucked firmly under the foot pads. If necessary, adjust the upper pad so that it lies below your hips, giving your hips room to fully flex. Put your hands lightly behind your head or cross them on your chest. ",
       "Execution": "Inhale as you lower your torso by flexing your hips and waist. Exhale as you raise your torso by extending your hips and back. Repeat.",
@@ -781,7 +781,7 @@
     "CodeNum": 73
   },
   {
-    "ExerciseItemName": "Lying leg curl",
+    "Name": "Lying leg curl",
     "Description": {
       "StartPosition": "Lie prone (face down) on the leg curl bench and position your legs under the lever pads. Your knees should be just below the edge of the bench and the lever pads should be resting just above your heels. Hold the handles for stability. ",
       "Execution": "Exhale as you flex your knees and curl the lever until it touches the back of your thighs. Hold for a count of two. Inhale as you lower the lever to the starting position. Repeat. ",
@@ -792,7 +792,7 @@
     "CodeNum": 74
   },
   {
-    "ExerciseItemName": "Kneeling leg curl",
+    "Name": "Kneeling leg curl",
     "Description": {
       "StartPosition": "Kneel on the knee pad with one knee. Place your opposite leg under the lever pad and rest your knee against the front pad. Position your forearms on the arm rest. Grasp the handles for support.",
       "Execution": "Exhale as you flex your knee and raise the lever to the back of your thigh. Hold for a count of two and squeeze your hamstrings. Inhale as you lower the lever to the starting position by extending your knee. Repeat for the prescribed number of repetitions. To work your opposite leg, move the knee pad to the other side and repeat the exercise. ",
@@ -803,7 +803,7 @@
     "CodeNum": 75
   },
   {
-    "ExerciseItemName": "Seated leg curl",
+    "Name": "Seated leg curl",
     "Description": {
       "StartPosition": "Choose your weight and sit on the leg extension machine. Make the necessary adjustments so that the backs of your thighs are fully supported by the seat and your back is fully supported by the back rest. Hook your feet above the foot pads of the lever with the pads resting just above your ankles. Grasp the side handles for support. ",
       "Execution": "Exhale as you let down the lever backwards and downwards by bending your legs until they are fully bended. Hold for a count of two. Inhale as you return the lever to the starting position by straightening your knees. Repeat.",
@@ -814,7 +814,7 @@
     "CodeNum": 76
   },
   {
-    "ExerciseItemName": "Machine standing calf raise",
+    "Name": "Machine standing calf raise",
     "Description": {
       "StartPosition": "Stand in the calf raise machine with the padded levers resting on your shoulders. Position the balls of your feet on the foot platform, with the arches and heels of your feet extending off. Hold the lever handles for support. ",
       "Execution": "Exhale as you push the levers up as far as possible by raising your heels. Hold for a count of two. Inhale as you slowly lower the levers until you feel a slight stretch in your calves. Repeat. ",
@@ -825,7 +825,7 @@
     "CodeNum": 77
   },
   {
-    "ExerciseItemName": "Sled calf press",
+    "Name": "Sled calf press",
     "Description": {
       "StartPosition": "Sit in the sled/leg press machine with your back pressed against the back support. Place your feet flat in the center of the platform. Hold the handles for stability. Push the platform up until your knees are almost fully extended. Position the balls of your feet on the bottom edge of the platform so that the arches and heels of your feet extend off. ",
       "Execution": "Exhale as you extend your ankles to push the platform up. Hold for a count of two and squeeze your calves. Inhale as you flex your ankles to lower the platform until you feel a mild stretch in your calves. Hold for a second to allow the stored elastic energy in your calves to dissipate. Repeat the press.",
@@ -836,7 +836,7 @@
     "CodeNum": 78
   },
   {
-    "ExerciseItemName": "Machine seated one-leg calf raise",
+    "Name": "Machine seated one-leg calf raise",
     "Description": {
       "StartPosition": "Sit in the calf raise machine, place your thighs under the lever pads, and adjust the pads to support your thighs. Place the forefoot of one of your feet on the platform, with your heel extending off. Lift the lever a little and release the safety bar, giving the lever freedom to descend. Hold the handles for support. ",
       "Execution": "Inhale as you allow the lever to descend in a controlled manner until you feel a mild stretch in your calf. Hold for a count of one. Exhale as you press the lever all the way up by raising your heel. Hold for a count of two. Repeat for more repetitions. Repeat the exercise with your opposite leg. When you have finished, secure the lever with the safety bar.",
@@ -847,7 +847,7 @@
     "CodeNum": 79
   },
   {
-    "ExerciseItemName": "Machine seated calf raise",
+    "Name": "Machine seated calf raise",
     "Description": {
       "StartPosition": "Sit in the calf raise machine and place your forefeet on the foot platforms, with your heels extending off. Place your thighs under the lever pads and adjust the pads to snugly support your thighs. Lift the lever a little and release the safety bar, giving the lever freedom to descend. Hold the handles for support.",
       "Execution": "Inhale as you allow the lever to descend in a controlled manner until you feel a stretch in your calves. Hold for a count of one. Exhale as you press the lever all the way up by raising your heels. Hold for a count of two. Repeat. When you have finished, secure the lever with the safety bar.",
@@ -858,7 +858,7 @@
     "CodeNum": 80
   },
   {
-    "ExerciseItemName": "Flexions of the wrists dumbbell",
+    "Name": "Flexions of the wrists dumbbell",
     "Description": {
       "StartPosition": "Holding a dumbbell in one hand, kneel by the side of a flat bench. Turn your palm upward (pronate your wrist) and place your forearm flat on the bench, with your wrist and the dumbbell extending off the edge. ",
       "Execution": "Exhale as you raise the dumbbell by extending your wrist. Hold for a count of two.Inhale as you slowly lower the dumbbell to the starting position by flexing your wrist. Repeat for the prescribed number of repetitions.Repeat the exercise with your opposite arm. ",
@@ -869,7 +869,7 @@
     "CodeNum": 81
   },
   {
-    "ExerciseItemName": "Parallel Bar Dip",
+    "Name": "Parallel Bar Dip",
     "Description": {
       "StartPosition": "Stand between a set of parallel bars. Place a hand on each bar, and then take a small jump to help you get into the starting position with your arms locked out. ",
       "Execution": "Begin by flexing the elbow, lowering your body until your arms break 90 degrees. Avoid swinging, and maintain good posture throughout the descent. Reverse the motion by extending the elbow, pushing yourself back up into the starting position. Repeat for the desired number of repetitions.",
@@ -880,7 +880,7 @@
     "CodeNum": 82
   },
   {
-    "ExerciseItemName": "Pushups",
+    "Name": "Pushups",
     "Description": {
       "StartPosition": "Get on your hands and knees, with your hands positioned wider than shoulder width apart. Extend your feet backward, and straighten your body so that you are supporting your bodyweight on your hands and toes. ",
       "Execution": "Keeping your body straight and rigid, lower your chest as far toward one side as possible. Keeping your chest close to the floor, shift your body as far as you can to the opposite side. Keep alternating the side to which you shift your body while keeping your chest close to the floor. Breathe naturally. ",
@@ -891,7 +891,7 @@
     "CodeNum": 83
   },
   {
-    "ExerciseItemName": "Bodyweight squat",
+    "Name": "Bodyweight squat",
     "Description": {
       "StartPosition": "Stand with your feet shoulder-width apart. Your knees and feet should be pointing in the same direction. Raise your arms out in front of you for balance (or you can leave them by your side and raise them as you descend).",
       "Execution": "Keeping your head up and torso upright, inhale as you squat, making sure to descend at least until your thighs are parallel with the floor. (If your arms were by your sides, raise them out in front of you as you descend to help you keep balance.) Exhale as you return to the starting position. Repeat for the prescribed number of repetitions. ",
@@ -902,7 +902,7 @@
     "CodeNum": 84
   },
   {
-    "ExerciseItemName": "Dumbbell rear lunge",
+    "Name": "Dumbbell rear lunge",
     "Description": {
       "StartPosition": "Holding a pair of dumbbells by your sides, stand up straight. Keeping your torso upright, inhale as you take a large step backward with one leg and plant your forefoot behind you. ",
       "Execution": "As you do so, flex the knee and hip of your front leg to allow yourself to descend into a kneeling position. However, do not allow your rear knee to make contact with the floor. Exhale as you get back up into the starting position by extending the knee and hip of your front leg and pushing off with your rear leg. Repeat the movement with your opposite leg. Keep alternating the leg with which your lunge backward. ",
@@ -913,7 +913,7 @@
     "CodeNum": 85
   },
   {
-    "ExerciseItemName": "Bent-Over Cable Lateral Raise",
+    "Name": "Bent-Over Cable Lateral Raise",
     "Description": {
       "StartPosition": "Stand between the low pulleys, with your feet shoulder width and your knees slightly bent. Cross your arms in front of your body in an X and grab the handles. Your left hand will hold the handle on your right side, and your right hand will hold the handle on your left side. Bent forward at the waist, keeping your back slightly arched, until your upper body is parallel with the floor. ",
       "Execution": "Slowly raise your arms outward and upward in an arc to shoulder level (as high as you can). Your arms should move directly out to the sides. Pause, then let the weights lower and your hands cross in front of your body. ",
@@ -924,7 +924,7 @@
     "CodeNum": 86
   },
   {
-    "ExerciseItemName": "Captain’s Chair Leg Raise",
+    "Name": "Captain’s Chair Leg Raise",
     "Description": {
       "StartPosition": "Position yourself on the chair so that your forearms are firmly supporting your body, back pressed against the pad. Allow your body to hang straight down, with your legs together. Lock a very slight bend in your knees. ",
       "Execution": "Keeping your feet together and without using momentum, lift your legs in front of you (keeping them nearly straight) until they come up above your hips. Pause a moment at the top and squeeze your abs, then slowly lower back to the start.",
@@ -935,7 +935,7 @@
     "CodeNum": 87
   },
   {
-    "ExerciseItemName": "Captain’s chair leg and hip raise",
+    "Name": "Captain’s chair leg and hip raise",
     "Description": {
       "StartPosition": " Get into the captain’s chair with your forearms on the pads, your hands on the handles, your back against the back pad, and your legs hanging straight down. Press your lower back against the back pad. ",
       "Execution": "Keeping your feet together, exhale as you raise your knees towards your chest by flexing your knees, hips, and your waist. Try to hold the end position for a count of two. Inhale as you lower your feet to the starting position in a controlled manner. Repeat.",
@@ -946,7 +946,7 @@
     "CodeNum": 88
   },
   {
-    "ExerciseItemName": "Dumbbell curl",
+    "Name": "Dumbbell curl",
     "Description": {
       "StartPosition": "Stand holding a pair of dumbbells by your sides using a neutral grip (palms facing in). Pull your shoulders back.",
       "Execution": "Exhale as you slowly curl one dumbbell up towards your shoulder. As the dumbbell rises, supinate your forearm gradually so that your palm faces your shoulder by the top of the curl. Once your elbow is fully flexed, allow your elbow to move forward a little (shoulder flexion), just until your forearm is vertical. Hold for a count of two and squeeze your biceps. Inhale as you slowly reverse the movement at half the speed and return the dumbbell to the starting position. Repeat the same action with the opposite arm, and then alternate repetitions. Keep your back straight and your body still. Avoid swinging the dumbbells",
@@ -957,7 +957,7 @@
     "CodeNum": 89
   },
   {
-    "ExerciseItemName": "Running",
+    "Name": "Running",
     "Description": {
       "StartPosition": "Stand Tall: Begin in a relaxed, upright standing position with your head up and your gaze forward. Shoulders Relaxed: Keep your shoulders relaxed and avoid tensing them up. Allow your arms to hang naturally by your sides.",
       "Execution": "Take a Step Forward: As you start running, take a step forward with one leg, landing on the midfoot. Arm Movement: Swing your arms naturally in coordination with your leg movements. The arms should swing forward and backward, not across the body. Midfoot Landing: Aim to land on the middle of your foot, not on your heel. This encourages a more natural and efficient running gait. Stride Length: Maintain a comfortable and natural stride length. Overstriding (taking excessively long steps) can lead to inefficient running and increased risk of injury. Breathe Naturally: Establish a natural breathing rhythm. Inhale and exhale steadily to provide your muscles with a consistent oxygen supply.",
@@ -968,7 +968,7 @@
     "CodeNum": 91
   },
   {
-    "ExerciseItemName": "Exercise bike",
+    "Name": "Exercise bike",
     "Description": {
       "StartPosition": "Before getting on the bike, adjust the seat height to a level where your legs are almost fully extended when the pedal is at its lowest point. Position the seat horizontally so that when your foot is on the pedal in its furthest position (farthest from you), there's a slight bend in your knee.",
       "Execution": "Mount the Bike: Stand on one side of the bike and carefully swing your leg over the seat to straddle the bike. Adjust Comfort: Sit comfortably on the seat, keeping your back straight and shoulders relaxed. Grip the Handlebars: Hold onto the handlebars with a comfortable grip, keeping your elbows slightly bent. Pedaling: Begin pedaling in a smooth, controlled motion. Ensure a full range of motion with each pedal revolution. Resistance: Adjust the resistance level to increase or decrease the intensity of your workout. Higher resistance simulates uphill riding and engages your muscles more.",
@@ -979,7 +979,7 @@
     "CodeNum": 92
   },
   {
-    "ExerciseItemName": "Dumbbell pullover",
+    "Name": "Dumbbell pullover",
     "Description": {
       "StartPosition": "Lie perpendicular on a bench with only your upper back and shoulders being supported by the surface. Your head and lower body should be extending off the bench, with your lower body acting as a counterbalance. Hold a dumbbell with both hands directly above your chest, with your arms almost fully extended and your palms facing each other.",
       "Execution": "Exhale as you slowly lower the dumbbell in a backward arc behind your head until your elbows are level with your ears. Hold for a count of two. Inhale as you slowly raise the dumbbell back over your head to the starting position using the same arcing motion. Repeat for the desired number of repetitions.",
@@ -990,7 +990,7 @@
     "CodeNum": 93
   },
   {
-    "ExerciseItemName": "Dumbbell Shrug",
+    "Name": "Dumbbell Shrug",
     "Description": {
       "StartPosition": "Stand erect with a dumbbell on each hand (palms facing your torso), arms extended on the sides. ",
       "Execution": "Lift the dumbbells by elevating the shoulders as high as possible while you exhale. Hold the contraction at the top for a second. Tip: The arms should remain extended at all times. Refrain from using the biceps to help lift the dumbbells. Only the shoulders should be moving up and down. Lower the dumbbells back to the original position. Repeat for the recommended amount of repetitions.",
@@ -1001,7 +1001,7 @@
     "CodeNum": 94
   },
   {
-    "ExerciseItemName": "EZ-Barbell preacher curl",
+    "Name": "EZ-Barbell preacher curl",
     "Description": {
       "StartPosition": "Position a loaded barbell on the rest of a preacher bench. Sit on the preacher bench and lift the barbell off the rest using a shoulder-width underhand (supinated) grip. Rest the backs of your upper arms on the padded surface, with your elbows fully extended. ",
       "Execution": "Exhale as you curl the barbell upwards, towards your shoulders. Hold for a count of two and squeeze your biceps. Inhale as you lower the barbell until your elbows are fully extended. Repeat for the prescribed number of repetitions.",
@@ -1012,7 +1012,7 @@
     "CodeNum": 95
   },
   {
-    "ExerciseItemName": "Vertical traction",
+    "Name": "Vertical traction",
     "Description": {
       "StartPosition": "Sit down on a vertical traction machine and adjust the seat so that the arms slightly bent at the elbows. Grasp the handles with an overhand grip and keep your feet flat on the floor.",
       "Execution": "Begin the movement by pulling the handles down towards your shoulders while keeping your elbows close to your body. Pause briefly at the bottom of the movement and then slowly release the handles back to the starting position. Repeat the movement for the desired number of repetitions.",
@@ -1023,7 +1023,7 @@
     "CodeNum": 100
   },
   {
-    "ExerciseItemName": "Hammer Strength - High Row",
+    "Name": "Hammer Strength - High Row",
     "Description": {
       "StartPosition": "Adjust the high row machine’s seat and chest pad for optimal comfort and range of motion. Sit in the machine, with your legs secured under the leg pads and your chest braced against the chest pad. Grasp the handles using a pronated (overhand) grip. Your arms should be fully extended and your shoulders should be stretched forward. ",
       "Execution": "Exhale as you pull the handles backward until your elbows are behind you and your shoulders are pulled backward. Hold for a count of two and squeeze your back muscles.Inhale as you allow the handles to return to the starting position, with your shoulders stretched forward. Repeat. ",
@@ -1034,7 +1034,7 @@
     "CodeNum": 101
   },
   {
-    "ExerciseItemName": "Jump Rope",
+    "Name": "Jump Rope",
     "Description": {
       "StartPosition": "Before you begin using a rope, measure it to your height. When you stand on the middle of the rope, the handles should extend to your armpits. Hold the rope with hands at about hip height and elbows slightly bent, keeping your upper arms close to your sides. Your chest should be out and your shoulders back and down. ",
       "Execution": "Make your jumps small and land on the balls of your feet.",
@@ -1045,7 +1045,7 @@
     "CodeNum": 102
   },
   {
-    "ExerciseItemName": "Superman",
+    "Name": "Superman",
     "Description": {
       "StartPosition": "Lie prone (face down) on a mat with your legs straight and your arms extended straight in front of you. ",
       "Execution": "Gently raise your arms, upper torso, and legs off the mat. Hold for a count of two. Gently return them to the starting position. Repeat. ",
@@ -1056,7 +1056,7 @@
     "CodeNum": 103
   },
   {
-    "ExerciseItemName": "Superman push-up",
+    "Name": "Superman push-up",
     "Description": {
       "StartPosition": "Lie prone (on your front) on the floor with your arms extended forward and your palms flat on the floor. This is the superman position. ",
       "Execution": "Keeping your body straight and rigid, exhale as you raise your body off the floor by pushing down on your palms. Hold for a count of two. Inhale as you slowly lower your body back to the floor. Repeat for the prescribed number of repetitions. ",
@@ -1067,7 +1067,7 @@
     "CodeNum": 104
   },
   {
-    "ExerciseItemName": "Diamond push-up on knees",
+    "Name": "Diamond push-up on knees",
     "Description": {
       "StartPosition": "Get into a push-up position, supporting your body on your hands and knees instead of on your hands and forefeet. Your hands should be positioned in such a way as to form a diamond shape with your thumbs and index fingers. ",
       "Execution": "Keeping your body straight and rigid and your elbows close to your body, inhale as you lower your chest to the floor. Exhale as you extend your elbows and push your body back up to the starting position. Repeat. ",
@@ -1078,7 +1078,7 @@
     "CodeNum": 105
   },
   {
-    "ExerciseItemName": "Side-to-Side Pushup",
+    "Name": "Side-to-Side Pushup",
     "Description": {
       "StartPosition": "Get on your hands and knees, with your hands positioned wider than shoulder width apart. Extend your feet backward, and straighten your body so that you are supporting your bodyweight on your hands and toes. ",
       "Execution": "Keeping your body straight and rigid, lower your chest as far toward one side as possible. Keeping your chest close to the floor, shift your body as far as you can to the opposite side. Keep alternating the side to which you shift your body while keeping your chest close to the floor. Breathe naturally. ",
@@ -1089,7 +1089,7 @@
     "CodeNum": 106
   },
   {
-    "ExerciseItemName": "Close-grip push-up",
+    "Name": "Close-grip push-up",
     "Description": {
       "StartPosition": "Get on all fours with your hands positioned either directly under your shoulders or closer together.    Extend your feet backward and straighten your body. ",
       "Execution": "Keeping your body straight and your elbows tucked in, inhale as you lower your chest onto your hands. Exhale as you push your body back up to the starting position. Repeat. ",
@@ -1100,7 +1100,7 @@
     "CodeNum": 107
   },
   {
-    "ExerciseItemName": "Knee push-up",
+    "Name": "Knee push-up",
     "Description": {
       "StartPosition": "Get into a push-up position, supporting your body on your hands and knees instead of on your hands and forefeet. Your hands should be a little wider than shoulder width apart. ",
       "Execution": "Keeping your body straight and your elbows slightly tucked in, inhale as you lower your chest to the floor. Exhale as you extend your elbows and push your body back up to the starting position. Repeat. ",
@@ -1111,7 +1111,7 @@
     "CodeNum": 108
   },
   {
-    "ExerciseItemName": "One-leg push-up",
+    "Name": "One-leg push-up",
     "Description": {
       "StartPosition": "Get on your hands and knees, with your arms positioned a little wider than shoulder width. Extend your feet backward and straighten your body. Raise one foot off the floor.",
       "Execution": "Keeping your body straight and rigid, inhale as you lower your chest to the floor by flexing your elbows. Exhale as you extend your elbows and push your body back up to the starting position. Repeat for more repetitions. Repeat the repetitions with your opposite foot raised off the floor. ",
@@ -1122,7 +1122,7 @@
     "CodeNum": 109
   },
   {
-    "ExerciseItemName": "Shoulder tap push-up",
+    "Name": "Shoulder tap push-up",
     "Description": {
       "StartPosition": "Get on your hands and knees, with your hands positioned a little wider than shoulder-width apart. Extend your feet backwards and straighten your body. ",
       "Execution": "Keeping your body straight and rigid, inhale as you lower your chest to the floor. Exhale as you push your body back up to the starting position. At the top of the movement, quickly tap your shoulder with the hand on the opposite side, before returning your hand to the floor. Repeat, making sure to alternate the shoulder that you tap. ",
@@ -1133,7 +1133,7 @@
     "CodeNum": 110
   },
   {
-    "ExerciseItemName": "Spiderman push-up",
+    "Name": "Spiderman push-up",
     "Description": {
       "StartPosition": "Get on your hands and knees, with your hands positioned a little wider than shoulder width apart. Extend your feet backwards and straighten your body so that your bodyweight is being supported by your hands and toes. ",
       "Execution": "Keeping your body straight and rigid, inhale as you lower your chest to the floor by flexing your elbows. At the same time, raise one knee out to the side and try to touch it to the corresponding arm. Exhale as you reverse the movements and return to the starting position. Keep repeating, each time alternating the knee that you raise out to the side. ",
@@ -1144,7 +1144,7 @@
     "CodeNum": 111
   },
   {
-    "ExerciseItemName": "Hammer-grip dumbbell bench press",
+    "Name": "Hammer-grip dumbbell bench press",
     "Description": {
       "StartPosition": "Holding a pair of dumbbells, sit on the end of a flat bench and rest the dumbbells on your knees. Kick the dumbbells up into the air with your knees as you lie supine (on your back) on the bench. Position the dumbbells next to the sides of your chest and hold them using a hammer grip (palms facing inward). Your elbows should be bent and tucked in to your body at a 45-degree angle. ",
       "Execution": "Exhale as you press the dumbbells upward and inward in an arcing motion until your arms are fully extended over your chest. Inhale as you reverse the motion and lower the dumbbells to the starting position or until you feel a mild stretch in your chest or shoulders. Repeat. ",
@@ -1155,7 +1155,7 @@
     "CodeNum": 112
   },
   {
-    "ExerciseItemName": "Lifting the body with a turn",
+    "Name": "Lifting the body with a turn",
     "Description": {
       "StartPosition": "Sit on the floor with your knees bent and rest on your heels. The angle between the thigh and the lower leg is about 120 degrees. Lean back a little, but don't round your back. Keep your hands behind your head, elbows wide apart.",
       "Execution": "Bring your navel towards your back and twist slightly to the right. The movement is small and occurs due to the movement of the ribs. This counts as one repeat. Inhale as you pivot to the center and twist to the left. Do 30 reps, changing sides.",
@@ -1166,7 +1166,7 @@
     "CodeNum": 113
   },
   {
-    "ExerciseItemName": "Tilts with dumbbell to the side",
+    "Name": "Tilts with dumbbell to the side",
     "Description": {
       "StartPosition": "Stand upright with your feet shoulder-width apart. Hold a dumbbell in one hand with your arm extended down by your side. Keep your back straight and engage your core muscles.",
       "Execution": "Slowly tilt your upper body to the side opposite the weight-bearing arm. Keep the dumbbell close to your thigh as you do this. Pause briefly at the bottom of the movement and then slowly return to the starting position. Repeat the movement for the desired number of repetitions on one side before switching to the other side.",
@@ -1177,7 +1177,7 @@
     "CodeNum": 114
   },
   {
-    "ExerciseItemName": "Curtsy Lunge",
+    "Name": "Curtsy Lunge",
     "Description": {
       "StartPosition": "Stand with your feet shoulder-width apart and your arms down at your sides. ",
       "Execution": "Putting your weight into your right foot, step back and around with your left foot — almost as if you’re curtsying — allowing your arms to come up in front of you to a comfortable position. Ensure that your chest stays proud. Stop lunging when your right thigh is parallel to the ground. Begin to straighten your right leg, pushing up through your heel, and returning your left foot to the starting position. Repeat steps 1–3 for the desired number of reps, then switch legs. ",
@@ -1188,7 +1188,7 @@
     "CodeNum": 115
   },
   {
-    "ExerciseItemName": "Backward-facing reverse pushup",
+    "Name": "Backward-facing reverse pushup",
     "Description": {
       "StartPosition": "Start by sitting on the floor with your knees bent and hands on the floor beneath your shoulders. ",
       "Execution": "Push off the floor, straightening your upper body and arms so your shoulders are directly above your hands. With your hips pushing your body upward, straighten your legs so your body is supported only by your hands and heels. Hold that position for several seconds, then slowly lower your body until your butt touches the floor. That’s 1 rep. Try a few reps at first, with the ultimate goal of doing several sets of 10 to 15 reps.",
@@ -1199,7 +1199,7 @@
     "CodeNum": 116
   },
   {
-    "ExerciseItemName": "Basic Squat With Side Leg Lift ",
+    "Name": "Basic Squat With Side Leg Lift ",
     "Description": {
       "StartPosition": "Stand with your feet shoulder-width distance apart, feet parallel. Hold your hands out in front of you for balance. ",
       "Execution": "Bend your knees, lowering your hips deeply so your thighs are parallel with the floor, keeping your weight back in your heels.    Then rise back up, straightening the legs completely and lifting the left leg out to the side, squeezing the outer glute.    As you step the foot back into shoulder-width distance position, squat down again. Then stand up and do a side leg lift on the right side. Lower the leg back to the starting position.    This counts as one rep. Do three sets of 15 reps on each side.",
@@ -1210,7 +1210,7 @@
     "CodeNum": 117
   },
   {
-    "ExerciseItemName": "Pilates Crunch",
+    "Name": "Pilates Crunch",
     "Description": {
       "StartPosition": "Lie on Your Back: Begin by lying on your back on a mat or a comfortable, flat surface. Keep your legs extended straight and your arms reaching overhead. Neutral Spine: Maintain a neutral spine by engaging your core muscles and ensuring a small natural curve in your lower back. This position helps protect your spine during the exercise. Leg Position: Your legs can be extended straight or bent with your feet flat on the floor, depending on your comfort and fitness level. Arm Position: Extend your arms overhead, keeping them in line with your ears.",
       "Execution": "Inhale - Prepare: Inhale as you prepare for the movement. Engage your core muscles by gently pulling your navel toward your spine. Exhale - Lift: Exhale as you lift your upper body off the mat, reaching your arms toward your toes. Focus on initiating the movement from your core, not just your neck or shoulders. Crunch: Continue lifting until your shoulder blades are off the mat. Imagine bringing your ribcage toward your pelvis while maintaining the engagement of your abdominal muscles. Inhale - Lower: Inhale as you lower your upper body back down to the starting position with control. Keep the movement slow and controlled to maximize the effectiveness of the exercise. Repeat: Perform the desired number of repetitions, maintaining proper form throughout.",
@@ -1221,7 +1221,7 @@
     "CodeNum": 118
   },
   {
-    "ExerciseItemName": "Incline lunge",
+    "Name": "Incline lunge",
     "Description": {
       "StartPosition": "Stand up straight, then take a wide step back with your right foot, bending both knees. Both knees are still bent, pull the torso forward and straighten the right knee. The gluteus muscle should feel the work.",
       "Execution": "Push off with your left heel and pull your right leg forward. Return to starting position. Do 12 reps, then change legs.",
@@ -1232,7 +1232,7 @@
     "CodeNum": 119
   },
   {
-    "ExerciseItemName": "Barbell Front Raise",
+    "Name": "Barbell Front Raise",
     "Description": {
       "StartPosition": "Grip the barbell with hands shoulder-width apart and feet positioned at about hip-width. Hold the barbell down by the front of your thighs. Maintain an erect posture with shoulders about neutral or retracted. ",
       "Execution": "While keeping the elbows straight or slightly bent, raise your arms up in front of you to eye or shoulder level. Slowly lower the bar and repeat. ",
@@ -1243,7 +1243,7 @@
     "CodeNum": 120
   },
   {
-    "ExerciseItemName": "Pushup and Row",
+    "Name": "Pushup and Row",
     "Description": {
       "StartPosition": "Start in a pushup position as you grip a pair of hex dumbbells placed shoulder-width apart, your palms facing in. Keep your feet about hip-width apart.",
       "Execution": "Lower down into a pushup until your body hovers just above the floor. Your body should stay in a straight line from head to heels the entire time. Pause, and then push yourself back up. Now bring one dumbbell toward your rib cage and return it to the floor.",
@@ -1254,7 +1254,7 @@
     "CodeNum": 121
   },
   {
-    "ExerciseItemName": "Leaning dumbbell lateral raise",
+    "Name": "Leaning dumbbell lateral raise",
     "Description": {
       "StartPosition": "Starting position: Holding a dumbbell in one hand, grasp a pole, cable machine, or anything stable with your free hand. Position both feet under the hand with which you are grasping the pole and lean out to the side holding the dumbbell, allowing the dumbbell to hang straight down. Flex your hips slightly so that you are leaning a little forward.",
       "Execution": "Keeping your body still and elbow slightly flexed, exhale as you raise the dumbbell out to the side. Hold for a count of two. Inhale as you lower the dumbbell to the starting position in a controlled manner. Repeat for the prescribed number of repetitions. Repeat the exercise with your opposite arm.",
@@ -1265,7 +1265,7 @@
     "CodeNum": 122
   },
   {
-    "ExerciseItemName": "Hammer Strength Bench Press",
+    "Name": "Hammer Strength Bench Press",
     "Description": {
       "StartPosition": "Sit on the end of the bench and lie back with the handles just below shoulder height. The handles should mimic the position of the bar when benching. Position your palms on the handles, inhale, and set your shoulder blades together on the bench. Keep your shoulder blades pinched together to ensure the shoulders remain in a safe position. Keep your feet flat on the floor and don’t allow the lower body to move during the set.",
       "Execution": "Press the handles to extension as you exhale but keep the shoulder blades packed. Repeat for the desired number of repetitions.",
@@ -1276,7 +1276,7 @@
     "CodeNum": 123
   },
   {
-    "ExerciseItemName": "Machine seated hip adduction",
+    "Name": "Machine seated hip adduction",
     "Description": {
       "StartPosition": "Setup in an upright position with your back against the pad and your spine neutral. ",
       "Execution": "Exhale and pull the legs together as you squeeze the pads inward. Once the pads touch, slowly return to the starting position. Repeat for the desired number of repetitions.",
@@ -1287,7 +1287,7 @@
     "CodeNum": 124
   },
   {
-    "ExerciseItemName": "Machine seated hip abduction",
+    "Name": "Machine seated hip abduction",
     "Description": {
       "StartPosition": "Sit in the seated hip abduction machine with your legs inside of the pads. Pull the side lever to allow your legs to come together. Release the side lever to lock your legs into position. Lie back and grasp the handles at your sides.",
       "Execution": "Exhale as you push against the pads with your knees until your hips are fully abducted. Hold for a count of two. Inhale as you reverse the movement and return your legs to the starting position. Repeat for the prescribed number of repetitions.",
@@ -1298,7 +1298,7 @@
     "CodeNum": 125
   },
   {
-    "ExerciseItemName": "Plank (elbows)",
+    "Name": "Plank (elbows)",
     "Description": {
       "StartPosition": "Set Up: Begin by getting into a prone position on a mat or a comfortable surface. Elbows Under Shoulders: Place your elbows directly beneath your shoulders. Your forearms should be parallel to each other and shoulder-width apart. Forearms on the Ground: Lower your body onto your forearms, with your palms facing down. Your hands can be clasped or your fists can be closed, depending on your comfort. Body Alignment: Extend your legs straight behind you, toes tucked under. Your body should form a straight line from your head to your heels. Engage your core to maintain a neutral spine.",
       "Execution": "Engage Core: Activate your core muscles by drawing your navel toward your spine. This helps stabilize your spine and prevent your lower back from sagging. Hold Position: Lift your hips slightly to align your body in a straight line. Keep your head in line with your spine, looking down at the mat to maintain a neutral neck position. Avoid Sagging or Raising: Ensure that your body remains in a straight line without allowing your hips to sag toward the floor or your buttocks to lift too high. Hold the Position: Maintain the plank position for the desired duration.  eginners may start with shorter holds and gradually progress as they build strength.",
@@ -1309,7 +1309,7 @@
     "CodeNum": 126
   },
   {
-    "ExerciseItemName": "Elliptical machine",
+    "Name": "Elliptical machine",
     "Description": {
       "StartPosition": "Stand on Pedals: Step onto the pedals with your feet hip-width apart. Some elliptical machines also have handlebars for the arms. Grip the Handles: If your elliptical has handlebars, grip them with a comfortable grip. Keep your shoulders relaxed.",
       "Execution": "Warm-up: Start with a slow and controlled motion to warm up your muscles. Use a comfortable resistance level. Pedal Motion: Begin pedaling in a smooth and continuous motion. Push through your heels and engage your leg muscles. This adds an upper body workout component. Posture: Maintain an upright posture with a straight back. Avoid leaning forward or resting too much weight on the handlebars. ",
@@ -1320,7 +1320,7 @@
     "CodeNum": 127
   },
   {
-    "ExerciseItemName": "Stepper",
+    "Name": "Stepper",
     "Description": {
       "StartPosition": "Place your feet on the stepper pedals, ensuring that your entire foot is securely positioned. Some steppers have handlebars, and others may not, depending on the design.",
       "Execution": "Start Stepping: Begin stepping by pushing one foot down, similar to climbing stairs. Your motion should be controlled and deliberate. Full Range of Motion: Aim for a full range of motion with each step. Fully extend your legs as you push down, and lift your feet off the pedals slightly as you return to the starting position. Controlled Pace: Maintain a controlled pace throughout your workout. Avoid rushing the movements to ensure proper form and reduce the risk of injury. Breathing: Breathe naturally. Inhale and exhale in a steady rhythm. If you're performing a more intense workout, adjust your breathing to match the level of exertion.",
@@ -1331,7 +1331,7 @@
     "CodeNum": 128
   },
   {
-    "ExerciseItemName": "Dumbell tate press",
+    "Name": "Dumbell tate press",
     "Description": {
       "StartPosition": "Sit on a flat bench with a dumbbell in each hand and rest one dumbbell on each knee. As you lie back on the bench, kick the dumbbells up into position over your chest, one at a time. Your forearms should be pronated (palms facing forward), and the sides of the dumbbells should be close together or touching. Spread your legs and plant your feet flat on the floor.",
       "Execution": "Inhale as you flex your elbows and slowly lower the dumbbells down toward your chest. Hold the dumbbells over your chest for a count of two. Do not allow the dumbbells to rest on your chest. Exhale as you flex your elbows and press the dumbbells back up to the starting position. Repeat.",
@@ -1342,7 +1342,7 @@
     "CodeNum": 129
   },
   {
-    "ExerciseItemName": "Plate front raise",
+    "Name": "Plate front raise",
     "Description": {
       "StartPosition": "Stand up straight, holding a weight plate in front of your thighs with both hands. Your hands should be at the three and nine o’clock positions.",
       "Execution": "Keeping your back straight and your elbows slightly bent, exhale as you raise the plate out in front of you in an arcing motion until your arms are parallel with the floor. Hold for a count of two. Inhale as you lower the plate in a controlled manner to the starting position. Repeat.",
@@ -1353,7 +1353,7 @@
     "CodeNum": 130
   },
   {
-    "ExerciseItemName": "Bent-over two-arm dumbbell row",
+    "Name": "Bent-over two-arm dumbbell row",
     "Description": {
       "StartPosition": "Holding a dumbbell in each hand using a neutral (hammer) grip, stand with your feet shoulder-width apart. Keeping a natural curvature of your spine, flex your hips and knees until your torso is horizontal or close to horizontal. Allow the dumbbells to hang down by your sides, with your shoulders stretching downward.",
       "Execution": "Keeping your elbows close to your body, exhale as you pull the dumbbells up to the sides of your waist. Hold for a count of two and squeeze your back muscles. Inhale as you lower the dumbbells to the starting position, with your shoulders stretching downward. Repeat.",
@@ -1364,7 +1364,7 @@
     "CodeNum": 131
   },
   {
-    "ExerciseItemName": "Jumping Jacks",
+    "Name": "Jumping Jacks",
     "Description": {
       "StartPosition": "Stand up straight with your feet together and your arms down. Bend your knees and take a jump. Do not forget about breathing: on the inhale - jump, on the exhale - return to the starting position. ",
       "Execution": "In a jump at the same time spread your legs slightly wider than your shoulders and raise your arms through the sides up, you can clap over your head. Jump to the starting position. Repeat jumping at a fast pace. ",
@@ -1375,7 +1375,7 @@
     "CodeNum": 132
   },
   {
-    "ExerciseItemName": "Jump squat",
+    "Name": "Jump squat",
     "Description": {
       "StartPosition": "Stand with your feet shoulder-width apart and your arms by your sides.",
       "Execution": "Keeping your torso upright, inhale as you squat down until your thighs are at least horizontal, and raise your arms horizontally in front of you. Exhale as you jump as high as possible, making sure to throw your arms downward as you rise as if to push the floor downward. When you land, flex your hips and knees to absorb the impact, and descend into another squat. Don’t forget to inhale. Exhale as you jump as high as possible again. Keep repeating the squat, then the jump.",
@@ -1386,7 +1386,7 @@
     "CodeNum": 133
   },
   {
-    "ExerciseItemName": "Jumping Lunges",
+    "Name": "Jumping Lunges",
     "Description": {
       "StartPosition": "Take a large step backward and lower your hips, so that your back knee is just above the floor, and your front thigh is parallel to the floor.",
       "Execution": "Jump into the air and switch leg positions. Jump again and return to the starting position. Repeat the exercise until set is complete. Keep your core tight, your shoulders down, and push the movement from the heel of the front feet. Exhale as you jump and land softly on the toes of the back leg and on the heel of the front leg.",
@@ -1397,7 +1397,7 @@
     "CodeNum": 134
   },
   {
-    "ExerciseItemName": "Jump Up Burpee",
+    "Name": "Jump Up Burpee",
     "Description": {
       "StartPosition": "Begin in a standing position. Drop into a squat position with your hands on the ground.",
       "Execution": "Kick your feet back into a plank position, while keeping your arms axtended. Immediately return your feet to the squat position. Stand up from the squat position and jump straight up as high as possible at the end of the moment, befor beginning the next burpee",
@@ -1408,7 +1408,7 @@
     "CodeNum": 135
   },
   {
-    "ExerciseItemName": "Seated triceps machine press",
+    "Name": "Seated triceps machine press",
     "Description": {
       "StartPosition": "Sit on the trainer. Adjust the rollers and the seat so that the legs do not hang out and there is a hard stop with the floor. Elbows at shoulder level.",
       "Execution": "We exhale and at the same time squeeze the simulator to fully extended arms, while the back should always be straight. Return to starting position.",
@@ -1419,7 +1419,7 @@
     "CodeNum": 136
   },
   {
-    "ExerciseItemName": "Bicycle Crunch on Forearms",
+    "Name": "Bicycle Crunch on Forearms",
     "Description": {
       "StartPosition": "Sit on the mat, lower your torso back, placing your hands on your elbows and pointing your forearms towards your pelvis. Raise your legs and pull up to your torso, as if spinning a bicycle. Look ahead, do not tilt your head forward.",
       "Execution": "Straighten your legs alternately. Do not touch the floor with your heels.",
@@ -1430,7 +1430,7 @@
     "CodeNum": 137
   },
   {
-    "ExerciseItemName": "Rock Climber",
+    "Name": "Rock Climber",
     "Description": {
       "StartPosition": "We get up in an emphasis lying.",
       "Execution": "First, bend the left leg and pull it towards the body. We return the leg to the place. Then we repeat the same with the right leg.",
@@ -1441,7 +1441,7 @@
     "CodeNum": 138
   },
   {
-    "ExerciseItemName": "Standing Knee Raises",
+    "Name": "Standing Knee Raises",
     "Description": {
       "StartPosition": "Stand upright with feet shoulder-width apart. Keep your back straight, shoulders relaxed, and arms either at your sides or bent at the elbows. Look straight ahead and engage your core.",
       "Execution": "Lift your right knee toward your chest while bringing your left arm forward, then return to the starting position and repeat on the opposite side, alternating knees in a controlled, rhythmic motion.",
@@ -1452,7 +1452,7 @@
     "CodeNum": 139
   },
   {
-    "ExerciseItemName": "Shoulder Rolls",
+    "Name": "Shoulder Rolls",
     "Description": {
       "StartPosition": "Stand tall with feet shoulder-width apart and arms relaxed by your sides.",
       "Execution": "Roll your shoulders forward in a circular motion several times, then reverse the direction.",
@@ -1463,7 +1463,7 @@
     "CodeNum": 140
   },
   {
-    "ExerciseItemName": "Side Bends",
+    "Name": "Side Bends",
     "Description": {
       "StartPosition": "Stand straight with your feet shoulder-width apart and arms resting at your sides.",
       "Execution": "Slowly bend to the right, sliding your hand down your leg, then return to center and repeat on the left.",
@@ -1474,7 +1474,7 @@
     "CodeNum": 141
   },
   {
-    "ExerciseItemName": "Leg Raises Backward",
+    "Name": "Leg Raises Backward",
     "Description": {
       "StartPosition": "Stand upright with feet hip-width apart and hands on your hips or resting on a stable surface for balance.",
       "Execution": "Lift one straight leg backward, squeezing the glutes, then lower and repeat with the other leg.",
@@ -1485,7 +1485,7 @@
     "CodeNum": 142
   },
   {
-    "ExerciseItemName": "Alternating Arm Swings Up and Down",
+    "Name": "Alternating Arm Swings Up and Down",
     "Description": {
       "StartPosition": "Stand upright with feet shoulder-width apart, arms relaxed at your sides.",
       "Execution": "Lift one arm straight up while simultaneously lowering the other. Alternate sides rhythmically, keeping arms extended.",

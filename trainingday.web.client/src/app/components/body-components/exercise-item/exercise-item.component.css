@@ -1,0 +1,7 @@
+.exercise-image {
+  max-width: 300px;     /* prevents overly large image on big screens */
+  width: 100%;          /* full width of container */
+  height: auto;         /* maintain aspect ratio */
+  object-fit: contain;  /* handles aspect ratio nicely */
+  border-radius: 8px;
+}

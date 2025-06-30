@@ -1,0 +1,64 @@
+<section>
+  <div class="container">
+    <h1 class="page-title">About TrainingDay</h1>
+    <hr>
+
+    <div class="container">
+      <h1>TrainingDay – Your Fitness Journey Starts Here</h1>
+      <p class="intro">Whether you’re training at home or in the gym, TrainingDay helps you reach your goals with ease.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>🏋️‍♀️ 100+ Exercises</h3>
+          <p>From cardio to strength, explore a diverse exercise library tailored to your needs.</p>
+        </div>
+        <div class="feature-card">
+          <h3>📅 Personalized Plans</h3>
+          <p>Create and follow workout plans that match your goals and fitness level.</p>
+        </div>
+        <div class="feature-card">
+          <h3>📈 Progress Tracking</h3>
+          <p>Track weight, waist, hips, and view your fitness journey over time.</p>
+        </div>
+        <div class="feature-card">
+          <h3>💡 Nutrition Tips</h3>
+          <p>Receive personalized workout and nutrition recommendations.</p>
+        </div>
+        <div class="feature-card">
+          <h3>🎓 Expert Advice</h3>
+          <p>Access videos, articles, and professional guidance to improve your results.</p>
+        </div>
+        <div class="feature-card">
+          <h3>🤝 Community Support</h3>
+          <p>Connect, share, and stay motivated with like-minded users.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <br />
+
+    <div class="carousel-container">
+      <button (click)="prev()" class="nav-button">&lt;</button>
+
+      <div class="carousel-slide">
+        <img [src]="images[currentIndex].path" [alt]="images[currentIndex].text" />
+        <p>{{ images[currentIndex].text }}</p>
+      </div>
+
+      <button (click)="next()" class="nav-button">&gt;</button>
+    </div>
+
+    <div class="carousel-dots">
+      <span *ngFor="let img of images; let i = index"
+            [class.active]="i === currentIndex"
+            (click)="goTo(i)">
+      </span>
+    </div>
+
+
+    <input target="_blank" type="image" onclick="window.open('https://play.google.com/store/apps/details?id=com.OLASoft.TrainingDay')" src="../../assets/get_google_play.png" style="width: 150px; height: 50px" />
+    <input target="_blank" type="image" onclick="window.open('https://apps.apple.com/app/id1548560346')" src="../../assets/get_appstore.png" style="width: 150px; height: 50px" />
+    <br />
+  </div>
+</section>

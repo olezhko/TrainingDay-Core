@@ -1,11 +1,11 @@
-class ExerciseDetails {
-    id!: number;
-    name!: string;
-    adviceDescription!: string;
-    startDescription!: string;
-    executionDescription!: string;
-    muscles!: string[];
-    tags!: string[];
-    code!: number;
-    culture!: string;
+export class ExerciseDetails {
+  id!: number;
+  name!: string;
+  adviceDescription!: string;
+  startingPositionDescription!: string;
+  executionDescription!: string;
+  muscles!: string[];
+  tags!: string[];
+  codeNum!: number;
+  culture!: string;
 }

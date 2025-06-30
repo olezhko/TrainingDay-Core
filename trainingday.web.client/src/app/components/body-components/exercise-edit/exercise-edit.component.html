@@ -1,0 +1,118 @@
+<!--<div class="container">
+    <form [formGroup]="editExerciseForm" (ngSubmit)="save()">
+        <div class="form-group">
+            <label class="required" for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Name" formControlName="name">
+        </div>
+    
+        <div class="form-group">
+            <label class="required" for="code">Code</label>
+            <input type="text" class="form-control" id="code" placeholder="Code Number" formControlName="code">
+        </div>
+    
+        <div class="form-group">
+            <label class="col-sm-2 control" for="startDescription">Start Position</label>
+            <input type="text" class="form-control" id="startDescription" placeholder="Start Position Description" formControlName="startDescription">
+        </div>
+    
+        <div class="form-group">
+            <label class="required" for="executionDescription">Execution</label>
+            <input type="text" class="form-control" id="executionDescription" placeholder="Execution Description" formControlName="executionDescription">
+        </div>
+    
+        <div class="form-group">
+            <label class="required" for="adviceDescription">Advice</label>
+            <input type="text" class="form-control" id="adviceDescription" placeholder="Advice Description" formControlName="adviceDescription">
+        </div>
+    
+        <div class="form-group">
+            <label class="required" for="muscles">Muscles</label>
+            <select class="form-control" multiple id="muscles" [value]="selectedMuscles" formControlName="selectedMuscles">
+                <option *ngFor="let tag of muscles" [ngValue]="tag">{{tag.text}}</option>
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label class="required" for="tags">Tags</label>
+            <select class="form-control" multiple id="tags" [value]="selectedTags" formControlName="selectedTags">
+                <option *ngFor="let tag of tags" [ngValue]="tag">{{tag.text}}</option>
+            </select>
+        </div>
+    
+        <div>
+            <button class="btn btn-default" [routerLink]="['/exercises']">Cancel</button>
+            <button class="btn btn-success save" type="submit">Save</button>
+        </div>
+    </form>
+</div>-->
+
+
+<div class="container mt-4">
+  <form [formGroup]="editExerciseForm" (ngSubmit)="save()" class="needs-validation" novalidate>
+
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Basic Info</h5>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="name" class="form-label required">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Exercise name" formControlName="name" required>
+          </div>
+
+          <div class="col-md-6">
+            <label for="code" class="form-label required">Code</label>
+            <input type="text" class="form-control" id="code" placeholder="Code number" formControlName="code" required>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Descriptions</h5>
+
+        <div class="mb-3">
+          <label for="startDescription" class="form-label">Start Position</label>
+          <textarea class="form-control" id="startDescription" rows="2" placeholder="Start position description" formControlName="startDescription"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="executionDescription" class="form-label required">Execution</label>
+          <textarea class="form-control" id="executionDescription" rows="2" placeholder="Execution details" formControlName="executionDescription" required></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="adviceDescription" class="form-label required">Advice</label>
+          <textarea class="form-control" id="adviceDescription" rows="2" placeholder="Advice and tips" formControlName="adviceDescription" required></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Classification</h5>
+
+        <div class="mb-3">
+          <label for="muscles" class="form-label required">Muscles Worked</label>
+          <select class="form-select" multiple id="muscles" formControlName="selectedMuscles">
+            <option *ngFor="let tag of muscles" [ngValue]="tag">{{ tag.text }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="tags" class="form-label required">Tags</label>
+          <select class="form-select" multiple id="tags" formControlName="selectedTags">
+            <option *ngFor="let tag of tags" [ngValue]="tag">{{ tag.text }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2">
+      <a class="btn btn-outline-secondary" [routerLink]="['/exercises']">Cancel</a>
+      <button class="btn btn-success" type="submit">Save Exercise</button>
+    </div>
+
+  </form>
+</div>

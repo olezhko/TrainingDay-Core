@@ -11,11 +11,13 @@ import { BlogDetails } from '../../data/blog/blog-details.model';
   providedIn: 'root'
 })
 export class BackendService {
-  private exerciseSearchUrl = 'https://localhost:7081/api/exercises/search';
-  private exerciseEditorUrl = 'https://localhost:7081/api/exercises/editor';
-  private exerciseApiUrl = 'https://localhost:7081/api/exercises';
 
-  private baseUrl = 'https://localhost:7081/api/BlogPosts';
+  private baseApiUrl = 'https://localhost:7081/api';
+  private exerciseApiUrl = this.baseApiUrl + '/exercises';
+  private exerciseSearchUrl = this.baseApiUrl + '/exercises/search';
+  private exerciseEditorUrl = this.baseApiUrl + '/exercises/editor';
+
+  private baseUrl = this.baseApiUrl + 'BlogPosts';
 
   constructor(private http: HttpClient) {}
 
@@ -60,7 +62,7 @@ export class BackendService {
   }
 
   getExerciseDetails(codeNum: number, twoLetterCulture: string): Observable<any> {
-    const url = `${this.exerciseApiUrl}/details?codeNum=${codeNum}&twoLetterCulture=${twoLetterCulture}`;
+    const url = `${this.exerciseApiUrl}?codeNum=${codeNum}&twoLetterCulture=${twoLetterCulture}`;
     return this.http.get(url)
       .pipe(
         catchError(this.handleError)

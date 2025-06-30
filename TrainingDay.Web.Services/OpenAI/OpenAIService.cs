@@ -44,7 +44,7 @@ public class OpenAIService(IOptions<Data.OpenAI.OpenAISettings> options) : IOpen
         await CreateAssistantRequestAsync(token);
     }
 
-    static string FormatExercise(BaseExercise e) => $"Name: {e.ExerciseItemName} | " +
+    static string FormatExercise(BaseExercise e) => $"Name: {e.Name} | " +
                $"Start: {e.Description.StartPosition} | " +
                $"Execution: {e.Description.Execution} | " +
                $"Advice: {e.Description.Advice} | " +

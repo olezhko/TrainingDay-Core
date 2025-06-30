@@ -41,7 +41,7 @@
 
     public class BaseExercise
     {
-        public string ExerciseItemName { get; set; }
+        public string Name { get; set; }
         public Description Description { get; set; }
         public string MusclesString { get; set; } // text, by "," enum collection
         public string Tags { get; set; }
@@ -57,7 +57,7 @@
     public class Exercise 
     {
         public int Id { get; set; }
-        public string ExerciseItemName { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public string MusclesString { get; set; } // text, by "," enum collection
         public int TagsValue { get; set; }

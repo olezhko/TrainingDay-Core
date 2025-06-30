@@ -7,18 +7,18 @@ namespace TrainingDay.Web.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BlogPostsController(ILogger<BlogPostsController> logger, IBlogPostsManager manager) : ControllerBase
+    public class BlogPostsController(ILogger<BlogPostsController> logger, IBlogPostsManager blogService) : ControllerBase
     {
         [HttpGet("search")]
         public async Task<IActionResult> Get(BlogsCultureTypes culture, int page, int pageSize, CancellationToken token)
         {
-            return Ok(await manager.Get(culture, page, pageSize, token));
+            return Ok(await blogService.Get(culture, page, pageSize, token));
         }
 
         [HttpGet]
         public async Task<IActionResult> Get(int id, CancellationToken token)
         {
-            var blogPost = await manager.Get(id, token);
+            var blogPost = await blogService.Get(id, token);
             if (blogPost == null)
             {
                 return NotFound();
@@ -30,7 +30,7 @@ namespace TrainingDay.Web.Server.Controllers
         [HttpGet("editor")]
         public IActionResult GetEditorData()
         {
-            return Ok(manager.CreateEditorData());
+            return Ok(blogService.CreateEditorData());
         }
 
         [HttpPost]
@@ -41,7 +41,7 @@ namespace TrainingDay.Web.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var blog = await manager.Create(blogPost);
+            var blog = await blogService.Create(blogPost);
 
             return Ok(blog);
         }
@@ -59,7 +59,7 @@ namespace TrainingDay.Web.Server.Controllers
                 return BadRequest();
             }
 
-            var blog = await manager.Edit(blogPost);
+            var blog = await blogService.Edit(blogPost);
 
             return Ok(blog);
         }
@@ -67,7 +67,7 @@ namespace TrainingDay.Web.Server.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
-            if (await manager.Delete(id))
+            if (await blogService.Delete(id))
             {
                 return Ok();
             }

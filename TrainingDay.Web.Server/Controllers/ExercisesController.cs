@@ -18,7 +18,7 @@ namespace TrainingDay.Web.Server.Controllers
     [ApiController]
     public class ExercisesController(TrainingDayContext context,
             IExerciseManager mngExercise,
-            IOpenAIService geminiService,
+            IOpenAIService aiService,
             IWebHostEnvironment environment,
             IMapper mapper) : ControllerBase
     {
@@ -45,7 +45,7 @@ namespace TrainingDay.Web.Server.Controllers
 
             if (!string.IsNullOrEmpty(filterName))
             {
-                result = result.Where(item => item.ExerciseItemName.ToLower().Contains(filterName.ToLower())).ToList();
+                result = result.Where(item => item.Name.ToLower().Contains(filterName.ToLower())).ToList();
             }
             return Ok(result);
         }
@@ -188,7 +188,7 @@ namespace TrainingDay.Web.Server.Controllers
                 return BadRequest("Query parameter is required.");
             }
 
-            var response = await geminiService.GetExercisesByQuery(query.Query, token);
+            var response = await aiService.GetExercisesByQuery(query.Query, token);
 
             return Ok(response);
         }
