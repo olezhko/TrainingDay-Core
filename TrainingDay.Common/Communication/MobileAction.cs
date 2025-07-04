@@ -4,11 +4,12 @@ public enum MobileActions
 {
     Enter,
     Workout,
-    Weight
+    Weight,
 }
 
 public class MobileAction
 {
     public string Token { get; set; }
     public MobileActions Action { get; set; }
+    public string Data { get; set; }
 }

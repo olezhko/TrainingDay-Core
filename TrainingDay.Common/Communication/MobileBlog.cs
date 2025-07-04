@@ -1,9 +1,22 @@
 ﻿namespace TrainingDay.Common.Communication;
 
-public class MobileBlog
+public class BlogsResponse
 {
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public string Text { get; set; } // text with web urls and etc
-    public DateTime DateTime { get; set; }
+	public IReadOnlyCollection<BlogResponse> Items { get; set; }
+	public int Page { get; set; }
+}
+
+public class BlogResponse
+{
+	public string Guid { get; set; }
+	/// <summary>
+	/// http-content needed to decode
+	/// </summary>
+	public string Content { get; set; }
+	/// <summary>
+	/// DateTime
+	/// </summary>
+	public string Published { get; set; }
+	public string Title { get; set; }
+	public IReadOnlyCollection<string> Labels { get; set; }
 }
