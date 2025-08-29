@@ -46,6 +46,7 @@
         public string MusclesString { get; set; } // text, by "," enum collection
         public string Tags { get; set; }
         public int CodeNum { get; set; }
+        public DifficultType DifficultType { get; set; }
     }
 
     public class Training
@@ -62,6 +63,7 @@
         public string MusclesString { get; set; } // text, by "," enum collection
         public int TagsValue { get; set; }
         public int CodeNum { get; set; }
+        public DifficultType DifficultType { get; set; }
     }
 
     public class LastTraining
@@ -93,5 +95,12 @@
         public int Id { get; set; }
         public int Count { get; set; }
         public int TrainingId { get; set; }
+    }
+
+    public enum DifficultType
+    {
+        Easy = 1,
+        Medium = 2,
+        Hard = 3,
     }
 }

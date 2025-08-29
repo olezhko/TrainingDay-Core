@@ -16,7 +16,7 @@ public class BlogResponse
 	/// <summary>
 	/// DateTime
 	/// </summary>
-	public string Published { get; set; }
+	public DateTime Published { get; set; }
 	public string Title { get; set; }
 	public IReadOnlyCollection<string> Labels { get; set; }
 }
