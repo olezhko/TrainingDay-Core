@@ -18,11 +18,11 @@
 
   <ItemGroup>
     <PackageReference Include="FirebaseAdmin" Version="2.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.15" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.19" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy">
       <Version>8.*-*</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.19">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\trainingday.web.client\trainingday.web.client.esproj" />
     <ProjectReference Include="..\TrainingDay.Web.Entities\TrainingDay.Web.Entities.csproj" />
     <ProjectReference Include="..\TrainingDay.Web.Services\TrainingDay.Web.Services.csproj" />
   </ItemGroup>
@@ -173,6 +174,10 @@
     <None Include="wwwroot\exercise_images\94.jpg" />
     <None Include="wwwroot\exercise_images\95.jpg" />
     <None Remove="wwwroot\exercise_images\139.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Logs\" />
   </ItemGroup>
 
 </Project>

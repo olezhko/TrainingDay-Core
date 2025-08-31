@@ -8,8 +8,11 @@ namespace TrainingDay.Web.Entities
     {
         [Key]
         public new int Id { get; set; }
-        [MaxLength(2)]
-        public string Culture { get; set; }
+
+        public int CultureId { get; set; }
+
+        public virtual Culture Culture { get; set; }
+
         public WebExercise(Common.Models.BaseExercise baseExercise)
         {
             Description = JsonConvert.SerializeObject(baseExercise.Description);

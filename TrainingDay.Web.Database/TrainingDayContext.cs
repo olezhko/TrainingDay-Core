@@ -14,7 +14,7 @@ public class TrainingDayContext : DbContext
     public DbSet<WebExercise> Exercises { get; set; }
     public DbSet<SupportRequest> SupportRequests { get; set; }
 
-    public DbSet<YoutubeVideoUrls> YoutubeVideoUrls { get; set; }
+    public DbSet<ExerciseVideoLink> ExerciseVideoLinks { get; set; }
 
 
     public DbSet<UserTrainingGroup> UserTrainingGroups { get; set; }
@@ -29,7 +29,7 @@ public class TrainingDayContext : DbContext
 
     public DbSet<MobileToken> MobileTokens { get; set; }
     public DbSet<UserMobileToken> UserTokens { get; set; }
-    public DbSet<User> Users { get; set; }
+    public DbSet<MobileUser> MobileUsers { get; set; }
 
     public TrainingDayContext(DbContextOptions<TrainingDayContext> options)
     : base(options)

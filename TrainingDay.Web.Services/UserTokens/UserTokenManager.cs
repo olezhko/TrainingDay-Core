@@ -18,7 +18,7 @@ public class UserTokenManager(TrainingDayContext context, ILogger<UserTokenManag
 
         foreach (UserMobileToken userToken in userTokens)
         {
-            var user = await context.Users.FirstOrDefaultAsync(a => a.Id == userToken.UserId);
+            var user = await context.MobileUsers.FirstOrDefaultAsync(a => a.Id == userToken.UserId);
             List<MobileToken> tokens = await context.MobileTokens.AsNoTracking().Where(item => item.Id == userToken.TokenId).ToListAsync();
             result.Add(new UserTokenModel()
             {
@@ -43,7 +43,7 @@ public class UserTokenManager(TrainingDayContext context, ILogger<UserTokenManag
             logger.LogInformation($"Remove UserToken {userToken.Id}");
             context.UserTokens.Remove(userToken);
 
-            var user = await context.Users.FindAsync(userToken.UserId);
+            var user = await context.MobileUsers.FindAsync(userToken.UserId);
             if (user != null)
             {
                 logger.LogInformation($"Remove user {user.Id}");

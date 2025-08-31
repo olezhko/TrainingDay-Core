@@ -59,7 +59,7 @@ namespace TrainingDay.Web.Server.ViewModels.Exercises
 
             Muscles = new ObservableCollection<MusclesEnum>(ExerciseExtensions.ConvertMuscleStringToList(model.MusclesString));
             Tags = [.. ExerciseExtensions.ConvertTagIntToList(model.TagsValue)];
-            Culture = model.Culture;
+            Culture = model.Culture.Code;
         }
     }
 }

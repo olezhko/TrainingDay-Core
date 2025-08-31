@@ -109,6 +109,28 @@ namespace TrainingDay.Web.Database.Migrations
                         });
                 });
 
+            modelBuilder.Entity("TrainingDay.Web.Entities.ExerciseVideoLink", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("ExerciseName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("UpdatedDateTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("VideoUrlList")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ExerciseVideoLinks");
+                });
+
             modelBuilder.Entity("TrainingDay.Web.Entities.MobileItems.UserExercise", b =>
                 {
                     b.Property<int>("Id")
@@ -426,33 +448,7 @@ namespace TrainingDay.Web.Database.Migrations
                     b.ToTable("MobileTokens");
                 });
 
-            modelBuilder.Entity("TrainingDay.Web.Entities.SupportRequest", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SupportRequests");
-                });
-
-            modelBuilder.Entity("TrainingDay.Web.Entities.User", b =>
+            modelBuilder.Entity("TrainingDay.Web.Entities.MobileUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -502,7 +498,33 @@ namespace TrainingDay.Web.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("MobileUsers");
+                });
+
+            modelBuilder.Entity("TrainingDay.Web.Entities.SupportRequest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SupportRequests");
                 });
 
             modelBuilder.Entity("TrainingDay.Web.Entities.WebExercise", b =>
@@ -514,10 +536,8 @@ namespace TrainingDay.Web.Database.Migrations
                     b.Property<int>("CodeNum")
                         .HasColumnType("int");
 
-                    b.Property<string>("Culture")
-                        .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("varchar(2)");
+                    b.Property<int>("CultureId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -539,29 +559,9 @@ namespace TrainingDay.Web.Database.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CultureId");
+
                     b.ToTable("Exercises");
-                });
-
-            modelBuilder.Entity("TrainingDay.Web.Entities.YoutubeVideoUrls", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("ExerciseName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("UpdatedDateTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("VideoUrlList")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("YoutubeVideoUrls");
                 });
 
             modelBuilder.Entity("TrainingDay.Web.Entities.BlogPostCulture", b =>
@@ -585,7 +585,7 @@ namespace TrainingDay.Web.Database.Migrations
 
             modelBuilder.Entity("TrainingDay.Web.Entities.MobileItems.UserExercise", b =>
                 {
-                    b.HasOne("TrainingDay.Web.Entities.User", "User")
+                    b.HasOne("TrainingDay.Web.Entities.MobileUser", "User")
                         .WithMany("UserExercises")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -596,7 +596,7 @@ namespace TrainingDay.Web.Database.Migrations
 
             modelBuilder.Entity("TrainingDay.Web.Entities.MobileItems.UserLastTraining", b =>
                 {
-                    b.HasOne("TrainingDay.Web.Entities.User", "User")
+                    b.HasOne("TrainingDay.Web.Entities.MobileUser", "User")
                         .WithMany("UserLastTrainings")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -607,7 +607,7 @@ namespace TrainingDay.Web.Database.Migrations
 
             modelBuilder.Entity("TrainingDay.Web.Entities.MobileItems.UserLastTrainingExercise", b =>
                 {
-                    b.HasOne("TrainingDay.Web.Entities.User", "User")
+                    b.HasOne("TrainingDay.Web.Entities.MobileUser", "User")
                         .WithMany("UserLastTrainingExercises")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -624,7 +624,7 @@ namespace TrainingDay.Web.Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TrainingDay.Web.Entities.User", "User")
+                    b.HasOne("TrainingDay.Web.Entities.MobileUser", "User")
                         .WithOne("UserMobileToken")
                         .HasForeignKey("TrainingDay.Web.Entities.MobileItems.UserMobileToken", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -637,7 +637,7 @@ namespace TrainingDay.Web.Database.Migrations
 
             modelBuilder.Entity("TrainingDay.Web.Entities.MobileItems.UserSuperSet", b =>
                 {
-                    b.HasOne("TrainingDay.Web.Entities.User", "User")
+                    b.HasOne("TrainingDay.Web.Entities.MobileUser", "User")
                         .WithMany("UserSuperSets")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -648,7 +648,7 @@ namespace TrainingDay.Web.Database.Migrations
 
             modelBuilder.Entity("TrainingDay.Web.Entities.MobileItems.UserTraining", b =>
                 {
-                    b.HasOne("TrainingDay.Web.Entities.User", "User")
+                    b.HasOne("TrainingDay.Web.Entities.MobileUser", "User")
                         .WithMany("UserTrainings")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -659,7 +659,7 @@ namespace TrainingDay.Web.Database.Migrations
 
             modelBuilder.Entity("TrainingDay.Web.Entities.MobileItems.UserTrainingExercise", b =>
                 {
-                    b.HasOne("TrainingDay.Web.Entities.User", "User")
+                    b.HasOne("TrainingDay.Web.Entities.MobileUser", "User")
                         .WithMany("UserTrainingExercises")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -670,7 +670,7 @@ namespace TrainingDay.Web.Database.Migrations
 
             modelBuilder.Entity("TrainingDay.Web.Entities.MobileItems.UserTrainingGroup", b =>
                 {
-                    b.HasOne("TrainingDay.Web.Entities.User", "User")
+                    b.HasOne("TrainingDay.Web.Entities.MobileUser", "User")
                         .WithMany("UserTrainingGroups")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -681,7 +681,7 @@ namespace TrainingDay.Web.Database.Migrations
 
             modelBuilder.Entity("TrainingDay.Web.Entities.MobileItems.UserWeightNote", b =>
                 {
-                    b.HasOne("TrainingDay.Web.Entities.User", "User")
+                    b.HasOne("TrainingDay.Web.Entities.MobileUser", "User")
                         .WithMany("UserWeightNotes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -690,7 +690,18 @@ namespace TrainingDay.Web.Database.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TrainingDay.Web.Entities.User", b =>
+            modelBuilder.Entity("TrainingDay.Web.Entities.WebExercise", b =>
+                {
+                    b.HasOne("TrainingDay.Web.Entities.Culture", "Culture")
+                        .WithMany()
+                        .HasForeignKey("CultureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Culture");
+                });
+
+            modelBuilder.Entity("TrainingDay.Web.Entities.MobileUser", b =>
                 {
                     b.Navigation("UserExercises");
 

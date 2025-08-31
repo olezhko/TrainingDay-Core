@@ -16,13 +16,13 @@ namespace TrainingDay.Web.Server.Controllers
     public class AuthController : ControllerBase
     {
         const string callbackScheme = "trainingday";
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<MobileUser> _userManager;
+        private readonly SignInManager<MobileUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         public AuthController(
-            UserManager<User> userManager,
-            SignInManager<User> signInManager,
+            UserManager<MobileUser> userManager,
+            SignInManager<MobileUser> signInManager,
             IEmailSender emailSender,
             ILogger<AuthController> logger)
         {
@@ -77,7 +77,7 @@ namespace TrainingDay.Web.Server.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Nick, Email = model.Email };
+                var user = new MobileUser { UserName = model.Nick, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -3,7 +3,7 @@ using TrainingDay.Web.Entities.MobileItems;
 
 namespace TrainingDay.Web.Entities;
 
-public class User : IdentityUser<Guid>
+public class MobileUser : IdentityUser<Guid>
 {
     public virtual UserMobileToken UserMobileToken { get; set; }
 

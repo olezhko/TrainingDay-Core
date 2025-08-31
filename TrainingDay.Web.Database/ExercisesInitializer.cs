@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using TrainingDay.Common.Extensions;
 using TrainingDay.Common.Models;
 using TrainingDay.Web.Entities;
@@ -9,10 +10,10 @@ public static class ExercisesInitializer
 {
     public static async Task Initialize(TrainingDayContext context)
     {
-        var cultures = new[] { "ru", "en" };
+        var cultures = await context.Cultures.AsNoTracking().ToListAsync();
         foreach (var culture in cultures)
         {
-            var exercises = await ResourceExtension.LoadResource<BaseExercise>("exercises", culture);
+            var exercises = await ResourceExtension.LoadResource<BaseExercise>("exercises", culture.Code);
             foreach (var srcExercise in exercises)
             {
                 var dbExercise = context.Exercises.FirstOrDefault(item => item.CodeNum == srcExercise.CodeNum && item.Culture == culture);
@@ -20,7 +21,7 @@ public static class ExercisesInitializer
                 {
                     context.Exercises.Add(new WebExercise(srcExercise)
                     {
-                        Culture = culture,
+                        CultureId = culture.Id,
                     });
                 }
                 else

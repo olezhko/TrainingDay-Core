@@ -8,12 +8,12 @@ namespace TrainingDay.Web.Services.Exercises;
 
 public class ExerciseManager(TrainingDayContext context) : IExerciseManager
 {
-    public WebExercise CreateExercise(string culture)
+    public WebExercise CreateExercise(int cultureId)
     {
         return new WebExercise()
         {
-            Culture = culture,
-            CodeNum = GetLastCode(culture) + 1,
+            CultureId = cultureId,
+            CodeNum = GetLastCode(cultureId) + 1,
             TagsValue = ExerciseExtensions.ConvertTagListToInt(
             [
                 ExerciseTags.DatabaseExercise
@@ -21,16 +21,10 @@ public class ExerciseManager(TrainingDayContext context) : IExerciseManager
         };
     }
 
-    public IEnumerable<WebExercise> GetExercises()
+    public int GetLastCode(int cultureId)
     {
         return context.Exercises.AsNoTracking()
-            .Where(item => item.Culture == "en");
-    }
-
-    public int GetLastCode(string cu)
-    {
-        return context.Exercises.AsNoTracking()
-            .Where(item => item.Culture == cu)
+            .Where(item => item.CultureId == cultureId)
             .Select(item => item.CodeNum)
             .Max();
     }

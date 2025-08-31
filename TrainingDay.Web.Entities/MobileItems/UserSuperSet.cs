@@ -21,5 +21,5 @@ public class UserSuperSet : Common.Models.SuperSet, IUserEntity
     public Guid UserId { get; set; }
     public int DatabaseId { get; set; }
 
-    public virtual User User { get; set; }
+    public virtual MobileUser User { get; set; }
 }

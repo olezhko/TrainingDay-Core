@@ -25,36 +25,32 @@ namespace TrainingDay.Web.Server.Controllers
         [HttpGet("search")]
         public async Task<IActionResult> GetAll(int? selectedMuscle, string? filterName, string twoLetterCulture)
         {
-            IEnumerable<ExerciseViewModel> result = new List<ExerciseViewModel>();
+            var result = context.Exercises
+                    .Include(item => item.Culture)
+                    .AsNoTracking()
+                    .Where(item => item.Culture.Code == twoLetterCulture)
+                    .OrderBy(item => item.CodeNum)
+                    .Select(item => new ExerciseViewModel(item));
+
             if (selectedMuscle != null)
             {
-                result = await context.Exercises.AsNoTracking()
-                    .Where(item => item.Culture == twoLetterCulture)
-                    .OrderBy(item => item.CodeNum)
-                    .Select(item => new ExerciseViewModel(item)).ToListAsync();
-
-                result = result.Where(item => item.Muscles.Contains((MusclesEnum)selectedMuscle)).ToList();
-            }
-            else
-            {
-                result = await context.Exercises.AsNoTracking()
-                    .Where(item => item.Culture == twoLetterCulture)
-                    .OrderBy(item => item.CodeNum)
-                    .Select(item => new ExerciseViewModel(item)).ToListAsync();
+                result = result.Where(item => item.Muscles.Contains((MusclesEnum)selectedMuscle));
             }
 
             if (!string.IsNullOrEmpty(filterName))
             {
-                result = result.Where(item => item.Name.ToLower().Contains(filterName.ToLower())).ToList();
+                result = result.Where(item => item.Name.ToLower().Contains(filterName.ToLower()));
             }
-            return Ok(result);
+
+            return Ok(await result.ToListAsync());
         }
 
         [HttpGet]
         public async Task<IActionResult> Details(int? codeNum, string twoLetterCulture)
         {
-            var exercise = await context.Exercises
-                .SingleOrDefaultAsync(item => item.CodeNum == codeNum && item.Culture == twoLetterCulture);
+            var exercise = await context.Exercises.Include(item => item.Culture)
+                    .AsNoTracking()
+                .SingleOrDefaultAsync(item => item.CodeNum == codeNum && item.Culture.Code == twoLetterCulture);
 
             if (exercise == null)
             {
@@ -112,9 +108,10 @@ namespace TrainingDay.Web.Server.Controllers
         }
 
         [HttpGet("editor")]
-        public async Task<IActionResult> GetEditParams(string cu)
+        public async Task<IActionResult> GetEditParams(int cultureId)
         {
-            var culture = new CultureInfo(cu);
+            var cu = await context.Cultures.AsNoTracking().FirstOrDefaultAsync(item => item.Id == cultureId);
+            var culture = new CultureInfo(cu.Code);
             EditParameters model = new EditParameters();
             model.AllMuscles = new List<SelectListItem>();
             for (int i = 0; i < (int)MusclesEnum.None; i++)
@@ -136,7 +133,7 @@ namespace TrainingDay.Web.Server.Controllers
                 });
             }
 
-            model.OfferedCode = mngExercise.GetLastCode(cu);
+            model.OfferedCode = mngExercise.GetLastCode(cultureId);
 
             return Ok(model);
         }

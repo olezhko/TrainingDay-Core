@@ -35,18 +35,18 @@ namespace TrainingDay.Web.Server.Controllers
                 }
 
                 name = name.Replace('+', ' ');
-                YoutubeVideoUrls model = await _context.YoutubeVideoUrls.FirstOrDefaultAsync(m => m.ExerciseName == name);
+                ExerciseVideoLink model = await _context.ExerciseVideoLinks.FirstOrDefaultAsync(m => m.ExerciseName == name);
 
                 if (model == null)
                 {
-                    model = new YoutubeVideoUrls { ExerciseName = name, UpdatedDateTime = DateTime.UtcNow };
+                    model = new ExerciseVideoLink { ExerciseName = name, UpdatedDateTime = DateTime.UtcNow };
                     var items = _youtubeVideoCatalog.GetVideoItemsAsync(name).Result;
                     if (items.Count == 0)
                     {
                         return NoContent();
                     }
                     model.VideoUrlList = JsonConvert.SerializeObject(items);
-                    _context.YoutubeVideoUrls.Add(model);
+                    _context.ExerciseVideoLinks.Add(model);
                     await _context.SaveChangesAsync();
                     return items;
                 }

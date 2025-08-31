@@ -185,13 +185,13 @@ namespace TrainingDay.Web.Server.Controllers
             return Ok();
         }
 
-        private User GetUserOrCreate(int tokenId)
+        private MobileUser GetUserOrCreate(int tokenId)
         {
             var userToken = _context.UserTokens.FirstOrDefault(item => item.TokenId == tokenId);
             if (userToken == null)
             {
-                var user = new User();
-                _context.Users.Add(user);
+                var user = new MobileUser();
+                _context.MobileUsers.Add(user);
                 _context.SaveChanges();
 
                 var newUserToken = new UserMobileToken()
@@ -206,7 +206,7 @@ namespace TrainingDay.Web.Server.Controllers
             }
             else
             {
-                return _context.Users.First(item => item.Id == userToken.UserId);
+                return _context.MobileUsers.First(item => item.Id == userToken.UserId);
             }
         }
 
@@ -218,7 +218,7 @@ namespace TrainingDay.Web.Server.Controllers
                 return BadRequest();
             }
 
-            var user = await _context.Users.FirstOrDefaultAsync(a => a.Email == mail);
+            var user = await _context.MobileUsers.FirstOrDefaultAsync(a => a.Email == mail);
             if (user == null)
             {
                 return NotFound(mail);
@@ -322,7 +322,7 @@ namespace TrainingDay.Web.Server.Controllers
                     return NotFound(repo.Token);
                 }
 
-                var user = await _context.Users.FirstOrDefaultAsync(a => a.Id == repo.UserId);
+                var user = await _context.MobileUsers.FirstOrDefaultAsync(a => a.Id == repo.UserId);
                 if (user == null)
                 {
                     return NotFound();
