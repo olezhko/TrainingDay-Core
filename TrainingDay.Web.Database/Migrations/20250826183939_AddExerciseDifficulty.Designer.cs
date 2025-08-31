@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrainingDay.Web.Database;
 
@@ -10,9 +11,11 @@ using TrainingDay.Web.Database;
 namespace TrainingDay.Web.Database.Migrations
 {
     [DbContext(typeof(TrainingDayContext))]
-    partial class TrainingDayContextModelSnapshot : ModelSnapshot
+    [Migration("20250826183939_AddExerciseDifficulty")]
+    partial class AddExerciseDifficulty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

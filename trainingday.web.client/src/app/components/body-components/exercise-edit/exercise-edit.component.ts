@@ -41,8 +41,6 @@ export class ExerciseEditComponent implements OnInit {
   }
 
   save(): void {
-    console.log(this.editExerciseForm.value);
-
     if (this.id === 0) {
       this.backendService.createExercise(this.editExerciseForm.value).subscribe(data => {
         this.router.navigate(['/exercises']);

@@ -4,6 +4,7 @@ import { BackendService } from 'src/app/services/backend/backend.service';
 import { ExerciseDetails } from 'src/app/data/exercises/exercise-details.model';
 import { ExerciseTagsEnglishLabels, ExerciseTags } from 'src/app/data/exercises/exercise-tags';
 import { MusclesEnumEnglishLabels, MusclesEnum } from 'src/app/data/exercises/exercise-muscle';
+import { environment } from '../../../../environment/environment'
 
 @Component({
   selector: 'app-exercise-item',
@@ -26,7 +27,7 @@ export class ExerciseItemComponent implements OnInit {
       next: (data: ExerciseDetails) => {
 
         this.exercise = data;
-        this.imageSrc = `https://localhost:7081/exercise_images/${this.exercise.codeNum}.jpg`;
+        this.imageSrc = environment.baseUrl + `/exercise_images/${this.exercise.codeNum}.jpg`;
 
       },
       error: (err) => {

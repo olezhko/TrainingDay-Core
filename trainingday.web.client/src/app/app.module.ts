@@ -9,6 +9,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ExerciseListComponent } from './components/body-components/exercise-list/exercise-list.component';
 import { BlogListComponent } from './components/body-components/blog-list/blog-list.component';
 import { BlogItemComponent } from './components/body-components/blog-item/blog-item.component';
+import { BlogEditComponent } from './components/body-components/blog-edit/blog-edit.component';
 import { ExerciseItemComponent } from './components/body-components/exercise-item/exercise-item.component';
 import { RouterOutlet } from "@angular/router";
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
@@ -23,10 +24,11 @@ import { ExercisePreviewComponent } from './components/body-components/exercise-
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { BackendService } from './services/backend/backend.service';
 import { ExerciseEditComponent } from './components/body-components/exercise-edit/exercise-edit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { NgxEditorModule } from 'ngx-editor';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { MaterialModule } from './material.module';
     ExerciseListComponent,
     BlogListComponent,
     BlogItemComponent,
+    BlogEditComponent,
     ExerciseItemComponent,
     LandingPageComponent, JoinUsComponent, AboutUsComponent,
     ContactMeComponent,
@@ -45,7 +48,7 @@ import { MaterialModule } from './material.module';
     ExerciseEditComponent,
   ],
   imports: [
-    BrowserModule, MaterialModule, RouterOutlet, HttpClientModule, AppRoutingComponent, FormsModule, ReactiveFormsModule, NgbModule, StoreModule.forRoot({}, {}), EffectsModule.forRoot([]), StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }), BrowserAnimationsModule
+    MatSnackBarModule, NgxEditorModule, BrowserModule, MaterialModule, RouterOutlet, HttpClientModule, AppRoutingComponent, FormsModule, ReactiveFormsModule, NgbModule, StoreModule.forRoot({}, {}), EffectsModule.forRoot([]), StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }), BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

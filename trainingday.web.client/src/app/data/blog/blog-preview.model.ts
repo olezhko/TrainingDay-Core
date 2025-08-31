@@ -18,8 +18,14 @@ export class BlogPreview {
   }
 }
 
-export interface BlogPostEditViewModel {
-  title: string;
-  content: string;
-  culture: string;
+export class BlogPostEditViewModel {
+  id!: number; // blogpost-culture connection
+  cultureId!: number;
+  blogId!: number; // blogpost id
+  title!: string;
+  description!: string;
+  date!: Date;
+  author!: string;
+  view!: string;
+  tags: string[] = [];
 }

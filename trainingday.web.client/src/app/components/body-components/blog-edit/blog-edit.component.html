@@ -1,1 +1,105 @@
-<p>blog-edit works!</p>
+<div class="blog-edit-container">
+  <form [formGroup]="blogForm" (ngSubmit)="onSubmit()" class="blog-form">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text"
+             id="title"
+             formControlName="title"
+             class="form-control"
+             placeholder="Enter blog title">
+      <div *ngIf="blogForm.get('title')?.invalid && blogForm.get('title')?.touched" class="error-message">
+        <div *ngIf="blogForm.get('title')?.errors?.['required']">Title is required</div>
+        <div *ngIf="blogForm.get('title')?.errors?.['maxlength']">Title cannot exceed 200 characters</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="author">Author</label>
+      <input type="text"
+             id="author"
+             formControlName="author"
+             class="form-control"
+             placeholder="Enter author name">
+      <div *ngIf="blogForm.get('author')?.invalid && blogForm.get('author')?.touched" class="error-message">
+        Author is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="date">Publish Date</label>
+      <input type="datetime"
+             id="date"
+             formControlName="date"
+             class="form-control"
+             [value]="blogForm.get('date')?.value">
+      <div *ngIf="blogForm.get('date')?.invalid && blogForm.get('date')?.touched" class="error-message">
+        Date is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Preview</label>
+      <ngx-editor-menu [editor]="editorPreview"> </ngx-editor-menu>
+      <ngx-editor [editor]="editorPreview" formControlName="description">
+      </ngx-editor>
+      <div *ngIf="blogForm.get('description')?.invalid && blogForm.get('description')?.touched" class="error-message">
+        Preview is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Content</label>
+      <ngx-editor-menu [editor]="editorContent"> </ngx-editor-menu>
+      <ngx-editor [editor]="editorContent" formControlName="view">
+      </ngx-editor>
+      <div *ngIf="blogForm.get('view')?.invalid && blogForm.get('view')?.touched" class="error-message">
+        Content is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Tags</label>
+      <div class="tags-container">
+        <div class="tag" *ngFor="let tag of blogForm.get('tags')?.value">
+          {{ tag }}
+          <span class="remove-tag" (click)="removeTag(tag)">×</span>
+        </div>
+        <input type="text"
+               class="tag-input"
+               placeholder="Add tags..."
+               (input)="onTagInput($event)">
+      </div>
+      <div class="tag-suggestions" *ngIf="filteredTags.length > 0">
+        <div class="tag-suggestion" *ngFor="let tag of filteredTags" (click)="addTag(tag)">
+          {{ tag }}
+        </div>
+      </div>
+      <div *ngIf="blogForm.get('tags')?.invalid && blogForm.get('tags')?.touched" class="error-message">
+        At least one tag is required
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="blogForm.invalid">Save</button>
+      <button type="button" class="btn btn-secondary">Cancel</button>
+    </div>
+  </form>
+
+  <!-- Preview Section -->
+  <div class="preview-section" *ngIf="blogForm.valid">
+    <h3>Preview</h3>
+    <div class="preview-content">
+      <h1>{{ blogForm.get('title')?.value }}</h1>
+      <div class="blog-meta">
+        <span>By {{ blogForm.get('author')?.value }}</span> |
+        <span>{{ blogForm.get('date')?.value | date:'mediumDate' }}</span>
+      </div>
+      <div class="blog-tags">
+        <span class="tag" *ngFor="let tag of blogForm.get('tags')?.value">{{ tag }}</span>
+      </div>
+      <div class="blog-description" [innerHTML]="getSafeHtml(blogForm.get('description')?.value)"></div>
+      <hr>
+      <div class="blog-content" [innerHTML]="getSafeHtml(blogForm.get('view')?.value)"></div>
+    </div>
+  </div>
+</div>

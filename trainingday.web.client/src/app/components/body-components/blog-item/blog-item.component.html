@@ -1,11 +1,7 @@
-<mat-toolbar color="accent">
-  <span>{{ blogPost.title }}</span>
-</mat-toolbar>
-
 <mat-card *ngIf="blogPost" class="blog-item-card">
   <mat-card-title>{{ blogPost.title }}</mat-card-title>
   <mat-card-subtitle>{{ blogPost.author }} | {{ blogPost.date | date }}</mat-card-subtitle>
   <mat-card-content>
-    <div [innerHTML]="blogPost.view"></div>
+    <div class="html-wrapper-description" [innerHTML]="blogPost.view"></div>
   </mat-card-content>
 </mat-card>

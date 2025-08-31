@@ -32,9 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\trainingday.web.client\trainingday.web.client.esproj">
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
     <ProjectReference Include="..\TrainingDay.Web.Entities\TrainingDay.Web.Entities.csproj" />
     <ProjectReference Include="..\TrainingDay.Web.Services\TrainingDay.Web.Services.csproj" />
   </ItemGroup>

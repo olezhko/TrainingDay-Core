@@ -20,16 +20,16 @@ public class MobileBlogsController : ControllerBase
     [HttpGet("blogs")]
     public async Task<IActionResult> GetMobileBlogs([FromQuery] int cultureId, int page, int pageSize, CancellationToken token)
     {
-        IEnumerable<MobileBlog> dataPage = await _context.PostCultures
+        IEnumerable<BlogResponse> dataPage = await _context.PostCultures
             .Where(post => post.CultureId == cultureId)
             .Include(item => item.BlogPost)
             .AsNoTracking()
             .Page(page, pageSize)
-            .Select(item => new MobileBlog()
+            .Select(item => new BlogResponse()
             {
-                Id = item.Id,
+                Guid = item.Id.ToString(),
                 Title = item.BlogPost.Title,
-                DateTime = item.BlogPost.Date,
+                Published = item.BlogPost.Date,
             })
             .ToListAsync(token);
 
@@ -49,11 +49,11 @@ public class MobileBlogsController : ControllerBase
             return NotFound();
         }
 
-        var result = new MobileBlog()
+        var result = new BlogResponse()
         {
             Title = blog.BlogPost.Title,
-            DateTime = blog.BlogPost.Date,
-            Text = blog.BlogPost.View
+            Published = blog.BlogPost.Date,
+            Content = blog.BlogPost.View
         };
 
         return Ok(result);

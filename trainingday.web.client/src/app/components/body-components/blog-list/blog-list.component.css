@@ -1,5 +1,5 @@
 .blog-list-container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: auto;
   padding: 20px;
 }
@@ -17,10 +17,10 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-  .mat-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
-  }
+.mat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+}
 
 .mat-card-title {
   font-size: 1.5rem;
@@ -48,4 +48,13 @@
 .mat-card-actions button {
   text-transform: uppercase;
   font-weight: 500;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#search-input {
+    width: 400px;
 }

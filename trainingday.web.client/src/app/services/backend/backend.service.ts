@@ -6,18 +6,20 @@ import { ExerciseEditParams } from 'src/app/data/exercises/exercise-params.model
 import { catchError } from 'rxjs/operators';
 import { BlogPostEditViewModel, BlogPreview } from '../../data/blog/blog-preview.model';
 import { BlogDetails } from '../../data/blog/blog-details.model';
+import { environment } from '../../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
 
-  private baseApiUrl = 'https://localhost:7081/api';
+  private baseApiUrl = environment.baseApiUrl;
+
   private exerciseApiUrl = this.baseApiUrl + '/exercises';
   private exerciseSearchUrl = this.baseApiUrl + '/exercises/search';
   private exerciseEditorUrl = this.baseApiUrl + '/exercises/editor';
 
-  private baseUrl = this.baseApiUrl + 'BlogPosts';
+  private baseUrl = this.baseApiUrl + '/BlogPosts';
 
   constructor(private http: HttpClient) {}
 
@@ -25,13 +27,13 @@ export class BackendService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'http://localhost:7081',
+        'Access-Control-Allow-Origin': environment.baseUrl,
         'Access-Control-Allow-Credentials': 'true'
       })
     };
 
     const data = { name, email, message };
-    return this.http.post<any>('https://localhost:7081/support/contact-me', data, httpOptions);
+    return this.http.post<any>(environment.baseUrl + '/support/contact-me', data, httpOptions);
   }
 
   getExercises(selectedMuscle: number | undefined, filterName: string, twoLetterCulture: string): Observable<ExercisePreview[]> {
@@ -84,12 +86,12 @@ export class BackendService {
     return this.http.get<BlogPreview[]>(`${this.baseUrl}/search`, { params });
   }
 
-  getBlogPost(id: number): Observable<BlogDetails> {
-    return this.http.get<BlogDetails>(`${this.baseUrl}?id=${id}`);
+  getBlogPost(id: number): Observable<BlogPostEditViewModel> {
+    return this.http.get<BlogPostEditViewModel>(`${this.baseUrl}?id=${id}`);
   }
 
   createBlogPost(blogPost: BlogPostEditViewModel): Observable<BlogDetails> {
-    return this.http.post<BlogDetails>(this.baseUrl, blogPost);
+    return this.http.post<BlogPostEditViewModel>(this.baseUrl, blogPost);
   }
 
   editBlogPost(id: number, blogPost: BlogPostEditViewModel): Observable<BlogDetails> {

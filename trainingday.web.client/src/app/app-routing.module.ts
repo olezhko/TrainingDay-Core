@@ -10,12 +10,15 @@ import { BlogListComponent } from './components/body-components/blog-list/blog-l
 import { BlogItemComponent } from './components/body-components/blog-item/blog-item.component';
 import { ExerciseItemComponent } from './components/body-components/exercise-item/exercise-item.component';
 import { ExerciseEditComponent } from './components/body-components/exercise-edit/exercise-edit.component';
+import { BlogEditComponent } from './components/body-components/blog-edit/blog-edit.component';
 
 // определение маршрутов
 const routes: Routes = [
   { path: "", component: LandingPageComponent },
   { path: "blogs", component: BlogListComponent },
-  { path: "blog/:id", component: BlogItemComponent },
+  { path: "blogs/new", component: BlogEditComponent },   // exact match first
+  { path: "blogs/edit/:id", component: BlogEditComponent }, 
+  { path: "blogs/:id", component: BlogItemComponent },   // generic last
   { path: "exercises", component: ExerciseListComponent },
   { path: "exercise/details/:id", component: ExerciseItemComponent },
   { path: "exercise/edit/:id", component: ExerciseEditComponent },

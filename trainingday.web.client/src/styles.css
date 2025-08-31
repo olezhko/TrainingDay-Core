@@ -51,3 +51,15 @@ body {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.html-wrapper-description img {
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+.html-wrapper-description p {
+  width: 100%;
+  text-indent: 2em;
+  text-align: justify;
+}
