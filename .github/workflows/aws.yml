@@ -1,0 +1,87 @@
+name: Deploy to Dev env
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+  
+env:
+  GUTHUB_COMMIT_HASH: ${{github.sha}}
+  EC2_HOST: ec2-100-29-152-98.compute-1.amazonaws.com
+  EC2_USERNAME: ubuntu
+  EC2_PRIVATE_KEY: ${{secrets.EC2_PRIVATE_KEY}}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Set outputs
+        id: vars
+        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Resore application
+        run: dotnet restore -p:TargetFramework=net8.0
+
+      - name: Build and Publish
+        run: |
+          dotnet publish -c Release --framework net8.0 --no-restore -o ./publish
+
+      - name: Create archive
+        run: tar -czf app.tar.gz -C ./publish .
+
+      - name: Delete previous archive
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.EC2_HOST }}
+          username: ${{ env.EC2_USERNAME }}
+          key: ${{ env.EC2_PRIVATE_KEY }}
+          script: |
+            rm -f /home/ubuntu/trainingday/app.tar.gz
+
+      - name: Copy archive to EC2 instance
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ env.EC2_HOST }}
+          username: ${{ env.EC2_USERNAME }}
+          key: ${{ env.EC2_PRIVATE_KEY }}
+          source: app.tar.gz
+          target: /home/ubuntu/trainingday/
+          overwrite: true
+
+      - name: SSH into EC2 instance and extract archive
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.EC2_HOST }}
+          username: ${{ env.EC2_USERNAME }}
+          key: ${{ env.EC2_PRIVATE_KEY }}
+          script: |
+            cd /home/ubuntu/trainingday
+            mkdir -p publish
+            tar -xzf app.tar.gz -C ./publish --strip-components=1
+
+      # - name: Copy appsettings with db adress
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ env.EC2_HOST }}
+      #     username: ${{ env.EC2_USERNAME }}
+      #     key: ${{ env.EC2_PRIVATE_KEY }}
+      #     script: |
+      #       cp /home/ubuntu/trainingday/appsettings.Production.json /home/ubuntu/trainingday/publish/
+
+      - name: SSH into EC2 instance and restart service
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.EC2_HOST }}
+          username: ${{ env.EC2_USERNAME }}
+          key: ${{ env.EC2_PRIVATE_KEY }}
+          script: |
+            sudo systemctl restart trainingday.service
