@@ -53,20 +53,23 @@ namespace TrainingDay.Web.Server.Extensions
                 var customFile = "Settings" + Path.DirectorySeparatorChar + settingsFileName;
                 if (File.Exists(customFile))
                 {
-                    logger.Information("firebase file exists");
                     return customFile;
                 }
 
                 return "Settings" + Path.DirectorySeparatorChar + settingsFileName;
             }
 
+            Stream GetStream(string settingsFileName)
+            {
+                return File.OpenRead(settingsFileName);
+            }
+
             var firebaseFilePath = GetPathToSettingsFile("firebase.json");
 
-            logger.Information($"Try to load firebase file: {firebaseFilePath}, CurrentDirectory: {Environment.CurrentDirectory}");
-            FirebaseApp.Create(new AppOptions()
-            {
-                Credential = GoogleCredential.FromFile(firebaseFilePath)
-            });
+            //FirebaseApp.Create(new AppOptions()
+            //{
+            //    Credential = GoogleCredential.FromStream(GetStream(firebaseFilePath))
+            //});
 
             //services.AddHostedService<ConsumeScopedServiceHostedService>();
             //services.AddScoped<IScopedProcessingService, ScopedProcessingService>();
