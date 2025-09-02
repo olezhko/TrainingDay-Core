@@ -28,12 +28,17 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Resore application
+      - name: Debug secret length
+        run: |
+          echo "Key length: $(echo '${{ secrets.EC2_PRIVATE_KEY }}' | wc -c)"
+          echo "First line: $(echo '${{ secrets.EC2_PRIVATE_KEY }}' | head -n 1)"
+
+      - name: Restore application
         run: dotnet restore -p:TargetFramework=net8.0
 
       - name: Build and Publish
         run: |
-          dotnet publish -c Release --framework net8.0 --no-restore -o ./publish
+          dotnet publish ./TrainingDay.Web.Server/TrainingDay.Web.Server.csproj -c Release --framework net8.0 --no-restore -o ./publish
 
       - name: Create archive
         run: tar -czf app.tar.gz -C ./publish .
