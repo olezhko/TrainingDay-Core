@@ -19,7 +19,7 @@ namespace TrainingDay.Web.Server.Extensions
 {
     public static class DependenciesInjection
     {
-        public static void InstallServices(this IServiceCollection services, ConfigurationManager configuration)
+        public static void InstallServices(this IServiceCollection services, ConfigurationManager configuration, Serilog.Core.Logger logger)
         {
             services.AddCors(options =>
             {
@@ -48,25 +48,28 @@ namespace TrainingDay.Web.Server.Extensions
 
             services.AddTransient<ISupportRepository, SupportRepository>();
 
+            string GetPathToSettingsFile(string settingsFileName)
+            {
+                var customFile = "Settings" + Path.DirectorySeparatorChar + settingsFileName;
+                if (File.Exists(customFile))
+                {
+                    logger.Information("firebase file exists");
+                    return customFile;
+                }
+
+                return "Settings" + Path.DirectorySeparatorChar + settingsFileName;
+            }
+
+            var firebaseFilePath = GetPathToSettingsFile("firebase.json");
+
+            logger.Information($"Try to load firebase file: {firebaseFilePath}, CurrentDirectory: {Environment.CurrentDirectory}");
             FirebaseApp.Create(new AppOptions()
             {
-                Credential = GoogleCredential.FromFile(GetPathToSettingsFile("firebase.json"))
+                Credential = GoogleCredential.FromFile(firebaseFilePath)
             });
 
             //services.AddHostedService<ConsumeScopedServiceHostedService>();
-            //services.AddHostedService<RabbitBackgroundReceiver>();
-
             //services.AddScoped<IScopedProcessingService, ScopedProcessingService>();
-        }
-
-        private static string GetPathToSettingsFile(string settingsFileName)
-        {
-            var customFile = "Settings" + Path.DirectorySeparatorChar + settingsFileName;
-            if (File.Exists(customFile))
-            {
-                return customFile;
-            }
-            return "Settings" + Path.DirectorySeparatorChar + settingsFileName;
         }
     }
 }

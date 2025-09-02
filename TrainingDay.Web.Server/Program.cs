@@ -3,7 +3,7 @@ using Serilog;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Server.Extensions;
 
-var logger = new LoggerConfiguration()
+Serilog.Core.Logger logger = new LoggerConfiguration()
     .WriteTo.Console(outputTemplate:
     "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
     .WriteTo.File($"Logs/log_.log", rollingInterval: RollingInterval.Day, fileSizeLimitBytes: 1024 * 1024 * 50, outputTemplate:
@@ -12,6 +12,7 @@ var logger = new LoggerConfiguration()
 
 try
 {
+    logger.Information($"Application starting");
     var builder = WebApplication.CreateBuilder(args);
     builder.Logging.ClearProviders();
     builder.Logging.AddSerilog(logger);
@@ -20,7 +21,7 @@ try
     builder.Services.AddDbContext<TrainingDayContext>(options => options.UseMySQL(conString));
 
     builder.Services.AddControllers();
-    builder.Services.InstallServices(builder.Configuration);
+    builder.Services.InstallServices(builder.Configuration, logger);
 
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
@@ -54,6 +55,7 @@ try
     }
 
     app.Run();
+    logger.Information($"Application started");
 }
 catch (Exception exception)
 {
