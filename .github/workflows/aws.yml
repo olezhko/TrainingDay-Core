@@ -6,11 +6,8 @@ on:
   workflow_dispatch:
   
 env:
-  AWS_REGION: eu-central-1
-  AWS_ACCESS_KEY_ID: ${{secrets.DEV_AWS_ACCESS_KEY_ID}}
-  AWS_SECRET_ACCESS_KEY: ${{secrets.DEV_SECRET_ACCESS_KEY}}
   GUTHUB_COMMIT_HASH: ${{github.sha}}
-  EC2_HOST: ec2-18-156-14-13.eu-central-1.compute.amazonaws.com
+  EC2_HOST: ec2-100-29-152-98.compute-1.amazonaws.com
   EC2_USERNAME: ubuntu
   EC2_PRIVATE_KEY: ${{secrets.EC2_PRIVATE_KEY}}
 
