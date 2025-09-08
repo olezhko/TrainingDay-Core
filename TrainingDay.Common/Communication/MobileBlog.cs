@@ -1,11 +1,5 @@
 ﻿namespace TrainingDay.Common.Communication;
 
-public class BlogsResponse
-{
-	public IReadOnlyCollection<BlogResponse> Items { get; set; }
-	public int Page { get; set; }
-}
-
 public class BlogResponse
 {
 	public string Guid { get; set; }

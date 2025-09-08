@@ -1,6 +1,6 @@
 ﻿[
   {
-    "title": "Your fitness level",
+    "title": "Your level:",
     "number": 1,
     "isMultiple": false,
     "answers": [
@@ -10,7 +10,7 @@
     ]
   },
   {
-    "title": "What are your fitness goals?",
+    "title": "Workout goals:",
     "number": 2,
     "isMultiple": true,
     "answers": [
@@ -22,7 +22,7 @@
     ]
   },
   {
-    "title": "What equipment do you have?",
+    "title": "Equipment:",
     "number": 3,
     "isMultiple": true,
     "answers": [
@@ -32,11 +32,11 @@
       "Machines",
       "Bench",
       "Yoga mat",
-      "Bodyweight only"
+      "Bodyweight"
     ]
   },
   {
-    "title": "What types of exercises interest you the most?",
+    "title": "Types of exercises:",
     "number": 4,
     "isMultiple": true,
     "answers": [
@@ -48,7 +48,7 @@
     ]
   },
   {
-    "title": "What part of your body do you want to work out today?",
+    "title": "Muscles:",
     "number": 5,
     "isMultiple": true,
     "answers": [
@@ -61,7 +61,7 @@
     ]
   },
   {
-    "title": "How much time are you willing to dedicate to workouts?",
+    "title": "Duration:",
     "number": 6,
     "isMultiple": false,
     "answers": [
