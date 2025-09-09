@@ -43,12 +43,6 @@ body {
   color: red;
 }
 
-@font-face {
-  font-family: 'Inter';
-  src: url('./assets/fonts/Inter/Inter-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
