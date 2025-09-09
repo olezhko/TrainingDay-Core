@@ -50,8 +50,8 @@ try
     using (var scope = app.Services.CreateScope())
     {
         TrainingDayContext db = scope.ServiceProvider.GetRequiredService<TrainingDayContext>();
-        db.Database.Migrate();
-        //ExercisesInitializer.Initialize(db).Wait();
+        await db.Database.MigrateAsync();
+        await ExercisesInitializer.InitializeAsync(db);
     }
 
     app.Run();

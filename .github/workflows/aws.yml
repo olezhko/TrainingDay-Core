@@ -1,4 +1,4 @@
-name: Deploy to Dev env
+﻿name: Deploy to Dev env
 
 on:
   push:
@@ -19,6 +19,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         
+      # 2️ Setup Node for Angular
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # 3️ Install Angular dependencies & build
+      - name: Install Angular dependencies
+        run: npm ci
+
       - name: Set outputs
         id: vars
         run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT

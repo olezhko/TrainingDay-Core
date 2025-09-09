@@ -8,7 +8,7 @@ namespace TrainingDay.Web.Database;
 
 public static class ExercisesInitializer
 {
-    public static async Task Initialize(TrainingDayContext context)
+    public static async Task InitializeAsync(TrainingDayContext context)
     {
         var cultures = await context.Cultures.AsNoTracking().ToListAsync();
         foreach (var culture in cultures)
@@ -26,6 +26,7 @@ public static class ExercisesInitializer
                 }
                 else
                 {
+                    dbExercise.DifficultType = srcExercise.DifficultLevel;
                     dbExercise.Description = JsonConvert.SerializeObject(srcExercise.Description);
                     dbExercise.MusclesString = srcExercise.MusclesString;
                     dbExercise.Name = srcExercise.Name;

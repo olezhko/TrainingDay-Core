@@ -63,7 +63,7 @@
         public string MusclesString { get; set; } // text, by "," enum collection
         public int TagsValue { get; set; }
         public int CodeNum { get; set; }
-        public DifficultTypes DifficultLevel { get; set; }
+        public DifficultTypes DifficultType { get; set; }
     }
 
     public class LastTraining
