@@ -25,9 +25,11 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
+          cache-dependency-path: trainingday.web.client/package-lock.json
 
       # 3️ Install Angular dependencies & build
       - name: Install Angular dependencies
+        working-directory: ./trainingday.web.client
         run: npm ci
 
       - name: Set outputs
