@@ -6,7 +6,7 @@ import { ExerciseEditParams } from 'src/app/data/exercises/exercise-params.model
 import { catchError } from 'rxjs/operators';
 import { BlogPostEditViewModel, BlogPreview } from '../../data/blog/blog-preview.model';
 import { BlogDetails } from '../../data/blog/blog-details.model';
-import { environment } from '../../../environment/environment';
+import { environment } from '../../../environment/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -91,6 +91,8 @@ export class BackendService {
   }
 
   createBlogPost(blogPost: BlogPostEditViewModel): Observable<BlogDetails> {
+    blogPost.id = 0;
+    blogPost.blogId = 0;
     return this.http.post<BlogPostEditViewModel>(this.baseUrl, blogPost);
   }
 

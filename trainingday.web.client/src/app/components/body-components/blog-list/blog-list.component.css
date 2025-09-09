@@ -58,3 +58,7 @@
 #search-input {
     width: 400px;
 }
+
+a {
+  text-decoration: none;
+}

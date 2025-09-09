@@ -1,5 +1,8 @@
 <div class="blog-edit-container">
   <form [formGroup]="blogForm" (ngSubmit)="onSubmit()" class="blog-form">
+
+    <input id="id" hidden />
+    <input id="blogId" hidden />
     <div class="form-group">
       <label for="title">Title</label>
       <input type="text"
@@ -58,6 +61,18 @@
     </div>
 
     <div class="form-group">
+      <label for="cultureId">Culture</label>
+      <input type="text"
+             id="cultureId"
+             formControlName="cultureId"
+             class="form-control"
+             [value]="blogForm.get('cultureId')?.value">
+      <div *ngIf="blogForm.get('cultureId')?.invalid && blogForm.get('cultureId')?.touched" class="error-message">
+        Culture is required
+      </div>
+    </div>
+
+    <div class="form-group">
       <label>Tags</label>
       <div class="tags-container">
         <div class="tag" *ngFor="let tag of blogForm.get('tags')?.value">
@@ -67,7 +82,8 @@
         <input type="text"
                class="tag-input"
                placeholder="Add tags..."
-               (input)="onTagInput($event)">
+               (input)="onTagInput($event)"
+               (keydown)="onTagKeyDown($event)">
       </div>
       <div class="tag-suggestions" *ngIf="filteredTags.length > 0">
         <div class="tag-suggestion" *ngFor="let tag of filteredTags" (click)="addTag(tag)">
@@ -80,7 +96,7 @@
     </div>
 
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary" [disabled]="blogForm.invalid">Save</button>
+      <button type="submit" class="btn btn-primary">Save</button>
       <button type="button" class="btn btn-secondary">Cancel</button>
     </div>
   </form>

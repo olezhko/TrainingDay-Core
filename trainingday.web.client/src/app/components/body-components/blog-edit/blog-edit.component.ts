@@ -98,6 +98,18 @@ export class BlogEditComponent {
     );
   }
 
+  onTagKeyDown(event: KeyboardEvent) {
+    const inputEl = event.target as HTMLInputElement;
+    const input = inputEl.value.trim();
+
+    if (event.key === 'Enter' && input) {
+      event.preventDefault();
+      this.addTag(input); // This will add even if it's a new custom tag
+      inputEl.value = ''; // Clear input
+      this.filteredTags = [];
+    }
+  }
+
   addTag(tag: string): void {
     const currentTags = this.blogForm.value.tags;
     if (!currentTags.includes(tag)) {
@@ -116,13 +128,27 @@ export class BlogEditComponent {
 
   onSubmit(): void {
     if (this.blogForm.valid) {
-      if(this.blogForm.value.id != 0)
-        this.backendService.editBlogPost(this.id, this.blogForm.value).subscribe(data => 
+
+      var blogModel = new BlogPostEditViewModel();
+      blogModel.id = this.blogForm.value["id"];
+      blogModel.title = this.blogForm.value["title"];
+      blogModel.description = this.blogForm.value["description"];
+      blogModel.tags = this.blogForm.value["tags"];
+      blogModel.author = this.blogForm.value["author"];
+      blogModel.date = this.blogForm.value["date"];
+      blogModel.view = this.blogForm.value["view"];
+      blogModel.blogId = this.blogForm.value["blogId"];
+      blogModel.cultureId = this.blogForm.value["cultureId"];
+
+      console.log(blogModel);
+
+      if(this.blogForm.value.id && this.blogForm.value.id != 0)
+        this.backendService.editBlogPost(this.id, blogModel).subscribe(data => 
         {
           console.log(data);
         });
       else
-        this.backendService.createBlogPost(this.blogForm.value).subscribe(data => 
+        this.backendService.createBlogPost(blogModel).subscribe(data => 
         {
           console.log(data);
         });

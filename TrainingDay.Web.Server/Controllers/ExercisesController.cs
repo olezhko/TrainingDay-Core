@@ -185,7 +185,7 @@ namespace TrainingDay.Web.Server.Controllers
                 return BadRequest("Query parameter is required.");
             }
 
-            var response = await aiService.GetExercisesByQuery(query.Query, token);
+            var response = await aiService.GetExercisesByQueryAsync(query.Query, token);
 
             return Ok(response);
         }

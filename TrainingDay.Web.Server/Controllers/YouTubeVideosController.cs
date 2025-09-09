@@ -10,19 +10,11 @@ namespace TrainingDay.Web.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class YouTubeVideosController : ControllerBase
+    public class YouTubeVideosController(TrainingDayContext context, ILogger<YouTubeVideosController> logger,
+        IYoutubeVideoCatalog youtubeVideoCatalog) : ControllerBase
     {
-        private readonly TrainingDayContext _context;
-        private readonly ILogger<YouTubeVideosController> _logger;
-        private readonly IYoutubeVideoCatalog _youtubeVideoCatalog;
-
-        public YouTubeVideosController(TrainingDayContext context, ILogger<YouTubeVideosController> logger,
-            IYoutubeVideoCatalog youtubeVideoCatalog)
-        {
-            _context = context;
-            _logger = logger;
-            _youtubeVideoCatalog = youtubeVideoCatalog;
-        }
+        private readonly TrainingDayContext _context = context;
+        private readonly IYoutubeVideoCatalog _youtubeVideoCatalog = youtubeVideoCatalog;
 
         [HttpGet("{name}")]
         public async Task<ActionResult<IEnumerable<YoutubeVideoItem>>> GetYouTubeVideos([FromRoute] string name)

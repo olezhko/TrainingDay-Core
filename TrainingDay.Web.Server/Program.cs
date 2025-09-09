@@ -51,7 +51,7 @@ try
     {
         TrainingDayContext db = scope.ServiceProvider.GetRequiredService<TrainingDayContext>();
         db.Database.Migrate();
-        ExercisesInitializer.Initialize(db).Wait();
+        //ExercisesInitializer.Initialize(db).Wait();
     }
 
     app.Run();

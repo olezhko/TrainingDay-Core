@@ -6,7 +6,6 @@ using OpenAI.Files;
 using OpenAI.Threads;
 using OpenAI.VectorStores;
 using System.Data;
-using System.Diagnostics;
 using System.Text;
 using TrainingDay.Common.Communication;
 using TrainingDay.Common.Extensions;
@@ -15,7 +14,7 @@ using TrainingDay.Web.Data.OpenAI;
 
 namespace TrainingDay.Web.Services.OpenAI;
 
-public class OpenAIService(IOptions<Data.OpenAI.OpenAISettings> options) : IOpenAIService
+public class OpenAIService(IOptions<OpenAISettings> options) : IOpenAIService
 {
     private readonly OpenAIClient client = new OpenAIClient(options.Value.Key);
     string? vectorStoreId = null;
@@ -24,15 +23,13 @@ public class OpenAIService(IOptions<Data.OpenAI.OpenAISettings> options) : IOpen
     private async Task LoadEmbeddedDbAsync(CancellationToken token)
     {
         var exercises = await ResourceExtension.LoadResource<BaseExercise>("exercises", "en");
-        
+
         await File.WriteAllLinesAsync("exercises.txt", exercises.Select(FormatExercise));
 
-        // 1. Upload to OpenAI (purpose = "assistants")
         var file = await client.FilesEndpoint.UploadFileAsync(
             filePath: "exercises.txt",
             purpose: FilePurpose.Assistants);
 
-        // 2. Create a new vector store that will hold the file
         var list = new List<string>
         {
             file.Id
@@ -45,14 +42,9 @@ public class OpenAIService(IOptions<Data.OpenAI.OpenAISettings> options) : IOpen
     }
 
     static string FormatExercise(BaseExercise e) => $"Name: {e.Name} | " +
-               $"Start: {e.Description.StartPosition} | " +
-               $"Execution: {e.Description.Execution} | " +
-               $"Advice: {e.Description.Advice} | " +
-               $"Muscles: {e.MusclesString} | " +
-               $"Guid: {e.CodeNum} | " +
-               $"Tags: {e.Tags}.";
+               $"Guid: {e.CodeNum}";
 
-    public async Task<IEnumerable<ExerciseQueryResponse>> GetExercisesByQuery(string query, CancellationToken token)
+    public async Task<IEnumerable<ExerciseQueryResponse>> GetExercisesByQueryAsync(string query, CancellationToken token)
     {
         if (vectorStoreId is null)
         {
@@ -106,12 +98,30 @@ public class OpenAIService(IOptions<Data.OpenAI.OpenAISettings> options) : IOpen
 
     private async Task CreateAssistantRequestAsync(CancellationToken token)
     {
-        assistant = await client.AssistantsEndpoint.CreateAssistantAsync(new CreateAssistantRequest(name: "Workout Coach",
-            instructions: "Use for exercises source only Exercise KB Vector Store, no additional sources. " +
-            $"Get exercises that followed these questions and answers. Return json format for result with properties: {nameof(ExerciseQueryResponse.Guid)}, {nameof(ExerciseQueryResponse.CountOfSets)}, {nameof(ExerciseQueryResponse.CountOfRepsOrTime)}, {nameof(ExerciseQueryResponse.WorkingWeight)} (in kilograms, if applicable).",
-            model: "gpt-4o-mini",
-            responseFormat: ChatResponseFormat.Json,
-            tools: new[] { Tool.FileSearch },
-            toolResources: new ToolResources(fileSearch: new FileSearchResources(vectorStoreId), null)), cancellationToken: token);
+        string assistantInstructions =
+$@"You are a fitness assistant.
+
+Your task:
+1. Use the user's answers to generate exercises (at least 20) and related information.
+2. Try to find in the Exercise KB Vector Store this exercises by matching Name or similar.
+3. Order by popularity of exercise and how its better to do exercises.
+4. Return JSON result.
+
+Output format:
+Return json format for result with properties: 
+{nameof(ExerciseQueryResponse.Guid)} (GUID value of exercise from Exercise KB Vector Store), 
+{nameof(ExerciseQueryResponse.CountOfSets)} (numeric value), 
+{nameof(ExerciseQueryResponse.CountOfRepsOrTime)} (numeric value), 
+{nameof(ExerciseQueryResponse.WorkingWeight)} (numeric value in kilograms, offer based on level and difficulty of exercise).";
+
+        assistant = await client.AssistantsEndpoint.CreateAssistantAsync(
+            new CreateAssistantRequest(
+                name: "Workout Coach",
+                instructions: assistantInstructions,
+                model: "gpt-4o-mini",
+                responseFormat: ChatResponseFormat.Json,
+                tools: new[] { Tool.FileSearch },
+                toolResources: new ToolResources(fileSearch: new FileSearchResources(vectorStoreId), null)), 
+            cancellationToken: token);
     }
 }
