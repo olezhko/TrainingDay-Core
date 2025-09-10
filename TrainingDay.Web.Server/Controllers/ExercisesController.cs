@@ -178,7 +178,7 @@ namespace TrainingDay.Web.Server.Controllers
         }
 
         [HttpPost("query")]
-        public async Task<ActionResult<IEnumerable<ExerciseQueryResponse>>> GetExercisesByQuery(ExerciseQueryRequest query, CancellationToken token)
+        public async Task<IActionResult> GetExercisesByQuery(ExerciseQueryRequest query, CancellationToken token)
         {
             if (string.IsNullOrWhiteSpace(query.Query))
             {

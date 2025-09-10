@@ -4,5 +4,7 @@ namespace TrainingDay.Web.Data.OpenAI;
 
 public interface IOpenAIService
 {
-    Task<IEnumerable<ExerciseQueryResponse>> GetExercisesByQueryAsync(string prompt, CancellationToken token);
+    Task<ExercisesAiResponse> GetExercisesByQueryAsync(string prompt, CancellationToken token);
 }
+
+public record ExercisesAiResponse(IEnumerable<ExerciseQueryResponse> exercises);

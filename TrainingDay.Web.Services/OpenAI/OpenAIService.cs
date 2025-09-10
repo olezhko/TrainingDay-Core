@@ -11,6 +11,7 @@ using TrainingDay.Common.Communication;
 using TrainingDay.Common.Extensions;
 using TrainingDay.Common.Models;
 using TrainingDay.Web.Data.OpenAI;
+using OpenAISettings = TrainingDay.Web.Data.OpenAI.OpenAISettings;
 
 namespace TrainingDay.Web.Services.OpenAI;
 
@@ -44,7 +45,7 @@ public class OpenAIService(IOptions<OpenAISettings> options) : IOpenAIService
     static string FormatExercise(BaseExercise e) => $"Name: {e.Name} | " +
                $"Guid: {e.CodeNum}";
 
-    public async Task<IEnumerable<ExerciseQueryResponse>> GetExercisesByQueryAsync(string query, CancellationToken token)
+    public async Task<ExercisesAiResponse> GetExercisesByQueryAsync(string query, CancellationToken token)
     {
         if (vectorStoreId is null)
         {
@@ -72,28 +73,17 @@ public class OpenAIService(IOptions<OpenAISettings> options) : IOpenAIService
         // read the answer
         var messages = await client.ThreadsEndpoint.ListMessagesAsync(thread.Id, cancellationToken: token);
 
-        var result = new List<ExerciseQueryResponse>();
         foreach (var m in messages.Items)
         {
             if (m.Role == Role.Assistant)
             {
                 var lines = m.PrintContent().Split('\n', StringSplitOptions.RemoveEmptyEntries);
-                StringBuilder sb = new StringBuilder();
-                for (int i = 2; i < lines.Length; i++)
-                {
-                    sb.Append(lines[i]);
-                    if (lines[i].Contains(']'))
-                    {
-                        break;
-                    }
-                }
-
-                IEnumerable<ExerciseQueryResponse> response = JsonConvert.DeserializeObject<IEnumerable<ExerciseQueryResponse>>(sb.ToString());
+                var response = JsonConvert.DeserializeObject<ExercisesAiResponse>(lines[0]);
                 return response;
             }
         }
 
-        return result;
+        return new ExercisesAiResponse([]);
     }
 
     private async Task CreateAssistantRequestAsync(CancellationToken token)
@@ -119,9 +109,11 @@ Return json format for result with properties:
                 name: "Workout Coach",
                 instructions: assistantInstructions,
                 model: "gpt-4o-mini",
-                responseFormat: ChatResponseFormat.Json,
+                jsonSchema: GetJsonSchema(),
                 tools: new[] { Tool.FileSearch },
-                toolResources: new ToolResources(fileSearch: new FileSearchResources(vectorStoreId), null)), 
+                toolResources: new ToolResources(fileSearch: new FileSearchResources(vectorStoreId), null)),
             cancellationToken: token);
     }
+
+    private JsonSchema GetJsonSchema() => new JsonSchema("exercise_response", ((JsonSchema)typeof(ExercisesAiResponse)).Schema);
 }
