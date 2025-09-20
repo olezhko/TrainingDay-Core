@@ -4,7 +4,9 @@
     {
         [Description("Без Инвентаря", "No inventory", "No inventory")] CanDoAtHome,
         [Description("На Время", "By Time", "By Time")] ExerciseByTime,
-        [Description("На Расстояние", "By Distance", "By Distance")] ExerciseByDistance,
+
+        [Obsolete("Not Supported")] ExerciseByDistance,
+
         [Description("Подходы/Вес", "Repetitions And Weight", "Repetitions And Weight")] ExerciseByRepsAndWeight,
         [Description("Штанга", "Barbell", "Barbell")] BarbellExist,
         [Description("Гантеля", "Dumbbell", "Dumbbell")] DumbbellExist,

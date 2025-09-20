@@ -17,7 +17,6 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public string TrainingIDsString { get; set; }
-        public bool IsExpanded { get; set; }
     }
 
     public class WeightNote

@@ -1,75 +1,81 @@
 [
   {
     "title": "Уровень физической подготовки:",
+    "instruction": "Your level:",
     "number": 1,
     "isMultiple": false,
     "answers": [
-      "Новичок",
-      "Средний",
-      "Продвинутый"
+      {"answer": "Новичок", "option": "Beginner"},
+      {"answer": "Средний", "option": "Intermediate"},
+      {"answer": "Продвинутый", "option": "Advanced"}
     ]
   },
   {
     "title": "Цели:",
+    "instruction": "Workout goals:",
     "number": 2,
     "isMultiple": true,
     "answers": [
-      "Похудение",
-      "Набор мышечной массы",
-      "Улучшение выносливости",
-      "Повышение силы",
-      "Общая физическая форма"
+      {"answer": "Похудение", "option": "Weight loss"},
+      {"answer": "Набор мышечной массы", "option": "Muscle gain"},
+      {"answer": "Улучшение выносливости", "option": "Endurance improvement"},
+      {"answer": "Повышение силы", "option": "Strength increase"},
+      {"answer": "Общая физическая форма", "option": "Overall fitness"}
     ]
   },
   {
     "title": "Оборудование:",
+    "instruction": "Equipment:",
     "number": 3,
     "isMultiple": true,
     "answers": [
-      "Гантели",
-      "Штанга",
-      "Турник",
-      "Тренажеры",
-      "Скамья",
-      "Коврик для йоги",
-      "Собственный вес"
+      {"answer": "Гантели", "option": "Dumbbells"},
+      {"answer": "Штанга", "option": "Barbell"},
+      {"answer": "Турник", "option": "Pull-up bar"},
+      {"answer": "Тренажеры", "option": "Machines"},
+      {"answer": "Скамья", "option": "Bench"},
+      {"answer": "Коврик для йоги", "option": "Yoga mat"},
+      {"answer": "Собственный вес", "option": "Bodyweight"}
     ]
   },
   {
     "title": "Типы упражнений:",
+    "instruction": "Types of exercises:",
     "number": 4,
     "isMultiple": true,
     "answers": [
-      "Кардио",
-      "Силовые тренировки",
-      "Йога",
-      "Растяжка",
-      "Фитнесс"
+      {"answer": "Кардио", "option": "Cardio"},
+      {"answer": "Силовые упражнени", "option": "Strength"},
+      {"answer": "Йога", "option": "Yoga"},
+      {"answer": "Растяжка", "option": "Stretching"},
+      {"answer": "Фитнесс", "option": "Fitness"}
     ]
   },
   {
     "title": "Мускулы:",
+    "instruction": "Muscles:",
     "number": 5,
     "isMultiple": true,
     "answers": [
-      "Грудь",
-      "Спина",
-      "Плечи",
-      "Руки",
-      "Пресс",
-      "Ноги"
+      {"answer": "Грудь", "option": "Chest"},
+      {"answer": "Спина", "option": "Back"},
+      {"answer": "Плечи", "option": "Shoulders"},
+      {"answer": "Руки", "option": "Arms"},
+      {"answer": "Пресс", "option": "Abdominals"},
+      {"answer": "Ноги", "option": "Legs"}
     ]
   },
   {
     "title": "Примерная длительность тренировки:",
+    "instruction": "Duration:",
     "number": 6,
     "isMultiple": false,
     "answers": [
-      "Около 30 минут",
-      "30-60 минут",
-      "60-90 минут",
-      "около 2 часов",
-      "окло 3 часов"
+      {"answer": "Около 30 минут", "option": "30 minutes"},
+      {"answer": "30-60 минут", "option": "60 minutes"},
+      {"answer": "60-90 минут", "option": "90 minutes"},
+      {"answer": "около 2 часов", "option": "2 hours"},
+      {"answer": "около 3 часов", "option": "3 hours"}
     ]
   }
 ]

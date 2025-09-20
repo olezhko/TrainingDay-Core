@@ -1051,8 +1051,7 @@
       "Advice": "Before starting your run, perform a proper warm-up to prepare your muscles and joints for the activity. This can include light jogging, dynamic stretches, or mobility exercises. Wear appropriate running shoes that provide support and cushioning. The right shoes can enhance comfort and reduce the risk of injuries. Pay attention to any discomfort or pain. If you experience persistent pain, consider adjusting your running routine or consulting with a healthcare professional."
     },
     "MusclesString": "Cardio,Quadriceps,Thighs,Caviar",
-    "Tags": "ExerciseByTime,ExerciseByDistance,DatabaseExercise",
-    "DifficultLevel": 1,
+    "Tags": "ExerciseByTime,DatabaseExercise",
     "CodeNum": 91
   },
   {
@@ -1063,8 +1062,7 @@
       "Advice": "Warm-up: Start with a brief warm-up to prepare your muscles for the exercise. Pedal at a moderate pace for a few minutes before increasing the intensity. Maintain Good Posture: Keep your back straight, and avoid leaning too far forward or backward. This helps prevent strain on your back and neck. Controlled Breathing: Breathe naturally and rhythmically. Inhale and exhale in a controlled manner. If you're doing a high-intensity workout, adjust your breathing to the level of exertion."
     },
     "MusclesString": "Cardio,Quadriceps,Thighs",
-    "Tags": "ExerciseByTime,ExerciseByDistance,DatabaseExercise",
-    "DifficultLevel": 1,
+    "Tags": "ExerciseByTime,DatabaseExercise",
     "CodeNum": 92
   },
   {

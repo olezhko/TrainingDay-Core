@@ -1,75 +1,81 @@
 ﻿[
   {
     "title": "Your level:",
+    "instruction": "Your level:",
     "number": 1,
     "isMultiple": false,
     "answers": [
-      "Beginner",
-      "Intermediate",
-      "Advanced"
+      {"answer": "Beginner", "option": "Beginner"},
+      {"answer": "Intermediate", "option": "Intermediate"},
+      {"answer": "Advanced", "option": "Advanced"}
     ]
   },
   {
     "title": "Workout goals:",
+    "instruction": "Workout goals:",
     "number": 2,
     "isMultiple": true,
     "answers": [
-      "Weight loss",
-      "Muscle gain",
-      "Endurance improvement",
-      "Strength increase",
-      "Overall fitness"
+      {"answer": "Weight loss", "option": "Weight loss"},
+      {"answer": "Muscle gain", "option": "Muscle gain"},
+      {"answer": "Endurance improvement", "option": "Endurance improvement"},
+      {"answer": "Strength increase", "option": "Strength increase"},
+      {"answer": "Overall fitness", "option": "Overall fitness"}
     ]
   },
   {
     "title": "Equipment:",
+    "instruction": "Equipment:",
     "number": 3,
     "isMultiple": true,
     "answers": [
-      "Dumbbells",
-      "Barbell",
-      "Pull-up bar",
-      "Machines",
-      "Bench",
-      "Yoga mat",
-      "Bodyweight"
+      {"answer": "Dumbbells", "option": "Dumbbells"},
+      {"answer": "Barbell", "option": "Barbell"},
+      {"answer": "Pull-up bar", "option": "Pull-up bar"},
+      {"answer": "Machines", "option": "Machines"},
+      {"answer": "Bench", "option": "Bench"},
+      {"answer": "Yoga mat", "option": "Yoga mat"},
+      {"answer": "Bodyweight", "option": "Bodyweight"}
     ]
   },
   {
     "title": "Types of exercises:",
+    "instruction": "Types of exercises:",
     "number": 4,
     "isMultiple": true,
     "answers": [
-      "Cardio",
-      "Strength",
-      "Yoga",
-      "Stretching",
-      "Fitness"
+      {"answer": "Cardio", "option": "Cardio"},
+      {"answer": "Strength", "option": "Strength"},
+      {"answer": "Yoga", "option": "Yoga"},
+      {"answer": "Stretching", "option": "Stretching"},
+      {"answer": "Fitness", "option": "Fitness"}
     ]
   },
   {
     "title": "Muscles:",
+    "instruction": "Muscles:",
     "number": 5,
     "isMultiple": true,
     "answers": [
-      "Chest",
-      "Back",
-      "Shoulders",
-      "Arms",
-      "Abdominals",
-      "Legs"
+      {"answer": "Chest", "option": "Chest"},
+      {"answer": "Back", "option": "Back"},
+      {"answer": "Shoulders", "option": "Shoulders"},
+      {"answer": "Arms", "option": "Arms"},
+      {"answer": "Abdominals", "option": "Abdominals"},
+      {"answer": "Legs", "option": "Legs"}
     ]
   },
   {
     "title": "Duration:",
+    "instruction": "Duration:",
     "number": 6,
     "isMultiple": false,
     "answers": [
-      "Around 30 minutes",
-      "30-60 minutes",
-      "60-90 minutes",
-      "near 2 hours",
-      "near 3 hours"
+      {"answer": "Around 30 minutes", "option": "30 minutes"},
+      {"answer": "30-60 minutes", "option": "60 minutes"},
+      {"answer": "60-90 minutes", "option": "90 minutes"},
+      {"answer": "near 2 hours", "option": "2 hours"},
+      {"answer": "near 3 hours", "option": "3 hours"}
     ]
   }
 ]
