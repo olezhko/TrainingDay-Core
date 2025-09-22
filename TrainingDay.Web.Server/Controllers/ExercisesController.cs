@@ -189,5 +189,18 @@ namespace TrainingDay.Web.Server.Controllers
 
             return Ok(response);
         }
+
+        [HttpPost("query/extended")]
+        public async Task<IActionResult> GetExercisesByQueryExtended(ExerciseQueryRequest query, CancellationToken token)
+        {
+            if (string.IsNullOrWhiteSpace(query.Query))
+            {
+                return BadRequest("Query parameter is required.");
+            }
+
+            var queryResponse = await aiService.GetExercisesByQueryAsync(query.Query, token);
+            var response = await mngExercise.GetExercisesByCodesAsync(queryResponse.Exercises.Select(item => item.Guid));
+            return Ok(response);
+        }
     }
 }

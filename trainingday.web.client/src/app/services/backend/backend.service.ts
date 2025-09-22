@@ -80,7 +80,7 @@ export class BackendService {
 
   getBlogPosts(culture: string, page: number, pageSize: number): Observable<BlogPreview[]> {
     let params = new HttpParams()
-      .set('culture', 1)
+      .set('culture', culture == 'en'? 1 : 2)
       .set('page', page)
       .set('pageSize', pageSize);
     return this.http.get<BlogPreview[]>(`${this.baseUrl}/search`, { params });

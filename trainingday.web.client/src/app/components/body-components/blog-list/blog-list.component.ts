@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BackendService } from '../../../services/backend/backend.service';
 import { BlogPreview } from '../../../data/blog/blog-preview.model';
 import { PageEvent } from '@angular/material/paginator';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-blog-list',
@@ -10,23 +10,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./blog-list.component.css']
 })
 export class BlogListComponent {
+  @Input() culture: string = 'en';
   blogPosts: BlogPreview[] = [];
   page = 1;
   pageSize = 5;
-  culture = 'en';
 
-  constructor(private backendService: BackendService, private router: Router) { }
+  constructor(private backendService: BackendService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    this.setCulture();
     this.loadPosts();
+  }
+
+  setCulture()  {
     const clientCulture = navigator.language || navigator['language'];
-    this.culture = clientCulture.split('-')[0];
+
+    var cultureFromRoute = this.route.snapshot.queryParams['cu'];
+    this.culture = cultureFromRoute? cultureFromRoute : clientCulture.split('-')[0];
   }
 
   loadPosts() {
     this.backendService.getBlogPosts(this.culture, this.page, this.pageSize)
       .subscribe(data => {
-        console.log(data);
         this.blogPosts = data}
       );
   }

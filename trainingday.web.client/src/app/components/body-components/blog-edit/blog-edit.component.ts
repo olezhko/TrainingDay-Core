@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class BlogEditComponent {
   @Input() id: number = 0;
+  isEditMode = false;
 
   blogForm!: FormGroup;
   toolbar: Toolbar = [
@@ -66,7 +67,9 @@ export class BlogEditComponent {
   }
 
   loadBlogDetails(id: number): void {
-    if (id != 0) {
+    this.isEditMode = !!this.id && this.id !== 0;
+
+    if (this.isEditMode) {
       this.backendService.getBlogPost(id)
         .subscribe(data => { 
           this.blogPost = data;
@@ -175,4 +178,10 @@ export class BlogEditComponent {
     this.editorPreview.destroy();
   }
 
+  onDelete(): void {
+    if(this.isEditMode)
+      this.backendService.deleteBlogPost(this.id).subscribe(data => {
+        this.router.navigate(['/blogs'])
+      });
+  }
 }

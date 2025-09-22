@@ -5,6 +5,13 @@ const PROXY_CONFIG = [
     ],
     target: "https://localhost:7081",
     secure: false
+  },
+  {
+    context: [
+      "/api",
+    ],
+    target: "https://www.api.trainingday.space",
+    secure: false
   }
 ]
 

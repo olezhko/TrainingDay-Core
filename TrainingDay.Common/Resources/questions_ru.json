@@ -19,7 +19,6 @@
       {"answer": "Похудение", "option": "Weight loss"},
       {"answer": "Набор мышечной массы", "option": "Muscle gain"},
       {"answer": "Улучшение выносливости", "option": "Endurance improvement"},
-      {"answer": "Повышение силы", "option": "Strength increase"},
       {"answer": "Общая физическая форма", "option": "Overall fitness"}
     ]
   },
@@ -31,7 +30,6 @@
     "answers": [
       {"answer": "Гантели", "option": "Dumbbells"},
       {"answer": "Штанга", "option": "Barbell"},
-      {"answer": "Турник", "option": "Pull-up bar"},
       {"answer": "Тренажеры", "option": "Machines"},
       {"answer": "Скамья", "option": "Bench"},
       {"answer": "Коврик для йоги", "option": "Yoga mat"},
@@ -44,15 +42,26 @@
     "number": 4,
     "isMultiple": true,
     "answers": [
-      {"answer": "Кардио", "option": "Cardio"},
-      {"answer": "Силовые упражнени", "option": "Strength"},
-      {"answer": "Йога", "option": "Yoga"},
-      {"answer": "Растяжка", "option": "Stretching"},
-      {"answer": "Фитнесс", "option": "Fitness"}
+      {
+        "answer": "Суперсеты",
+        "option": "Supersets"
+      },
+      {
+        "answer": "Пирамида (Прямая: вес растёт, повторения уменьшаются)",
+        "option": "Pyramid Direct (weight increases, reps decreases)"
+      },
+      {
+        "answer": "Пирамида (Обратная: вес падает, повторения растут.)",
+        "option": "Pyramid Back (weight decreases, reps increases)"
+      },
+      {
+        "answer": "Лестница (увеличение/уменьшение повторов)",
+        "option": "Ladder (increase/decrease repetitions)"
+      }
     ]
   },
   {
-    "title": "Мускулы:",
+    "title": "Мышцы:",
     "instruction": "Muscles:",
     "number": 5,
     "isMultiple": true,
