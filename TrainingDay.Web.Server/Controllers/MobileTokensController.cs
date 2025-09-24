@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TrainingDay.Common.Communication;
 using TrainingDay.Web.Database;
@@ -13,7 +14,7 @@ namespace TrainingDay.Web.Server.Controllers
     public class MobileTokensController(TrainingDayContext context) : ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> PostMobileToken([FromBody] FirebaseTokenDto firebaseToken, CancellationToken cancellationToken)
+        public async Task<IActionResult> PostMobileTokenAsync([FromBody] FirebaseTokenDto firebaseToken, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
@@ -51,7 +52,7 @@ namespace TrainingDay.Web.Server.Controllers
         }
 
         [HttpPost("action")]
-        public async Task<IActionResult> PostMobileAction([FromBody] MobileActionDto token, CancellationToken cancellationToken)
+        public async Task<IActionResult> PostMobileActionAsync([FromBody] MobileActionDto token, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
@@ -90,7 +91,7 @@ namespace TrainingDay.Web.Server.Controllers
 #endif
 
         [HttpGet]
-        public async Task<IActionResult> GetMobileTokens([FromQuery] GetMobileTokensFilter filter, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetMobileTokensAsync([FromQuery] GetMobileTokensFilter filter, CancellationToken cancellationToken)
         {
             var query = context.MobileTokens
                     .AsNoTracking();
@@ -124,7 +125,7 @@ namespace TrainingDay.Web.Server.Controllers
 #if !DEBUG
         [Authorize(Roles = "admin")]
 #endif
-        public async Task<IActionResult> GetMobileToken([FromRoute] string token, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetMobileTokenAsync([FromRoute] string token, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
@@ -145,7 +146,7 @@ namespace TrainingDay.Web.Server.Controllers
 #if !DEBUG
         [Authorize(Roles = "admin")]
 #endif
-        public async Task<IActionResult> Delete([FromRoute] string token, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteAsync([FromRoute] string token, CancellationToken cancellationToken)
         {
             var mobileToken = await context.MobileTokens.SingleOrDefaultAsync(m => m.Token == token, cancellationToken);
             if (mobileToken == null)
