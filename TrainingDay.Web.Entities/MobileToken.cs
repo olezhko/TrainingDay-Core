@@ -2,13 +2,13 @@
 
 namespace TrainingDay.Web.Entities;
 
-public class MobileToken
+public class MobileToken : AuditableEntity
 {
     [Key]
     public int Id { get; set; }
-    public string Token { get; set; }
-    public string Language { get; set; }
-    public string Zone { get; set; }
+    public required string Token { get; set; }
+    public required string Language { get; set; }
+    public required string Zone { get; set; }
 
     public DateTime LastSend { get; set; } //last enter to application
     public DateTime LastWorkoutDateTime { get; set; } // UTC

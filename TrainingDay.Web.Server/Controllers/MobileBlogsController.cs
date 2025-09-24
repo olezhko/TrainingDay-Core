@@ -8,19 +8,12 @@ namespace TrainingDay.Web.Server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class MobileBlogsController : ControllerBase
+public class MobileBlogsController(TrainingDayContext context) : ControllerBase
 {
-    private readonly TrainingDayContext _context;
-
-    public MobileBlogsController(TrainingDayContext context)
-    {
-        _context = context;
-    }
-
     [HttpGet("blogs")]
     public async Task<IActionResult> GetMobileBlogs([FromQuery] int cultureId, int page, int pageSize, CancellationToken token)
     {
-        IEnumerable<BlogResponse> dataPage = await _context.PostCultures
+        IEnumerable<BlogResponse> dataPage = await context.PostCultures
             .Where(post => post.CultureId == cultureId)
             .Include(item => item.BlogPost)
             .AsNoTracking()
@@ -39,7 +32,7 @@ public class MobileBlogsController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetMobileBlog([FromQuery] int id, CancellationToken token)
     {
-        var blog = await _context.PostCultures
+        var blog = await context.PostCultures
             .Include(item => item.BlogPost)
             .AsNoTracking()
             .FirstOrDefaultAsync(post => post.Id == id, token);

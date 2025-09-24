@@ -10,11 +10,14 @@ public class TrainingDayContext : DbContext
     public DbSet<BlogPostCulture> PostCultures { get; set; }
     public DbSet<Culture> Cultures { get; set; }
 
-
-    public DbSet<WebExercise> Exercises { get; set; }
     public DbSet<SupportRequest> SupportRequests { get; set; }
 
+    public DbSet<WebExercise> Exercises { get; set; }
     public DbSet<ExerciseVideoLink> ExerciseVideoLinks { get; set; }
+
+    public DbSet<MobileToken> MobileTokens { get; set; }
+    public DbSet<MobileUser> MobileUsers { get; set; }
+    public DbSet<UserMobileToken> UserTokens { get; set; }
 
 
     public DbSet<UserTrainingGroup> UserTrainingGroups { get; set; }
@@ -26,16 +29,18 @@ public class TrainingDayContext : DbContext
     public DbSet<UserTrainingExercise> UserTrainingExercises { get; set; }
     public DbSet<UserExercise> UserExercises { get; set; }
 
-
-    public DbSet<MobileToken> MobileTokens { get; set; }
-    public DbSet<UserMobileToken> UserTokens { get; set; }
-    public DbSet<MobileUser> MobileUsers { get; set; }
-
     public TrainingDayContext(DbContextOptions<TrainingDayContext> options)
     : base(options)
     {
 
     }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.AddInterceptors(new AuditSaveChangesInterceptor());
+        base.OnConfiguring(optionsBuilder);
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

@@ -199,7 +199,7 @@ namespace TrainingDay.Web.Server.Controllers
             }
 
             var queryResponse = await aiService.GetExercisesByQueryAsync(query.Query, token);
-            var response = await mngExercise.GetExercisesByCodesAsync(queryResponse.Exercises.Select(item => item.Guid));
+            var response = await mngExercise.GetExercisesByCodesAsync(queryResponse.Exercises.Select(item => item.Guid), token);
             return Ok(response);
         }
     }

@@ -1,4 +1,5 @@
-﻿using TrainingDay.Web.Entities;
+﻿using TrainingDay.Common.Extensions;
+using TrainingDay.Web.Entities;
 
 namespace TrainingDay.Web.Services.Exercises.Models
 {
@@ -21,10 +22,30 @@ namespace TrainingDay.Web.Services.Exercises.Models
                 Code = source.CodeNum,
                 Description = source.Description,
                 ExerciseId = source.Id,
-                Muscles = source.MusclesString.Split(',').Select(x => x.Trim()),
+                Muscles = ParseMuscles(source.MusclesString),
                 Name = source.Name,
-                Tags =
-            }
+                Tags = ParseTags(source.TagsValue),
+            }; 
+        }
+
+        private static IReadOnlyCollection<ExerciseTag> ParseTags(int tagsValue)
+        {
+            return [.. ExerciseExtensions.ConvertTagIntToList(tagsValue)
+                .Select(tag => new ExerciseTag()
+                {
+                    Id = (int)tag,
+                    Name = tag.ToString()!,
+                })];
+        }
+
+        private static IReadOnlyCollection<ExerciseMuscle> ParseMuscles(string musclesString)
+        {
+            return [.. ExerciseExtensions.ConvertMuscleStringToList(musclesString)
+                .Select(muscle => new ExerciseMuscle()
+                {
+                    Id = (int)muscle,
+                    Name = muscle.ToString()!,
+                })];
         }
     }
 }

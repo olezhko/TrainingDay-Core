@@ -10,12 +10,8 @@ namespace TrainingDay.Web.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class YouTubeVideosController(TrainingDayContext context, ILogger<YouTubeVideosController> logger,
-        IYoutubeVideoCatalog youtubeVideoCatalog) : ControllerBase
+    public class YouTubeVideosController(TrainingDayContext context, IYoutubeVideoCatalog videoCatalog) : ControllerBase
     {
-        private readonly TrainingDayContext _context = context;
-        private readonly IYoutubeVideoCatalog _youtubeVideoCatalog = youtubeVideoCatalog;
-
         [HttpGet("{name}")]
         public async Task<ActionResult<IEnumerable<YoutubeVideoItem>>> GetYouTubeVideos([FromRoute] string name)
         {
@@ -27,33 +23,39 @@ namespace TrainingDay.Web.Server.Controllers
                 }
 
                 name = name.Replace('+', ' ');
-                ExerciseVideoLink model = await _context.ExerciseVideoLinks.FirstOrDefaultAsync(m => m.ExerciseName == name);
+                ExerciseVideoLink model = await context.ExerciseVideoLinks.FirstOrDefaultAsync(m => m.ExerciseName == name);
 
                 if (model == null)
                 {
-                    model = new ExerciseVideoLink { ExerciseName = name, UpdatedDateTime = DateTime.UtcNow };
-                    var items = _youtubeVideoCatalog.GetVideoItemsAsync(name).Result;
+                    var items = videoCatalog.GetVideoItemsAsync(name).Result;
                     if (items.Count == 0)
                     {
                         return NoContent();
                     }
-                    model.VideoUrlList = JsonConvert.SerializeObject(items);
-                    _context.ExerciseVideoLinks.Add(model);
-                    await _context.SaveChangesAsync();
+
+                    model = new ExerciseVideoLink
+                    {
+                        ExerciseName = name,
+                        UpdatedDateTime = DateTime.UtcNow,
+                        VideoUrlList = JsonConvert.SerializeObject(items)
+                    };
+
+                    context.ExerciseVideoLinks.Add(model);
+                    await context.SaveChangesAsync();
                     return items;
                 }
 
                 if (DateTime.UtcNow - model.UpdatedDateTime > TimeSpan.FromDays(30))
                 {
-                    var items = _youtubeVideoCatalog.GetVideoItemsAsync(name).Result;
+                    var items = videoCatalog.GetVideoItemsAsync(name).Result;
                     if (items.Count == 0)
                     {
                         return NoContent();
                     }
                     model.VideoUrlList = JsonConvert.SerializeObject(items);
                     model.UpdatedDateTime = DateTime.UtcNow;
-                    _context.Update(model);
-                    await _context.SaveChangesAsync();
+                    context.Update(model);
+                    await context.SaveChangesAsync();
                     return items;
                 }
 

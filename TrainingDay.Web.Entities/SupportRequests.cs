@@ -1,10 +1,10 @@
 ﻿namespace TrainingDay.Web.Entities;
 
-public class SupportRequest
+public sealed class SupportRequest
 {
     public Guid Id { get; set; }
-    public string Message { get; set; }
-    public string Name { get; set; }
-    public string Email { get; set; }
+    public required string Message { get; set; }
+    public required string Name { get; set; }
+    public required string Email { get; set; }
     public DateTime Created { get; set; }
 }

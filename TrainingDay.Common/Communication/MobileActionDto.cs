@@ -7,9 +7,9 @@ public enum MobileActions
     Weight,
 }
 
-public class MobileAction
+public class MobileActionDto
 {
-    public string Token { get; set; }
+    public required string Token { get; set; }
     public MobileActions Action { get; set; }
-    public string Data { get; set; }
+    public string? Data { get; set; }
 }

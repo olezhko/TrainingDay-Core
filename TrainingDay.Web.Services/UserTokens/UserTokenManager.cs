@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using TrainingDay.Common.Communication;
 using TrainingDay.Web.Data.UserToken;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Entities;
@@ -34,9 +35,6 @@ public class UserTokenManager(TrainingDayContext context, ILogger<UserTokenManag
 
     public async Task RemoveNotExistToken(MobileToken token)
     {
-        //IQueryable<UserAlarm> alarms = context.UserAlarm.Include(item => item.User).Where(item => item.TokenId == token.Id);
-        //context.UserAlarm.RemoveRange(alarms);
-        logger.LogInformation($"Remove Alarms");
         UserMobileToken userToken = await context.UserTokens.FirstOrDefaultAsync(item => item.TokenId == token.Id);
         if (userToken != null)
         {
@@ -55,5 +53,39 @@ public class UserTokenManager(TrainingDayContext context, ILogger<UserTokenManag
         logger.LogInformation($"Remove MobileToken {token.Token} {token.Id}");
 
         await context.SaveChangesAsync();
+    }
+
+    public async Task ConnectTokenUser(MobileUserToken repo, CancellationToken token)
+    {
+        var mobileToken = await context.MobileTokens.FirstOrDefaultAsync(a => a.Token == repo.Token);
+        if (mobileToken is null)
+        {
+            throw new KeyNotFoundException($"Token not found: {repo.Token}");
+        }
+
+        var user = await context.MobileUsers.FirstOrDefaultAsync(a => a.Id == repo.UserId);
+        if (user is null)
+        {
+            throw new KeyNotFoundException($"User not found: {repo.UserId}");
+        }
+
+        var userExist = context.UserTokens.FirstOrDefault(item => item.UserId == user.Id);
+        if (userExist is null)
+        {
+            var newUserToken = new UserMobileToken()
+            {
+                TokenId = mobileToken.Id,
+                UserId = user.Id,
+            };
+
+            context.UserTokens.Add(newUserToken);
+        }
+        else
+        {
+            userExist.TokenId = mobileToken.Id;
+            context.Update(userExist);
+        }
+
+        await context.SaveChangesAsync(token);
     }
 }

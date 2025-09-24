@@ -1,75 +1,64 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using TrainingDay.Common.Communication;
-using TrainingDay.Common.Models;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Entities;
-using TrainingDay.Web.Entities.MobileItems;
+using TrainingDay.Web.Server.Models.MobileTokens;
+using TrainingDay.Web.Services.Extensions;
 
 namespace TrainingDay.Web.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MobileTokensController : ControllerBase
+    public class MobileTokensController(TrainingDayContext context) : ControllerBase
     {
-        private readonly TrainingDayContext _context;
-        private readonly ILogger<MobileTokensController> _logger;
-
-        public MobileTokensController(TrainingDayContext context, ILogger<MobileTokensController> logger)
-        {
-            _context = context;
-            _logger = logger;
-        }
-
         [HttpPost]
-        public async Task<IActionResult> PostMobileToken([FromBody] FirebaseToken mobileTokenConnection)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
-                var token = _context.MobileTokens.FirstOrDefault(item => item.Token == mobileTokenConnection.Token);
-                if (token != null)
-                {
-                    token.Language = mobileTokenConnection.Language;
-                    token.Zone = mobileTokenConnection.Zone;
-                    token.LastSend = DateTime.Now;
-                    _context.Update(token);
-                    await _context.SaveChangesAsync();
-                    return Ok();
-                }
-
-                MobileToken newItem = new MobileToken();
-                newItem.Token = mobileTokenConnection.Token;
-                newItem.Zone = mobileTokenConnection.Zone;
-                newItem.Language = mobileTokenConnection.Language;
-                newItem.LastSend = DateTime.Now;
-
-                _context.MobileTokens.Add(newItem);
-                await _context.SaveChangesAsync();
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "PostMobileToken error");
-                return BadRequest();
-            }
-        }
-
-        [HttpPost("mobile-action")]
-        public async Task<IActionResult> PostMobileAction([FromBody] MobileAction token)
+        public async Task<IActionResult> PostMobileToken([FromBody] FirebaseTokenDto firebaseToken, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var mobileToken = await _context.MobileTokens.SingleOrDefaultAsync(m => m.Token == token.Token);
+            if (!DateTimeExtensions.TryParseZone(firebaseToken.Zone, out var zone))
+            {
+                ModelState.AddModelError("Zone", "Invalid zone format. Expected format is ±hh:mm (e.g., +03:00 or -05:30).");
+                return BadRequest(ModelState);
+            }
+
+            var token = context.MobileTokens.FirstOrDefault(item => item.Token == firebaseToken.Token);
+            if (token != null)
+            {
+                token.Language = firebaseToken.Language;
+                token.Zone = firebaseToken.Zone.ToString();
+                token.LastSend = DateTime.Now;
+                context.Update(token);
+                await context.SaveChangesAsync(cancellationToken);
+                return Ok();
+            }
+
+            MobileToken newItem = new()
+            {
+                Token = firebaseToken.Token,
+                Zone = firebaseToken.Zone.ToString(),
+                Language = firebaseToken.Language,
+                LastSend = DateTime.Now
+            };
+
+            context.MobileTokens.Add(newItem);
+            await context.SaveChangesAsync(cancellationToken);
+            return Ok();
+        }
+
+        [HttpPost("action")]
+        public async Task<IActionResult> PostMobileAction([FromBody] MobileActionDto token, CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var mobileToken = await context.MobileTokens.SingleOrDefaultAsync(m => m.Token == token.Token);
             if (mobileToken == null)
             {
                 return NotFound(token);
@@ -89,56 +78,60 @@ namespace TrainingDay.Web.Server.Controllers
                 default:
                     break;
             }
-            
-            _context.Update(mobileToken);
-            await _context.SaveChangesAsync();
 
-            return Ok(mobileToken);
+            context.Update(mobileToken);
+            await context.SaveChangesAsync(cancellationToken);
+
+            return Ok();
         }
 
-        // GET: api/MobileTokens
-        [HttpGet("all")]
+#if !DEBUG
         [Authorize(Roles = "admin")]
-        public IEnumerable<MobileToken> GetMobileTokens()
+#endif
+
+        [HttpGet]
+        public async Task<IActionResult> GetMobileTokens([FromQuery] GetMobileTokensFilter filter, CancellationToken cancellationToken)
         {
-            try
+            var query = context.MobileTokens
+                    .AsNoTracking();
+
+            if (filter.LastActiveDays is not null)
             {
-                var items = _context.MobileTokens.ToList();
-                return items;
+                query = query.Where(item => (DateTime.Now - item.LastSend) < TimeSpan.FromDays(filter.LastActiveDays.Value));
             }
-            catch (Exception e)
+
+            var ret = await query
+                .Select(item => new MobileTokenDto()
+                {
+                    Language = item.Language,
+                    Token = item.Token,
+                    Zone = item.Zone,
+                    LastSend = item.LastSend,
+                    Id = item.Id,
+                    LastBodyControlDateTime = item.LastBodyControlDateTime,
+                    LastWorkoutDateTime = item.LastWorkoutDateTime
+                })
+                .ToListAsync(cancellationToken);
+
+            return Ok(new MobileTokensDto()
             {
-                return new List<MobileToken>();
-            }
+                MobileTokens = ret,
+                TotalCount = ret.Count
+            });
         }
 
-        [HttpGet("all={days}")]
+        [HttpGet("{token}")]
+#if !DEBUG
         [Authorize(Roles = "admin")]
-        public IEnumerable<MobileToken> GetMobileTokens(int days)
-        {
-            try
-            {
-                var items = _context.MobileTokens.ToList().Where(item => (DateTime.Now - item.LastSend) < TimeSpan.FromDays(days)).AsEnumerable();
-                return items.ToList();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return new List<MobileToken>();
-            }
-        }
-
-        // GET: api/MobileTokens/5
-        [HttpGet("{id}")]
-        [Authorize(Roles = "admin")]
-        public async Task<IActionResult> GetMobileToken([FromRoute] int id)
+#endif
+        public async Task<IActionResult> GetMobileToken([FromRoute] string token, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var mobileToken = await _context.MobileTokens.SingleOrDefaultAsync(m => m.Id == id);
+            var mobileToken = await context.MobileTokens.SingleOrDefaultAsync(m => m.Token == token, cancellationToken);
 
             if (mobileToken == null)
             {
@@ -148,211 +141,41 @@ namespace TrainingDay.Web.Server.Controllers
             return Ok(mobileToken);
         }
 
-        [HttpPost("delete/{token}")]
+        [HttpDelete("{token}")]
+#if !DEBUG
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> Delete([FromRoute] string token)
+#endif
+        public async Task<IActionResult> Delete([FromRoute] string token, CancellationToken cancellationToken)
         {
-            var mobileToken = await _context.MobileTokens.SingleOrDefaultAsync(m => m.Token == token);
+            var mobileToken = await context.MobileTokens.SingleOrDefaultAsync(m => m.Token == token, cancellationToken);
             if (mobileToken == null)
             {
                 return NotFound(token);
             }
 
-            _context.MobileTokens.Remove(mobileToken);
-            await _context.SaveChangesAsync();
+            context.MobileTokens.Remove(mobileToken);
+            await context.SaveChangesAsync(cancellationToken);
 
             return Ok(mobileToken);
         }
 
-        private bool MobileTokenExists(int id)
+        [HttpDelete("unused")]
+#if !DEBUG
+        [Authorize(Roles = "admin")]
+#endif
+        public async Task<IActionResult> RemoveUnusedTokensAsync(CancellationToken cancellationToken)
         {
-            return _context.MobileTokens.Any(e => e.Id == id);
-        }
-
-        [HttpPost("del_unused")]
-        public async Task<IActionResult> RemoveUnusedTokens()
-        {
-            foreach (var contextMobileToken in _context.MobileTokens)
+            foreach (var contextMobileToken in context.MobileTokens)
             {
                 if (contextMobileToken.LastSend == new DateTime())
                 {
-                    _context.MobileTokens.Remove(contextMobileToken);
+                    context.MobileTokens.Remove(contextMobileToken);
                     continue;
                 }
             }
 
-            await _context.SaveChangesAsync();
+            await context.SaveChangesAsync(cancellationToken);
             return Ok();
-        }
-
-        private MobileUser GetUserOrCreate(int tokenId)
-        {
-            var userToken = _context.UserTokens.FirstOrDefault(item => item.TokenId == tokenId);
-            if (userToken == null)
-            {
-                var user = new MobileUser();
-                _context.MobileUsers.Add(user);
-                _context.SaveChanges();
-
-                var newUserToken = new UserMobileToken()
-                {
-                    TokenId = tokenId,
-                    UserId = user.Id,
-                };
-
-                _context.UserTokens.Add(newUserToken);
-                _context.SaveChanges();
-                return user;
-            }
-            else
-            {
-                return _context.MobileUsers.First(item => item.Id == userToken.UserId);
-            }
-        }
-
-        [HttpGet("repo_sync")]
-        public async Task<IActionResult> GetUserRepo([FromQuery] string mail, string token)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            var user = await _context.MobileUsers.FirstOrDefaultAsync(a => a.Email == mail);
-            if (user == null)
-            {
-                return NotFound(mail);
-            }
-
-            RepositoryBase data = new RepositoryBase();
-            var userWeights = _context.UserWeightNotes.Where(item => item.UserId == user.Id);
-            var userExercises = _context.UserExercises.Where(item => item.UserId == user.Id);
-            var userTrainingExercises = _context.UserTrainingExercises.Where(item => item.UserId == user.Id);
-            var userTrainings = _context.UserTrainings.Where(item => item.UserId == user.Id);
-            var userSuperSets = _context.UserSuperSets.Where(item => item.UserId == user.Id);
-            var userLastTrainingExercise = _context.UserLastTrainingExercises.Where(item => item.UserId == user.Id);
-            var userLastTraining = _context.UserLastTrainings.Where(item => item.UserId == user.Id);
-            var userTrainingGroups = _context.UserTrainingGroups.Where(item => item.UserId == user.Id);
-
-            data.Exercises = userExercises.Select(item => new Entities.WebExercise()
-            {
-                Id = item.DatabaseId,
-                Description = JsonConvert.SerializeObject(item.Description),
-                Name = item.Name,
-                MusclesString = item.MusclesString,
-                TagsValue = item.TagsValue,
-                CodeNum = item.CodeNum,
-            }).ToList();
-            data.BodyControl = userWeights.Select(item => new WeightNote()
-            {
-                Id = item.DatabaseId,
-                Date = item.Date,
-                Weight = item.Weight,
-                Type = item.Type
-            }).ToList();
-            data.TrainingExercise = userTrainingExercises.Select(item => new TrainingExerciseComm()
-            {
-                TrainingId = item.TrainingId,
-                Id = item.DatabaseId,
-                ExerciseId = item.ExerciseId,
-                SuperSetId = item.SuperSetId,
-                WeightAndRepsString = item.WeightAndRepsString,
-                OrderNumber = item.OrderNumber
-            }).ToList();
-            data.Trainings = userTrainings.Select(item => new Training()
-            {
-                Id = item.DatabaseId,
-                Title = item.Title
-            }).ToList();
-            data.SuperSets = userSuperSets.Select(item => new SuperSet()
-            {
-                Id = item.DatabaseId,
-                TrainingId = item.TrainingId,
-                Count = item.Count
-            }).ToList();
-            data.LastTrainingExercises = userLastTrainingExercise.Select(item => new LastTrainingExercise()
-            {
-                LastTrainingId = item.LastTrainingId,
-                Id = item.DatabaseId,
-                ExerciseName = item.ExerciseName,
-                SuperSetId = item.SuperSetId,
-                WeightAndRepsString = item.WeightAndRepsString,
-                OrderNumber = item.OrderNumber,
-                Description = item.Description,
-                MusclesString = item.MusclesString,
-                TagsValue = item.TagsValue
-            }).ToList();
-            data.LastTrainings = userLastTraining.Select(item => new LastTraining()
-            {
-                Id = item.DatabaseId,
-                TrainingId = item.TrainingId,
-                Title = item.Title,
-                Time = item.Time,
-                ElapsedTime = item.ElapsedTime
-            }).ToList();
-            data.TrainingUnions = userTrainingGroups.Select(item => new TrainingUnion()
-            {
-                Id = item.DatabaseId,
-                Name = item.Name,
-                TrainingIDsString = item.TrainingIDsString,
-                IsExpanded = item.IsExpanded
-            }).ToList();
-            //var dataString = JsonConvert.SerializeObject(data);
-            //System.IO.File.WriteAllText(dataString,);
-            //prepare data
-            //string filename = user.Id + ".zip";
-            //return File(dataString, "application/octet-stream", filename);
-
-            return Ok(data);
-        }
-
-        [HttpPost("token_user")]
-        public async Task<IActionResult> ConnectTokenUser([FromBody] MobileUserToken repo)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest();
-                }
-
-                var token = await _context.MobileTokens.FirstOrDefaultAsync(a => a.Token == repo.Token);
-                if (token == null)
-                {
-                    return NotFound(repo.Token);
-                }
-
-                var user = await _context.MobileUsers.FirstOrDefaultAsync(a => a.Id == repo.UserId);
-                if (user == null)
-                {
-                    return NotFound();
-                }
-
-                var userExist = _context.UserTokens.FirstOrDefault(item => item.UserId == user.Id);
-                if (userExist == null)
-                {
-                    var newUserToken = new UserMobileToken()
-                    {
-                        TokenId = token.Id,
-                        UserId = user.Id,
-                    };
-
-                    _context.UserTokens.Add(newUserToken);
-                }
-                else
-                {
-                    userExist.TokenId = token.Id;
-                    _context.Update(userExist);
-                }
-
-                await _context.SaveChangesAsync();
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return BadRequest(e);
-            }
         }
     }
 }

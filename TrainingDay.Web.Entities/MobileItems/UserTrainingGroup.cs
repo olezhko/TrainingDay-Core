@@ -14,7 +14,6 @@ public class UserTrainingGroup : Common.Models.TrainingUnion, IUserEntity
         DatabaseId = item.Id;
         Name = item.Name;
         TrainingIDsString = item.TrainingIDsString;
-        IsExpanded = item.IsExpanded;
     }
 
     [Key]

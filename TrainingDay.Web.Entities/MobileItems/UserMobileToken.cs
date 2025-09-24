@@ -2,7 +2,7 @@
 
 namespace TrainingDay.Web.Entities.MobileItems;
 
-public class UserMobileToken
+public class UserMobileToken : AuditableEntity
 {
     [Key]
     public int Id { get; set; }

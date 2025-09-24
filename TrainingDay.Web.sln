@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingDay.Web.Database", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingDay.Common", "TrainingDay.Common\TrainingDay.Common.csproj", "{6F1E8FAB-CEF4-4AD4-B9DD-F30E1A683DC2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingDay.Web.Services.Tests", "TrainingDay.Web.Services.Tests\TrainingDay.Web.Services.Tests.csproj", "{B5B50F68-7E1B-4FCD-8A46-7238FFE5C040}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,9 +57,16 @@ Global
 		{6F1E8FAB-CEF4-4AD4-B9DD-F30E1A683DC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F1E8FAB-CEF4-4AD4-B9DD-F30E1A683DC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F1E8FAB-CEF4-4AD4-B9DD-F30E1A683DC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5B50F68-7E1B-4FCD-8A46-7238FFE5C040}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5B50F68-7E1B-4FCD-8A46-7238FFE5C040}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5B50F68-7E1B-4FCD-8A46-7238FFE5C040}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5B50F68-7E1B-4FCD-8A46-7238FFE5C040}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B5B50F68-7E1B-4FCD-8A46-7238FFE5C040} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {30034458-9555-4E57-ACBA-B6BEAF4519A2}

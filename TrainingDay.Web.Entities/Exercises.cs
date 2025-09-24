@@ -20,6 +20,7 @@ namespace TrainingDay.Web.Entities
             CodeNum = baseExercise.CodeNum;
             MusclesString = baseExercise.MusclesString;
             Name = baseExercise.Name;
+            DifficultType = baseExercise.DifficultLevel;
         }
 
         public WebExercise()
