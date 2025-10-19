@@ -1,0 +1,17 @@
+.download-container {
+  text-align: center;
+  padding: 40px;
+  font-family: Arial, sans-serif;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+img {
+  height: 60px;
+  cursor: pointer;
+}

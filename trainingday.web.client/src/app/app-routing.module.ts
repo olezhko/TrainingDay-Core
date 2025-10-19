@@ -11,8 +11,8 @@ import { BlogItemComponent } from './components/body-components/blog-item/blog-i
 import { ExerciseItemComponent } from './components/body-components/exercise-item/exercise-item.component';
 import { ExerciseEditComponent } from './components/body-components/exercise-edit/exercise-edit.component';
 import { BlogEditComponent } from './components/body-components/blog-edit/blog-edit.component';
+import { DownloadPageComponent } from './components/download-page/download-page.component';
 
-// определение маршрутов
 const routes: Routes = [
   { path: "", component: LandingPageComponent },
   { path: "blogs", component: BlogListComponent },
@@ -26,6 +26,7 @@ const routes: Routes = [
   { path: "contact", component: ContactMeComponent },
   { path: "privacy", component: PrivacyComponent },
   { path: "about", component: AboutComponent },
+  { path: "download", component: DownloadPageComponent },
   { path: "**", component: NotFoundComponent }
 ];
 

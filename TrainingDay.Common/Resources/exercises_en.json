@@ -1044,6 +1044,17 @@
     "CodeNum": 89
   },
   {
+    "Name": "Brisk Walking",
+    "Description": {
+      "StartPosition": "Stand naturally with your torso upright and shoulders relaxed. Keep your abs slightly engaged and your head straight, looking forward. Bend your arms at about a 90-degree angle and move them rhythmically with each step. Keep your feet parallel and take medium, comfortable strides.",
+      "Execution": "Start walking at a moderate pace, gradually increasing to a brisk but controlled speed. Push off with the ball of your back foot and smoothly transfer your weight to the front foot. Maintain a steady, rhythmic motion without jerky movements. Sync your breathing with your steps — for example, inhale for 3 steps and exhale for 2. Keep your arms active to help maintain your pace.",
+      "Advice": "Brisk walking is excellent for cardiovascular fitness and overall health. Do a light warm-up before starting. Begin with 15–20 minutes and gradually increase to 40–60 minutes. The optimal pace is one where your breathing quickens but you can still hold a conversation without gasping. For better results, alternate between faster and slower intervals during your walk."
+    },
+    "MusclesString": "Cardio,Quadriceps,Thighs,Caviar",
+    "Tags": "ExerciseByTime,DatabaseExercise",
+    "CodeNum": 90
+  },
+  {
     "Name": "Running",
     "Description": {
       "StartPosition": "Stand Tall: Begin in a relaxed, upright standing position with your head up and your gaze forward. Shoulders Relaxed: Keep your shoulders relaxed and avoid tensing them up. Allow your arms to hang naturally by your sides.",

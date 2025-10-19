@@ -29,6 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { NgxEditorModule } from 'ngx-editor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DownloadPageComponent } from './components/download-page/download-page.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     NotFoundComponent,
     ExercisePreviewComponent,
     ExerciseEditComponent,
+    DownloadPageComponent
   ],
   imports: [
     MatSnackBarModule, NgxEditorModule, BrowserModule, MaterialModule, RouterOutlet, HttpClientModule, AppRoutingComponent, FormsModule, ReactiveFormsModule, NgbModule, StoreModule.forRoot({}, {}), EffectsModule.forRoot([]), StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }), BrowserAnimationsModule
