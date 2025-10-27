@@ -18,7 +18,7 @@ namespace TrainingDay.Web.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(int id, CancellationToken token)
         {
-            var blogPost = await blogService.Get(id, token);
+            var blogPost = await blogService.GetAsync(id, token);
             if (blogPost == null)
             {
                 return NotFound();

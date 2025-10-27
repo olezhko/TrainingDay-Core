@@ -1,4 +1,4 @@
-﻿namespace TrainingDay.Web.Server.Extensions;
+﻿namespace TrainingDay.Web.Services.Extensions;
 
 public static class PagingExtensions
 {

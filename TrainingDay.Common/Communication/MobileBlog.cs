@@ -2,7 +2,7 @@
 
 public class BlogResponse
 {
-	public string Guid { get; set; }
+	public int Guid { get; set; }
 	/// <summary>
 	/// http-content needed to decode
 	/// </summary>

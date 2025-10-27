@@ -1,41 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using TrainingDay.Common.Communication;
-using TrainingDay.Web.Database;
-using TrainingDay.Web.Server.Extensions;
+using TrainingDay.Web.Services.Blogs;
 
 namespace TrainingDay.Web.Server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class MobileBlogsController(TrainingDayContext context) : ControllerBase
+public class MobileBlogsController(IBlogPostsManager blogPostsManager) : ControllerBase
 {
-    [HttpGet("blogs")]
-    public async Task<IActionResult> GetMobileBlogs([FromQuery] int cultureId, int page, int pageSize, CancellationToken token)
+    [HttpGet]
+    public async Task<IActionResult> GetMobileBlogsAsync([FromQuery] int? cultureId, DateTime? createdFilter, CancellationToken token)
     {
-        IEnumerable<BlogResponse> dataPage = await context.PostCultures
-            .Where(post => post.CultureId == cultureId)
-            .Include(item => item.BlogPost)
-            .AsNoTracking()
-            .Page(page, pageSize)
-            .Select(item => new BlogResponse()
-            {
-                Guid = item.Id.ToString(),
-                Title = item.BlogPost.Title,
-                Published = item.BlogPost.Date,
-            })
-            .ToListAsync(token);
-
+        var dataPage = await blogPostsManager.GetMobileBlogsAsync(cultureId, createdFilter, token);
         return Ok(dataPage);
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetMobileBlog([FromQuery] int id, CancellationToken token)
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetMobileBlogAsync(int id, CancellationToken token)
     {
-        var blog = await context.PostCultures
-            .Include(item => item.BlogPost)
-            .AsNoTracking()
-            .FirstOrDefaultAsync(post => post.Id == id, token);
+        var blog = await blogPostsManager.GetAsync(id, token);
 
         if (blog == null)
         {
@@ -44,9 +27,9 @@ public class MobileBlogsController(TrainingDayContext context) : ControllerBase
 
         var result = new BlogResponse()
         {
-            Title = blog.BlogPost.Title,
-            Published = blog.BlogPost.Date,
-            Content = blog.BlogPost.View
+            Title = blog.Title,
+            Published = blog.Date,
+            Content = blog.View
         };
 
         return Ok(result);

@@ -6,6 +6,7 @@ using TrainingDay.Web.Data.BlogPosts;
 using TrainingDay.Web.Data.Blogs;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Entities;
+using TrainingDay.Web.Services.Extensions;
 using TrainingDay.Web.Services.Firebase;
 
 namespace TrainingDay.Web.Services.Blogs
@@ -114,7 +115,7 @@ namespace TrainingDay.Web.Services.Blogs
             return mapper.Map<IEnumerable<BlogPostEditViewModel>>(result);
         }
 
-        public async Task<BlogPostEditViewModel> Get(int id, CancellationToken token)
+        public async Task<BlogPostEditViewModel> GetAsync(int id, CancellationToken token)
         {
             var blogPost = await context.PostCultures
                 .Include(item => item.BlogPost)
@@ -122,6 +123,32 @@ namespace TrainingDay.Web.Services.Blogs
 
             var result = mapper.Map<BlogPostEditViewModel>(blogPost);
             return result;
+        }
+
+        public async Task<IEnumerable<BlogResponse>> GetMobileBlogsAsync(int? cultureId, DateTime? createdFilter, CancellationToken token)
+        {
+            var query = context.PostCultures.Include(item => item.BlogPost).AsNoTracking().AsQueryable();
+            if (createdFilter.HasValue)
+            {
+                query = query.Where(post => post.BlogPost.Date >= createdFilter.Value);
+            }
+
+            if (cultureId.HasValue)
+            {
+                query = query.Where(post => post.CultureId == cultureId.Value);
+            }
+
+            IEnumerable<BlogResponse> dataPage = await query
+                .Select(item => new BlogResponse()
+                {
+                    Guid = item.Id,
+                    Title = item.BlogPost.Title,
+                    Published = item.BlogPost.Date,
+                    Labels = item.BlogPost.TagsString.Split(",", StringSplitOptions.RemoveEmptyEntries).ToList()
+                })
+                .ToListAsync(token);
+
+            return dataPage;
         }
     }
 }
