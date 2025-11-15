@@ -364,3 +364,5 @@ FodyWeavers.xsd
 /TrainingDay.Web.Server/appsettings.Development.json
 /TrainingDay.Web.Server/appsettings.Production.json
 .DS_Store
+/TrainingDay.Web.Server/Settings/firebase.json
+/TrainingDay.Web.Server/exercises.txt

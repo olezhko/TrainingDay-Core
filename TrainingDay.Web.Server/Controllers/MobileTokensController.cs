@@ -5,7 +5,6 @@ using TrainingDay.Common.Communication;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Entities;
 using TrainingDay.Web.Server.Models.MobileTokens;
-using TrainingDay.Web.Services.Extensions;
 
 namespace TrainingDay.Web.Server.Controllers
 {
@@ -21,17 +20,11 @@ namespace TrainingDay.Web.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (!DateTimeExtensions.TryParseZone(firebaseToken.Zone, out var zone))
-            {
-                ModelState.AddModelError("Zone", "Invalid zone format. Expected format is ±hh:mm (e.g., +03:00 or -05:30).");
-                return BadRequest(ModelState);
-            }
-
             var token = context.MobileTokens.FirstOrDefault(item => item.Token == firebaseToken.Token);
             if (token != null)
             {
                 token.Language = firebaseToken.Language;
-                token.Zone = firebaseToken.Zone.ToString();
+                token.Zone = firebaseToken.Zone;
                 token.LastSend = DateTime.Now;
                 context.Update(token);
                 await context.SaveChangesAsync(cancellationToken);
@@ -41,7 +34,7 @@ namespace TrainingDay.Web.Server.Controllers
             MobileToken newItem = new()
             {
                 Token = firebaseToken.Token,
-                Zone = firebaseToken.Zone.ToString(),
+                Zone = firebaseToken.Zone,
                 Language = firebaseToken.Language,
                 LastSend = DateTime.Now
             };
@@ -59,7 +52,7 @@ namespace TrainingDay.Web.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var mobileToken = await context.MobileTokens.SingleOrDefaultAsync(m => m.Token == token.Token);
+            var mobileToken = await context.MobileTokens.SingleOrDefaultAsync(m => m.Token == token.Token, cancellationToken: cancellationToken);
             if (mobileToken == null)
             {
                 return NotFound(token);

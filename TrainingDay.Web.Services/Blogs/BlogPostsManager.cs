@@ -6,7 +6,6 @@ using TrainingDay.Web.Data.BlogPosts;
 using TrainingDay.Web.Data.Blogs;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Entities;
-using TrainingDay.Web.Services.Extensions;
 using TrainingDay.Web.Services.Firebase;
 
 namespace TrainingDay.Web.Services.Blogs

@@ -3,29 +3,24 @@ using Microsoft.Extensions.Hosting;
 
 namespace TrainingDay.Web.Services.Notification;
 
-public class ConsumeScopedServiceHostedService : BackgroundService
+public class ConsumeScopedServiceHostedService(IServiceProvider provider) : BackgroundService
 {
-    private IServiceProvider _provider;
-    public ConsumeScopedServiceHostedService(IServiceProvider provider)
-    {
-        _provider = provider;
-    }
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        await DoWork(stoppingToken);
+        await DoWorkAsync(stoppingToken);
     }
 
-    private async Task DoWork(CancellationToken stoppingToken)
+    private async Task DoWorkAsync(CancellationToken stoppingToken)
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            using (var scope = _provider.CreateScope())
+            using (var scope = provider.CreateScope())
             {
                 var scopedProcessingService = scope.ServiceProvider.GetRequiredService<IScopedProcessingService>();
 
                 await scopedProcessingService.DoWork(stoppingToken);
             }
-            //Add a delay between executions.
+
             await Task.Delay(2000, stoppingToken);
         }
     }

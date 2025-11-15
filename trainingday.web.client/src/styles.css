@@ -54,6 +54,5 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .html-wrapper-description p {
   width: 100%;
-  text-indent: 2em;
   text-align: justify;
 }

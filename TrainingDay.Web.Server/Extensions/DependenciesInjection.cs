@@ -1,5 +1,6 @@
 ﻿using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
+using Microsoft.Extensions.Localization;
 using TrainingDay.Web.Data.Common.Files;
 using TrainingDay.Web.Data.OpenAI;
 using TrainingDay.Web.Data.Repositories;
@@ -8,8 +9,11 @@ using TrainingDay.Web.Services;
 using TrainingDay.Web.Services.Blogs;
 using TrainingDay.Web.Services.Email;
 using TrainingDay.Web.Services.Exercises;
+using TrainingDay.Web.Services.Extensions;
 using TrainingDay.Web.Services.Firebase;
+using TrainingDay.Web.Services.Notification;
 using TrainingDay.Web.Services.OpenAI;
+using TrainingDay.Web.Services.Rabbit;
 using TrainingDay.Web.Services.Repositories;
 using TrainingDay.Web.Services.Support;
 using TrainingDay.Web.Services.UserTokens;
@@ -40,8 +44,9 @@ namespace TrainingDay.Web.Server.Extensions
             services.AddScoped<IBlogPostsManager, BlogPostsManager>();
             services.AddScoped<IFirebaseService, FirebaseService>();
             services.AddScoped<IFileUploadService, FileUploadService>();
+            services.AddScoped<IStringLocalizer, StringLocalizerService>();
             services.AddSingleton<IOpenAIService, OpenAIService>();
-            //services.AddScoped<IMessageProducer, RabbitMQProducer>();
+            services.AddScoped<IMessageProducer, RabbitMQProducer>();
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<ISupportManager, SupportManager>();
@@ -66,13 +71,13 @@ namespace TrainingDay.Web.Server.Extensions
 
             var firebaseFilePath = GetPathToSettingsFile("firebase.json");
 
-            //FirebaseApp.Create(new AppOptions()
-            //{
-            //    Credential = GoogleCredential.FromStream(GetStream(firebaseFilePath))
-            //});
+            FirebaseApp.Create(new AppOptions()
+            {
+                Credential = GoogleCredential.FromStream(GetStream(firebaseFilePath))
+            });
 
-            //services.AddHostedService<ConsumeScopedServiceHostedService>();
-            //services.AddScoped<IScopedProcessingService, ScopedProcessingService>();
+            services.AddHostedService<ConsumeScopedServiceHostedService>();
+            services.AddScoped<IScopedProcessingService, ScopedProcessingService>();
         }
     }
 }

@@ -27,6 +27,7 @@ public class MobileBlogsController(IBlogPostsManager blogPostsManager) : Control
 
         var result = new BlogResponse()
         {
+            Guid = blog.Id,
             Title = blog.Title,
             Published = blog.Date,
             Content = blog.View
