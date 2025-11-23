@@ -1,7 +1,7 @@
 ﻿[
   {
     "title": "Your level:",
-    "instruction": "Your level:",
+    "instruction": "My level: ",
     "number": 1,
     "isMultiple": false,
     "answers": [
@@ -12,20 +12,19 @@
   },
   {
     "title": "Workout goals:",
-    "instruction": "Workout goals:",
+    "instruction": "Workout goals: ",
     "number": 2,
     "isMultiple": true,
     "answers": [
       {"answer": "Weight loss", "option": "Weight loss"},
       {"answer": "Muscle gain", "option": "Muscle gain"},
       {"answer": "Endurance improvement", "option": "Endurance improvement"},
-      {"answer": "Strength increase", "option": "Strength increase"},
-      {"answer": "Overall fitness", "option": "Overall fitness"}
+      {"answer": "Strength increase", "option": "Strength increase"}
     ]
   },
   {
     "title": "Equipment:",
-    "instruction": "Equipment:",
+    "instruction": "In exercises should be equipment: ",
     "number": 3,
     "isMultiple": true,
     "answers": [
@@ -44,11 +43,22 @@
     "number": 4,
     "isMultiple": true,
     "answers": [
-      {"answer": "Cardio", "option": "Cardio"},
-      {"answer": "Strength", "option": "Strength"},
-      {"answer": "Yoga", "option": "Yoga"},
-      {"answer": "Stretching", "option": "Stretching"},
-      {"answer": "Fitness", "option": "Fitness"}
+      {
+        "answer": "Supersets",
+        "option": "Supersets"
+      },
+      {
+        "answer": "Pyramid Direct (weight increases, reps decreases)",
+        "option": "Pyramid Direct (weight increases, reps decreases)"
+      },
+      {
+        "answer": "Pyramid Back (weight decreases, reps increases)",
+        "option": "Pyramid Back (weight decreases, reps increases)"
+      },
+      {
+        "answer": "Ladder (increase/decrease repetitions)",
+        "option": "Ladder (increase/decrease repetitions)"
+      }
     ]
   },
   {

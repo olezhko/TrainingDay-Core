@@ -1,7 +1,7 @@
 [
   {
     "title": "Уровень физической подготовки:",
-    "instruction": "Your level:",
+    "instruction": "My level:",
     "number": 1,
     "isMultiple": false,
     "answers": [
@@ -24,7 +24,7 @@
   },
   {
     "title": "Оборудование:",
-    "instruction": "Equipment:",
+    "instruction": "Be sure that in exercises should be equipment: ",
     "number": 3,
     "isMultiple": true,
     "answers": [
@@ -33,7 +33,7 @@
       {"answer": "Тренажеры", "option": "Machines"},
       {"answer": "Скамья", "option": "Bench"},
       {"answer": "Коврик для йоги", "option": "Yoga mat"},
-      {"answer": "Собственный вес", "option": "Bodyweight"}
+      {"answer": "Собственный вес", "option": "Without any equipment"}
     ]
   },
   {
@@ -62,7 +62,7 @@
   },
   {
     "title": "Мышцы:",
-    "instruction": "Muscles:",
+    "instruction": "Target muscle:",
     "number": 5,
     "isMultiple": true,
     "answers": [

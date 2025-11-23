@@ -11,5 +11,4 @@ public class MobileActionDto
 {
     public required string Token { get; set; }
     public MobileActions Action { get; set; }
-    public string? Data { get; set; }
 }
