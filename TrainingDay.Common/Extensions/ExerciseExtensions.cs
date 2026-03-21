@@ -67,15 +67,17 @@ public static class ExerciseExtensions
             return new List<ExerciseTags>();
         }
 
-        List<ExerciseTags> result = new List<ExerciseTags>();
+        List<ExerciseTags> result = [];
 
         BitArray array = new BitArray(new[] { value });
-        for (int i = 0; i < (int)ExerciseTags.Last; i++)
+
+        var exerciseTags = Enum.GetValues<ExerciseTags>();
+        for (int i = 0; i < exerciseTags.Length; i++)
         {
-            var flagValue = array.Get(i);
+            var flagValue = array.Get((int)exerciseTags[i]);
             if (flagValue)
             {
-                result.Add((ExerciseTags)i);
+                result.Add(exerciseTags[i]);
             }
         }
 

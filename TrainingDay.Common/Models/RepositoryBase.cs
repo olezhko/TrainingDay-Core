@@ -4,7 +4,7 @@
     {
         public IEnumerable<Training> Trainings { get; set; }
         public IEnumerable<Exercise> Exercises { get; set; }
-        public IEnumerable<TrainingExerciseComm> TrainingExercise { get; set; }
+        public IEnumerable<TrainingExercise> TrainingExercise { get; set; }
         public IEnumerable<TrainingUnion> TrainingUnions { get; set; }
         public IEnumerable<SuperSet> SuperSets { get; set; }
         public IEnumerable<LastTraining> LastTrainings { get; set; }
@@ -27,7 +27,7 @@
         public int Type { get; set; }
     }
 
-    public class TrainingExerciseComm
+    public class TrainingExercise
     {
         public int Id { get; set; }
 

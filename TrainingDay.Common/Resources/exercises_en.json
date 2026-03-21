@@ -1113,6 +1113,18 @@
     "CodeNum": 95
   },
   {
+    "Name": "Forward Fold",
+    "Description": {
+      "StartPosition": "Stance: Stand tall with your feet parallel to each other. You can place them together or hip-width apart (the latter is more stable and comfortable for the lower back). Posture: Roll your shoulders back and down, reach the crown of your head toward the ceiling, straightening your spine. Arms: Let your arms hang naturally at your sides or rest them on the front of your thighs. Knees: Keep your legs straight but avoid locking your knees (keep a micro-bend for safety).",
+      "Execution": "Stand straight with your feet hip-width apart (about 10–15 cm). Exhale and slowly hinge forward at the hips, pushing your pelvis back while keeping your back flat and your chest 'open'. Lean down on the exhale and return to the starting position on the inhale. Do not lift your head; it should remain a natural extension of your spine with the neck relaxed. Hold the bottom position for 1–2 seconds.",
+      "Advice": "Don't just reach for the floor with your fingers—aim to bring your abdomen toward your thighs. If your flexibility is currently limited and you feel intense tension behind the knees or discomfort in the lower back, slightly bend your knees. This will relieve excess pressure from the lower back and allow your pelvis to tilt correctly. As your muscles adapt over time, you will be able to perform the exercise with fully straightened legs."
+    },
+    "MusclesString": "LowerBack,Thighs,ErectorSpinae",
+    "Tags": "CanDoAtHome,ExerciseByReps,DatabaseExercise,Flexibility",
+    "DifficultLevel": 1,
+    "CodeNum": 99
+  },
+  {
     "Name": "Vertical traction",
     "Description": {
       "StartPosition": "Sit down on a vertical traction machine and adjust the seat so that the arms slightly bent at the elbows. Grasp the handles with an overhand grip and keep your feet flat on the floor.",

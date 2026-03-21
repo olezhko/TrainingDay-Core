@@ -13,7 +13,7 @@
         [Description("Скамья", "Bench", "Bench")] BenchExist,
         [Description("Базовое", "Default", "Default")] DatabaseExercise,
         [Description("На Повторения", "Repetitions", "Wiederholungen")] ExerciseByReps,
-        Last,
+        [Description("Растяжка", "Flexibility", "Flexibility")] Flexibility,
     }
 
     public enum MusclesEnum
@@ -32,13 +32,12 @@
         [Description("Бицепс", "Biceps", "Bizeps")] Biceps,
         [Description("Предплечье", "Forearm", "Oberarme")] Forearm,
         [Description("Квадрицепс", "Quadriceps", "Quadriceps")] Quadriceps,
-        [Description("Икры", "Caviar", "Caviar")] Caviar,
+        [Description("Икры", "Calves", "Calves")] Caviar,
         [Description("Камболовидная", "Camboloid", "Camboloid")] ShinCamboloid,
         [Description("Передняя голень", "Anterior tibialis", "Anterior tibialis")] ShinAnteriorTibialis,
         [Description("Бедра", "Thighs", "Oberschenkel")] Thighs,
         [Description("Ягодицы", "Glute", "Gesäß")] Buttocks,
         [Description("Кардио", "Cardio", "Cardio")] Cardio,
         [Description("Поясница", "Lower Back", "Kreuz")] LowerBack,
-        [Description("Выберите", "Select", "Auswählen")] None,
     }
 }
