@@ -1113,6 +1113,18 @@
     "CodeNum": 95
   },
   {
+    "Name": "Side plank",
+    "Description": {
+      "StartPosition": "Lie on your side, place your elbow directly under your shoulder, legs straight and stacked one on top of the other.",
+      "Execution": "Lift your hips so your body forms a straight line, engage your core and hold the position.",
+      "Advice": "Don’t let your hips drop, keep your body aligned, avoid leaning forward/backward, keep your neck neutral and breathe steadily."
+    },
+    "MusclesString": "Abdominal,Buttocks",
+    "Tags": "CanDoAtHome,ExerciseByTime,DatabaseExercise,Flexibility",
+    "DifficultLevel": 1,
+    "CodeNum": 98
+  },
+  {
     "Name": "Forward Fold",
     "Description": {
       "StartPosition": "Stance: Stand tall with your feet parallel to each other. You can place them together or hip-width apart (the latter is more stable and comfortable for the lower back). Posture: Roll your shoulders back and down, reach the crown of your head toward the ceiling, straightening your spine. Arms: Let your arms hang naturally at your sides or rest them on the front of your thighs. Knees: Keep your legs straight but avoid locking your knees (keep a micro-bend for safety).",
