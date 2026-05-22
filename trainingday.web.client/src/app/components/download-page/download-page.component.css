@@ -1,17 +1,129 @@
-.download-container {
-  text-align: center;
-  padding: 40px;
-  font-family: Arial, sans-serif;
+.download-page {
+  min-height: 80vh;
 }
 
-.buttons {
+.download-hero {
+  background: linear-gradient(135deg, #111827 0%, #1f2937 60%, #1a1a2e 100%);
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.download-hero-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.download-label {
+  display: inline-block;
+  background-color: rgba(255, 107, 53, 0.15);
+  color: #FF6B35;
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  border-radius: 20px;
+  padding: 0.3rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.download-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.accent {
+  color: #FF6B35;
+}
+
+.download-hero p {
+  font-size: 1.05rem;
+  color: #9ca3af;
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.store-badges {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
-img {
-  height: 60px;
-  cursor: pointer;
+.store-badges img {
+  height: 56px;
+  width: auto;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.store-badges img:hover {
+  transform: translateY(-3px);
+  opacity: 0.9;
+}
+
+.download-features {
+  background-color: #f9fafb;
+  padding: 72px 24px;
+}
+
+.download-features-inner {
+  max-width: 1024px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.dl-feature {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.dl-feature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+}
+
+.dl-feature-icon {
+  width: 56px;
+  height: 56px;
+  background-color: rgba(255, 107, 53, 0.1);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FF6B35;
+  margin: 0 auto 20px;
+}
+
+.dl-feature-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.dl-feature h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.dl-feature p {
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 680px) {
+  .download-features-inner {
+    grid-template-columns: 1fr;
+  }
 }

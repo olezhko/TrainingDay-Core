@@ -1,32 +1,3 @@
-:host {
-    max-width: 1280px;
-    padding: 0rem;
-}
-
-tr:nth-child(even) {
-    background: #F2F2F2;
-}
-
-tr:nth-child(odd) {
-    background: #FFF;
-}
-
-th, td {
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-table {
-    margin: 0 auto;
-}
-
-
 .body-wrapper {
-    padding: 30px;
-    margin-top: 60px;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
+  min-height: calc(100vh - 72px - 280px);
 }

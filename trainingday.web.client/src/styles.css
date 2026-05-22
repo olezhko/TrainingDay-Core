@@ -1,58 +1,195 @@
-/* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
-body {
+@font-face {
   font-family: 'Inter';
-  margin-top: 80px;
-  margin-bottom: 120px;
+  src: url('./assets/fonts/inter/Inter-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/inter/Inter-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/inter/Inter-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/inter/Inter-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/inter/Inter-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
 }
 
-.horizontal-container {
-  display: flex;
-  gap: 10px; /* Adjust the gap between divs as needed */
+:root {
+  --primary: #FF6B35;
+  --primary-dark: #e55a24;
+  --primary-light: rgba(255, 107, 53, 0.1);
+  --dark: #111827;
+  --dark-2: #1f2937;
+  --dark-3: #374151;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --light-bg: #f9fafb;
+  --border: #e5e7eb;
+  --white: #ffffff;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.15);
+  --transition: all 0.25s ease;
 }
 
-.wrap-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: space-around;
+html, body {
+  height: 100%;
 }
 
-.vertical-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px; /* Adjust the gap between divs as needed */
-  align-items: center;
+body {
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+  color: var(--text);
+  background-color: var(--light-bg);
+  margin: 0;
+  padding-top: 72px;
 }
 
-.space {
-  flex: 1;
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: var(--transition);
 }
 
-.w-300 {
-  width: 300px;
+a:hover {
+  color: var(--primary-dark);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  color: var(--text);
 }
 
 .page-title {
-  color: Orange;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+
+.page-section {
+  padding: 48px 0;
+}
+
+.section-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.btn-primary-custom {
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  padding: 0.65rem 1.75rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-block;
+}
+
+.btn-primary-custom:hover {
+  background-color: var(--primary-dark);
+  color: var(--white);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255, 107, 53, 0.35);
+}
+
+.btn-outline-custom {
+  background-color: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 0.6rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-block;
+}
+
+.btn-outline-custom:hover {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.badge-muscle {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+  margin: 0.2rem;
+}
+
+.badge-tag {
+  background-color: var(--dark-2);
+  color: var(--white);
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-block;
+  margin: 0.2rem;
 }
 
 .required:after {
-  content: "*";
-  color: red;
+  content: " *";
+  color: var(--primary);
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
 .html-wrapper-description img {
-  width: 50%;
+  width: 100%;
+  max-width: 600px;
   display: block;
-  margin: 0 auto;
+  margin: 1rem auto;
+  border-radius: var(--radius-sm);
 }
 
 .html-wrapper-description p {
   width: 100%;
   text-align: justify;
+  line-height: 1.8;
+}
+
+/* Legacy layout helpers */
+.horizontal-container {
+  display: flex;
+  gap: 10px;
+}
+
+.wrap-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: flex-start;
+}
+
+.vertical-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.space {
+  flex: 1;
 }

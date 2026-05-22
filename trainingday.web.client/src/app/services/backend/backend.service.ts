@@ -6,7 +6,7 @@ import { ExerciseEditParams } from 'src/app/data/exercises/exercise-params.model
 import { catchError } from 'rxjs/operators';
 import { BlogPostEditViewModel, BlogPreview } from '../../data/blog/blog-preview.model';
 import { BlogDetails } from '../../data/blog/blog-details.model';
-import { environment } from '../../../environment/environment.prod';
+import { environment } from '../../../environment/environment';
 
 @Injectable({
   providedIn: 'root'

@@ -1,3 +1,54 @@
-section {
-    margin: 10px;
+.privacy-header {
+  background-color: #111827;
+  padding: 48px 24px;
+}
+
+.privacy-header-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.privacy-header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #FF6B35;
+  margin-bottom: 6px;
+}
+
+.privacy-body {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+.privacy-body p {
+  font-size: 0.975rem;
+  line-height: 1.8;
+  color: #374151;
+  margin-bottom: 16px;
+}
+
+.privacy-body strong {
+  color: #111827;
+  font-weight: 700;
+}
+
+.privacy-body ul {
+  padding-left: 1.5rem;
+  margin-bottom: 16px;
+}
+
+.privacy-body ul li {
+  font-size: 0.975rem;
+  line-height: 1.75;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.privacy-body a {
+  color: #FF6B35;
+}
+
+.privacy-body a:hover {
+  text-decoration: underline;
 }

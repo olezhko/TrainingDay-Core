@@ -1,29 +1,114 @@
-.footer {
-    position: relative;
-  bottom: 0;
-  width: 100%;
-  background-color: #f1f1f1;
+.td-footer {
+  background-color: #111827;
+  color: #9ca3af;
+  margin-top: 80px;
+}
+
+.td-footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 56px 24px 40px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+}
+
+.td-footer-brand img {
+  height: 36px;
+  width: auto;
+  margin-bottom: 16px;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
+
+.td-footer-brand p {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: #6b7280;
+  max-width: 280px;
+  margin: 0;
+}
+
+.td-footer-heading {
+  color: #f9fafb;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+
+.td-footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.td-footer-col a {
+  color: #6b7280;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.td-footer-col a:hover {
+  color: #FF6B35;
+}
+
+.td-footer-socials {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.td-footer-socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: #1f2937;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.td-footer-socials a:hover {
+  background-color: #FF6B35;
+}
+
+.td-footer-socials img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+}
+
+.td-footer-bottom {
+  border-top: 1px solid #1f2937;
+  padding: 20px 24px;
   text-align: center;
-  padding: 1% 10%
+  font-size: 0.825rem;
+  color: #4b5563;
 }
 
-.column-header {
-  font-size: large;
-  font-weight: bold;
+@media (max-width: 900px) {
+  .td-footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .td-footer-brand {
+    grid-column: 1 / -1;
+  }
 }
 
-img {
-  width: 20px;
-  height: 20px;
-  align-self: center;
-}
+@media (max-width: 540px) {
+  .td-footer-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 
-a {
-  color: black;
-}
-
-@media screen and (max-width: 1000px) {
-  .footer {
-    padding: 20px;
+  .td-footer-brand {
+    grid-column: 1;
   }
 }

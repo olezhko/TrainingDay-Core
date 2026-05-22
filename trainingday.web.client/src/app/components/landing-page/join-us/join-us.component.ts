@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-join-us',
@@ -7,9 +6,5 @@ import { Router } from '@angular/router';
   styleUrls: ['./join-us.component.css']
 })
 export class JoinUsComponent {
-  constructor(private router: Router) { }
-
-  join() {
-    this.router.navigate(['/download']);
-  }
+  heroBg = '../../assets/home-2.jpg';
 }

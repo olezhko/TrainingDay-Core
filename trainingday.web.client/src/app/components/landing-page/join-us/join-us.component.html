@@ -1,12 +1,29 @@
-<section>
-  <div class="vertical-container">
-    <img id="img-join" src="../../assets/home-2.jpg">
-    <div class="vertical-container overlay">
-      <div class="get-fit-div">
-        <h1>Get Fit with TrainingDay</h1>
+<section class="hero">
+  <div class="hero-bg" [style.backgroundImage]="'url(' + heroBg + ')'"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Your Fitness Journey Starts Here</span>
+    <h1 class="hero-title">Get Fit with<br><span class="hero-accent">TrainingDay</span></h1>
+    <p class="hero-subtitle">Achieve your fitness goals with expert advice, personalized workout plans, and effective exercises.</p>
+    <div class="hero-actions">
+      <a href="/download" class="btn-hero-primary">Download App</a>
+      <a href="/exercises" class="btn-hero-outline">Browse Exercises</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="stat-number">100+</span>
+        <span class="stat-label">Exercises</span>
       </div>
-      <span>Achieve your fitness goals with expert advice and effective workouts.</span>
-      <button id="join-button" class="btn btn-primary" (click)="join()">Join</button>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <span class="stat-number">Free</span>
+        <span class="stat-label">To Download</span>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <span class="stat-number">iOS & Android</span>
+        <span class="stat-label">Available On</span>
+      </div>
     </div>
   </div>
 </section>

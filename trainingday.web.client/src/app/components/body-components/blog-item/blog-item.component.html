@@ -1,7 +1,25 @@
-<mat-card *ngIf="blogPost" class="blog-item-card">
-  <mat-card-title>{{ blogPost.title }}</mat-card-title>
-  <mat-card-subtitle>{{ blogPost.author }} | {{ blogPost.date | date }}</mat-card-subtitle>
-  <mat-card-content>
-    <div class="html-wrapper-description" [innerHTML]="blogPost.view"></div>
-  </mat-card-content>
-</mat-card>
+<div class="blog-item-page" *ngIf="blogPost">
+  <div class="blog-item-header">
+    <div class="blog-item-header-inner">
+      <div class="blog-item-meta">
+        <span class="blog-author">{{ blogPost.author }}</span>
+        <span class="blog-dot"></span>
+        <span class="blog-date">{{ blogPost.date | date:'MMMM d, y' }}</span>
+      </div>
+      <h1 class="blog-item-title">{{ blogPost.title }}</h1>
+    </div>
+  </div>
+
+  <div class="blog-item-body">
+    <div class="blog-item-content html-wrapper-description" [innerHTML]="blogPost.view"></div>
+    <a href="/blogs" class="blog-back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Blog
+    </a>
+  </div>
+</div>
+
+<div class="blog-item-loading" *ngIf="!blogPost">
+  <div class="blog-loading-spinner"></div>
+  <p>Loading article...</p>
+</div>

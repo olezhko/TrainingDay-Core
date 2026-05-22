@@ -1,35 +1,38 @@
-<div class="container">
-    <h1 class="page-title">Blogs</h1>
-    <hr>
+<div class="blog-list-page">
+  <div class="blog-list-header">
+    <div class="blog-list-header-inner">
+      <h1 class="page-title">Blog</h1>
+      <p class="page-subtitle">Expert fitness advice, workout tips, and nutrition guides</p>
+    </div>
+  </div>
 
-    <!--<div class="header">
-        <input type="text" placeholder="Search" class="form-control" id="search-input" />
-        <button type="button" class="btn btn-secondary" (click)="createNew()">Create a new</button>
-    </div>-->
+  <div class="blog-list-body">
+    <div class="blog-grid">
+      <article class="blog-card" *ngFor="let post of blogPosts">
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span class="blog-author">{{ post.author }}</span>
+            <span class="blog-dot"></span>
+            <span class="blog-date">{{ post.date | date:'MMM d, y' }}</span>
+          </div>
+          <h2 class="blog-card-title">
+            <a [routerLink]="['/blogs', post.id]">{{ post.title }}</a>
+          </h2>
+          <div class="blog-card-excerpt html-wrapper-description" [innerHTML]="post.description"></div>
+          <a [routerLink]="['/blogs', post.id]" class="blog-read-more">
+            Read article
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+      </article>
+    </div>
 
-    <div class="blog-list-container">
-      <mat-card *ngFor="let post of blogPosts" class="blog-card">
-        <mat-card-header>
-          <mat-card-title-group>
-            <mat-card-title>
-              <a [routerLink]="['/blogs', post.id]">{{ post.title }}</a>
-            </mat-card-title>
-            <mat-card-subtitle>{{ post.author }} | {{ post.date | date }}</mat-card-subtitle>
-          </mat-card-title-group>
-        </mat-card-header>
-
-          <mat-card-content>
-            <div class="html-wrapper-description" [innerHTML]="post.description"></div>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button color="primary" [routerLink]="['/blogs', post.id]">Read More</button>
-          </mat-card-actions>
-      </mat-card>
-
+    <div class="blog-paginator">
       <mat-paginator [length]="100"
-                    [pageSize]="pageSize"
-                    [pageSizeOptions]="[5, 10, 20]"
-                    (page)="onPageChange($event)">
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="[5, 10, 20]"
+                     (page)="onPageChange($event)">
       </mat-paginator>
     </div>
+  </div>
 </div>

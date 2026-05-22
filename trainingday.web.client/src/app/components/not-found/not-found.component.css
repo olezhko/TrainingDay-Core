@@ -1,15 +1,50 @@
+.not-found-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 40px 24px;
+}
+
+.not-found-code {
+  font-size: clamp(5rem, 15vw, 9rem);
+  font-weight: 900;
+  color: #FF6B35;
+  line-height: 1;
+  margin-bottom: 8px;
+  opacity: 0.85;
+}
+
 h1 {
-  font-size: 3em;
-  margin-bottom: 10px;
-  color: #dc3545;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 12px;
 }
 
 p {
-  font-size: 1.2em;
-  margin-bottom: 30px;
+  font-size: 1rem;
+  color: #6b7280;
+  margin-bottom: 32px;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+.btn-home {
+  background-color: #FF6B35;
+  color: #ffffff;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  display: inline-block;
+}
+
+.btn-home:hover {
+  background-color: #e55a24;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(255, 107, 53, 0.35);
 }

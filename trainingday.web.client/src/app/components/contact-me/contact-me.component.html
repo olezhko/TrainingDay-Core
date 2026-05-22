@@ -1,27 +1,61 @@
-<section>
-    <div class="container">
-        <h1 class="page-title">Contact Me</h1>
-        <hr>
-    
-        <div class="form-group mb-2">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" required [(ngModel)]="name">
-        </div>
-    
-        <div class="form-group mb-2">
-            <label for="email">Email</label>
-            <input type="text" class="form-control" id="email" required [(ngModel)]="email">
-        </div>
-    
-        <div class="form-group mb-2">
-            <label for="message">Message</label>
-            <textarea type="text" class="form-control" id="message" required [(ngModel)]="message"></textarea>
-        </div>
-        <div class="form-group mb-2 badge" *ngIf="isShowBadge">
-            <label>Request sent</label>
-        </div>
-    
-        <input type="button" class="btn btn-primary px-4" value="Send" (click)="sendMessage()"/>
-
+<div class="contact-page">
+  <div class="contact-header">
+    <div class="contact-header-inner">
+      <h1 class="page-title">Contact Us</h1>
+      <p class="page-subtitle">Have a question or feedback? We'd love to hear from you.</p>
     </div>
-</section>
+  </div>
+
+  <div class="contact-body">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </div>
+          <div>
+            <strong>Email</strong>
+            <p><a href="mailto:info@trainingday.space">info@trainingday.space</a></p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          </div>
+          <div>
+            <strong>Socials</strong>
+            <p>
+              <a href="https://www.instagram.com/trainingday.app/" target="_blank" rel="noopener">@trainingday.app</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-card">
+        <h2>Send a Message</h2>
+
+        <div class="form-field">
+          <label for="name">Name</label>
+          <input type="text" class="form-input" id="name" placeholder="Your name" required [(ngModel)]="name">
+        </div>
+
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" class="form-input" id="email" placeholder="your@email.com" required [(ngModel)]="email">
+        </div>
+
+        <div class="form-field">
+          <label for="message">Message</label>
+          <textarea class="form-input form-textarea" id="message" placeholder="How can we help you?" required [(ngModel)]="message" rows="5"></textarea>
+        </div>
+
+        <div class="form-success" *ngIf="isShowBadge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          Message sent successfully!
+        </div>
+
+        <button class="btn-submit" (click)="sendMessage()">Send Message</button>
+      </div>
+    </div>
+  </div>
+</div>

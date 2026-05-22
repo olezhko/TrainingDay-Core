@@ -75,7 +75,7 @@ namespace TrainingDay.Web.Server.Controllers
                 Weight = item.Weight,
                 Type = item.Type
             }).ToList();
-            data.TrainingExercise = userTrainingExercises.Select(item => new TrainingExerciseComm()
+            data.TrainingExercise = userTrainingExercises.Select(item => new TrainingExercise()
             {
                 TrainingId = item.TrainingId,
                 Id = item.DatabaseId,

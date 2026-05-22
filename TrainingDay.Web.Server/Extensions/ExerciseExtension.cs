@@ -75,7 +75,8 @@ public static class ExerciseExtension
         List<ExerciseTags> result = new List<ExerciseTags>();
 
         BitArray array = new BitArray(new[] { value });
-        for (int i = 0; i < (int)ExerciseTags.Last; i++)
+        var exerciseTagCollection = Enum.GetValues<ExerciseTags>();
+        for (int i = 0; i < exerciseTagCollection.Length; i++)
         {
             var flagValue = array.Get(i);
             if (flagValue)

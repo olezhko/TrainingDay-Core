@@ -1,9 +1,88 @@
-.card {
-  width: 300px;
-  margin: 15px;
+.ex-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
 }
 
-.card-title {
-  margin-bottom: 10px;
-  font-size: 20px;
+.ex-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.13);
+}
+
+.ex-card:hover .ex-card-overlay {
+  opacity: 1;
+}
+
+.ex-card-image {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+  background-color: #f3f4f6;
+}
+
+.ex-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+  display: block;
+}
+
+.ex-card:hover .ex-card-image img {
+  transform: scale(1.05);
+}
+
+.ex-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(17, 24, 39, 0.75), transparent);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 16px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.ex-card-cta {
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background-color: #FF6B35;
+  padding: 0.4rem 1.2rem;
+  border-radius: 6px;
+}
+
+.ex-card-body {
+  padding: 16px 20px 20px;
+  flex: 1;
+}
+
+.ex-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 10px;
+  line-height: 1.4;
+}
+
+.ex-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ex-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #FF6B35;
+  background-color: rgba(255, 107, 53, 0.1);
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  text-transform: capitalize;
 }

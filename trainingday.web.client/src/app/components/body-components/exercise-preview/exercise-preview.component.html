@@ -1,7 +1,11 @@
-<div class="card">
-  <img src="{{imageSrc}}" alt="Exercise Image">
-  <div class="card-body">
-    <h5 class="card-title">{{exercise.name}}</h5>
-    <button class="btn btn-primary" (click)="showDetails()">Details</button>
+<div class="ex-card" (click)="showDetails()">
+  <div class="ex-card-image">
+    <img [src]="imageSrc" [alt]="exercise.name" />
+    <div class="ex-card-overlay">
+      <span class="ex-card-cta">View Details</span>
+    </div>
+  </div>
+  <div class="ex-card-body">
+    <h3 class="ex-card-title">{{ exercise.name }}</h3>
   </div>
 </div>

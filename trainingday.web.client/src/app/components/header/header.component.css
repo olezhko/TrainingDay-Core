@@ -1,17 +1,116 @@
-.header-padding {
-  padding: 20px 200px;
+.td-navbar {
+  background-color: #111827;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
 }
 
-.nav-title-text {
-  text-decoration: underline;
+.td-navbar-inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
 }
 
-.nav-link {
-    font-size: 20px;
+.td-brand img {
+  height: 40px;
+  width: auto;
+  display: block;
 }
 
-@media screen and (max-width: 1000px) {
-  .header-padding {
-    padding: 20px;
+.td-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.td-nav-link {
+  color: #d1d5db;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.td-nav-link:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.td-nav-download {
+  background-color: #FF6B35;
+  color: #ffffff;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.td-nav-download:hover {
+  background-color: #e55a24;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.td-toggler {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: auto;
+}
+
+.td-toggler-bar {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: #d1d5db;
+  border-radius: 2px;
+  transition: all 0.25s ease;
+}
+
+@media (max-width: 768px) {
+  .td-toggler {
+    display: flex;
+  }
+
+  .td-nav-links {
+    display: none;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background-color: #111827;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px 24px 24px;
+    gap: 4px;
+    border-top: 1px solid #1f2937;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .td-nav-links.open {
+    display: flex;
+  }
+
+  .td-nav-link {
+    padding: 0.65rem 1rem;
+    font-size: 1rem;
+  }
+
+  .td-nav-download {
+    margin-left: 0;
+    text-align: center;
+    margin-top: 8px;
   }
 }

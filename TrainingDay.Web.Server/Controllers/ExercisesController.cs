@@ -23,7 +23,7 @@ namespace TrainingDay.Web.Server.Controllers
             IMapper mapper) : ControllerBase
     {
         [HttpGet("search")]
-        public async Task<IActionResult> GetAll(int? selectedMuscle, string? filterName, string twoLetterCulture)
+        public async Task<IActionResult> GetAllAsync(int? selectedMuscle, string? filterName, string twoLetterCulture)
         {
             var result = context.Exercises
                     .Include(item => item.Culture)
@@ -46,7 +46,7 @@ namespace TrainingDay.Web.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(int? codeNum, string twoLetterCulture)
+        public async Task<IActionResult> DetailsAsync(int? codeNum, string twoLetterCulture)
         {
             var exercise = await context.Exercises.Include(item => item.Culture)
                     .AsNoTracking()
@@ -63,7 +63,7 @@ namespace TrainingDay.Web.Server.Controllers
 
         // POST: ExerciseViewModels/Create
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]ExerciseViewModel model)
+        public async Task<IActionResult> CreateAsync([FromBody]ExerciseViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -77,7 +77,7 @@ namespace TrainingDay.Web.Server.Controllers
         }
 
         [HttpPost("image")]
-        public async Task<IActionResult> SetImage(UploadImageModel model, CancellationToken token)
+        public async Task<IActionResult> SetImageAsync(UploadImageModel model, CancellationToken token)
         {
             if (model.ImageFile != null)
             {
@@ -108,28 +108,30 @@ namespace TrainingDay.Web.Server.Controllers
         }
 
         [HttpGet("editor")]
-        public async Task<IActionResult> GetEditParams(int cultureId)
+        public async Task<IActionResult> GetEditParamsAsync(int cultureId)
         {
             var cu = await context.Cultures.AsNoTracking().FirstOrDefaultAsync(item => item.Id == cultureId);
             var culture = new CultureInfo(cu.Code);
             EditParameters model = new EditParameters();
             model.AllMuscles = new List<SelectListItem>();
-            for (int i = 0; i < (int)MusclesEnum.None; i++)
+            var muscleCollection = Enum.GetValues<MusclesEnum>();
+            for (int i = 0; i < muscleCollection.Length; i++)
             {
                 model.AllMuscles.Add(new SelectListItem
                 {
                     Value = i.ToString(),
-                    Text = $"{ExerciseExtensions.GetEnumDescription((MusclesEnum)i, culture)}"
+                    Text = $"{ExerciseExtensions.GetEnumDescription(muscleCollection[i], culture)}"
                 });
             }
 
+            var exerciseTagCollection = Enum.GetValues<ExerciseTags>();
             model.AllTags = new List<SelectListItem>();
-            for (int i = 0; i < (int)ExerciseTags.Last; i++)
+            for (int i = 0; i < exerciseTagCollection.Length; i++)
             {
                 model.AllTags.Add(new SelectListItem
                 {
                     Value = i.ToString(),
-                    Text = $"{ExerciseExtensions.GetEnumDescription((ExerciseTags)i, culture)}"
+                    Text = $"{ExerciseExtensions.GetEnumDescription(exerciseTagCollection[i], culture)}"
                 });
             }
 
@@ -140,7 +142,7 @@ namespace TrainingDay.Web.Server.Controllers
 
         // PUT: ExerciseViewModels/Edit/5
         [HttpPut]
-        public async Task<IActionResult> Edit(int id, [FromBody] ExerciseViewModel exerciseViewModel)
+        public async Task<IActionResult> EditAsync(int id, [FromBody] ExerciseViewModel exerciseViewModel)
         {
             if (id != exerciseViewModel.Id)
             {
@@ -159,7 +161,7 @@ namespace TrainingDay.Web.Server.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
             if (!ExerciseExists(id))
             {
@@ -178,7 +180,7 @@ namespace TrainingDay.Web.Server.Controllers
         }
 
         [HttpPost("query")]
-        public async Task<IActionResult> GetExercisesByQuery(ExerciseQueryRequest query, CancellationToken token)
+        public async Task<IActionResult> GetExercisesByQueryAsync(ExerciseQueryRequest query, CancellationToken token)
         {
             if (string.IsNullOrWhiteSpace(query.Query))
             {
@@ -191,7 +193,7 @@ namespace TrainingDay.Web.Server.Controllers
         }
 
         [HttpPost("query/extended")]
-        public async Task<IActionResult> GetExercisesByQueryExtended(ExerciseQueryRequest query, CancellationToken token)
+        public async Task<IActionResult> GetExercisesByQueryExtendedAsync(ExerciseQueryRequest query, CancellationToken token)
         {
             if (string.IsNullOrWhiteSpace(query.Query))
             {

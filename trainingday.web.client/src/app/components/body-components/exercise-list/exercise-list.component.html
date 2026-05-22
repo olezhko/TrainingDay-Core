@@ -1,15 +1,20 @@
-<section>
-    <div class="container">
+<div class="exercise-list-page">
+  <div class="exercise-list-header">
+    <div class="exercise-list-header-inner">
+      <div>
         <h1 class="page-title">Exercises</h1>
-        <hr>
-
-        <!-- <div class="header">
-            <input type="text" placeholder="Search" class="form-control" id="search-input" />
-            <button type="button" class="btn btn-secondary" (click)="createNew()">Create a new</button>
-        </div> -->
-
-        <div class="wrap-container">
-            <app-exercise-preview *ngFor="let exercise of exercisePreviews" [exercise]="exercise"></app-exercise-preview>
-        </div>
+        <p class="page-subtitle">Browse our complete exercise library with technique guides and muscle targets</p>
+      </div>
     </div>
-</section>
+  </div>
+
+  <div class="exercise-list-body">
+    <div class="exercise-grid">
+      <app-exercise-preview *ngFor="let exercise of exercisePreviews" [exercise]="exercise"></app-exercise-preview>
+    </div>
+
+    <div *ngIf="exercisePreviews?.length === 0" class="exercise-empty">
+      <p>No exercises found.</p>
+    </div>
+  </div>
+</div>
