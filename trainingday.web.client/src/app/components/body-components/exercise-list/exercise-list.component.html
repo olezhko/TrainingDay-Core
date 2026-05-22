@@ -8,12 +8,75 @@
     </div>
   </div>
 
+  <div class="filter-panel">
+    <div class="filter-panel-inner">
+      <div class="search-row">
+        <div class="search-input-wrap">
+          <mat-icon class="search-icon">search</mat-icon>
+          <input
+            class="search-input"
+            type="text"
+            placeholder="Search exercises..."
+            [value]="filterName"
+            (input)="onSearchInput($any($event.target).value)" />
+        </div>
+
+        <button class="filter-toggle-btn" (click)="filtersExpanded = !filtersExpanded">
+          <mat-icon>{{ filtersExpanded ? 'expand_less' : 'tune' }}</mat-icon>
+          Filters
+          <span *ngIf="activeFilterCount > 0" class="filter-badge">{{ activeFilterCount }}</span>
+        </button>
+
+        <button *ngIf="activeFilterCount > 0" class="clear-btn" (click)="clearFilters()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <div *ngIf="filtersExpanded" class="filter-sections">
+        <div class="filter-section">
+          <span class="filter-label">Muscles</span>
+          <div class="muscle-groups">
+            <div *ngFor="let group of muscleGroups" class="muscle-group">
+              <span class="muscle-group-label">{{ group.label }}</span>
+              <div class="chip-list">
+                <button
+                  *ngFor="let opt of group.options"
+                  class="chip"
+                  [class.chip-active]="opt.selected"
+                  (click)="toggleMuscle(opt)">
+                  {{ opt.label }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-section">
+          <span class="filter-label">Tags</span>
+          <div class="chip-list">
+            <button
+              *ngFor="let opt of tagOptions"
+              class="chip"
+              [class.chip-active]="opt.selected"
+              (click)="toggleTag(opt)">
+              {{ opt.label }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="exercise-list-body">
-    <div class="exercise-grid">
+    <div *ngIf="loading" class="exercise-empty">
+      <p>Loading...</p>
+    </div>
+
+    <div *ngIf="!loading" class="exercise-grid">
       <app-exercise-preview *ngFor="let exercise of exercisePreviews" [exercise]="exercise"></app-exercise-preview>
     </div>
 
-    <div *ngIf="exercisePreviews?.length === 0" class="exercise-empty">
+    <div *ngIf="!loading && exercisePreviews?.length === 0" class="exercise-empty">
       <p>No exercises found.</p>
     </div>
   </div>

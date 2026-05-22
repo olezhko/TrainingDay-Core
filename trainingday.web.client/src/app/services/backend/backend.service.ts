@@ -36,11 +36,17 @@ export class BackendService {
     return this.http.post<any>(environment.baseUrl + '/support/contact-me', data, httpOptions);
   }
 
-  getExercises(selectedMuscle: number | undefined, filterName: string, twoLetterCulture: string): Observable<ExercisePreview[]> {
-    if (selectedMuscle === undefined)
-      return this.http.get<ExercisePreview[]>(`${this.exerciseSearchUrl}?twoLetterCulture=${twoLetterCulture}&filterName=${filterName}`);
-    
-    return this.http.get<ExercisePreview[]>(`${this.exerciseSearchUrl}?twoLetterCulture=${twoLetterCulture}&filterName=${filterName}&selectedMuscle=${selectedMuscle}`);
+  getExercises(
+    selectedMuscles: number[],
+    selectedTags: number[],
+    filterName: string,
+    twoLetterCulture: string
+  ): Observable<ExercisePreview[]> {
+    let params = new HttpParams().set('twoLetterCulture', twoLetterCulture);
+    if (filterName) params = params.set('filterName', filterName);
+    selectedMuscles.forEach(m => params = params.append('selectedMuscle', m));
+    selectedTags.forEach(t => params = params.append('selectedTags', t));
+    return this.http.get<ExercisePreview[]>(this.exerciseSearchUrl, { params });
   }
 
   getExerciseEditParams(twoLetterCulture: string) : Observable<ExerciseEditParams> {

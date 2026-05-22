@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using TrainingDay.Web.Data.Repositories;
+﻿using TrainingDay.Web.Data.Repositories;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Entities;
 

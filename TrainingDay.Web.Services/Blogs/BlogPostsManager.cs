@@ -1,4 +1,3 @@
-﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TrainingDay.Common.Communication;
@@ -7,10 +6,11 @@ using TrainingDay.Web.Data.Blogs;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Entities;
 using TrainingDay.Web.Services.Firebase;
+using TrainingDay.Web.Services.Mapping;
 
 namespace TrainingDay.Web.Services.Blogs
 {
-    public class BlogPostsManager(TrainingDayContext context, IMapper mapper, ILogger<BlogPostsManager> logger, IFirebaseService firebaseService) : IBlogPostsManager
+    public class BlogPostsManager(TrainingDayContext context, ILogger<BlogPostsManager> logger, IFirebaseService firebaseService) : IBlogPostsManager
     {
         public EditorData CreateEditorData()
         {
@@ -37,7 +37,7 @@ namespace TrainingDay.Web.Services.Blogs
 
         public async Task<BlogPost> Create(BlogPostEditViewModel blogPost)
         {
-            var blog = mapper.Map<BlogPostCulture>(blogPost);
+            var blog = blogPost.ToEntity();
             context.Add(blog.BlogPost);
 
             await context.SaveChangesAsync();
@@ -80,7 +80,7 @@ namespace TrainingDay.Web.Services.Blogs
 
         public async Task<BlogPost> Edit(BlogPostEditViewModel blogPost)
         {
-            var blog = mapper.Map<BlogPostCulture>(blogPost);
+            var blog = blogPost.ToEntity();
             context.Update(blog);
             await context.SaveChangesAsync();
 
@@ -111,7 +111,7 @@ namespace TrainingDay.Web.Services.Blogs
                 .Take(pageSize)
                 .ToListAsync(token);
 
-            return mapper.Map<IEnumerable<BlogPostEditViewModel>>(result);
+            return result.Select(item => item.ToViewModel());
         }
 
         public async Task<BlogPostEditViewModel> GetAsync(int id, CancellationToken token)
@@ -120,8 +120,7 @@ namespace TrainingDay.Web.Services.Blogs
                 .Include(item => item.BlogPost)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
-            var result = mapper.Map<BlogPostEditViewModel>(blogPost);
-            return result;
+            return blogPost.ToViewModel();
         }
 
         public async Task<IEnumerable<BlogResponse>> GetMobileBlogsAsync(int? cultureId, DateTime? createdFilter, CancellationToken token)

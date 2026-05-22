@@ -45,3 +45,39 @@ export const MusclesEnumEnglishLabels: Record<MusclesEnum, string> = {
   [MusclesEnum.Cardio]: 'Cardio',
   [MusclesEnum.LowerBack]: 'Lower Back',
 };
+
+export interface MuscleGroup {
+  label: string;
+  muscles: MusclesEnum[];
+}
+
+export const MUSCLE_GROUPS: MuscleGroup[] = [
+  {
+    label: 'Shoulders & Neck',
+    muscles: [MusclesEnum.Neck, MusclesEnum.Trapezium, MusclesEnum.ShouldersFront, MusclesEnum.ShouldersBack, MusclesEnum.ShouldersMiddle],
+  },
+  {
+    label: 'Back',
+    muscles: [MusclesEnum.WidestBack, MusclesEnum.MiddleBack, MusclesEnum.ErectorSpinae, MusclesEnum.LowerBack],
+  },
+  {
+    label: 'Chest',
+    muscles: [MusclesEnum.Chest],
+  },
+  {
+    label: 'Core',
+    muscles: [MusclesEnum.Abdominal],
+  },
+  {
+    label: 'Arms',
+    muscles: [MusclesEnum.Triceps, MusclesEnum.Biceps, MusclesEnum.Forearm],
+  },
+  {
+    label: 'Legs',
+    muscles: [MusclesEnum.Quadriceps, MusclesEnum.Thighs, MusclesEnum.Buttocks, MusclesEnum.Caviar, MusclesEnum.ShinCamboloid, MusclesEnum.ShinAnteriorTibialis],
+  },
+  {
+    label: 'Cardio',
+    muscles: [MusclesEnum.Cardio],
+  },
+];

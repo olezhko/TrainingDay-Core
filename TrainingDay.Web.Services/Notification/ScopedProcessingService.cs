@@ -28,7 +28,7 @@ public class ScopedProcessingService(
     private async Task SendWeightNotificationAsync(DateTime dateTimeNow, CancellationToken stoppingToken)
     {
         var itemsList = await context.MobileTokens.AsNoTracking().ToListAsync(cancellationToken: stoppingToken);
-        var items = itemsList.Where(item => CheckTime(dateTimeNow, item.Zone, TimeSpan.Parse("08:00:00")));
+        var items = itemsList.Where(item => CheckTime(dateTimeNow, ParseOrDefault(item.Zone), TimeSpan.Parse("08:00:00")));
         foreach (var contextMobileToken in items)
         {
             var locale = CultureInfo.GetCultureInfo(contextMobileToken.Language).TwoLetterISOLanguageName;
@@ -67,7 +67,7 @@ public class ScopedProcessingService(
     private async Task SendWorkoutNotificationAsync(DateTime dateTimeNow, CancellationToken stoppingToken)
     {
         var itemsList = await context.MobileTokens.AsNoTracking().ToListAsync(cancellationToken: stoppingToken);
-        var items = itemsList.Where(item => CheckTime(dateTimeNow, item.Zone, TimeSpan.Parse("11:00:00")));
+        var items = itemsList.Where(item => CheckTime(dateTimeNow, ParseOrDefault(item.Zone), TimeSpan.Parse("11:00:00")));
         foreach (var contextMobileToken in items)
         {
             var locale = CultureInfo.GetCultureInfo(contextMobileToken.Language).TwoLetterISOLanguageName;
@@ -103,15 +103,25 @@ public class ScopedProcessingService(
         }
     }
 
+    private static TimeSpan ParseOrDefault(string zone)
+    {
+        if (TimeSpan.TryParse(zone, out var result))
+        {
+            return result;
+        }
+
+        return TimeSpan.Parse("03:00");
+    }
+
     public static void CheckTokenByTime(MobileToken token, DateTime utcNow, out bool isWeightNotifySend, out bool isWorkoutNotifySend)
     {
         isWeightNotifySend = CheckIsTimePeriodPast(utcNow, token.LastBodyControlDateTime, TimeSpan.FromDays(7));
         isWorkoutNotifySend = CheckIsTimePeriodPast(utcNow, token.LastWorkoutDateTime, TimeSpan.FromDays(3));
     }
 
-    public static bool CheckTime(DateTime currentUtcTime, string zone, TimeSpan timeofDay)
+    public static bool CheckTime(DateTime currentUtcTime, TimeSpan zone, TimeSpan timeofDay)
     {
-        var userActualTime = currentUtcTime + TimeSpan.Parse(zone);
+        var userActualTime = currentUtcTime + zone;
         var expectedTime = currentUtcTime.Date + timeofDay;
 
         return userActualTime.TimeOfDay - expectedTime.TimeOfDay <= TimeSpan.FromSeconds(2)

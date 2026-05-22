@@ -36,8 +36,6 @@ namespace TrainingDay.Web.Server.Extensions
             services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
             services.Configure<OpenAISettings>(configuration.GetSection("OpenAI"));
 
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
             services.AddTransient<IYoutubeVideoCatalog, YoutubeVideoCatalog>();
             services.AddScoped<IExerciseManager, ExerciseManager>();
             services.AddScoped<IUserTokenManager, UserTokenManager>();

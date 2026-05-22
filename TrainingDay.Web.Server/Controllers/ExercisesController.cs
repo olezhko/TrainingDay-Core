@@ -1,4 +1,3 @@
-﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +8,7 @@ using TrainingDay.Common.Models;
 using TrainingDay.Web.Data.OpenAI;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Entities;
+using TrainingDay.Web.Server.Mapper;
 using TrainingDay.Web.Server.ViewModels.Exercises;
 using TrainingDay.Web.Services.Exercises;
 
@@ -19,30 +19,40 @@ namespace TrainingDay.Web.Server.Controllers
     public class ExercisesController(TrainingDayContext context,
             IExerciseManager mngExercise,
             IOpenAIService aiService,
-            IWebHostEnvironment environment,
-            IMapper mapper) : ControllerBase
+            IWebHostEnvironment environment) : ControllerBase
     {
         [HttpGet("search")]
-        public async Task<IActionResult> GetAllAsync(int? selectedMuscle, string? filterName, string twoLetterCulture)
+        public async Task<IActionResult> GetAllAsync(
+            [FromQuery] MusclesEnum[] selectedMuscle,
+            [FromQuery] ExerciseTags[] selectedTags,
+            [FromQuery] string? filterName,
+            [FromQuery] string twoLetterCulture,
+            CancellationToken cancellationToken)
         {
-            var result = context.Exercises
-                    .Include(item => item.Culture)
-                    .AsNoTracking()
-                    .Where(item => item.Culture.Code == twoLetterCulture)
-                    .OrderBy(item => item.CodeNum)
-                    .Select(item => new ExerciseViewModel(item));
-
-            if (selectedMuscle != null)
-            {
-                result = result.Where(item => item.Muscles.Contains((MusclesEnum)selectedMuscle));
-            }
+            var query = context.Exercises
+                .Include(item => item.Culture)
+                .AsNoTracking()
+                .Where(item => item.Culture.Code == twoLetterCulture);
 
             if (!string.IsNullOrEmpty(filterName))
             {
-                result = result.Where(item => item.Name.ToLower().Contains(filterName.ToLower()));
+                query = query.Where(item => item.Name.Contains(filterName, StringComparison.CurrentCultureIgnoreCase));
             }
 
-            return Ok(await result.ToListAsync());
+            var entities = await query.OrderBy(item => item.CodeNum).ToListAsync(cancellationToken);
+            IEnumerable<ExerciseViewModel> result = entities.Select(item => new ExerciseViewModel(item));
+
+            if (selectedMuscle != null && selectedMuscle.Length > 0)
+            {
+                result = result.Where(item => selectedMuscle.Any(m => item.Muscles.Contains(m)));
+            }
+
+            if (selectedTags != null && selectedTags.Length > 0)
+            {
+                result = result.Where(item => selectedTags.Any(t => item.Tags.Contains(t)));
+            }
+
+            return Ok(result.ToList());
         }
 
         [HttpGet]
@@ -57,20 +67,19 @@ namespace TrainingDay.Web.Server.Controllers
                 return NotFound();
             }
 
-            var exerciseViewModel = mapper.Map<ExerciseViewModel>(exercise);
-            return Ok(exerciseViewModel);
+            return Ok(exercise.ToViewModel());
         }
 
         // POST: ExerciseViewModels/Create
         [HttpPost]
-        public async Task<IActionResult> CreateAsync([FromBody]ExerciseViewModel model)
+        public async Task<IActionResult> CreateAsync([FromBody] ExerciseViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var exercise = mapper.Map<WebExercise>(model);
+            var exercise = model.ToEntity();
             context.Exercises.Add(exercise);
             await context.SaveChangesAsync();
             return Ok(exercise);
@@ -154,7 +163,7 @@ namespace TrainingDay.Web.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var exercise = mapper.Map<WebExercise>(exerciseViewModel);
+            var exercise = exerciseViewModel.ToEntity();
             context.Update(exercise);
             await context.SaveChangesAsync();
             return Ok(exercise);

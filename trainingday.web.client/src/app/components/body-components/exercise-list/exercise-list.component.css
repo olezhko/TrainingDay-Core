@@ -2,6 +2,203 @@
   min-height: 80vh;
 }
 
+/* Filter panel */
+.filter-panel {
+  background-color: #1f2937;
+  border-bottom: 1px solid #374151;
+  padding: 10px 24px;
+}
+
+.filter-panel-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-input-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 7px 12px 7px 34px;
+  background: #111827;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  color: #f9fafb;
+  font-size: 0.9rem;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  border-color: #FF6B35;
+}
+
+.search-input::placeholder {
+  color: #6b7280;
+}
+
+.filter-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  color: #9ca3af;
+  padding: 5px 10px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.filter-toggle-btn mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+}
+
+.filter-toggle-btn:hover {
+  border-color: #FF6B35;
+  color: #FF6B35;
+}
+
+.clear-btn {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid #4b5563;
+  border-radius: 8px;
+  color: #6b7280;
+  padding: 5px 7px;
+  cursor: pointer;
+}
+
+.clear-btn mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+}
+
+.clear-btn:hover {
+  border-color: #FF6B35;
+  color: #FF6B35;
+}
+
+.filter-badge {
+  background: #FF6B35;
+  color: #fff;
+  border-radius: 999px;
+  padding: 1px 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.filter-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 4px;
+}
+
+.filter-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.filter-label {
+  color: #9ca3af;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-top: 4px;
+  min-width: 52px;
+}
+
+.muscle-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
+.muscle-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.muscle-group-label {
+  color: #6b7280;
+  font-size: 0.72rem;
+  font-weight: 600;
+  min-width: 110px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.chip {
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid #374151;
+  background: transparent;
+  color: #d1d5db;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.chip:hover {
+  border-color: #FF6B35;
+  color: #FF6B35;
+}
+
+.chip-active {
+  background: #FF6B35;
+  border-color: #FF6B35;
+  color: #fff;
+}
+
+.chip-active:hover {
+  background: #e85d2a;
+  color: #fff;
+}
+
 .exercise-list-header {
   background-color: #111827;
   padding: 48px 24px;
