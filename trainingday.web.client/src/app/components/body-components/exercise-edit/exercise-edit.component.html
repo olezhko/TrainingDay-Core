@@ -106,6 +106,13 @@
             <option *ngFor="let tag of tags" [ngValue]="tag">{{ tag.text }}</option>
           </select>
         </div>
+
+        <div class="mb-3">
+          <label for="difficultType" class="form-label required">Difficulty</label>
+          <select class="form-select" id="difficultType" formControlName="difficultType">
+            <option *ngFor="let opt of difficultOptions" [ngValue]="opt.value">{{ opt.text }}</option>
+          </select>
+        </div>
       </div>
     </div>
 

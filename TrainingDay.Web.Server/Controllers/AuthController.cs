@@ -75,6 +75,7 @@ namespace TrainingDay.Web.Server.Controllers
             var result = await userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
+                await userManager.AddToRoleAsync(user, "User");
                 _logger.LogInformation("User created a new account with password.");
                 var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
                 var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
@@ -125,7 +126,8 @@ namespace TrainingDay.Web.Server.Controllers
             if (result.Succeeded)
             {
                 _logger.LogInformation("User logged in.");
-                return Ok();
+                var roles = await userManager.GetRolesAsync(user);
+                return Ok(new { email = user.Email, nick = user.UserName, role = roles.FirstOrDefault() ?? "User" });
             }
 
             if (result.IsLockedOut)
@@ -147,10 +149,13 @@ namespace TrainingDay.Web.Server.Controllers
 
         [HttpGet("enter")]
         [Authorize]
-        public IActionResult Enter()
+        public async Task<IActionResult> Enter()
         {
-            _logger.LogInformation($"Enter {User.Identity!.Name}");
-            return Ok();
+            var user = await userManager.GetUserAsync(User);
+            if (user == null) return Unauthorized();
+            var roles = await userManager.GetRolesAsync(user);
+            _logger.LogInformation($"Enter {user.Email}");
+            return Ok(new { email = user.Email, nick = user.UserName, role = roles.FirstOrDefault() ?? "User" });
         }
 
         [HttpGet("confirm")]

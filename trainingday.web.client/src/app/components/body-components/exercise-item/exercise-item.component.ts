@@ -4,7 +4,8 @@ import { BackendService } from 'src/app/services/backend/backend.service';
 import { ExerciseDetails } from 'src/app/data/exercises/exercise-details.model';
 import { ExerciseTagsEnglishLabels, ExerciseTags } from 'src/app/data/exercises/exercise-tags';
 import { MusclesEnumEnglishLabels, MusclesEnum } from 'src/app/data/exercises/exercise-muscle';
-import { environment } from '../../../../environment/environment'
+import { environment } from '../../../../environment/environment';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-exercise-item',
@@ -16,7 +17,7 @@ export class ExerciseItemComponent implements OnInit {
   exerciseId: number = 0;
   exercise: ExerciseDetails;
   imageSrc: string = ' ';
-  constructor(private backendService: BackendService, private router: Router, private route: ActivatedRoute) {
+  constructor(private backendService: BackendService, private router: Router, private route: ActivatedRoute, public authService: AuthService) {
     this.exercise = new ExerciseDetails;
   }
 
@@ -42,5 +43,23 @@ export class ExerciseItemComponent implements OnInit {
 
   muscleLabel(muscle: string): string {
     return MusclesEnumEnglishLabels[muscle as MusclesEnum] ?? muscle;
+  }
+
+  difficultLabel(value: number): string {
+    return { 1: 'Easy', 2: 'Medium', 3: 'Hard' }[value] ?? 'Unknown';
+  }
+
+  difficultClass(value: number): string {
+    return { 1: 'diff-easy', 2: 'diff-medium', 3: 'diff-hard' }[value] ?? '';
+  }
+
+  edit(): void {
+    this.router.navigate(['/exercise/edit', this.exerciseId]);
+  }
+
+  delete(): void {
+    this.backendService.deleteExercise(this.exerciseId).subscribe({
+      complete: () => this.router.navigate(['/exercises'])
+    });
   }
 }

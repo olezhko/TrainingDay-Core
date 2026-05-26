@@ -6,6 +6,7 @@ import { ExercisePreview } from 'src/app/data/exercises/exercise-preview.model';
 import { ExerciseTags, ExerciseTagsEnglishLabels } from 'src/app/data/exercises/exercise-tags';
 import { MUSCLE_GROUPS, MusclesEnumEnglishLabels, MusclesEnum } from 'src/app/data/exercises/exercise-muscle';
 import { BackendService } from 'src/app/services/backend/backend.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 export interface MuscleOption {
   value: number;
@@ -19,6 +20,12 @@ export interface MuscleGroupSection {
 }
 
 interface TagOption {
+  value: number;
+  label: string;
+  selected: boolean;
+}
+
+interface DifficultyOption {
   value: number;
   label: string;
   selected: boolean;
@@ -50,11 +57,17 @@ export class ExerciseListComponent implements OnInit, OnDestroy {
     selected: false
   }));
 
+  public difficultyOptions: DifficultyOption[] = [
+    { value: 1, label: 'Easy', selected: false },
+    { value: 2, label: 'Medium', selected: false },
+    { value: 3, label: 'Hard', selected: false },
+  ];
+
   private searchSubject = new Subject<string>();
   private destroy$ = new Subject<void>();
   private culture: string;
 
-  constructor(private backendService: BackendService, private router: Router) {
+  constructor(private backendService: BackendService, private router: Router, public authService: AuthService) {
     this.culture = navigator.language.split('-')[0] || 'en';
   }
 
@@ -88,10 +101,16 @@ export class ExerciseListComponent implements OnInit, OnDestroy {
     this.loadExercises();
   }
 
+  toggleDifficulty(option: DifficultyOption): void {
+    option.selected = !option.selected;
+    this.loadExercises();
+  }
+
   clearFilters(): void {
     this.filterName = '';
     this.muscleGroups.forEach(g => g.options.forEach(o => o.selected = false));
     this.tagOptions.forEach(o => o.selected = false);
+    this.difficultyOptions.forEach(o => o.selected = false);
     this.loadExercises();
   }
 
@@ -99,15 +118,17 @@ export class ExerciseListComponent implements OnInit, OnDestroy {
     const muscleCount = this.muscleGroups.reduce((sum, g) => sum + g.options.filter(o => o.selected).length, 0);
     return muscleCount
       + this.tagOptions.filter(o => o.selected).length
+      + this.difficultyOptions.filter(o => o.selected).length
       + (this.filterName ? 1 : 0);
   }
 
   private loadExercises(): void {
     const muscles = this.muscleGroups.flatMap(g => g.options.filter(o => o.selected).map(o => o.value));
     const tags = this.tagOptions.filter(o => o.selected).map(o => o.value);
+    const difficulties = this.difficultyOptions.filter(o => o.selected).map(o => o.value);
 
     this.loading = true;
-    this.backendService.getExercises(muscles, tags, this.filterName, this.culture)
+    this.backendService.getExercises(muscles, tags, difficulties, this.filterName, this.culture)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: exercises => {

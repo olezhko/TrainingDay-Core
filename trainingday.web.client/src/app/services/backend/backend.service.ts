@@ -39,6 +39,7 @@ export class BackendService {
   getExercises(
     selectedMuscles: number[],
     selectedTags: number[],
+    selectedDifficulty: number[],
     filterName: string,
     twoLetterCulture: string
   ): Observable<ExercisePreview[]> {
@@ -46,16 +47,17 @@ export class BackendService {
     if (filterName) params = params.set('filterName', filterName);
     selectedMuscles.forEach(m => params = params.append('selectedMuscle', m));
     selectedTags.forEach(t => params = params.append('selectedTags', t));
+    selectedDifficulty.forEach(d => params = params.append('selectedDifficulty', d));
     return this.http.get<ExercisePreview[]>(this.exerciseSearchUrl, { params });
   }
 
   getExerciseEditParams(twoLetterCulture: string) : Observable<ExerciseEditParams> {
-    return this.http.get<ExerciseEditParams>(`${this.exerciseEditorUrl}?cu=${twoLetterCulture}`);
+    return this.http.get<ExerciseEditParams>(`${this.exerciseEditorUrl}?cu=${twoLetterCulture}`, { withCredentials: true });
   }
 
   editExercise(id: number, exerciseViewModel: any): Observable<any> {
     const url = `${this.exerciseApiUrl}/${id}`;
-    return this.http.put(url, exerciseViewModel)
+    return this.http.put(url, exerciseViewModel, { withCredentials: true })
       .pipe(
         catchError(this.handleError)
       );
@@ -63,7 +65,7 @@ export class BackendService {
 
   deleteExercise(id: number): Observable<any> {
     const url = `${this.exerciseApiUrl}/${id}`;
-    return this.http.delete(url)
+    return this.http.delete(url, { withCredentials: true })
       .pipe(
         catchError(this.handleError)
       );
@@ -78,7 +80,7 @@ export class BackendService {
   }
 
   createExercise(model: any): Observable<any> {
-    return this.http.post(this.exerciseApiUrl, model)
+    return this.http.post(this.exerciseApiUrl, model, { withCredentials: true })
       .pipe(
         catchError(this.handleError)
       );
@@ -99,15 +101,15 @@ export class BackendService {
   createBlogPost(blogPost: BlogPostEditViewModel): Observable<BlogDetails> {
     blogPost.id = 0;
     blogPost.blogId = 0;
-    return this.http.post<BlogPostEditViewModel>(this.baseUrl, blogPost);
+    return this.http.post<BlogPostEditViewModel>(this.baseUrl, blogPost, { withCredentials: true });
   }
 
   editBlogPost(id: number, blogPost: BlogPostEditViewModel): Observable<BlogDetails> {
-    return this.http.put<BlogDetails>(`${this.baseUrl}?id=${id}`, blogPost);
+    return this.http.put<BlogDetails>(`${this.baseUrl}?id=${id}`, blogPost, { withCredentials: true });
   }
 
   deleteBlogPost(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}?id=${id}`);
+    return this.http.delete<void>(`${this.baseUrl}?id=${id}`, { withCredentials: true });
   }
 
   private handleError(error: any): Promise<any> {

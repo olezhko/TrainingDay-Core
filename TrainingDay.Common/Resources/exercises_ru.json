@@ -1052,6 +1052,7 @@
     },
     "MusclesString": "Cardio,Quadriceps,Thighs,Caviar",
     "Tags": "ExerciseByTime,DatabaseExercise",
+    "DifficultLevel": 1,
     "CodeNum": 90
   },
   {
@@ -1063,6 +1064,7 @@
     },
     "MusclesString": "Cardio,Quadriceps,Thighs,Caviar",
     "Tags": "ExerciseByTime,DatabaseExercise",
+    "DifficultLevel": 1,
     "CodeNum": 91
   },
   {
@@ -1074,6 +1076,7 @@
     },
     "MusclesString": "Cardio,Quadriceps,Thighs",
     "Tags": "ExerciseByTime,DatabaseExercise",
+    "DifficultLevel": 1,
     "CodeNum": 92
   },
   {

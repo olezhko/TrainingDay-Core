@@ -37,7 +37,7 @@ export class BlogEditComponent {
     private fb: FormBuilder,
     private sanitizer: DomSanitizer,
     private backendService: BackendService,
-    private router: Router,
+    public router: Router,
     private route: ActivatedRoute, 
     private snackBar: MatSnackBar
   ) {
@@ -130,43 +130,40 @@ export class BlogEditComponent {
   }
 
   onSubmit(): void {
-    if (this.blogForm.valid) {
-
-      var blogModel = new BlogPostEditViewModel();
-      blogModel.id = this.blogForm.value["id"];
-      blogModel.title = this.blogForm.value["title"];
-      blogModel.description = this.blogForm.value["description"];
-      blogModel.tags = this.blogForm.value["tags"];
-      blogModel.author = this.blogForm.value["author"];
-      blogModel.date = this.blogForm.value["date"];
-      blogModel.view = this.blogForm.value["view"];
-      blogModel.blogId = this.blogForm.value["blogId"];
-      blogModel.cultureId = this.blogForm.value["cultureId"];
-
-      console.log(blogModel);
-
-      if(this.blogForm.value.id && this.blogForm.value.id != 0)
-        this.backendService.editBlogPost(this.id, blogModel).subscribe(data => 
-        {
-          console.log(data);
-        });
-      else
-        this.backendService.createBlogPost(blogModel).subscribe(data => 
-        {
-          console.log(data);
-        });
-
-      this.snackBar.open('Blog post saved successfully!', 'Close', {
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-        panelClass: ['success-snackbar']
-      });
-
-      this.router.navigate(['/blogs'])
-    } else {
+    if (!this.blogForm.valid) {
       this.blogForm.markAllAsTouched();
+      return;
     }
+
+    const v = this.blogForm.value;
+    const blogModel = Object.assign(new BlogPostEditViewModel(), {
+      id: v.id, title: v.title, description: v.description,
+      tags: v.tags, author: v.author, date: v.date,
+      view: v.view, blogId: v.blogId, cultureId: v.cultureId,
+    });
+
+    const request$ = this.isEditMode
+      ? this.backendService.editBlogPost(this.id, blogModel)
+      : this.backendService.createBlogPost(blogModel);
+
+    request$.subscribe({
+      next: () => {
+        this.snackBar.open('Blog post saved successfully!', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['success-snackbar']
+        });
+        this.router.navigate(['/blogs']);
+      },
+      error: () => {
+        this.snackBar.open('Failed to save blog post.', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        });
+      }
+    });
   }
 
   getSafeHtml(html: string) {

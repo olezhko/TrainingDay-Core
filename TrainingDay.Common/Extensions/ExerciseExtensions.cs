@@ -30,8 +30,6 @@ public static class ExerciseExtensions
         }
     }
 
-
-
     /// <summary>
     /// Convert from base to value
     /// </summary>

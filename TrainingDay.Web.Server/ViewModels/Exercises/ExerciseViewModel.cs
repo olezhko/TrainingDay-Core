@@ -34,8 +34,9 @@ namespace TrainingDay.Web.Server.ViewModels.Exercises
         [Required]
         public int CodeNum { get; set; }
 
-        [Required]
-        public string Culture { get; set; }
+        public string? CultureCode { get; set; }
+
+        public DifficultTypes DifficultType { get; set; }
 
         public ExerciseViewModel()
         {
@@ -59,7 +60,8 @@ namespace TrainingDay.Web.Server.ViewModels.Exercises
 
             Muscles = new ObservableCollection<MusclesEnum>(ExerciseExtensions.ConvertMuscleStringToList(model.MusclesString));
             Tags = [.. ExerciseExtensions.ConvertTagIntToList(model.TagsValue)];
-            Culture = model.Culture.Code;
+            CultureCode = model.Culture.Code;
+            DifficultType = model.DifficultType;
         }
     }
 }

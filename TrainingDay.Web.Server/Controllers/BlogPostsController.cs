@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TrainingDay.Web.Data.BlogPosts;
 using TrainingDay.Web.Entities;
 using TrainingDay.Web.Services.Blogs;
@@ -28,12 +29,14 @@ namespace TrainingDay.Web.Server.Controllers
         }
 
         [HttpGet("editor")]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetEditorData()
         {
             return Ok(blogService.CreateEditorData());
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([FromBody] BlogPostEditViewModel blogPost)
         {
             if (!ModelState.IsValid)
@@ -47,6 +50,7 @@ namespace TrainingDay.Web.Server.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [FromBody] BlogPostEditViewModel blogPost)
         {
             if (id != blogPost.Id)
@@ -65,6 +69,7 @@ namespace TrainingDay.Web.Server.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             if (await blogService.Delete(id))

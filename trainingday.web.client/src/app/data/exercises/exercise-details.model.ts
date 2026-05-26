@@ -8,4 +8,5 @@ export class ExerciseDetails {
   tags!: string[];
   codeNum!: number;
   culture!: string;
+  difficultType!: number;
 }

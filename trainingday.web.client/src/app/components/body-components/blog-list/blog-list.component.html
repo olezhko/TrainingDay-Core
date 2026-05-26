@@ -1,8 +1,14 @@
 <div class="blog-list-page">
   <div class="blog-list-header">
     <div class="blog-list-header-inner">
-      <h1 class="page-title">Blog</h1>
-      <p class="page-subtitle">Expert fitness advice, workout tips, and nutrition guides</p>
+      <div>
+        <h1 class="page-title">Blog</h1>
+        <p class="page-subtitle">Expert fitness advice, workout tips, and nutrition guides</p>
+      </div>
+      <button *ngIf="authService.isAdmin" class="admin-btn" (click)="createNew()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        New Post
+      </button>
     </div>
   </div>
 

@@ -3,6 +3,7 @@ import { BackendService } from '../../../services/backend/backend.service';
 import { BlogPreview } from '../../../data/blog/blog-preview.model';
 import { PageEvent } from '@angular/material/paginator';
 import { Router,ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-blog-list',
@@ -15,7 +16,7 @@ export class BlogListComponent {
   page = 1;
   pageSize = 5;
 
-  constructor(private backendService: BackendService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private backendService: BackendService, private route: ActivatedRoute, private router: Router, public authService: AuthService) { }
 
   ngOnInit() {
     this.setCulture();

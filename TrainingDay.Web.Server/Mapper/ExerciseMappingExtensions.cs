@@ -23,5 +23,6 @@ public static class ExerciseMappingExtensions
         }),
         MusclesString = ExerciseExtensions.ConvertFromMuscleListToString(vm.Muscles.ToList()),
         TagsValue = ExerciseExtensions.ConvertTagListToInt(vm.Tags.ToList()),
+        DifficultType = vm.DifficultType,
     };
 }

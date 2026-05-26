@@ -7,6 +7,7 @@ import { environment } from '../../../environment/environment';
 export interface UserInfo {
   email: string;
   nick: string;
+  role: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -21,6 +22,10 @@ export class AuthService {
     return this._currentUser.value !== null;
   }
 
+  get isAdmin(): boolean {
+    return this._currentUser.value?.role === 'Admin';
+  }
+
   get currentUser(): UserInfo | null {
     return this._currentUser.value;
   }
@@ -29,9 +34,8 @@ export class AuthService {
 
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.authApiUrl}/login`, { email, password, rememberMe: true }, { withCredentials: true }).pipe(
-      tap(() => {
-        const nick = email.split('@')[0];
-        this.setUser({ email, nick });
+      tap((res: any) => {
+        this.setUser({ email: res.email, nick: res.nick ?? email.split('@')[0], role: res.role ?? 'User' });
       })
     );
   }
@@ -82,10 +86,18 @@ export class AuthService {
     this._currentUser.next(null);
   }
 
+  updateUserFromServer(res: any): void {
+    if (res?.email) {
+      this.setUser({ email: res.email, nick: res.nick ?? res.email.split('@')[0], role: res.role ?? 'User' });
+    }
+  }
+
   private loadUser(): UserInfo | null {
     try {
       const raw = localStorage.getItem(this.storageKey);
-      return raw ? JSON.parse(raw) : null;
+      if (!raw) return null;
+      const user = JSON.parse(raw);
+      return { ...user, role: user.role ?? 'User' };
     } catch {
       return null;
     }

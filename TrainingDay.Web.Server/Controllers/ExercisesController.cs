@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ namespace TrainingDay.Web.Server.Controllers
         public async Task<IActionResult> GetAllAsync(
             [FromQuery] MusclesEnum[] selectedMuscle,
             [FromQuery] ExerciseTags[] selectedTags,
+            [FromQuery] DifficultTypes[] selectedDifficulty,
             [FromQuery] string? filterName,
             [FromQuery] string twoLetterCulture,
             CancellationToken cancellationToken)
@@ -51,6 +53,11 @@ namespace TrainingDay.Web.Server.Controllers
                 result = result.Where(item => selectedTags.Any(t => item.Tags.Contains(t)));
             }
 
+            if (selectedDifficulty != null && selectedDifficulty.Length > 0)
+            {
+                result = result.Where(item => selectedDifficulty.Contains(item.DifficultType));
+            }
+
             return Ok(result.ToList());
         }
 
@@ -71,6 +78,7 @@ namespace TrainingDay.Web.Server.Controllers
 
         // POST: ExerciseViewModels/Create
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateAsync([FromBody] ExerciseViewModel model)
         {
             if (!ModelState.IsValid)
@@ -85,6 +93,7 @@ namespace TrainingDay.Web.Server.Controllers
         }
 
         [HttpPost("image")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SetImageAsync(UploadImageModel model, CancellationToken token)
         {
             if (model.ImageFile != null)
@@ -116,10 +125,15 @@ namespace TrainingDay.Web.Server.Controllers
         }
 
         [HttpGet("editor")]
-        public async Task<IActionResult> GetEditParamsAsync(int cultureId)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetEditParamsAsync(string cu)
         {
-            var cu = await context.Cultures.AsNoTracking().FirstOrDefaultAsync(item => item.Id == cultureId);
-            var culture = new CultureInfo(cu.Code);
+            var culture = new CultureInfo(cu);
+
+            var cul = await context.Cultures
+                .AsNoTracking()
+                .FirstOrDefaultAsync(item => item.Code == cu);
+
             EditParameters model = new EditParameters();
             model.AllMuscles = new List<SelectListItem>();
             var muscleCollection = Enum.GetValues<MusclesEnum>();
@@ -143,14 +157,15 @@ namespace TrainingDay.Web.Server.Controllers
                 });
             }
 
-            model.OfferedCode = mngExercise.GetLastCode(cultureId);
+            model.OfferedCode = mngExercise.GetLastCode(cul.Id);
 
             return Ok(model);
         }
 
         // PUT: ExerciseViewModels/Edit/5
-        [HttpPut]
-        public async Task<IActionResult> EditAsync(int id, [FromBody] ExerciseViewModel exerciseViewModel)
+        [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> EditAsync([FromRoute] int id, [FromBody] ExerciseViewModel exerciseViewModel)
         {
             if (id != exerciseViewModel.Id)
             {
@@ -162,13 +177,26 @@ namespace TrainingDay.Web.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var exercise = exerciseViewModel.ToEntity();
-            context.Update(exercise);
+            var existing = await context.Exercises.FindAsync(id);
+            if (existing == null)
+            {
+                return NotFound();
+            }
+
+            var updated = exerciseViewModel.ToEntity();
+            existing.Name = updated.Name;
+            existing.CodeNum = updated.CodeNum;
+            existing.Description = updated.Description;
+            existing.MusclesString = updated.MusclesString;
+            existing.TagsValue = updated.TagsValue;
+            existing.DifficultType = updated.DifficultType;
+
             await context.SaveChangesAsync();
-            return Ok(exercise);
+            return Ok(existing);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
             if (!ExerciseExists(id))

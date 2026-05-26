@@ -2,12 +2,10 @@
 {
     public enum ExerciseTags
     {
-        [Description("Без Инвентаря", "No inventory", "No inventory")] CanDoAtHome,
-        [Description("На Время", "By Time", "By Time")] ExerciseByTime,
+        [Description("Без Инвентаря", "No inventory", "No inventory")] CanDoAtHome = 0,
+        [Description("На Время", "By Time", "By Time")] ExerciseByTime = 1,
 
-        [Obsolete("Not Supported")] ExerciseByDistance,
-
-        [Description("Подходы/Вес", "Repetitions And Weight", "Repetitions And Weight")] ExerciseByRepsAndWeight,
+        [Description("Подходы/Вес", "Repetitions And Weight", "Repetitions And Weight")] ExerciseByRepsAndWeight = 3,
         [Description("Штанга", "Barbell", "Barbell")] BarbellExist,
         [Description("Гантеля", "Dumbbell", "Dumbbell")] DumbbellExist,
         [Description("Скамья", "Bench", "Bench")] BenchExist,

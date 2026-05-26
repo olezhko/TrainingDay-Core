@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using TrainingDay.Web.Database;
+using TrainingDay.Web.Entities;
 using TrainingDay.Web.Server.Extensions;
 
 Serilog.Core.Logger logger = new LoggerConfiguration()
@@ -65,6 +67,13 @@ try
         TrainingDayContext db = scope.ServiceProvider.GetRequiredService<TrainingDayContext>();
         await db.Database.MigrateAsync();
         await ExercisesInitializer.InitializeAsync(db);
+
+        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+        foreach (var role in new[] { "Admin", "User" })
+        {
+            if (!await roleManager.RoleExistsAsync(role))
+                await roleManager.CreateAsync(new IdentityRole<Guid>(role));
+        }
     }
 
     app.Run();

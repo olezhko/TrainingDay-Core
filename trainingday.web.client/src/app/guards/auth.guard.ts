@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { AuthService } from '../services/auth/auth.service';
 
 @Injectable({ providedIn: 'root' })
@@ -15,6 +15,7 @@ export class AuthGuard implements CanActivate {
     }
 
     return this.authService.checkAuth().pipe(
+      tap((res: any) => this.authService.updateUserFromServer(res)),
       map(() => true),
       catchError(() => {
         this.authService.clearUser();

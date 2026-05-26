@@ -199,6 +199,10 @@
   color: #fff;
 }
 
+.chip-diff-easy.chip-active { background: #16a34a; border-color: #16a34a; }
+.chip-diff-medium.chip-active { background: #ca8a04; border-color: #ca8a04; }
+.chip-diff-hard.chip-active { background: #dc2626; border-color: #dc2626; }
+
 .exercise-list-header {
   background-color: #111827;
   padding: 48px 24px;

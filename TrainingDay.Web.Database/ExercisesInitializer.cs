@@ -13,7 +13,7 @@ public static class ExercisesInitializer
         var itemsToInsert = new List<WebExercise>();
 
         var cultures = await context.Cultures.AsNoTracking().ToListAsync();
-        var exercises = await context.Exercises.AsNoTracking().ToListAsync();
+        var exercises = await context.Exercises.ToListAsync();
         foreach (var culture in cultures)
         {
             var resourceExercises = await ResourceExtension.LoadResource<BaseExercise>("exercises", culture.Code);

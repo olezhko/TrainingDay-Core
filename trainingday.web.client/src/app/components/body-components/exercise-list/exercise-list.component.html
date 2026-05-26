@@ -5,6 +5,10 @@
         <h1 class="page-title">Exercises</h1>
         <p class="page-subtitle">Browse our complete exercise library with technique guides and muscle targets</p>
       </div>
+      <button *ngIf="authService.isAdmin" class="admin-btn" (click)="createNew()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        New Exercise
+      </button>
     </div>
   </div>
 
@@ -59,6 +63,20 @@
               class="chip"
               [class.chip-active]="opt.selected"
               (click)="toggleTag(opt)">
+              {{ opt.label }}
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-section">
+          <span class="filter-label">Difficulty</span>
+          <div class="chip-list">
+            <button
+              *ngFor="let opt of difficultyOptions"
+              class="chip"
+              [class.chip-active]="opt.selected"
+              [ngClass]="'chip-diff-' + opt.label.toLowerCase()"
+              (click)="toggleDifficulty(opt)">
               {{ opt.label }}
             </button>
           </div>
