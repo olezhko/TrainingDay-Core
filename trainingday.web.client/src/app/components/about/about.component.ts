@@ -16,14 +16,14 @@ export class AboutComponent implements OnInit {
 
   ngOnInit(): void {
     this.images = [
-      new ImageAbout('../../assets/EN/1.png', 'Preloaded Workouts'),
-      new ImageAbout('../../assets/EN/2.png', 'Big Exercise Collection'),
-      new ImageAbout('../../assets/EN/3.png', 'Exercise Brief Description'),
-      new ImageAbout('../../assets/EN/5.png', 'Exercise Filter'),
-      new ImageAbout('../../assets/EN/6.png', 'Workout Perfoming Control'),
-      new ImageAbout('../../assets/EN/7.png', 'Previous Workouts'),
-      new ImageAbout('../../assets/EN/8.png', 'Body Control'),
-      new ImageAbout('../../assets/EN/4.png', 'Account Statistic'),
+      new ImageAbout('../../assets/EN/1.png', 'Preloaded Workouts', 'Start immediately with ready-made training programs for any fitness level.'),
+      new ImageAbout('../../assets/EN/2.png', 'Big Exercise Collection', 'Browse 100+ exercises with technique guides, muscle targets, and tips.'),
+      new ImageAbout('../../assets/EN/3.png', 'Exercise Brief Description', 'Get step-by-step instructions for correct form and execution.'),
+      new ImageAbout('../../assets/EN/5.png', 'Exercise Filter', 'Find exercises by muscle group, tags, or difficulty level in seconds.'),
+      new ImageAbout('../../assets/EN/6.png', 'Workout Performing Control', 'Track sets, reps, and rest time as you work through each session.'),
+      new ImageAbout('../../assets/EN/7.png', 'Previous Workouts', 'Review your training history and monitor progress over time.'),
+      new ImageAbout('../../assets/EN/8.png', 'Body Control', 'Log weight, waist, hips, and other measurements to see your transformation.'),
+      new ImageAbout('../../assets/EN/4.png', 'Account Statistics', 'Visualize your overall activity and achievements in one place.'),
     ]
   };
 

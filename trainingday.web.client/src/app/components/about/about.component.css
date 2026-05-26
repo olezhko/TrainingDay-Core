@@ -129,28 +129,43 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 40px;
   margin-bottom: 24px;
 }
 
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
 .carousel-slide {
-  text-align: center;
+  display: flex;
 }
 
 .carousel-slide img {
   max-height: 500px;
   max-width: 260px;
-  width: 100%;
+  flex-shrink: 0;
   height: auto;
   border-radius: 16px;
   box-shadow: 0 16px 48px rgba(0,0,0,0.12);
   object-fit: contain;
 }
 
-.carousel-caption {
-  margin-top: 16px;
-  font-size: 0.875rem;
+.carousel-caption-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 8px;
+}
+
+.carousel-caption-desc {
+  font-size: 0.9rem;
   color: #6b7280;
+  line-height: 1.6;
+  margin: 0;
+  width: 240px;
 }
 
 .carousel-btn {

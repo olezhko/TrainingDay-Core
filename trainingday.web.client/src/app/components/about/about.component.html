@@ -65,18 +65,24 @@
       <h2 class="section-title">See It in Action</h2>
 
       <div class="carousel-container">
-        <button (click)="prev()" class="carousel-btn" aria-label="Previous">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-        </button>
+        <div class="carousel-controls">
+          <div>
+            <p class="carousel-caption-title">{{ images[currentIndex].title }}</p>
+            <p class="carousel-caption-desc">{{ images[currentIndex].description }}</p>
+          </div>
 
-        <div class="carousel-slide">
-          <img [src]="images[currentIndex].path" [alt]="images[currentIndex].text" />
-          <p class="carousel-caption">{{ images[currentIndex].text }}</p>
+          <button (click)="prev()" class="carousel-btn" aria-label="Previous">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+
+          <div class="carousel-slide">
+            <img [src]="images[currentIndex].path" [alt]="images[currentIndex].title" />
+          </div>
+
+          <button (click)="next()" class="carousel-btn" aria-label="Next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
         </div>
-
-        <button (click)="next()" class="carousel-btn" aria-label="Next">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-        </button>
       </div>
 
       <div class="carousel-dots">
