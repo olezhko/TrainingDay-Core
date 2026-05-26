@@ -17,6 +17,4 @@ public class AuthRegisterViewModel
 
     [Display(Name = "Nick")]
     public string Nick { get; set; }
-
-    public string Token { get; set; }
 }

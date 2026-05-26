@@ -7,7 +7,6 @@ using TrainingDay.Common.Extensions;
 using TrainingDay.Common.Models;
 using TrainingDay.Web.Data.OpenAI;
 using TrainingDay.Web.Database;
-using TrainingDay.Web.Entities;
 using TrainingDay.Web.Server.Mapper;
 using TrainingDay.Web.Server.ViewModels.Exercises;
 using TrainingDay.Web.Services.Exercises;

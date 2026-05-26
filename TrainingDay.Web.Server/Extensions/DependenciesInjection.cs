@@ -1,6 +1,9 @@
 ﻿using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
+using TrainingDay.Web.Database;
+using TrainingDay.Web.Entities;
 using TrainingDay.Web.Data.Common.Files;
 using TrainingDay.Web.Data.OpenAI;
 using TrainingDay.Web.Data.Repositories;
@@ -23,13 +26,57 @@ namespace TrainingDay.Web.Server.Extensions
 {
     public static class DependenciesInjection
     {
-        public static void InstallServices(this IServiceCollection services, ConfigurationManager configuration, Serilog.Core.Logger logger)
+        public static void InstallServices(this IServiceCollection services, ConfigurationManager configuration, IWebHostEnvironment environment, Serilog.Core.Logger logger)
         {
+            var allowedOrigins = configuration.GetSection("AllowedOrigins").Get<string[]>() ?? [];
             services.AddCors(options =>
             {
-                options.AddPolicy("default", corsPolicyBuilder => corsPolicyBuilder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader());
+                options.AddPolicy("default", corsPolicyBuilder =>
+                {
+                    if (allowedOrigins.Length > 0)
+                        corsPolicyBuilder.WithOrigins(allowedOrigins);
+                    else
+                        corsPolicyBuilder.AllowAnyOrigin();
+
+                    corsPolicyBuilder
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+
+                    if (allowedOrigins.Length > 0)
+                        corsPolicyBuilder.AllowCredentials();
+                });
+            });
+
+            services.AddIdentity<MobileUser, IdentityRole<Guid>>()
+                .AddEntityFrameworkStores<TrainingDayContext>()
+                .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                // Dev: Angular (http) → backend (https) are cross-scheme, so SameSite=Lax blocks the cookie.
+                // SameSite=None + Secure lets the browser send it cross-site in dev.
+                options.Cookie.SameSite = environment.IsDevelopment() ? SameSiteMode.None : SameSiteMode.Lax;
+                options.ExpireTimeSpan = TimeSpan.FromDays(30);
+                options.SlidingExpiration = true;
+
+                options.Events.OnRedirectToLogin = ctx =>
+                {
+                    if (ctx.Request.Path.StartsWithSegments("/api"))
+                        ctx.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    else
+                        ctx.Response.Redirect(ctx.RedirectUri);
+                    return Task.CompletedTask;
+                };
+                options.Events.OnRedirectToAccessDenied = ctx =>
+                {
+                    if (ctx.Request.Path.StartsWithSegments("/api"))
+                        ctx.Response.StatusCode = StatusCodes.Status403Forbidden;
+                    else
+                        ctx.Response.Redirect(ctx.RedirectUri);
+                    return Task.CompletedTask;
+                };
             });
 
             services.Configure<ApiSettings>(configuration.GetSection("ApiSettings"));

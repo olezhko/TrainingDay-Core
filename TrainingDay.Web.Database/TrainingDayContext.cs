@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TrainingDay.Web.Entities;
 using TrainingDay.Web.Entities.MobileItems;
 
 namespace TrainingDay.Web.Database;
 
-public class TrainingDayContext : DbContext
+public class TrainingDayContext : IdentityDbContext<MobileUser, IdentityRole<Guid>, Guid>
 {
     public DbSet<BlogPost> Posts { get; set; }
     public DbSet<BlogPostCulture> PostCultures { get; set; }
@@ -44,6 +46,14 @@ public class TrainingDayContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<MobileUser>().ToTable("MobileUsers");
+        modelBuilder.Entity<IdentityRole<Guid>>().ToTable("AspNetRoles");
+        modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AspNetUserRoles");
+        modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AspNetUserClaims");
+        modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AspNetUserLogins");
+        modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AspNetRoleClaims");
+        modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AspNetUserTokens");
 
         modelBuilder.Entity<Culture>().HasData(
             new() { Id = 1, Name = "Русский", Code = "ru" },

@@ -19,6 +19,18 @@
       <a class="td-nav-link" href="/blogs">Blog</a>
       <a class="td-nav-link" href="/about">About</a>
       <a class="td-nav-link td-nav-download" href="/download">Download App</a>
+      <div class="td-nav-divider"></div>
+      <ng-container *ngIf="!authService.isLoggedIn">
+        <a class="td-nav-link" routerLink="/login">Sign In</a>
+        <a class="td-nav-link td-nav-register" routerLink="/register">Register</a>
+      </ng-container>
+      <ng-container *ngIf="authService.isLoggedIn">
+        <a class="td-nav-link td-nav-profile" routerLink="/profile">
+          <span class="td-avatar">{{ (authService.currentUser?.nick || authService.currentUser?.email || '?').charAt(0).toUpperCase() }}</span>
+          {{ authService.currentUser?.nick }}
+        </a>
+        <button class="td-nav-link td-nav-logout" (click)="logout()">Sign Out</button>
+      </ng-container>
     </div>
   </div>
 </nav>

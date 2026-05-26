@@ -1,0 +1,52 @@
+<div class="profile-page">
+  <div class="profile-header">
+    <div class="profile-header-inner">
+      <h1 class="page-title">My Profile</h1>
+      <p class="page-subtitle">Manage your TrainingDay account</p>
+    </div>
+  </div>
+
+  <div class="profile-body">
+
+    <div class="loading-state" *ngIf="checkingSession">
+      <div class="spinner"></div>
+      <span>Loading profile...</span>
+    </div>
+
+    <div *ngIf="!checkingSession && user">
+      <div class="profile-card">
+        <div class="profile-avatar">{{ getInitials() }}</div>
+        <div class="profile-info">
+          <h2 class="profile-name">{{ user.nick }}</h2>
+          <p class="profile-email">{{ user.email }}</p>
+          <div class="session-badge" [class.valid]="sessionValid" [class.invalid]="!sessionValid">
+            <svg *ngIf="sessionValid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <svg *ngIf="!sessionValid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            {{ sessionValid ? 'Session active' : 'Session expired' }}
+          </div>
+        </div>
+      </div>
+
+      <div class="details-card">
+        <h3 class="section-title">Account Details</h3>
+        <div class="detail-row">
+          <span class="detail-label">Nickname</span>
+          <span class="detail-value">{{ user.nick }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Email</span>
+          <span class="detail-value">{{ user.email }}</span>
+        </div>
+      </div>
+
+      <div class="actions-card">
+        <a routerLink="/forgot-password" class="btn-secondary">Change Password</a>
+        <button class="btn-logout" (click)="logout()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Sign Out
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

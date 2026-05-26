@@ -11,7 +11,7 @@ import { BlogListComponent } from './components/body-components/blog-list/blog-l
 import { BlogItemComponent } from './components/body-components/blog-item/blog-item.component';
 import { BlogEditComponent } from './components/body-components/blog-edit/blog-edit.component';
 import { ExerciseItemComponent } from './components/body-components/exercise-item/exercise-item.component';
-import { RouterOutlet } from "@angular/router";
+import { RouterModule, RouterOutlet } from "@angular/router";
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ContactMeComponent } from './components/contact-me/contact-me.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
@@ -30,6 +30,11 @@ import { MaterialModule } from './material.module';
 import { NgxEditorModule } from 'ngx-editor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DownloadPageComponent } from './components/download-page/download-page.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
+import { UserProfileComponent } from './components/auth/user-profile/user-profile.component';
+import { ConfirmEmailComponent } from './components/auth/confirm-email/confirm-email.component';
 
 @NgModule({
   declarations: [
@@ -47,10 +52,15 @@ import { DownloadPageComponent } from './components/download-page/download-page.
     NotFoundComponent,
     ExercisePreviewComponent,
     ExerciseEditComponent,
-    DownloadPageComponent
+    DownloadPageComponent,
+    LoginComponent,
+    RegisterComponent,
+    ForgotPasswordComponent,
+    UserProfileComponent,
+    ConfirmEmailComponent
   ],
   imports: [
-    MatSnackBarModule, NgxEditorModule, BrowserModule, MaterialModule, RouterOutlet, HttpClientModule, AppRoutingComponent, FormsModule, ReactiveFormsModule, NgbModule, StoreModule.forRoot({}, {}), EffectsModule.forRoot([]), StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }), BrowserAnimationsModule
+    MatSnackBarModule, NgxEditorModule, BrowserModule, MaterialModule, RouterOutlet, RouterModule, HttpClientModule, AppRoutingComponent, FormsModule, ReactiveFormsModule, NgbModule, StoreModule.forRoot({}, {}), EffectsModule.forRoot([]), StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }), BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

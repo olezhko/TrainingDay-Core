@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -6,13 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  isMenuOpen: boolean = false;
-  
+  isMenuOpen = false;
+
+  constructor(public authService: AuthService, private router: Router) {}
+
   openMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
+  logout(): void {
+    this.isMenuOpen = false;
+    this.authService.logout().subscribe({
+      complete: () => this.router.navigate(['/login']),
+      error: () => this.router.navigate(['/login']),
+    });
+  }
+
   ngOnInit(): void {
-    this.isMenuOpen = false; // ensures it's hidden on init
+    this.isMenuOpen = false;
   }
 }

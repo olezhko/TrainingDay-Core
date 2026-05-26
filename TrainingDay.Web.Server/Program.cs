@@ -21,7 +21,7 @@ try
     builder.Services.AddDbContext<TrainingDayContext>(options => options.UseMySQL(conString));
 
     builder.Services.AddControllers();
-    builder.Services.InstallServices(builder.Configuration, logger);
+    builder.Services.InstallServices(builder.Configuration, builder.Environment, logger);
 
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
@@ -30,7 +30,8 @@ try
 
     app.UseDefaultFiles();
     app.UseStaticFiles();
-    app.UseCors("default");
+    app.UseHttpsRedirection();
+
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
@@ -38,7 +39,19 @@ try
         app.UseSwaggerUI();
     }
 
-    app.UseHttpsRedirection();
+    app.UseRouting();
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseCors(policy => policy
+            .SetIsOriginAllowed(_ => true)
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+    }
+    else
+    {
+        app.UseCors("default");
+    }
 
     app.UseAuthentication();
     app.UseAuthorization();

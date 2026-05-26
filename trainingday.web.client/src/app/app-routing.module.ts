@@ -12,13 +12,24 @@ import { ExerciseItemComponent } from './components/body-components/exercise-ite
 import { ExerciseEditComponent } from './components/body-components/exercise-edit/exercise-edit.component';
 import { BlogEditComponent } from './components/body-components/blog-edit/blog-edit.component';
 import { DownloadPageComponent } from './components/download-page/download-page.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
+import { UserProfileComponent } from './components/auth/user-profile/user-profile.component';
+import { ConfirmEmailComponent } from './components/auth/confirm-email/confirm-email.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: "", component: LandingPageComponent },
+  { path: "login", component: LoginComponent },
+  { path: "register", component: RegisterComponent },
+  { path: "forgot-password", component: ForgotPasswordComponent },
+  { path: "confirm-email", component: ConfirmEmailComponent },
+  { path: "profile", component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: "blogs", component: BlogListComponent },
-  { path: "blogs/new", component: BlogEditComponent },   // exact match first
-  { path: "blogs/edit/:id", component: BlogEditComponent }, 
-  { path: "blogs/:id", component: BlogItemComponent },   // generic last
+  { path: "blogs/new", component: BlogEditComponent },
+  { path: "blogs/edit/:id", component: BlogEditComponent },
+  { path: "blogs/:id", component: BlogItemComponent },
   { path: "exercises", component: ExerciseListComponent },
   { path: "exercise/details/:id", component: ExerciseItemComponent },
   { path: "exercise/edit/:id", component: ExerciseEditComponent },
