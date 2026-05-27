@@ -1371,7 +1371,7 @@
     "Name": "Incline lunge",
     "Description": {
       "StartPosition": "Stand up straight, then take a wide step back with your right foot, bending both knees. Both knees are still bent, pull the torso forward and straighten the right knee. The gluteus muscle should feel the work.",
-      "Execution": "Push off with your left heel and pull your right leg forward. Return to starting position. Do 12 reps, then change legs.",
+      "Execution": "Push off with your left heel and pull your right leg forward. Return to starting position. Do requried reps, then change legs.",
       "Advice": ""
     },
     "MusclesString": "Buttocks,Quadriceps",

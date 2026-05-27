@@ -1,6 +1,6 @@
 ﻿namespace TrainingDay.Web.Data.OpenAI
 {
-    public class OpenAISettings
+    public class OpenAIOptions
     {
         public string Key { get; set; } = string.Empty;
         public string Model { get; set; } = "gpt-3.5-turbo"; // Default model, can be overridden
