@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ExercisePreview } from 'src/app/data/exercises/exercise-preview.model';
 import { ExerciseEditParams } from 'src/app/data/exercises/exercise-params.model';
@@ -24,16 +24,7 @@ export class BackendService {
   constructor(private http: HttpClient) {}
 
   sendMessage(name: string, email: string, message: string): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': environment.baseUrl,
-        'Access-Control-Allow-Credentials': 'true'
-      })
-    };
-
-    const data = { name, email, message };
-    return this.http.post<any>(environment.baseUrl + '/support/contact-me', data, httpOptions);
+    return this.http.post<any>(environment.baseUrl + '/support/contact-me', { name, email, message });
   }
 
   getExercises(

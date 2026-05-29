@@ -26,27 +26,8 @@ namespace TrainingDay.Web.Server.Extensions
 {
     public static class DependenciesInjection
     {
-        public static void InstallServices(this IServiceCollection services, ConfigurationManager configuration, IWebHostEnvironment environment, Serilog.Core.Logger logger)
+        public static void InstallServices(this IServiceCollection services, ConfigurationManager configuration, IWebHostEnvironment environment)
         {
-            var allowedOrigins = configuration.GetSection("AllowedOrigins").Get<string[]>() ?? [];
-            services.AddCors(options =>
-            {
-                options.AddPolicy("default", corsPolicyBuilder =>
-                {
-                    if (allowedOrigins.Length > 0)
-                        corsPolicyBuilder.WithOrigins(allowedOrigins);
-                    else
-                        corsPolicyBuilder.AllowAnyOrigin();
-
-                    corsPolicyBuilder
-                        .AllowAnyMethod()
-                        .AllowAnyHeader();
-
-                    if (allowedOrigins.Length > 0)
-                        corsPolicyBuilder.AllowCredentials();
-                });
-            });
-
             services.AddIdentity<MobileUser, IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<TrainingDayContext>()
                 .AddDefaultTokenProviders();

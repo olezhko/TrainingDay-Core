@@ -2,10 +2,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using TrainingDay.Web.Database;
-using TrainingDay.Web.Entities;
 using TrainingDay.Web.Server.Extensions;
 
 Serilog.Core.Logger logger = new LoggerConfiguration()
+    .MinimumLevel.Warning()
     .WriteTo.Console(outputTemplate:
     "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
     .WriteTo.File($"Logs/log_.log", rollingInterval: RollingInterval.Day, fileSizeLimitBytes: 1024 * 1024 * 50, outputTemplate:
@@ -22,8 +22,25 @@ try
     var conString = builder.Configuration.GetConnectionString("DefaultConnection");
     builder.Services.AddDbContext<TrainingDayContext>(options => options.UseMySQL(conString));
 
+    var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+    var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>() ?? [];
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy(MyAllowSpecificOrigins, corsPolicyBuilder =>
+        {
+            if (allowedOrigins.Length > 0)
+            {
+                corsPolicyBuilder
+                    .WithOrigins(allowedOrigins)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+            }
+        });
+    });
+
     builder.Services.AddControllers();
-    builder.Services.InstallServices(builder.Configuration, builder.Environment, logger);
+    builder.Services.InstallServices(builder.Configuration, builder.Environment);
 
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
@@ -31,8 +48,6 @@ try
     var app = builder.Build();
 
     app.UseDefaultFiles();
-    app.UseStaticFiles();
-    app.UseHttpsRedirection();
 
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
@@ -41,7 +56,10 @@ try
         app.UseSwaggerUI();
     }
 
+    app.UseHttpsRedirection();
+    app.UseStaticFiles();
     app.UseRouting();
+
     if (app.Environment.IsDevelopment())
     {
         app.UseCors(policy => policy
@@ -52,7 +70,7 @@ try
     }
     else
     {
-        app.UseCors("default");
+        app.UseCors(MyAllowSpecificOrigins);
     }
 
     app.UseAuthentication();
