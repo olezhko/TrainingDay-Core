@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Reflection;
+using System.Text.Json;
 
 namespace TrainingDay.Common.Extensions
 {
 	public static class ResourceExtension
 	{
-        public static async Task<ObservableCollection<T>> LoadResource<T>(string category, string ci)
+        public static async Task<ObservableCollection<T>> LoadResourceAsync<T>(string category, string ci)
         {
             try
             {
@@ -16,18 +16,18 @@ namespace TrainingDay.Common.Extensions
 
                 if (stream == null)
                 {
-                    return new ObservableCollection<T>();
+                    return [];
                 }
 
-                StreamReader reader = new StreamReader(stream);
+                using var reader = new StreamReader(stream);
                 var data = await reader.ReadToEndAsync();
-                var collection = JsonConvert.DeserializeObject<IEnumerable<T>>(data);
+                var collection = JsonSerializer.Deserialize<IEnumerable<T>>(data);
 
                 return new ObservableCollection<T>(collection);
             }
-            catch (Exception e)
+            catch
             {
-                return new ObservableCollection<T>();
+                return [];
             }
         }
     }
