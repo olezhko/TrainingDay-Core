@@ -1666,5 +1666,17 @@
     "Tags": "CanDoAtHome,DatabaseExercise,ExerciseByReps",
     "DifficultLevel": 1,
     "CodeNum": 143
+  },
+  {
+    "Name": "Standing Under-knee Clap",
+    "Description": {
+      "StartPosition": "Stand upright with your feet hip-width apart. Keep your back straight, core engaged, and arms relaxed at your sides. Look forward with your shoulders relaxed.",
+      "Execution": "Lift one knee toward hip level. Simultaneously clap your hands underneath the raised knee. Lower your leg back to the starting position. Repeat the movement with the opposite leg, alternating sides in a smooth, rhythmic motion.",
+      "Advice": "Keep your torso upright throughout the exercise. Raise your knee high enough to comfortably clap underneath it. Engage your core to maintain balance. Perform the movement in a controlled rhythm without leaning backward or forward. Breathe naturally and land softly on each repetition."
+    },
+    "MusclesString": "Chest,Thighs,Buttocks,Quadriceps,Cardio",
+    "Tags": "CanDoAtHome,DatabaseExercise,ExerciseByReps",
+    "DifficultLevel": 1,
+    "CodeNum": 144
   }
 ]

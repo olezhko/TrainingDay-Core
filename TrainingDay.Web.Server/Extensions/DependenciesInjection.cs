@@ -9,6 +9,7 @@ using TrainingDay.Web.Data.OpenAI;
 using TrainingDay.Web.Data.Repositories;
 using TrainingDay.Web.Server.Managers;
 using TrainingDay.Web.Services;
+using TrainingDay.Web.Services.Auth;
 using TrainingDay.Web.Services.Blogs;
 using TrainingDay.Web.Services.Email;
 using TrainingDay.Web.Services.Exercises;
@@ -18,7 +19,9 @@ using TrainingDay.Web.Services.Notification;
 using TrainingDay.Web.Services.OpenAI;
 using TrainingDay.Web.Services.Rabbit;
 using TrainingDay.Web.Services.Repositories;
+using TrainingDay.Web.Services.SocialWorkouts;
 using TrainingDay.Web.Services.Support;
+using TrainingDay.Web.Services.UserRepo;
 using TrainingDay.Web.Services.UserTokens;
 using TrainingDay.Web.Services.YoutubeVideo;
 
@@ -63,11 +66,16 @@ namespace TrainingDay.Web.Server.Extensions
             services.Configure<ApiSettings>(configuration.GetSection("ApiSettings"));
             services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
             services.Configure<OpenAIOptions>(configuration.GetSection("OpenAI"));
+            services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
+
+            services.AddScoped<IJwtTokenService, JwtTokenService>();
 
             services.AddTransient<IYoutubeVideoCatalog, YoutubeVideoCatalog>();
             services.AddScoped<IExerciseManager, ExerciseManager>();
             services.AddScoped<IUserTokenManager, UserTokenManager>();
             services.AddScoped<IBlogPostsManager, BlogPostsManager>();
+            services.AddScoped<ISocialWorkoutManager, SocialWorkoutManager>();
+            services.AddScoped<IUserRepoManager, UserRepoManager>();
             services.AddScoped<IFirebaseService, FirebaseService>();
             services.AddScoped<IFileUploadService, FileUploadService>();
             services.AddScoped<IStringLocalizer, StringLocalizerService>();

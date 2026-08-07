@@ -1,8 +1,13 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using System.Text;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Server.Extensions;
+using TrainingDay.Web.Services;
 
 Serilog.Core.Logger logger = new LoggerConfiguration()
     .MinimumLevel.Warning()
@@ -42,6 +47,31 @@ try
     builder.Services.AddControllers();
     builder.Services.InstallServices(builder.Configuration, builder.Environment);
 
+    var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>() ?? new JwtSettings();
+    builder.Services.AddAuthentication()
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = jwtSettings.Issuer,
+                ValidAudience = jwtSettings.Audience,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key ?? string.Empty)),
+                ClockSkew = TimeSpan.FromMinutes(1)
+            };
+        });
+
+    builder.Services.AddAuthorization(options =>
+    {
+        options.DefaultPolicy = new AuthorizationPolicyBuilder(IdentityConstants.ApplicationScheme, JwtBearerDefaults.AuthenticationScheme)
+            .RequireAuthenticatedUser()
+            .Build();
+    });
+
+    builder.Services.AddApiVersioning();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 

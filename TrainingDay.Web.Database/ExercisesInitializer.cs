@@ -16,7 +16,7 @@ public static class ExercisesInitializer
         var exercises = await context.Exercises.ToListAsync();
         foreach (var culture in cultures)
         {
-            var resourceExercises = await ResourceExtension.LoadResource<BaseExercise>("exercises", culture.Code);
+            var resourceExercises = await ResourceExtension.LoadResourceAsync<BaseExercise>("exercises", culture.Code);
             foreach (var srcExercise in resourceExercises)
             {
                 var dbExercise = exercises.FirstOrDefault(item => item.CodeNum == srcExercise.CodeNum && item.CultureId == culture.Id);

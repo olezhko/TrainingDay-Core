@@ -12,7 +12,7 @@ export interface UserInfo {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly authApiUrl = `${environment.baseApiUrl}/auth`;
+  private readonly authApiUrl = `${environment.baseApiUrl}/v1/auth`;
   private readonly storageKey = 'td_user';
 
   private _currentUser = new BehaviorSubject<UserInfo | null>(this.loadUser());

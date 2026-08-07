@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrainingDay.Web.Database;
 
@@ -10,9 +11,11 @@ using TrainingDay.Web.Database;
 namespace TrainingDay.Web.Database.Migrations
 {
     [DbContext(typeof(TrainingDayContext))]
-    partial class TrainingDayContextModelSnapshot : ModelSnapshot
+    [Migration("20260805205242_AddRefreshTokens")]
+    partial class AddRefreshTokens
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -314,6 +317,9 @@ namespace TrainingDay.Web.Database.Migrations
                     b.Property<Guid>("OwnerUserId")
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid>("ServerId")
+                        .HasColumnType("char(36)");
+
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime(6)");
 
@@ -324,6 +330,9 @@ namespace TrainingDay.Web.Database.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("OwnerUserId");
+
+                    b.HasIndex("ServerId")
+                        .IsUnique();
 
                     b.ToTable("SocialWorkouts");
                 });

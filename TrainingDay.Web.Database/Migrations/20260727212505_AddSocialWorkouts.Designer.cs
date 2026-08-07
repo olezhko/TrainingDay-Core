@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrainingDay.Web.Database;
 
@@ -10,9 +11,11 @@ using TrainingDay.Web.Database;
 namespace TrainingDay.Web.Database.Migrations
 {
     [DbContext(typeof(TrainingDayContext))]
-    partial class TrainingDayContextModelSnapshot : ModelSnapshot
+    [Migration("20260727212505_AddSocialWorkouts")]
+    partial class AddSocialWorkouts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -257,41 +260,6 @@ namespace TrainingDay.Web.Database.Migrations
                     b.ToTable("ExerciseVideoLinks");
                 });
 
-            modelBuilder.Entity("TrainingDay.Web.Entities.MobileItems.RefreshToken", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("ExpiresAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("ReplacedByToken")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime?>("RevokedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Token")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Token")
-                        .IsUnique();
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("RefreshTokens");
-                });
-
             modelBuilder.Entity("TrainingDay.Web.Entities.MobileItems.SocialWorkout", b =>
                 {
                     b.Property<int>("Id")
@@ -314,6 +282,9 @@ namespace TrainingDay.Web.Database.Migrations
                     b.Property<Guid>("OwnerUserId")
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid>("ServerId")
+                        .HasColumnType("char(36)");
+
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime(6)");
 
@@ -324,6 +295,9 @@ namespace TrainingDay.Web.Database.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("OwnerUserId");
+
+                    b.HasIndex("ServerId")
+                        .IsUnique();
 
                     b.ToTable("SocialWorkouts");
                 });
@@ -919,17 +893,6 @@ namespace TrainingDay.Web.Database.Migrations
                     b.Navigation("Culture");
                 });
 
-            modelBuilder.Entity("TrainingDay.Web.Entities.MobileItems.RefreshToken", b =>
-                {
-                    b.HasOne("TrainingDay.Web.Entities.MobileUser", "User")
-                        .WithMany("RefreshTokens")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("TrainingDay.Web.Entities.MobileItems.SocialWorkout", b =>
                 {
                     b.HasOne("TrainingDay.Web.Entities.MobileUser", "OwnerUser")
@@ -1098,8 +1061,6 @@ namespace TrainingDay.Web.Database.Migrations
 
             modelBuilder.Entity("TrainingDay.Web.Entities.MobileUser", b =>
                 {
-                    b.Navigation("RefreshTokens");
-
                     b.Navigation("SocialWorkoutLikes");
 
                     b.Navigation("SocialWorkouts");

@@ -63,7 +63,7 @@ public class OpenAIService(IOptions<OpenAIOptions> options) : IOpenAIService
 
     private async Task LoadEmbeddedDbAsync(CancellationToken token)
     {
-        var exercises = await ResourceExtension.LoadResource<BaseExercise>("exercises", "en");
+        var exercises = await ResourceExtension.LoadResourceAsync<BaseExercise>("exercises", "en");
         await File.WriteAllLinesAsync("exercises.txt", exercises.Select(FormatExercise), token);
 
         var file = await client.FilesEndpoint.UploadFileAsync("exercises.txt", FilePurpose.Assistants, token);

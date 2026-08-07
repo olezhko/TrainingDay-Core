@@ -44,3 +44,7 @@ dotnet_style_collection_initializer = true:suggestion
 dotnet_style_prefer_simplified_boolean_expressions = true:suggestion
 dotnet_style_prefer_conditional_expression_over_assignment = true:silent
 dotnet_style_prefer_conditional_expression_over_return = true:silent
+
+
+# IDE0161: Convert to file-scoped namespace
+csharp_style_namespace_declarations = file_scoped:warning

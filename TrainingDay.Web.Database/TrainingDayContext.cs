@@ -31,6 +31,12 @@ public class TrainingDayContext : IdentityDbContext<MobileUser, IdentityRole<Gui
     public DbSet<UserTrainingExercise> UserTrainingExercises { get; set; }
     public DbSet<UserExercise> UserExercises { get; set; }
 
+    public DbSet<SocialWorkout> SocialWorkouts { get; set; }
+    public DbSet<SocialWorkoutExercise> SocialWorkoutExercises { get; set; }
+    public DbSet<SocialWorkoutLike> SocialWorkoutLikes { get; set; }
+
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
+
     public TrainingDayContext(DbContextOptions<TrainingDayContext> options)
     : base(options)
     {
@@ -58,5 +64,23 @@ public class TrainingDayContext : IdentityDbContext<MobileUser, IdentityRole<Gui
         modelBuilder.Entity<Culture>().HasData(
             new() { Id = 1, Name = "Русский", Code = "ru" },
             new() { Id = 2, Name = "English", Code = "en" });
+
+        modelBuilder.Entity<MobileUser>()
+            .Property(item => item.ShareCompletedWorkouts)
+            .HasDefaultValue(true);
+
+        modelBuilder.Entity<SocialWorkoutLike>()
+            .HasIndex(item => new { item.SocialWorkoutId, item.UserId })
+            .IsUnique();
+
+        modelBuilder.Entity<RefreshToken>()
+            .HasIndex(item => item.Token)
+            .IsUnique();
+
+        modelBuilder.Entity<RefreshToken>()
+            .HasOne(item => item.User)
+            .WithMany(item => item.RefreshTokens)
+            .HasForeignKey(item => item.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
