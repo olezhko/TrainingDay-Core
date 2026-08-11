@@ -59,7 +59,7 @@ public class SocialWorkoutManager(TrainingDayContext context, UserManager<Mobile
         return MapToDto(workout, userId);
     }
 
-    public async Task<PagedResult<SocialWorkoutDto>> GetFeedAsync(Guid userId, int page, int pageSize, CancellationToken token)
+    public async Task<PagedResult<SocialWorkoutDto>> GetFeedAsync(Guid? userId, int page, int pageSize, CancellationToken token)
     {
         var query = context.SocialWorkouts.AsNoTracking();
 
@@ -125,7 +125,7 @@ public class SocialWorkoutManager(TrainingDayContext context, UserManager<Mobile
 
     private static string GenerateDefaultNickname() => $"User_{Random.Shared.Next(0, 10001)}";
 
-    private static SocialWorkoutDto MapToDto(SocialWorkout workout, Guid userId) => new()
+    private static SocialWorkoutDto MapToDto(SocialWorkout workout, Guid? userId) => new()
     {
         Id = workout.Id.ToString(),
         OwnerUserId = workout.OwnerUserId.ToString(),
@@ -134,7 +134,7 @@ public class SocialWorkoutManager(TrainingDayContext context, UserManager<Mobile
         Date = workout.Date,
         Duration = workout.Duration,
         LikesCount = workout.Likes?.Count ?? 0,
-        LikedByMe = workout.Likes?.Any(item => item.UserId == userId) ?? false,
+        LikedByMe = userId != null && (workout.Likes?.Any(item => item.UserId == userId) ?? false),
         BaseExercises = workout.Exercises
             .Where(item => item.CodeNum > 0)
             .OrderBy(item => item.OrderNumber)

@@ -235,6 +235,27 @@ public class AuthController(
         return Ok();
     }
 
+    [HttpDelete("remove")]
+    [Authorize]
+    public async Task<IActionResult> RemoveAccountAsync()
+    {
+        var user = await userManager.GetUserAsync(User);
+        if (user == null)
+            return Unauthorized();
+
+        await signInManager.SignOutAsync();
+
+        var result = await userManager.DeleteAsync(user);
+        if (!result.Succeeded)
+        {
+            var errors = string.Join(" ", result.Errors.Select(e => e.Description));
+            return BadRequest(errors);
+        }
+
+        logger.LogInformation($"Account removed for user {user.Email}");
+        return Ok();
+    }
+
     [HttpGet("enter")]
     [Authorize]
     public async Task<IActionResult> EnterAsync()

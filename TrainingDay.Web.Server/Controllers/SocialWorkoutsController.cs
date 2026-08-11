@@ -13,15 +13,12 @@ namespace TrainingDay.Web.Server.Controllers;
 public class SocialWorkoutsController(ISocialWorkoutManager manager, UserManager<MobileUser> userManager) : ControllerBase
 {
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> GetFeedAsync([FromQuery] int page = 1, [FromQuery] int pageSize = 10, CancellationToken token = default)
     {
         var user = await userManager.GetUserAsync(User);
-        if (user == null)
-        {
-            return Unauthorized();
-        }
 
-        var result = await manager.GetFeedAsync(user.Id, page, pageSize, token);
+        var result = await manager.GetFeedAsync(user?.Id, page, pageSize, token);
         return Ok(result);
     }
 
