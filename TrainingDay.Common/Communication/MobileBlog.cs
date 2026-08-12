@@ -1,16 +1,21 @@
-﻿namespace TrainingDay.Common.Communication;
+﻿using System.Text.Json.Serialization;
 
-public class BlogResponse
+namespace TrainingDay.Common.Communication;
+
+public sealed record BlogResponse
 {
-	public int Guid { get; set; }
 	/// <summary>
 	/// http-content needed to decode
 	/// </summary>
-	public string Content { get; set; }
+	[JsonPropertyName("content")]
+	public string? Content { get; set; }
+
 	/// <summary>
 	/// DateTime
 	/// </summary>
+	[JsonPropertyName("published")]	
 	public DateTime Published { get; set; }
-	public string Title { get; set; }
-	public IReadOnlyCollection<string> Labels { get; set; }
+	
+	[JsonPropertyName("title")]
+	public required string Title { get; set; }
 }
