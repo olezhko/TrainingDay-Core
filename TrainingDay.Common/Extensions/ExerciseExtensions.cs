@@ -24,7 +24,7 @@ public static class ExerciseExtensions
             };
             return attribute;
         }
-        catch (Exception e)
+        catch
         {
             return value.ToString();
         }
