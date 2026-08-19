@@ -207,18 +207,18 @@ public class AuthController(
             return BadRequest(ModelState);
         }
 
-        var tokens = await jwtTokenService.RefreshAsync(model.RefreshToken, cancellationToken);
-        if (tokens == null)
+        var token = await jwtTokenService.RefreshAsync(model.RefreshToken, cancellationToken);
+        if (token == null)
         {
             return Unauthorized("Invalid or expired refresh token.");
         }
 
         return Ok(new
         {
-            accessToken = tokens.AccessToken,
-            accessTokenExpires = tokens.AccessTokenExpiresAt,
-            refreshToken = tokens.RefreshToken,
-            refreshTokenExpires = tokens.RefreshTokenExpiresAt
+            accessToken = token.AccessToken,
+            accessTokenExpires = token.AccessTokenExpiresAt,
+            refreshToken = token.RefreshToken,
+            refreshTokenExpires = token.RefreshTokenExpiresAt
         });
     }
 

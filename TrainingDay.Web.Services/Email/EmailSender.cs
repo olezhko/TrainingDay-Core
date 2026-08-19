@@ -20,7 +20,7 @@ namespace TrainingDay.Web.Services.Email
 
         public async Task<bool> DoSendAsync(string subject, string message, string toEmailAddress, bool isTextBody = false)
         {
-            var email = new MimeMessage();
+            using var email = new MimeMessage();
             email.Sender = MailboxAddress.Parse(_emailSettings.UsernameEmail);
             email.Subject = subject;
 

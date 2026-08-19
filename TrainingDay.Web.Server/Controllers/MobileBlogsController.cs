@@ -27,10 +27,11 @@ public class MobileBlogsController(IBlogPostsManager blogPostsManager) : Control
 
         var result = new BlogResponse()
         {
-            Guid = blog.Id,
+            Id = blog.Id,
             Title = blog.Title,
             Published = blog.Date,
-            Content = blog.View
+            Content = blog.View,
+            Tags = blog.Tags
         };
 
         return Ok(result);

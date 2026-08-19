@@ -4,6 +4,9 @@ namespace TrainingDay.Common.Communication;
 
 public sealed record BlogResponse
 {
+	[JsonPropertyName("id")]
+    public int Id { get; set; }
+
 	/// <summary>
 	/// http-content needed to decode
 	/// </summary>
@@ -18,4 +21,7 @@ public sealed record BlogResponse
 	
 	[JsonPropertyName("title")]
 	public required string Title { get; set; }
+
+	[JsonPropertyName("tags")]
+	public List<string> Tags { get; set; } = [];
 }

@@ -8,7 +8,7 @@ namespace TrainingDay.Web.Services.Blogs;
 public interface IBlogPostsManager
 {
     Task<IEnumerable<BlogResponse>> GetMobileBlogsAsync(int? cultureId, DateTime? createdFilter, CancellationToken token);
-    Task<BlogPostEditViewModel> GetAsync(int id, CancellationToken token);
+    Task<BlogPostEditViewModel?> GetAsync(int id, CancellationToken token);
 
 
     EditorData CreateEditorData();

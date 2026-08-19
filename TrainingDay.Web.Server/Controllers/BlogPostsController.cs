@@ -4,80 +4,79 @@ using TrainingDay.Web.Data.BlogPosts;
 using TrainingDay.Web.Entities;
 using TrainingDay.Web.Services.Blogs;
 
-namespace TrainingDay.Web.Server.Controllers
+namespace TrainingDay.Web.Server.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class BlogPostsController(ILogger<BlogPostsController> logger, IBlogPostsManager blogService) : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BlogPostsController(ILogger<BlogPostsController> logger, IBlogPostsManager blogService) : ControllerBase
+    [HttpGet("search")]
+    public async Task<IActionResult> GetAsync(BlogsCultureTypes culture, int page, int pageSize, CancellationToken token)
     {
-        [HttpGet("search")]
-        public async Task<IActionResult> Get(BlogsCultureTypes culture, int page, int pageSize, CancellationToken token)
+        return Ok(await blogService.Get(culture, page, pageSize, token));
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAsync(int id, CancellationToken token)
+    {
+        var blogPost = await blogService.GetAsync(id, token);
+        if (blogPost == null)
         {
-            return Ok(await blogService.Get(culture, page, pageSize, token));
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Get(int id, CancellationToken token)
-        {
-            var blogPost = await blogService.GetAsync(id, token);
-            if (blogPost == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(blogPost);
-        }
-
-        [HttpGet("editor")]
-        [Authorize(Roles = "Admin")]
-        public IActionResult GetEditorData()
-        {
-            return Ok(blogService.CreateEditorData());
-        }
-
-        [HttpPost]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([FromBody] BlogPostEditViewModel blogPost)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var blog = await blogService.Create(blogPost);
-
-            return Ok(blog);
-        }
-
-        [HttpPut]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, [FromBody] BlogPostEditViewModel blogPost)
-        {
-            if (id != blogPost.Id)
-            {
-                return NotFound();
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            var blog = await blogService.Edit(blogPost);
-
-            return Ok(blog);
-        }
-
-        [HttpDelete]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            if (await blogService.Delete(id))
-            {
-                return Ok();
-            }
-
             return NotFound();
         }
+
+        return Ok(blogPost);
+    }
+
+    [HttpGet("editor")]
+    [Authorize(Roles = "Admin")]
+    public IActionResult GetEditorData()
+    {
+        return Ok(blogService.CreateEditorData());
+    }
+
+    [HttpPost]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> CreateAsync([FromBody] BlogPostEditViewModel blogPost)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var blog = await blogService.Create(blogPost);
+
+        return Ok(blog);
+    }
+
+    [HttpPut]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> EditAsync(int id, [FromBody] BlogPostEditViewModel blogPost)
+    {
+        if (id != blogPost.Id)
+        {
+            return NotFound();
+        }
+
+        if (!ModelState.IsValid)
+        {
+            return BadRequest();
+        }
+
+        var blog = await blogService.Edit(blogPost);
+
+        return Ok(blog);
+    }
+
+    [HttpDelete]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> DeleteAsync(int id)
+    {
+        if (await blogService.Delete(id))
+        {
+            return Ok();
+        }
+
+        return NotFound();
     }
 }
