@@ -75,7 +75,7 @@
     <div class="form-group">
       <label>Tags</label>
       <div class="tags-container">
-        <div class="tag" *ngFor="let tag of blogForm.get('tags')?.value">
+        <div class="tag" *ngFor="let tag of blogForm.get('tags')?.value; trackBy: trackByTag">
           {{ tag }}
           <span class="remove-tag" (click)="removeTag(tag)">×</span>
         </div>
@@ -86,7 +86,7 @@
                (keydown)="onTagKeyDown($event)">
       </div>
       <div class="tag-suggestions" *ngIf="filteredTags.length > 0">
-        <div class="tag-suggestion" *ngFor="let tag of filteredTags" (click)="addTag(tag)">
+        <div class="tag-suggestion" *ngFor="let tag of filteredTags; trackBy: trackByTag" (click)="addTag(tag)">
           {{ tag }}
         </div>
       </div>
@@ -121,7 +121,7 @@
         <span>{{ blogForm.get('date')?.value | date:'mediumDate' }}</span>
       </div>
       <div class="blog-tags">
-        <span class="tag" *ngFor="let tag of blogForm.get('tags')?.value">{{ tag }}</span>
+        <span class="tag" *ngFor="let tag of blogForm.get('tags')?.value; trackBy: trackByTag">{{ tag }}</span>
       </div>
       <div class="blog-description" [innerHTML]="getSafeHtml(blogForm.get('description')?.value)"></div>
       <hr>

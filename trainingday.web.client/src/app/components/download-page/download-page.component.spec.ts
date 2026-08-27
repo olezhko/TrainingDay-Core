@@ -8,7 +8,7 @@ describe('DownloadPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DownloadPageComponent]
+      imports: [DownloadPageComponent]
     });
     fixture = TestBed.createComponent(DownloadPageComponent);
     component = fixture.componentInstance;

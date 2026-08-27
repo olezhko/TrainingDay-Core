@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BackendService } from 'src/app/services/backend/backend.service';
 import { ExerciseDetails } from 'src/app/data/exercises/exercise-details.model';
@@ -9,32 +11,37 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-exercise-item',
+  standalone: true,
+  imports: [CommonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './exercise-item.component.html',
   styleUrls: ['./exercise-item.component.css']
 })
 export class ExerciseItemComponent implements OnInit {
+  private backendService = inject(BackendService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private destroyRef = inject(DestroyRef);
+  public authService = inject(AuthService);
 
-  exerciseId: number = 0;
-  exercise: ExerciseDetails;
-  imageSrc: string = ' ';
-  constructor(private backendService: BackendService, private router: Router, private route: ActivatedRoute, public authService: AuthService) {
-    this.exercise = new ExerciseDetails;
-  }
+  exerciseId = 0;
+  exercise = signal<ExerciseDetails>(new ExerciseDetails());
+  imageSrc = signal(' ');
 
   ngOnInit() {
     this.exerciseId = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.backendService.getExerciseDetails(this.exerciseId, "en").subscribe({
-      next: (data: ExerciseDetails) => {
-
-        this.exercise = data;
-        this.imageSrc = environment.baseUrl + `/exercise_images/${this.exercise.codeNum}.jpg`;
-
-      },
-      error: (err) => {
-        console.error('Failed to fetch exercise details', err);
-      }
-    });
+    this.backendService.getExerciseDetails(this.exerciseId, "en")
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (data: ExerciseDetails) => {
+          this.exercise.set(data);
+          this.imageSrc.set(environment.baseUrl + `/exercise_images/${data.codeNum}.jpg`);
+        },
+        error: (err) => {
+          console.error('Failed to fetch exercise details', err);
+        }
+      });
   }
 
   tagLabel(tag: string): string {
@@ -53,13 +60,19 @@ export class ExerciseItemComponent implements OnInit {
     return { 1: 'diff-easy', 2: 'diff-medium', 3: 'diff-hard' }[value] ?? '';
   }
 
+  trackByValue(index: number, value: string): string {
+    return value;
+  }
+
   edit(): void {
     this.router.navigate(['/exercise/edit', this.exerciseId]);
   }
 
   delete(): void {
-    this.backendService.deleteExercise(this.exerciseId).subscribe({
-      complete: () => this.router.navigate(['/exercises'])
-    });
+    this.backendService.deleteExercise(this.exerciseId)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        complete: () => this.router.navigate(['/exercises'])
+      });
   }
 }

@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { ExercisePreviewComponent } from './exercise-preview.component';
+import { ExercisePreview } from 'src/app/data/exercises/exercise-preview.model';
 
 describe('ExercisePreviewComponent', () => {
   let component: ExercisePreviewComponent;
@@ -8,10 +10,12 @@ describe('ExercisePreviewComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ExercisePreviewComponent]
+      imports: [ExercisePreviewComponent],
+      providers: [provideRouter([])]
     });
     fixture = TestBed.createComponent(ExercisePreviewComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('exercise', new ExercisePreview(1, 'Push Up', 100));
     fixture.detectChanges();
   });
 

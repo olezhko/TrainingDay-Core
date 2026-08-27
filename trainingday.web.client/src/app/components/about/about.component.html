@@ -93,7 +93,7 @@
       </div>
 
       <div class="carousel-dots">
-        <button *ngFor="let img of images; let i = index"
+        <button *ngFor="let img of images; let i = index; trackBy: trackByPath"
              [class.active]="i === currentIndex"
              (click)="goTo(i)"
              class="carousel-dot"

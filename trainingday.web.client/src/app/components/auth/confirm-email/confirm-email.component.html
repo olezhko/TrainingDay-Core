@@ -9,12 +9,12 @@
   <div class="auth-body">
     <div class="auth-card">
 
-      <div class="state-loading" *ngIf="state === 'loading'">
+      <div class="state-loading" *ngIf="state() === 'loading'">
         <div class="spinner"></div>
         <p>Confirming your email address...</p>
       </div>
 
-      <div class="state-success" *ngIf="state === 'success'">
+      <div class="state-success" *ngIf="state() === 'success'">
         <div class="state-icon success-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
@@ -26,7 +26,7 @@
         <a routerLink="/login" class="btn-primary">Sign In</a>
       </div>
 
-      <div class="state-error" *ngIf="state === 'error'">
+      <div class="state-error" *ngIf="state() === 'error'">
         <div class="state-icon error-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"/>
@@ -35,7 +35,7 @@
           </svg>
         </div>
         <h2>Confirmation Failed</h2>
-        <p>{{ errorMessage }}</p>
+        <p>{{ errorMessage() }}</p>
         <a routerLink="/register" class="btn-secondary">Register again</a>
       </div>
 

@@ -1,19 +1,32 @@
-import { Component, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnDestroy, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Editor, Toolbar, Validators as EditorValidators } from 'ngx-editor';   
+import { Editor, NgxEditorModule, Toolbar, Validators as EditorValidators } from 'ngx-editor';
 import { BackendService } from '../../../services/backend/backend.service';
 import { Router, ActivatedRoute  } from '@angular/router';
 import { BlogPostEditViewModel } from 'src/app/data/blog/blog-preview.model';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-blog-edit',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, NgxEditorModule, MatSnackBarModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './blog-edit.component.html',
   styleUrls: ['./blog-edit.component.css']
 })
-export class BlogEditComponent {
-  @Input() id: number = 0;
+export class BlogEditComponent implements OnInit, OnDestroy {
+  private fb = inject(FormBuilder);
+  private sanitizer = inject(DomSanitizer);
+  private backendService = inject(BackendService);
+  public router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private snackBar = inject(MatSnackBar);
+  private destroyRef = inject(DestroyRef);
+
+  id: number = 0;
   isEditMode = false;
 
   blogForm!: FormGroup;
@@ -33,15 +46,6 @@ export class BlogEditComponent {
   blogPost!: BlogPostEditViewModel;
   editorPreview!: Editor;
   editorContent!: Editor;
-  constructor(
-    private fb: FormBuilder,
-    private sanitizer: DomSanitizer,
-    private backendService: BackendService,
-    public router: Router,
-    private route: ActivatedRoute, 
-    private snackBar: MatSnackBar
-  ) {
-  }
 
   ngOnInit(): void {
     this.editorPreview = new Editor();
@@ -71,22 +75,30 @@ export class BlogEditComponent {
 
     if (this.isEditMode) {
       this.backendService.getBlogPost(id)
-        .subscribe(data => { 
-          this.blogPost = data;
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe({
+          next: data => {
+            this.blogPost = data;
 
-          this.blogForm.patchValue({
-            id: this.blogPost.id,
-            cultureId: this.blogPost.cultureId,
-            blogId: this.blogPost.blogId,
-            title: this.blogPost.title,
-            description: this.blogPost.description,
-            author: this.blogPost.author,
-            date: this.blogPost.date,
-            view: this.blogPost.view,
-            tags: this.blogPost.tags
-          });
+            this.blogForm.patchValue({
+              id: this.blogPost.id,
+              cultureId: this.blogPost.cultureId,
+              blogId: this.blogPost.blogId,
+              title: this.blogPost.title,
+              description: this.blogPost.description,
+              author: this.blogPost.author,
+              date: this.blogPost.date,
+              view: this.blogPost.view,
+              tags: this.blogPost.tags
+            });
+          },
+          error: (err) => console.error('Failed to fetch blog post', err)
         });
     }
+  }
+
+  trackByTag(index: number, tag: string): string {
+    return tag;
   }
 
   onTagInput(event: any): void {
@@ -146,7 +158,9 @@ export class BlogEditComponent {
       ? this.backendService.editBlogPost(this.id, blogModel)
       : this.backendService.createBlogPost(blogModel);
 
-    request$.subscribe({
+    request$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
       next: () => {
         this.snackBar.open('Blog post saved successfully!', 'Close', {
           duration: 3000,
@@ -176,9 +190,12 @@ export class BlogEditComponent {
   }
 
   onDelete(): void {
-    if(this.isEditMode)
-      this.backendService.deleteBlogPost(this.id).subscribe(data => {
-        this.router.navigate(['/blogs'])
-      });
+    if (this.isEditMode) {
+      this.backendService.deleteBlogPost(this.id)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe({
+          complete: () => this.router.navigate(['/blogs'])
+        });
+    }
   }
 }

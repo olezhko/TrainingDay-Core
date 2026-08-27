@@ -96,21 +96,21 @@
         <div class="mb-3">
           <label for="muscles" class="form-label required">Muscles Worked</label>
           <select class="form-select" multiple id="muscles" formControlName="selectedMuscles">
-            <option *ngFor="let tag of muscles" [ngValue]="tag">{{ tag.text }}</option>
+            <option *ngFor="let tag of muscles(); trackBy: trackByValue" [ngValue]="tag">{{ tag.text }}</option>
           </select>
         </div>
 
         <div class="mb-3">
           <label for="tags" class="form-label required">Tags</label>
           <select class="form-select" multiple id="tags" formControlName="selectedTags">
-            <option *ngFor="let tag of tags" [ngValue]="tag">{{ tag.text }}</option>
+            <option *ngFor="let tag of tags(); trackBy: trackByValue" [ngValue]="tag">{{ tag.text }}</option>
           </select>
         </div>
 
         <div class="mb-3">
           <label for="difficultType" class="form-label required">Difficulty</label>
           <select class="form-select" id="difficultType" formControlName="difficultType">
-            <option *ngFor="let opt of difficultOptions" [ngValue]="opt.value">{{ opt.text }}</option>
+            <option *ngFor="let opt of difficultOptions; trackBy: trackByOptionValue" [ngValue]="opt.value">{{ opt.text }}</option>
           </select>
         </div>
       </div>

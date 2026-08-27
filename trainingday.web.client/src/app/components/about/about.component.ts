@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ImageAbout } from '../../data/about/image-about.model';
-import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [NgbCarouselModule, CommonModule],
+  imports: [CommonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })
@@ -37,5 +37,9 @@ export class AboutComponent implements OnInit {
 
   goTo(index: number) {
     this.currentIndex = index;
+  }
+
+  trackByPath(index: number, image: ImageAbout): string {
+    return image.path;
   }
 }

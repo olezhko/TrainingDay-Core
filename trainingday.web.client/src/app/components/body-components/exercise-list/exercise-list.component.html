@@ -25,26 +25,26 @@
             (input)="onSearchInput($any($event.target).value)" />
         </div>
 
-        <button class="filter-toggle-btn" (click)="filtersExpanded = !filtersExpanded">
-          <mat-icon>{{ filtersExpanded ? 'expand_less' : 'tune' }}</mat-icon>
+        <button class="filter-toggle-btn" (click)="toggleFiltersExpanded()">
+          <mat-icon>{{ filtersExpanded() ? 'expand_less' : 'tune' }}</mat-icon>
           Filters
-          <span *ngIf="activeFilterCount > 0" class="filter-badge">{{ activeFilterCount }}</span>
+          <span *ngIf="getActiveFilterCount() > 0" class="filter-badge">{{ getActiveFilterCount() }}</span>
         </button>
 
-        <button *ngIf="activeFilterCount > 0" class="clear-btn" (click)="clearFilters()">
+        <button *ngIf="getActiveFilterCount() > 0" class="clear-btn" (click)="clearFilters()">
           <mat-icon>close</mat-icon>
         </button>
       </div>
 
-      <div *ngIf="filtersExpanded" class="filter-sections">
+      <div *ngIf="filtersExpanded()" class="filter-sections">
         <div class="filter-section">
           <span class="filter-label">Muscles</span>
           <div class="muscle-groups">
-            <div *ngFor="let group of muscleGroups" class="muscle-group">
+            <div *ngFor="let group of muscleGroups; trackBy: trackByLabel" class="muscle-group">
               <span class="muscle-group-label">{{ group.label }}</span>
               <div class="chip-list">
                 <button
-                  *ngFor="let opt of group.options"
+                  *ngFor="let opt of group.options; trackBy: trackByValue"
                   class="chip"
                   [class.chip-active]="opt.selected"
                   (click)="toggleMuscle(opt)">
@@ -59,7 +59,7 @@
           <span class="filter-label">Tags</span>
           <div class="chip-list">
             <button
-              *ngFor="let opt of tagOptions"
+              *ngFor="let opt of tagOptions; trackBy: trackByValue"
               class="chip"
               [class.chip-active]="opt.selected"
               (click)="toggleTag(opt)">
@@ -72,7 +72,7 @@
           <span class="filter-label">Difficulty</span>
           <div class="chip-list">
             <button
-              *ngFor="let opt of difficultyOptions"
+              *ngFor="let opt of difficultyOptions; trackBy: trackByValue"
               class="chip"
               [class.chip-active]="opt.selected"
               [ngClass]="'chip-diff-' + opt.label.toLowerCase()"
@@ -86,15 +86,15 @@
   </div>
 
   <div class="exercise-list-body">
-    <div *ngIf="loading" class="exercise-empty">
+    <div *ngIf="loading()" class="exercise-empty">
       <p>Loading...</p>
     </div>
 
-    <div *ngIf="!loading" class="exercise-grid">
-      <app-exercise-preview *ngFor="let exercise of exercisePreviews" [exercise]="exercise"></app-exercise-preview>
+    <div *ngIf="!loading()" class="exercise-grid">
+      <app-exercise-preview *ngFor="let exercise of exercisePreviews(); trackBy: trackByExerciseId" [exercise]="exercise"></app-exercise-preview>
     </div>
 
-    <div *ngIf="!loading && exercisePreviews?.length === 0" class="exercise-empty">
+    <div *ngIf="!loading() && exercisePreviews().length === 0" class="exercise-empty">
       <p>No exercises found.</p>
     </div>
   </div>

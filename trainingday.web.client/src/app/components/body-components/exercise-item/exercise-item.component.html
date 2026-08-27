@@ -1,14 +1,14 @@
-<div class="ex-detail-page" *ngIf="exercise?.name">
+<div class="ex-detail-page" *ngIf="exercise()?.name">
   <div class="ex-detail-hero">
-    <img [src]="imageSrc" [alt]="exercise.name" class="ex-detail-image" />
+    <img [src]="imageSrc()" [alt]="exercise().name" class="ex-detail-image" />
     <div class="ex-detail-hero-overlay">
       <div class="ex-detail-hero-content">
-        <h1 class="ex-detail-title">{{ exercise.name }}</h1>
-        <div class="ex-detail-badges" *ngIf="exercise.muscles?.length">
-          <span *ngFor="let muscle of exercise.muscles" class="badge-muscle">{{ muscleLabel(muscle) }}</span>
+        <h1 class="ex-detail-title">{{ exercise().name }}</h1>
+        <div class="ex-detail-badges" *ngIf="exercise().muscles?.length">
+          <span *ngFor="let muscle of exercise().muscles; trackBy: trackByValue" class="badge-muscle">{{ muscleLabel(muscle) }}</span>
         </div>
-        <div class="ex-detail-difficulty" *ngIf="exercise.difficultType">
-          <span class="badge-difficulty" [ngClass]="difficultClass(exercise.difficultType)">{{ difficultLabel(exercise.difficultType) }}</span>
+        <div class="ex-detail-difficulty" *ngIf="exercise().difficultType">
+          <span class="badge-difficulty" [ngClass]="difficultClass(exercise().difficultType)">{{ difficultLabel(exercise().difficultType) }}</span>
         </div>
       </div>
     </div>
@@ -17,40 +17,40 @@
   <div class="ex-detail-body">
     <div class="ex-detail-content">
 
-      <div class="ex-section" *ngIf="exercise.startingPositionDescription">
+      <div class="ex-section" *ngIf="exercise().startingPositionDescription">
         <div class="ex-section-header">
           <div class="ex-section-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
           </div>
           <h2>Starting Position</h2>
         </div>
-        <p>{{ exercise.startingPositionDescription }}</p>
+        <p>{{ exercise().startingPositionDescription }}</p>
       </div>
 
-      <div class="ex-section" *ngIf="exercise.executionDescription">
+      <div class="ex-section" *ngIf="exercise().executionDescription">
         <div class="ex-section-header">
           <div class="ex-section-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
           </div>
           <h2>Execution</h2>
         </div>
-        <p>{{ exercise.executionDescription }}</p>
+        <p>{{ exercise().executionDescription }}</p>
       </div>
 
-      <div class="ex-section" *ngIf="exercise.adviceDescription">
+      <div class="ex-section" *ngIf="exercise().adviceDescription">
         <div class="ex-section-header">
           <div class="ex-section-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
           </div>
           <h2>Tips & Advice</h2>
         </div>
-        <p>{{ exercise.adviceDescription }}</p>
+        <p>{{ exercise().adviceDescription }}</p>
       </div>
 
-      <div class="ex-tags-section" *ngIf="exercise.tags?.length">
+      <div class="ex-tags-section" *ngIf="exercise().tags?.length">
         <h3>Tags</h3>
         <div class="ex-tags-list">
-          <span *ngFor="let tag of exercise.tags" class="badge-tag">{{ tagLabel(tag) }}</span>
+          <span *ngFor="let tag of exercise().tags; trackBy: trackByValue" class="badge-tag">{{ tagLabel(tag) }}</span>
         </div>
       </div>
 
@@ -68,7 +68,7 @@
   </div>
 </div>
 
-<div class="ex-detail-loading" *ngIf="!exercise?.name">
+<div class="ex-detail-loading" *ngIf="!exercise()?.name">
   <div class="ex-loading-spinner"></div>
   <p>Loading exercise...</p>
 </div>

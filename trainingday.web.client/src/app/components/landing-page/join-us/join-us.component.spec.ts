@@ -8,7 +8,7 @@ describe('JoinUsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [JoinUsComponent]
+      imports: [JoinUsComponent]
     });
     fixture = TestBed.createComponent(JoinUsComponent);
     component = fixture.componentInstance;

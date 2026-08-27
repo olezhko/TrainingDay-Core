@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-download-page',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './download-page.component.html',
   styleUrls: ['./download-page.component.css']
 })

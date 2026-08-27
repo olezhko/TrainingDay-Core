@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService, UserInfo } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-user-profile',
+  standalone: true,
+  imports: [CommonModule, RouterLink],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })

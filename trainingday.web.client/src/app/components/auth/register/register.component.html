@@ -9,12 +9,12 @@
   <div class="auth-body">
     <div class="auth-card">
 
-      <div class="form-success" *ngIf="successMessage">
+      <div class="form-success" *ngIf="successMessage()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        {{ successMessage }}
+        {{ successMessage() }}
       </div>
 
-      <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!successMessage">
+      <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!successMessage()">
 
         <div class="form-field">
           <label for="nick">Nickname</label>
@@ -33,10 +33,10 @@
         <div class="form-field">
           <label for="password">Password</label>
           <div class="input-wrapper">
-            <input [type]="showPassword ? 'text' : 'password'" class="form-input" id="password" placeholder="Min 8 characters with numbers and special characters" formControlName="password" autocomplete="new-password">
-            <button type="button" class="toggle-password" (click)="showPassword = !showPassword" tabindex="-1">
-              <svg *ngIf="!showPassword" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-              <svg *ngIf="showPassword" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            <input [type]="showPassword() ? 'text' : 'password'" class="form-input" id="password" placeholder="Min 8 characters with numbers and special characters" formControlName="password" autocomplete="new-password">
+            <button type="button" class="toggle-password" (click)="togglePassword()" tabindex="-1">
+              <svg *ngIf="!showPassword()" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg *ngIf="showPassword()" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
             </button>
           </div>
           <span class="field-error" *ngIf="form.get('password')?.touched && form.get('password')?.hasError('required')">Password is required</span>
@@ -49,14 +49,14 @@
           <span class="field-error" *ngIf="form.get('confirmPassword')?.touched && form.hasError('mismatch')">Passwords do not match</span>
         </div>
 
-        <div class="form-error" *ngIf="errorMessage">
+        <div class="form-error" *ngIf="errorMessage()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          {{ errorMessage }}
+          {{ errorMessage() }}
         </div>
 
-        <button type="submit" class="btn-submit" [disabled]="loading">
-          <span *ngIf="!loading">Create Account</span>
-          <span *ngIf="loading" class="spinner"></span>
+        <button type="submit" class="btn-submit" [disabled]="loading()">
+          <span *ngIf="!loading()">Create Account</span>
+          <span *ngIf="loading()" class="spinner"></span>
         </button>
       </form>
 
