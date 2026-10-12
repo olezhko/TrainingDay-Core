@@ -7,6 +7,8 @@
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   display: flex;
   flex-direction: column;
+  color: inherit;
+  text-decoration: none;
 }
 
 .ex-card:hover {

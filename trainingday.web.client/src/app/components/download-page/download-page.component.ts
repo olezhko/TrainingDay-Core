@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-download-page',
@@ -8,9 +9,19 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./download-page.component.css']
 })
 export class DownloadPageComponent implements OnInit {
+  private platformId = inject(PLATFORM_ID);
 
   ngOnInit(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
+
+    // Let search engine crawlers (Googlebot smartphone reports Android) index this page.
+    if (/bot|crawler|spider|crawling|lighthouse/i.test(userAgent)) {
+      return;
+    }
 
     if (/android/i.test(userAgent)) {
       window.location.href = 'https://play.google.com/store/apps/details?id=com.OLASoft.TrainingDay&pli=1';

@@ -27,17 +27,8 @@ export const exerciseReducer = createReducer(
     exercises,
     isLoading: false
   })),
-  on(ExerciseActions.loadMoreExercises, state => ({
+  on(ExerciseActions.exercisesLoadError, state => ({
     ...state,
-    isLoading: true
-  })),
-  on(ExerciseActions.moreExercisesLoaded, (state, { exercises }) => ({
-    ...state,
-    exercises: [...state.exercises, ...exercises],
     isLoading: false
-  })),
-  on(ExerciseActions.searchExercises, (state, { query }) => ({
-    ...state,
-    searchQuery: query
   }))
 );

@@ -1,6 +1,6 @@
 <nav class="td-navbar fixed-top">
   <div class="td-navbar-inner">
-    <a class="td-brand" href="/">
+    <a class="td-brand" routerLink="/">
       <img src="../../assets/main.png" alt="TrainingDay" />
     </a>
 
@@ -14,11 +14,11 @@
       <span class="td-toggler-bar"></span>
     </button>
 
-    <div class="td-nav-links" [class.open]="isMenuOpen">
-      <a class="td-nav-link" href="/exercises">Exercises</a>
-      <a class="td-nav-link" href="/blogs">Blog</a>
-      <a class="td-nav-link" href="/about">About</a>
-      <a class="td-nav-link td-nav-download" href="/download">Download App</a>
+    <div class="td-nav-links" [class.open]="isMenuOpen" (click)="isMenuOpen = false">
+      <a class="td-nav-link" routerLink="/exercises">Exercises</a>
+      <a class="td-nav-link" routerLink="/blogs">Blog</a>
+      <a class="td-nav-link" routerLink="/about">About</a>
+      <a class="td-nav-link td-nav-download" routerLink="/download">Download App</a>
       <div class="td-nav-divider"></div>
       <ng-container *ngIf="!isLoggedIn()">
         <a class="td-nav-link" routerLink="/login">Sign In</a>

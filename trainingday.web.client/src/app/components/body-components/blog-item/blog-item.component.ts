@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BackendService } from '../../../services/backend/backend.service';
 import { BlogDetails } from '../../../data/blog/blog-details.model';
 import { AuthService } from '../../../services/auth/auth.service';
+import { SeoService } from '../../../services/seo/seo.service';
 
 @Component({
   selector: 'app-blog-item',
@@ -19,6 +20,7 @@ export class BlogItemComponent implements OnInit {
   private router = inject(Router);
   private backendService = inject(BackendService);
   private destroyRef = inject(DestroyRef);
+  private seoService = inject(SeoService);
   public authService = inject(AuthService);
 
   blogPost = signal<BlogDetails | null>(null);
@@ -27,7 +29,10 @@ export class BlogItemComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.backendService.getBlogPost(id)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(post => this.blogPost.set(post));
+      .subscribe(post => {
+        this.blogPost.set(post);
+        this.seoService.update({ title: post.title, description: post.description || post.view, type: 'article' });
+      });
   }
 
   edit(): void {

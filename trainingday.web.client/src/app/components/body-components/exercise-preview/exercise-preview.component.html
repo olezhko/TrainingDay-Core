@@ -1,6 +1,6 @@
-<div class="ex-card" (click)="showDetails()">
+<a class="ex-card" [routerLink]="['/exercise/details', exercise().codeNum]">
   <div class="ex-card-image">
-    <img [src]="imageSrc()" [alt]="exercise().name" />
+    <img [src]="imageSrc()" [alt]="exercise().name" loading="lazy" />
     <div class="ex-card-overlay">
       <span class="ex-card-cta">View Details</span>
     </div>
@@ -8,4 +8,4 @@
   <div class="ex-card-body">
     <h3 class="ex-card-title">{{ exercise().name }}</h3>
   </div>
-</div>
+</a>

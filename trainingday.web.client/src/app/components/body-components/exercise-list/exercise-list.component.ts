@@ -1,16 +1,18 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ExercisePreview } from 'src/app/data/exercises/exercise-preview.model';
 import { ExerciseTags, ExerciseTagsEnglishLabels } from 'src/app/data/exercises/exercise-tags';
 import { MUSCLE_GROUPS, MusclesEnumEnglishLabels, MusclesEnum } from 'src/app/data/exercises/exercise-muscle';
-import { BackendService } from 'src/app/services/backend/backend.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ExercisePreviewComponent } from '../exercise-preview/exercise-preview.component';
+import * as ExerciseActions from 'src/app/services/ngrx/actions/exercise.actions';
+import { selectExerciseList, selectIsLoading } from 'src/app/services/ngrx/actions/exercise.selectors';
 
 export interface MuscleOption {
   value: number;
@@ -44,14 +46,14 @@ interface DifficultyOption {
   styleUrls: ['./exercise-list.component.css']
 })
 export class ExerciseListComponent implements OnInit {
-  private backendService = inject(BackendService);
+  private store = inject(Store);
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
   public authService = inject(AuthService);
 
   public filterName: string = '';
-  public exercisePreviews = signal<ExercisePreview[]>([]);
-  public loading = signal(false);
+  public exercisePreviews = toSignal(this.store.select(selectExerciseList), { initialValue: [] as ExercisePreview[] });
+  public loading = toSignal(this.store.select(selectIsLoading), { initialValue: false });
   public filtersExpanded = signal(false);
 
   public muscleGroups: MuscleGroupSection[] = MUSCLE_GROUPS.map(g => ({
@@ -79,7 +81,8 @@ export class ExerciseListComponent implements OnInit {
   private culture: string;
 
   constructor() {
-    this.culture = navigator.language.split('-')[0] || 'en';
+    // navigator is not available while prerendering at build time.
+    this.culture = (typeof navigator !== 'undefined' && navigator.language.split('-')[0]) || 'en';
   }
 
   ngOnInit(): void {
@@ -145,20 +148,17 @@ export class ExerciseListComponent implements OnInit {
   }
 
   private loadExercises(): void {
-    const muscles = this.muscleGroups.flatMap(g => g.options.filter(o => o.selected).map(o => o.value));
-    const tags = this.tagOptions.filter(o => o.selected).map(o => o.value);
-    const difficulties = this.difficultyOptions.filter(o => o.selected).map(o => o.value);
+    const selectedMuscles = this.muscleGroups.flatMap(g => g.options.filter(o => o.selected).map(o => o.value));
+    const selectedTags = this.tagOptions.filter(o => o.selected).map(o => o.value);
+    const selectedDifficulty = this.difficultyOptions.filter(o => o.selected).map(o => o.value);
 
-    this.loading.set(true);
-    this.backendService.getExercises(muscles, tags, difficulties, this.filterName, this.culture)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: exercises => {
-          this.exercisePreviews.set(exercises);
-          this.loading.set(false);
-        },
-        error: () => { this.loading.set(false); }
-      });
+    this.store.dispatch(ExerciseActions.loadExercises({
+      selectedMuscles,
+      selectedTags,
+      selectedDifficulty,
+      filterName: this.filterName,
+      twoLetterCulture: this.culture
+    }));
   }
 
   createNew(): void {

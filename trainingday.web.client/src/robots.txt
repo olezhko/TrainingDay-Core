@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /api/
+Disallow: /swagger/
+Disallow: /profile
+Disallow: /blogs/new
+Disallow: /blogs/edit/
+Disallow: /exercise/new
+Disallow: /exercise/edit/
+
+Sitemap: https://trainingday.space/sitemap.xml

@@ -13,15 +13,11 @@ import { AuthService, UserInfo } from '../../../services/auth/auth.service';
 })
 export class UserProfileComponent implements OnInit {
   user: UserInfo | null = null;
-  sessionValid = false;
-  checkingSession = true;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.user = this.authService.currentUser;
-    this.sessionValid = true;
-    this.checkingSession = false;
   }
 
   logout(): void {

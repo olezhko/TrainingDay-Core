@@ -28,19 +28,15 @@ try
     builder.Services.AddDbContext<TrainingDayContext>(options => options.UseMySQL(conString));
 
     var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-    var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>() ?? [];
     builder.Services.AddCors(options =>
     {
         options.AddPolicy(MyAllowSpecificOrigins, corsPolicyBuilder =>
         {
-            if (allowedOrigins.Length > 0)
-            {
-                corsPolicyBuilder
-                    .WithOrigins(allowedOrigins)
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials();
-            }
+            corsPolicyBuilder
+                .SetIsOriginAllowed(_ => true)
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
         });
     });
 
@@ -77,7 +73,8 @@ try
 
     var app = builder.Build();
 
-    app.UseDefaultFiles();
+    // Prerendered pages live in folders (e.g. blogs/19/index.html); serve them at /blogs/19 without redirecting to /blogs/19/.
+    app.UseDefaultFiles(new DefaultFilesOptions { RedirectToAppendTrailingSlash = false });
 
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -86,25 +83,14 @@ try
     app.UseStaticFiles();
     app.UseRouting();
 
-    if (app.Environment.IsDevelopment())
-    {
-        app.UseCors(policy => policy
-            .SetIsOriginAllowed(_ => true)
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials());
-    }
-    else
-    {
-        app.UseCors(MyAllowSpecificOrigins);
-    }
+    app.UseCors(MyAllowSpecificOrigins);
 
     app.UseAuthentication();
     app.UseAuthorization();
 
     app.MapControllers();
 
-    app.MapFallbackToFile("/index.html");
+    app.MapSpaFallback();
 
     using (var scope = app.Services.CreateScope())
     {

@@ -1,25 +1,18 @@
 ﻿using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
 using Microsoft.Extensions.Options;
-using System.Text;
 using TrainingDay.Common.Communication;
 
 namespace TrainingDay.Web.Services.YoutubeVideo;
 
-public class YoutubeVideoCatalog : IYoutubeVideoCatalog
+public class YoutubeVideoCatalog(IOptions<ApiSettings> settings) : IYoutubeVideoCatalog
 {
-    private readonly ApiSettings _settings;
-
-    public YoutubeVideoCatalog(IOptions<ApiSettings> settings)
-    {
-        _settings = settings.Value;
-    }
+    private readonly ApiSettings _settings = settings.Value;
 
     public async Task<List<YoutubeVideoItem>> GetVideoItemsAsync(string search, int maxCount = 10)
     {
         var result = new List<YoutubeVideoItem>();
 
-        Console.OutputEncoding = Encoding.Unicode;
         using var youtubeService = new YouTubeService(new BaseClientService.Initializer()
         {
             ApiKey = _settings.YouTube.Key,
@@ -27,7 +20,7 @@ public class YoutubeVideoCatalog : IYoutubeVideoCatalog
         });
 
         var searchListRequest = youtubeService.Search.List("snippet");
-        searchListRequest.Q = search; // Replace with your search term.
+        searchListRequest.Q = search;
         searchListRequest.MaxResults = maxCount;
 
         // Call the search.list method to retrieve results matching the specified query term.

@@ -33,7 +33,8 @@ export class BlogListComponent implements OnInit {
   }
 
   setCulture() {
-    const clientCulture = navigator.language || navigator['language'];
+    // navigator is not available while prerendering at build time.
+    const clientCulture = typeof navigator !== 'undefined' ? navigator.language : 'en';
 
     const cultureFromRoute = this.route.snapshot.queryParams['cu'];
     this.culture = cultureFromRoute ? cultureFromRoute : clientCulture.split('-')[0];

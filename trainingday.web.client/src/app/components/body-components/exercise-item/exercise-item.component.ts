@@ -8,6 +8,7 @@ import { ExerciseTagsEnglishLabels, ExerciseTags } from 'src/app/data/exercises/
 import { MusclesEnumEnglishLabels, MusclesEnum } from 'src/app/data/exercises/exercise-muscle';
 import { environment } from '../../../../environment/environment';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { SeoService } from 'src/app/services/seo/seo.service';
 
 @Component({
   selector: 'app-exercise-item',
@@ -22,6 +23,7 @@ export class ExerciseItemComponent implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private destroyRef = inject(DestroyRef);
+  private seoService = inject(SeoService);
   public authService = inject(AuthService);
 
   exerciseId = 0;
@@ -37,6 +39,11 @@ export class ExerciseItemComponent implements OnInit {
         next: (data: ExerciseDetails) => {
           this.exercise.set(data);
           this.imageSrc.set(environment.baseUrl + `/exercise_images/${data.codeNum}.jpg`);
+          this.seoService.update({
+            title: `${data.name} – How to Do It, Muscles Worked`,
+            description: [data.startingPositionDescription, data.executionDescription].filter(Boolean).join(' '),
+            image: this.imageSrc(),
+          });
         },
         error: (err) => {
           console.error('Failed to fetch exercise details', err);

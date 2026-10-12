@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "run-script-os",
+    "prebuild": "node scripts/prerender-routes.mjs",
     "build": "ng build",
+    "postbuild": "node scripts/create-csr-shell.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "prestart": "node aspnetcore-https",
@@ -22,6 +24,7 @@
     "@angular/material": "^17.3.10",
     "@angular/platform-browser": "^17.3.12",
     "@angular/platform-browser-dynamic": "^17.3.12",
+    "@angular/platform-server": "^17.3.12",
     "@angular/router": "^17.3.12",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "@ngrx/effects": "^17.2.0",

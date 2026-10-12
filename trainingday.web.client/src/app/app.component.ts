@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { SeoService } from './services/seo/seo.service';
 
 @Component({
   selector: 'app-root',
@@ -12,5 +13,7 @@ import { FooterComponent } from './components/footer/footer.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Training Day';
+  constructor() {
+    inject(SeoService).init();
+  }
 }
