@@ -19,7 +19,6 @@ Serilog.Core.Logger logger = new LoggerConfiguration()
 
 try
 {
-    logger.Information($"Application starting");
     var builder = WebApplication.CreateBuilder(args);
     builder.Logging.ClearProviders();
     builder.Logging.AddSerilog(logger);
@@ -67,6 +66,8 @@ try
             .Build();
     });
 
+    builder.Services.AddAppRateLimiting();
+
     builder.Services.AddApiVersioning();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
@@ -87,6 +88,7 @@ try
 
     app.UseAuthentication();
     app.UseAuthorization();
+    app.UseRateLimiter();
 
     app.MapControllers();
 
@@ -95,7 +97,15 @@ try
     using (var scope = app.Services.CreateScope())
     {
         TrainingDayContext db = scope.ServiceProvider.GetRequiredService<TrainingDayContext>();
-        await db.Database.MigrateAsync();
+        var pendingMigrations = (await db.Database.GetPendingMigrationsAsync()).ToList();
+        if (pendingMigrations.Count > 0)
+        {
+            logger.Warning("Applying {Count} pending migrations: {Migrations}", pendingMigrations.Count, string.Join(", ", pendingMigrations));
+            await db.Database.MigrateAsync();
+        }
+        else
+            logger.Warning("No pending migrations");
+
         await ExercisesInitializer.InitializeAsync(db);
 
         var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
@@ -107,7 +117,6 @@ try
     }
 
     app.Run();
-    logger.Information($"Application started");
 }
 catch (Exception exception)
 {

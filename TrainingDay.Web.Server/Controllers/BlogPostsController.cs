@@ -8,7 +8,7 @@ namespace TrainingDay.Web.Server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class BlogPostsController(ILogger<BlogPostsController> logger, IBlogPostsManager blogService) : ControllerBase
+public class BlogPostsController(IBlogPostsManager blogService) : ControllerBase
 {
     [HttpGet("search")]
     public async Task<IActionResult> GetAsync(BlogsCultureTypes culture, int page, int pageSize, CancellationToken token)

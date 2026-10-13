@@ -16,7 +16,7 @@ namespace TrainingDay.Web.Database.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.19")
+                .HasAnnotation("ProductVersion", "10.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -784,6 +784,22 @@ namespace TrainingDay.Web.Database.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("MobileUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000001"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0B1C2D3E-4F50-4617-8293-A4B5C6D7E8F9",
+                            EmailConfirmed = false,
+                            LockoutEnabled = true,
+                            NormalizedUserName = "ANONYMOUS",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7F3B2C9E-5A41-4D8E-9C6B-1E2F3A4B5C6D",
+                            ShareCompletedWorkouts = true,
+                            TwoFactorEnabled = false,
+                            UserName = "Anonymous"
+                        });
                 });
 
             modelBuilder.Entity("TrainingDay.Web.Entities.SupportRequest", b =>

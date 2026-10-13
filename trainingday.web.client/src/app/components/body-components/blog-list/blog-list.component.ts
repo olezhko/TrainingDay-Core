@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { catchError, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { BackendService } from '../../../services/backend/backend.service';
@@ -42,7 +43,11 @@ export class BlogListComponent implements OnInit {
 
   loadPosts() {
     this.backendService.getBlogPosts(this.culture, this.page, this.pageSize)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        // An unavailable API (e.g. during prerender) leaves the list empty instead of failing.
+        catchError(() => of([] as BlogPreview[])),
+        takeUntilDestroyed(this.destroyRef)
+      )
       .subscribe(data => this.blogPosts.set(data));
   }
 

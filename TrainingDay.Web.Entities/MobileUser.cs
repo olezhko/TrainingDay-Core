@@ -5,6 +5,9 @@ namespace TrainingDay.Web.Entities;
 
 public class MobileUser : IdentityUser<Guid>
 {
+    public static readonly Guid AnonymousUserId = new("00000000-0000-0000-0000-000000000001");
+    public const string AnonymousUserName = "Anonymous";
+
     public bool ShareCompletedWorkouts { get; set; } = true;
 
     public virtual UserMobileToken UserMobileToken { get; set; }

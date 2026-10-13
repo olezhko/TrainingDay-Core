@@ -69,6 +69,18 @@ public class TrainingDayContext : IdentityDbContext<MobileUser, IdentityRole<Gui
             .Property(item => item.ShareCompletedWorkouts)
             .HasDefaultValue(true);
 
+        // Shared author for workouts shared by non-logged-in users. No password, so nobody can sign in as it.
+        modelBuilder.Entity<MobileUser>().HasData(new MobileUser
+        {
+            Id = MobileUser.AnonymousUserId,
+            UserName = MobileUser.AnonymousUserName,
+            NormalizedUserName = MobileUser.AnonymousUserName.ToUpperInvariant(),
+            SecurityStamp = "7F3B2C9E-5A41-4D8E-9C6B-1E2F3A4B5C6D",
+            ConcurrencyStamp = "0B1C2D3E-4F50-4617-8293-A4B5C6D7E8F9",
+            LockoutEnabled = true,
+            ShareCompletedWorkouts = true,
+        });
+
         modelBuilder.Entity<SocialWorkoutLike>()
             .HasIndex(item => new { item.SocialWorkoutId, item.UserId })
             .IsUnique();

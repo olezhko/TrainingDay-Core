@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using TrainingDay.Common.Models;
 using TrainingDay.Web.Entities;
+using TrainingDay.Web.Server.Extensions;
 using TrainingDay.Web.Services.SocialWorkouts;
 
 namespace TrainingDay.Web.Server.Controllers;
@@ -23,6 +25,8 @@ public class SocialWorkoutsController(ISocialWorkoutManager manager, UserManager
     }
 
     [HttpPost]
+    [AllowAnonymous]
+    [EnableRateLimiting(RateLimitingExtensions.ShareWorkoutPolicy)]
     public async Task<IActionResult> ShareAsync([FromBody] ShareSocialWorkoutRequest request, CancellationToken token)
     {
         if (!ModelState.IsValid)
@@ -31,14 +35,11 @@ public class SocialWorkoutsController(ISocialWorkoutManager manager, UserManager
         }
 
         var user = await userManager.GetUserAsync(User);
-        if (user == null)
-        {
-            return Unauthorized();
-        }
+        var userId = user?.Id ?? MobileUser.AnonymousUserId;
 
         try
         {
-            var result = await manager.ShareAsync(user.Id, request, token);
+            var result = await manager.ShareAsync(userId, request, token);
             return Ok(result);
         }
         catch (InvalidOperationException ex)

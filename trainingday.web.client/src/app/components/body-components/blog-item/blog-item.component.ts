@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { EMPTY, catchError } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BackendService } from '../../../services/backend/backend.service';
@@ -28,7 +29,11 @@ export class BlogItemComponent implements OnInit {
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.backendService.getBlogPost(id)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        // An unavailable API (e.g. during prerender) leaves the page empty instead of failing.
+        catchError(() => EMPTY),
+        takeUntilDestroyed(this.destroyRef)
+      )
       .subscribe(post => {
         this.blogPost.set(post);
         this.seoService.update({ title: post.title, description: post.description || post.view, type: 'article' });
