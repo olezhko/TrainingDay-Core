@@ -2,7 +2,7 @@
 
 namespace TrainingDay.Web.Data.OpenAI;
 
-public interface IOpenAIService
+public interface IAiService
 {
     Task<ExercisesAiResponse> GetExercisesByQueryAsync(string prompt, CancellationToken token);
 }

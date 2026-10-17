@@ -1,7 +1,6 @@
-﻿namespace TrainingDay.Common.Communication
+﻿namespace TrainingDay.Common.Communication;
+
+public class ExerciseQueryRequest
 {
-    public class ExerciseQueryRequest
-    {
-        public string Query { get; set; } = string.Empty;
-    }
+    public string Query { get; set; } = string.Empty;
 }

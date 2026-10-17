@@ -2,6 +2,7 @@
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Options;
 using TrainingDay.Web.Data.OpenAI;
 using TrainingDay.Web.Data.Repositories;
 using TrainingDay.Web.Database;
@@ -9,6 +10,7 @@ using TrainingDay.Web.Entities;
 using TrainingDay.Web.Services;
 using TrainingDay.Web.Services.Auth;
 using TrainingDay.Web.Services.Blogs;
+using TrainingDay.Web.Services.DeepSeek;
 using TrainingDay.Web.Services.Email;
 using TrainingDay.Web.Services.Exercises;
 using TrainingDay.Web.Services.Extensions;
@@ -63,7 +65,9 @@ public static class DependenciesInjection
 
         services.Configure<ApiSettings>(configuration.GetSection("ApiSettings"));
         services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
+        services.Configure<AiOptions>(configuration.GetSection("AI"));
         services.Configure<OpenAIOptions>(configuration.GetSection("OpenAI"));
+        services.Configure<DeepSeekOptions>(configuration.GetSection("DeepSeek"));
         services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
         services.AddScoped<IJwtTokenService, JwtTokenService>();
@@ -76,7 +80,14 @@ public static class DependenciesInjection
         services.AddScoped<IUserRepoManager, UserRepoManager>();
         services.AddScoped<IFirebaseService, FirebaseService>();
         services.AddScoped<IStringLocalizer, StringLocalizerService>();
-        services.AddSingleton<IOpenAIService, OpenAIService>();
+        // The provider is read per resolution, so switching "AI:Provider" in appsettings takes effect without a restart.
+        services.AddSingleton<OpenAIService>();
+        services.AddSingleton<DeepSeekService>();
+        services.AddTransient<IAiService>(sp => sp.GetRequiredService<IOptionsMonitor<AiOptions>>().CurrentValue.Provider switch
+        {
+            AiProvider.DeepSeek => sp.GetRequiredService<DeepSeekService>(),
+            _ => sp.GetRequiredService<OpenAIService>()
+        });
         services.AddScoped<IMessageProducer, RabbitMQProducer>();
 
         services.AddTransient<IEmailSender, EmailSender>();

@@ -30,6 +30,12 @@ npm test           # Karma/Jasmine
 `TrainingDay.Common` also targets `net10.0-ios`/`net10.0-android`, which need MAUI workloads. On machines without
 them (e.g. CI), restore/publish the server with `-p:TargetFramework=net10.0` as `.github/workflows/aws.yml` does.
 
+## Code rules
+
+- Never use APIs marked `[Obsolete]` (compiler warnings CS0618/CS0612) in new or changed code; use the replacement
+  named in the obsolete message (e.g. OpenAI-DotNet `TextResponseFormat.Json` → `jsonSchema:`). Check the build output
+  for these warnings in files you touched.
+
 ## Architecture
 
 Project dependency chain (top depends on bottom):
@@ -37,7 +43,10 @@ Project dependency chain (top depends on bottom):
 - `TrainingDay.Web.Server`: controllers, view models, hand-written mapping extensions in `Mapper/` (no AutoMapper), startup. `Extensions/DependenciesInjection.cs`
   (`InstallServices`) registers every service, Identity, options sections and Firebase. Register new services there.
 - `TrainingDay.Web.Services`: business logic as `I*Manager`/`*Manager` pairs, one folder per feature (Blogs, Exercises,
-  SocialWorkouts, UserTokens, Auth/JWT, Email via MailKit, Firebase push, OpenAI, RabbitMQ producer, YouTube).
+  SocialWorkouts, UserTokens, Auth/JWT, Email via MailKit, Firebase push, RabbitMQ producer, YouTube).
+  AI exercise search goes through `IAiService`, implemented by `OpenAIService` (Assistants API + vector store) and
+  `DeepSeekService` (chat completions with the exercise list in the prompt); `AI:Provider` (`OpenAI`/`DeepSeek`) picks one
+  per request. Shared prompt rules live in `OpenAI/ExerciseAiPrompt.cs`.
   Background work runs through `ConsumeScopedServiceHostedService` → `IScopedProcessingService`.
 - `TrainingDay.Web.Database`: `TrainingDayContext` (EF Core, MySQL via `MySql.EntityFrameworkCore`, ASP.NET Identity
   with `MobileUser` / `IdentityRole<Guid>`), migrations, `AuditSaveChangesInterceptor`, `ExercisesInitializer` seed data.
