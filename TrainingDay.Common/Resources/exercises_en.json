@@ -127,7 +127,7 @@
       "Advice": ""
     },
     "MusclesString": "ShouldersBack,MiddleBack,Trapezium",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 11
   },
@@ -187,7 +187,7 @@
       "Advice": "Keep your body still and your elbows fixed to your sides. Only your forearms should move."
     },
     "MusclesString": "Biceps,Forearm",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 16
   },
@@ -199,7 +199,7 @@
       "Advice": "Use one cable at a time to get your core more involved. The overhead cable curl targets your brachialis, not your biceps brachii. The curling movement is initiated by your brachialis, which is assisted by your brachioradialis. Your biceps brachii, especially the short (inner) head, gets involved once the flexion of your elbow reaches approximately 45 degrees."
     },
     "MusclesString": "Biceps,Forearm",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 17
   },
@@ -259,7 +259,7 @@
       "Advice": "Using a shoulder-width grip and tucking your elbows into your body are important to maximize the emphasis on your triceps brachii instead of on your pectoralis major. Do not use a grip that’s narrower than shoulder width. This will not put more emphasis on your triceps brachii. Instead, it will decrease your range of motion, put excessive pressure on your wrists, and limit the amount of weight that you can use. Never use a false (aka thumbless or “suicide”) grip with any kind of bench press, including the close-grip barbell bench press. For safety, have a spotter ready when lifting heavy. When performed using proper form, the close-grip barbell bench press is one of the most effective exercises for activation and development of the triceps brachii."
     },
     "MusclesString": "Triceps,ShouldersFront,Chest",
-    "Tags": "ExerciseByRepsAndWeight,DumbbellExist,BenchExist,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,BenchExist,DatabaseExercise,BarbellExist",
     "DifficultLevel": 2,
     "CodeNum": 22
   },
@@ -307,7 +307,7 @@
       "Advice": "Keep your body and upper arms still. Only your forearms should move. Keep your elbows close to your head. Otherwise your deltoids (shoulder muscles) will get involved and the exercise will turn into an overhead press. If you have to move your elbows out to the sides to press the cable bar upward, it means that the weight is too heavy. "
     },
     "MusclesString": "Triceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 26
   },
@@ -319,7 +319,7 @@
       "Advice": "Keep your elbows tucked in to your sides. Do not try to spread the rope out at the end of the movement. Stay close to the cable to provide resistance throughout the exercise."
     },
     "MusclesString": "Triceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 27
   },
@@ -331,7 +331,7 @@
       "Advice": "Position your body in such a way as to ensure resistance throughout the range of motion. Keeping your elbow fixed against your side is important for isolating your triceps."
     },
     "MusclesString": "Triceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 28
   },
@@ -379,7 +379,7 @@
       "Advice": "Planting your feet firmly on the floor, arching your back, retracting your shoulder blades, tucking in your elbows, and straightening your wrists allow you to produce a strong foundation from which to press and get your whole body behind the lift. Tucking in your elbows also reduces the pressure on your shoulders, which are prone to injury with this and other pressing exercises. An angle of 45 degrees is recommended. Never use a false (aka thumbless or “suicide”) grip with the incline barbell bench press. Hold the bar deep in your palms and wrap your thumbs securely around the bar. When lifting heavy weights, have a spotter ready for safety."
     },
     "MusclesString": "Chest,ShouldersFront,Triceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,BarbellExist,BenchExist",
     "DifficultLevel": 3,
     "CodeNum": 32
   },
@@ -391,7 +391,7 @@
       "Advice": "Never use a thumbless grip (aka suicide grip)! Do not lock your elbows out at the top of the press. If lifting heavy, have a spotter ready. Retracting your shoulder blades, keeping your elbows tucked in a little, and keeping your wrists straight help you to drive the barbell upward. Keeping your elbows tucked in also reduces the pressure on your shoulders, which are prone to injury."
     },
     "MusclesString": "Chest,ShouldersFront,Triceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,BarbellExist,BenchExist",
     "DifficultLevel": 3,
     "CodeNum": 33
   },
@@ -415,7 +415,7 @@
       "Advice": "To minimize the pressure on your shoulder joints, keep your elbows a little lower than your shoulders. Some chest press machines have a foot lever that will help you to push the handles forward from their resting positions, making them easier to grasp at the start of the exercise. Otherwise, you’d have to stretch your arms far back to grasp the handles. After you grasp the handles, you have to release the lever before starting to press. Once the set is over, you have to use the same foot lever to brace the handles and lower them back to their resting positions without having to stretch your arms far back."
     },
     "MusclesString": "Chest,ShouldersFront,Triceps,ShouldersMiddle,ShouldersBack",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 37
   },
@@ -451,7 +451,7 @@
       "Advice": "Adjust the fly machine for comfort and proper back support. Keep the movement slow and deliberate. By internally rotating your shoulders (so that your wrists, elbows, and shoulders are level), you better isolate your pectoralis major because the origin and insertion of the muscle are brought more into line. The machine fly is not a major mass-building exercise. As an isolation exercise, it is useful if you want to warm up your chest, pre-exhaust it before the compound chest exercises, or flush it at the end of a chest workout. The machine fly doesn’t target your inner chest. This is a myth. It is not possible to emphasize your inner chest. The only ways to produce more inner chest definition are to reduce your body fat level and keep building your chest using compound exercises."
     },
     "MusclesString": "Chest,ShouldersFront,MiddleBack",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 40
   },
@@ -463,7 +463,7 @@
       "Advice": ""
     },
     "MusclesString": "Chest,ShouldersFront",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 41
   },
@@ -475,7 +475,7 @@
       "Advice": ""
     },
     "MusclesString": "ShouldersFront,Chest,Biceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 42
   },
@@ -499,7 +499,7 @@
       "Advice": "Exercise can be made more challenging by placing hands further up toward head. Exercise can also be performed with additional weight."
     },
     "MusclesString": "Abdominal",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 44
   },
@@ -523,7 +523,7 @@
       "Advice": "Keep your hips fixed. All of the movement should be in your abdomen. See the second video for how not to do the kneeling cable crunch. Do not allow your back to arch or hyperextend beyond feeling a mild stretch. Keep your neck in a neutral position so that there’s always a space between your chin and your chest. Instead of a rope attachment, you can use two stirrups."
     },
     "MusclesString": "Abdominal",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 46
   },
@@ -535,7 +535,7 @@
       "Advice": " Keep the movement slow and controlled. Do not use momentum. Try to resist the lowering of your hips. Keep your feet off the floor. Keep your lower back straight so that it makes contact with the floor. If this is difficult for you, place your hands under your buttocks. This will help to straighten your lower back as well as support your pelvis."
     },
     "MusclesString": "Abdominal",
-    "Tags": "DatabaseExercise,ExerciseByReps",
+    "Tags": "DatabaseExercise,ExerciseByReps,CanDoAtHome",
     "DifficultLevel": 1,
     "CodeNum": 47
   },
@@ -547,7 +547,7 @@
       "Advice": "Make sure that you’re not just raising your knees. After raising your knees, you must also flex your abdomen to raise your knees even higher. If you do not flex your abdomen, your abs and obliques will only function as stabilizers. Do not swing or use momentum. Keep your lower back as straight as possible throughout the exercise. The exercise is best performed with your lower back pressed against a padded surface for support (see video). Instead of hanging from a bar with an unsupported lower back, use a captain’s chair if one is available."
     },
     "MusclesString": "Abdominal,Quadriceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,PullUpBarExist",
     "DifficultLevel": 3,
     "CodeNum": 48
   },
@@ -559,7 +559,7 @@
       "Advice": "Keep your lower back straight. Ideally, the frame from which you hang should have padding to support your lower back. Try not to use momentum to raise your legs. keep the movement slow and under control. Make the hanging straight leg raise more difficult by holding a dumbbell between your feet. To help with your grip, use a wrist strap or a hook strap."
     },
     "MusclesString": "Abdominal,Quadriceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,PullUpBarExist",
     "DifficultLevel": 3,
     "CodeNum": 49
   },
@@ -583,7 +583,7 @@
       "Advice": "Pull with your elbows, not with your biceps. Avoid swinging. Make the exercise easier by bending your knees and getting someone to hold your feet. You can also use an assisted pull-up machine. Make the exercise more difficult by wearing a weighted vest or dip belt, by holding a dumbbell between your feet, or by trying some of the numerous advanced pull-up variations (see second video)."
     },
     "MusclesString": "MiddleBack,WidestBack,Biceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,PullUpBarExist",
     "DifficultLevel": 3,
     "CodeNum": 51
   },
@@ -643,7 +643,7 @@
       "Advice": "Pull the bar down with your elbows, not your biceps. Keep your torso still. Extend your arms fully on the return phase. Do not pull the bar down behind your neck, as doing so will force you to bend your neck out of alignment with your spine as well as put your shoulder joint through an extreme range of motion—both of which increase the risk of injury."
     },
     "MusclesString": "WidestBack,MiddleBack,Trapezium,Chest",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 56
   },
@@ -655,7 +655,7 @@
       "Advice": "Pull the bar down with your back muscles, not your arm muscles. Keep your torso still. Extend your arms fully on the return phase. Your biceps only act as dynamic stabilizers, along with the long head of your triceps."
     },
     "MusclesString": "WidestBack,MiddleBack,Chest",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 57
   },
@@ -667,7 +667,7 @@
       "Advice": "Caution: Avoid swinging your torso back and forth as you can cause lower back injury by doing so."
     },
     "MusclesString": "ShouldersBack,WidestBack,MiddleBack,Trapezium",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 58
   },
@@ -679,7 +679,7 @@
       "Advice": "Keep the movement slow and controlled. Keep your elbows slightly bent."
     },
     "MusclesString": "WidestBack,MiddleBack,Chest",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 59
   },
@@ -727,7 +727,7 @@
       "Advice": "Caution: This is not an exercise to be taken lightly. If you have back issues, substitute it with leg presses instead. If you have a healthy back, ensure perfect form and never slouch the back forward as this can cause back injury. Be cautious as well with the weight used; in case of doubt, use less weight rather than more. The squat is a very safe exercise but only if performed properly. If you performed the exercise correctly, the front of the knees should make an imaginary straight line with the toes that is perpendicular to the front. If your knees are past that imaginary line (if they are past your toes) then you are placing undue stress on the knee and the exercise has been performed incorrectly"
     },
     "MusclesString": "Quadriceps,Buttocks,Thighs",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 63
   },
@@ -739,7 +739,7 @@
       "Advice": "Initiate the squat by pushing your hips backward and then bending your knees forward. This will allow your body to “fold” down in a smooth motion, with your torso remaining upright. Keep your back straight, body upright, chest out, and feet flat. Keep the bar close to your body, and your feet and knees pointing in the same direction. If the bar hurts your arms, try pronating your forearms (turning your knuckles upward). The bar will then rest more on your brachioradialis muscle, which may be less sensitive."
     },
     "MusclesString": "Quadriceps,Buttocks,Thighs",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,BarbellExist",
     "DifficultLevel": 3,
     "CodeNum": 64
   },
@@ -751,7 +751,7 @@
       "Advice": ""
     },
     "MusclesString": "Buttocks,Quadriceps,ErectorSpinae,Thighs",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,BarbellExist",
     "DifficultLevel": 2,
     "CodeNum": 65
   },
@@ -763,7 +763,7 @@
       "Advice": "Make sure that the platform is securely locked when you load the weight. Adjust the back support and safety brace to accommodate a full range of motion. Keep your feet flat on the platform, and your knees and toes pointing in the same direction (slightly outward). As you lower the platform, do not allow your lower back to curl up; keep it in firm contact with the support. Do not lock your knees out when you press the platform up."
     },
     "MusclesString": "Quadriceps,Buttocks,Thighs",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 66
   },
@@ -799,7 +799,7 @@
       "Advice": "Adjust the back support and seat to accommodate full range of motion. Position your knees at the same axis as the lever fulcrum. As you raise the padded lever, do not allow your hips to curl up; keep your thighs in firm contact with the seat. Do not go too heavy because it can be bad for your knees. The leg extension exercise mainly develops your lower quads. To put more emphasis on your upper quads, as you raise your legs, point your toes forward. The exercise can also be performed with one leg at a time."
     },
     "MusclesString": "Quadriceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 69
   },
@@ -847,7 +847,7 @@
       "Advice": "Do not lower your torso beyond feeling a mild stretch in your hamstrings or back. Do not extend your back beyond feeling a mild stretch in your spine. To make the exercise more difficult, hold your arms out straight or cross them over a weight plate held against your chest. You can also perform the exercise with one leg."
     },
     "MusclesString": "Buttocks,Thighs,ErectorSpinae,Caviar",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 73
   },
@@ -859,7 +859,7 @@
       "Advice": "Keep the movement slow and controlled. Try to resist the lowering of the lever; don’t just let it drop. Don’t allow your hips to rise off the bench. Adjust the lever for optimal leverage. Keep your ankles flexed so that your toes point toward your shins. This allows your gastrocnemii to offer better assistance."
     },
     "MusclesString": "Thighs,Caviar",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 74
   },
@@ -871,7 +871,7 @@
       "Advice": " Adjust the lever pad for optimal leverage. Keep the movement slow and under control. Try to resist the lowering of the lever. Don’t just let it drop. Point the toes of your working leg toward your shin. This is known as dorsiflexion, and it allows your gastrocnemius to offer better assistance to your hamstrings."
     },
     "MusclesString": "Thighs,Caviar",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 75
   },
@@ -883,7 +883,7 @@
       "Advice": ""
     },
     "MusclesString": "Thighs,Caviar",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 76
   },
@@ -895,7 +895,7 @@
       "Advice": "Keep your back straight. Do not lock your knees out. Turn your toes inward (internal rotation) while performing the machine standing calf raise to emphasize the lateral head of your gastrocnemius, turn your toes outward (external rotation) to emphasize the medial head of your gastrocnemius, or keep your toes pointing forward to place equal emphasis on each head. "
     },
     "MusclesString": "Caviar,ShinCamboloid",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 77
   },
@@ -907,7 +907,7 @@
       "Advice": "Keep both phases of the repetition slow. Ensure you complete a full range of motion. Try not to lock out your knees. Keep your back pressed against the back rest. This includes your lower back. If you have a difference in muscle size or strength between your two calves, do one calf at a time, starting with your weak calf and making sure to not perform more repetitions with your strong calf. Notice that you don’t have to release the safety lever that allows the platform to slide all the way down to the bottom of the sled. The reason is that all of the movement takes place above the safety lock. The sled calf press is also known as the leg press calf press or incorrectly as the sled calf raise."
     },
     "MusclesString": "Caviar,ShinCamboloid",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 78
   },
@@ -919,7 +919,7 @@
       "Advice": ""
     },
     "MusclesString": "Caviar,ShinCamboloid",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 79
   },
@@ -931,7 +931,7 @@
       "Advice": "If you don’t have access to a seated calf raise machine, you can perform seated calf raises with a barbell on your knees and your forefeet on a block. "
     },
     "MusclesString": "ShinAnteriorTibialis",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 80
   },
@@ -955,7 +955,7 @@
       "Advice": ""
     },
     "MusclesString": "Triceps,ShouldersFront,Chest",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 3,
     "CodeNum": 82
   },
@@ -1003,7 +1003,7 @@
       "Advice": "In order to perform this rear deltoid exercise safely and effectively, you should keep in mind the following guidelines: Keep your back slightly arched (but not rounded) and almost parallel to the floor during the movement, Don’t raise your torso; keep it almost parallel to the floor—this keeps the effort on the rear delt much more than with your torso inclined with your chest and head uppermost, To target the posterior deltoid, your arms should move directly out to the sides. If your hands are raised in a forward arc in front of your head, the trapezius and lateral deltoid contribute to the exercise."
     },
     "MusclesString": "ShouldersFront,ShouldersMiddle,ShouldersBack,Trapezium",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 86
   },
@@ -1015,7 +1015,7 @@
       "Advice": ""
     },
     "MusclesString": "Abdominal,Quadriceps",
-    "Tags": "DatabaseExercise,ExerciseByReps",
+    "Tags": "DatabaseExercise,ExerciseByReps,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 87
   },
@@ -1027,7 +1027,7 @@
       "Advice": ""
     },
     "MusclesString": "Abdominal,Quadriceps",
-    "Tags": "DatabaseExercise,ExerciseByReps",
+    "Tags": "DatabaseExercise,ExerciseByReps,MachineExist",
     "DifficultLevel": 3,
     "CodeNum": 88
   },
@@ -1051,7 +1051,7 @@
       "Advice": "Brisk walking is excellent for cardiovascular fitness and overall health. Do a light warm-up before starting. Begin with 15–20 minutes and gradually increase to 40–60 minutes. The optimal pace is one where your breathing quickens but you can still hold a conversation without gasping. For better results, alternate between faster and slower intervals during your walk."
     },
     "MusclesString": "Cardio,Quadriceps,Thighs,Caviar",
-    "Tags": "ExerciseByTime,DatabaseExercise",
+    "Tags": "ExerciseByTime,DatabaseExercise,CanDoAtHome",
     "DifficultLevel": 1,
     "CodeNum": 90
   },
@@ -1063,7 +1063,7 @@
       "Advice": "Before starting your run, perform a proper warm-up to prepare your muscles and joints for the activity. This can include light jogging, dynamic stretches, or mobility exercises. Wear appropriate running shoes that provide support and cushioning. The right shoes can enhance comfort and reduce the risk of injuries. Pay attention to any discomfort or pain. If you experience persistent pain, consider adjusting your running routine or consulting with a healthcare professional."
     },
     "MusclesString": "Cardio,Quadriceps,Thighs,Caviar",
-    "Tags": "ExerciseByTime,DatabaseExercise",
+    "Tags": "ExerciseByTime,DatabaseExercise,CanDoAtHome",
     "DifficultLevel": 1,
     "CodeNum": 91
   },
@@ -1075,7 +1075,7 @@
       "Advice": "Warm-up: Start with a brief warm-up to prepare your muscles for the exercise. Pedal at a moderate pace for a few minutes before increasing the intensity. Maintain Good Posture: Keep your back straight, and avoid leaning too far forward or backward. This helps prevent strain on your back and neck. Controlled Breathing: Breathe naturally and rhythmically. Inhale and exhale in a controlled manner. If you're doing a high-intensity workout, adjust your breathing to the level of exertion."
     },
     "MusclesString": "Cardio,Quadriceps,Thighs",
-    "Tags": "ExerciseByTime,DatabaseExercise",
+    "Tags": "ExerciseByTime,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 92
   },
@@ -1147,7 +1147,7 @@
       "Advice": "Use a weight that allows you to maintain proper form while still challenging your muscles. Keep your movements slow and controlled to get the most out of the exercise and avoid injury. To increase the difficulty of the exercise, you can use a heavier weight or perform more repetitions."
     },
     "MusclesString": "WidestBack,Biceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 100
   },
@@ -1159,7 +1159,7 @@
       "Advice": "Pull with your elbows, not with your biceps."
     },
     "MusclesString": "WidestBack,MiddleBack,Trapezium,Biceps,ShouldersBack",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 101
   },
@@ -1291,7 +1291,7 @@
       "Advice": "When you have finished, do not drop the dumbbells to your sides. Instead, carefully lower the dumbbells towards your thighs and allow the weight of the dumbbells to help you to sit up."
     },
     "MusclesString": "Chest,ShouldersFront,ShouldersMiddle,Triceps,Biceps",
-    "Tags": "ExerciseByRepsAndWeight,DumbbellExist,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DumbbellExist,DatabaseExercise,BenchExist",
     "DifficultLevel": 2,
     "CodeNum": 112
   },
@@ -1387,7 +1387,7 @@
       "Advice": "There’s no need to try and jump to maximum poundages as it’ll limit the effectiveness of the exercise and place unnecessary stress on your joints. You also want your arms to be positioned parallel and not too narrow or wide to maximize results."
     },
     "MusclesString": "ShouldersFront,ShouldersMiddle,Chest,Trapezium",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,BarbellExist",
     "DifficultLevel": 2,
     "CodeNum": 120
   },
@@ -1423,7 +1423,7 @@
       "Advice": "Many lifters use a thumbless grip with this machine variation as they feel it is easier to keep tension through the pecs and triceps rather than having to worry about squeezing the bar excessively tight. Squeezing the handles tightly instead of using a thumbless grip can help to improve a phenomenon known as “irradiation” which promotes greater shoulder stability. Imagine you’re trying to push yourself away from the weights rather than pushing the weights away from yourself. If you’re feeling pain within the shoulder joint itself (specifically at the front), ensure your shoulder blades are slightly retracted and try to keep the shoulder girdle “packed”. Ensure you maintain some tension in your abs and don’t allow your lower back to excessive arch. "
     },
     "MusclesString": "Chest,ShouldersFront,Triceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 123
   },
@@ -1435,7 +1435,7 @@
       "Advice": ""
     },
     "MusclesString": "Buttocks,Quadriceps,Abdominal",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 124
   },
@@ -1447,7 +1447,7 @@
       "Advice": "To emphasize the activation of your gluteus maximus, sit upright or even lean forward a little. To emphasize the activation of your gluteus medius, sit back. Do not allow the weight plates to come crashing down as you reverse the movement; keep the weight plates suspended."
     },
     "MusclesString": "Buttocks,Quadriceps,Abdominal",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 125
   },
@@ -1459,7 +1459,7 @@
       "Advice": "Breathing: Breathe deeply and evenly throughout the exercise. Avoid holding your breath, as proper breathing enhances core engagement and overall stability. orm Over Duration: Focus on maintaining proper form rather than holding the plank for an extended duration. As you gain strength, you can gradually increase the duration of your planks. Shoulder Position: Keep your shoulders away from your ears and avoid shrugging. This helps prevent tension in the neck and promotes better stability."
     },
     "MusclesString": "Abdominal,Thighs,MiddleBack,ShouldersFront,Buttocks",
-    "Tags": "ExerciseByTime,DatabaseExercise",
+    "Tags": "ExerciseByTime,DatabaseExercise,CanDoAtHome",
     "DifficultLevel": 2,
     "CodeNum": 126
   },
@@ -1471,7 +1471,7 @@
       "Advice": "Proper Form: Focus on maintaining proper form throughout your workout. Keep your core engaged, and avoid slouching or using excessive force on the handlebars. Breathing: Breathe naturally throughout the exercise. Exhale as you exert force (pushing the pedals, pulling the handlebars) and inhale during the recovery phase. Foot Position: Keep your feet flat on the pedals, and avoid lifting your heels. This ensures that you engage your entire leg muscles. Intensity: Adjust the intensity based on your fitness level. Beginners may start with a lower resistance and gradually increase it as they become more comfortable."
     },
     "MusclesString": "Quadriceps,Thighs,Caviar,Cardio",
-    "Tags": "ExerciseByTime,DatabaseExercise",
+    "Tags": "ExerciseByTime,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 127
   },
@@ -1482,8 +1482,8 @@
       "Execution": "Start Stepping: Begin stepping by pushing one foot down, similar to climbing stairs. Your motion should be controlled and deliberate. Full Range of Motion: Aim for a full range of motion with each step. Fully extend your legs as you push down, and lift your feet off the pedals slightly as you return to the starting position. Controlled Pace: Maintain a controlled pace throughout your workout. Avoid rushing the movements to ensure proper form and reduce the risk of injury. Breathing: Breathe naturally. Inhale and exhale in a steady rhythm. If you're performing a more intense workout, adjust your breathing to match the level of exertion.",
       "Advice": "Proper Foot Placement: Keep your entire foot on the pedals, and avoid letting your heels hang off. This ensures proper stability and engagement of your leg muscles. Posture: Maintain good posture throughout the exercise. Keep your shoulders back, chest lifted, and avoid leaning forward. If the stepper has handlebars, use them for balance and support."
     },
-    "MusclesString": "Quadriceps,Thighs,Caviar",
-    "Tags": "ExerciseByTime,DatabaseExercise",
+    "MusclesString": "Quadriceps,Thighs,Caviar,Cardio",
+    "Tags": "ExerciseByTime,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 128
   },
@@ -1495,7 +1495,7 @@
       "Advice": "Keep the movement of your upper arms to a minimum. Do not lock out your elbows at the top of the movement. Keep the dumbbells either close together or in contact with each other throughout the repetitions. Keeping them in contact can help you to maintain stability. When you have finished the Tate press, do not drop the dumbbells down by your sides. Instead, raise your knees and bring the dumbbells down onto your thighs. The weight of the dumbbells will help you to sit up."
     },
     "MusclesString": "Triceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,DumbbellExist,BenchExist",
     "DifficultLevel": 2,
     "CodeNum": 129
   },
@@ -1507,7 +1507,7 @@
       "Advice": "Keep your body still. Don’t sway back and forth as you raise and lower the weight plate. If you lift heavy, the weight plate front raise will significantly challenge your core and especially your lower back. Therefore, increase weight gradually to give your lower back time to adapt. Keeping a slight bend in your knees can help to decrease the pressure on your lower back."
     },
     "MusclesString": "ShouldersFront",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,BarbellExist",
     "DifficultLevel": 2,
     "CodeNum": 130
   },
@@ -1579,7 +1579,7 @@
       "Advice": "You should not choose a lot of weight, it is better to do more repetitions. "
     },
     "MusclesString": "Triceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 136
   },

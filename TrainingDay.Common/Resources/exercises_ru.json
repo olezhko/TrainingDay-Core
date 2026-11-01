@@ -127,7 +127,7 @@
       "Advice": "Если конструкция тренажера не позволяет делать упражнение с выпрямленными руками, позволительно чуть - чуть согнуть руки в исходном положении. Главное чтобы вы не двигали руками (не сгибали и не разгибали их) во время движения. Локтевой сустав должен оставаться в зафиксированном состоянии до конца подхода. "
     },
     "MusclesString": "ShouldersBack,MiddleBack",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 11
   },
@@ -187,7 +187,7 @@
       "Advice": "До конца сета, Ваша спина должна быть ровной, а пресс напряженным. "
     },
     "MusclesString": "Biceps,Forearm",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 16
   },
@@ -199,7 +199,7 @@
       "Advice": "На протяжении всего времени выполнения упражнения туловище и верхняя часть рук должны быть неподвижными. Чтобы избежать травм, зафиксируйте пояс и держите торс ровно."
     },
     "MusclesString": "Biceps,Forearm",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 17
   },
@@ -259,7 +259,7 @@
       "Advice": ""
     },
     "MusclesString": "Triceps,ShouldersFront,Chest",
-    "Tags": "ExerciseByRepsAndWeight,DumbbellExist,BenchExist,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,BenchExist,DatabaseExercise,BarbellExist",
     "DifficultLevel": 2,
     "CodeNum": 22
   },
@@ -307,7 +307,7 @@
       "Advice": ""
     },
     "MusclesString": "Triceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 26
   },
@@ -319,7 +319,7 @@
       "Advice": "Всё время выполнения упражнения локти должны оставаться неподвижными, тело не наклоняться вперёд, приседать нельзя. Одним словом, ноги, верхняя часть рук и туловище, до конца подхода не должны двигаться. Когда будете разгибать руки вниз, следите за тем, что, когда мизинцы будут ниже локтей, нужно будет начать плавно разворачивать кисти и разводить рукоятки в стороны, таким образом, чтобы в тот момент, когда руки будут полностью выпрямлены, ладони «смотрели» на бёдра. "
     },
     "MusclesString": "Triceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 27
   },
@@ -331,7 +331,7 @@
       "Advice": ""
     },
     "MusclesString": "Triceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 28
   },
@@ -415,7 +415,7 @@
       "Advice": ""
     },
     "MusclesString": "Chest,ShouldersFront,Triceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 37
   },
@@ -451,7 +451,7 @@
       "Advice": ""
     },
     "MusclesString": "Chest,ShouldersFront",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 40
   },
@@ -463,7 +463,7 @@
       "Advice": ""
     },
     "MusclesString": "Chest,ShouldersFront",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 41
   },
@@ -475,7 +475,7 @@
       "Advice": ""
     },
     "MusclesString": "Chest,ShouldersFront,Biceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 42
   },
@@ -499,7 +499,7 @@
       "Advice": "Выполнять упражнение надлежит в медленном или умеренно – медленном темпе. "
     },
     "MusclesString": "Abdominal",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 44
   },
@@ -523,7 +523,7 @@
       "Advice": ""
     },
     "MusclesString": "Abdominal",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 46
   },
@@ -535,7 +535,7 @@
       "Advice": ""
     },
     "MusclesString": "Abdominal",
-    "Tags": "DatabaseExercise,ExerciseByReps",
+    "Tags": "DatabaseExercise,ExerciseByReps,CanDoAtHome",
     "DifficultLevel": 1,
     "CodeNum": 47
   },
@@ -547,7 +547,7 @@
       "Advice": ""
     },
     "MusclesString": "Abdominal,Quadriceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,PullUpBarExist",
     "DifficultLevel": 3,
     "CodeNum": 48
   },
@@ -559,7 +559,7 @@
       "Advice": "После полного освоения техники Вы можете усложнить упражнение: выполняйте подъемы прямых ног. При этом, нагрузка увеличится как на мышцы – сгибатели бедра, так и на нижнюю часть пресса. "
     },
     "MusclesString": "Abdominal,Quadriceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,PullUpBarExist",
     "DifficultLevel": 3,
     "CodeNum": 49
   },
@@ -583,7 +583,7 @@
       "Advice": ""
     },
     "MusclesString": "MiddleBack,WidestBack,Biceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,PullUpBarExist",
     "DifficultLevel": 3,
     "CodeNum": 51
   },
@@ -643,7 +643,7 @@
       "Advice": "Не наклоняйте голову вперед"
     },
     "MusclesString": "WidestBack,MiddleBack,Trapezium,Chest",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 56
   },
@@ -655,7 +655,7 @@
       "Advice": ""
     },
     "MusclesString": "WidestBack,MiddleBack,Chest",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 57
   },
@@ -667,7 +667,7 @@
       "Advice": "Спина прямая, а в пояснице должен сохраняться небольшой прогиб. Во время тяги туловище должно оставаться неподвижным. Отклонения торса от вертикального положения допустимы, но должны быть минимальными. Тянуть трос нужно только мышцами спины, не подключая к действию поясницу (не отклоняясь назад, чтобы помочь себе всем телом)."
     },
     "MusclesString": "ShouldersBack,WidestBack,MiddleBack,Trapezium",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 58
   },
@@ -679,7 +679,7 @@
       "Advice": ""
     },
     "MusclesString": "WidestBack,MiddleBack,Chest",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 59
   },
@@ -727,7 +727,7 @@
       "Advice": ""
     },
     "MusclesString": "Quadriceps,Buttocks,Thighs",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 63
   },
@@ -739,7 +739,7 @@
       "Advice": "У этого упражнения имеется и более продвинутый вариант выполнения: когда Вы достигнете нижней точки, остановившись на пару секунд, изо всех сил напрягайте мышцы и с силой выталкивайте себя вверх. При этом гриф не должен отрываться от плеч. Эта техника является более эффективной для ускорения роста мышц и наращивания взрывной силы. "
     },
     "MusclesString": "Quadriceps,Buttocks,Thighs",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,BarbellExist",
     "DifficultLevel": 3,
     "CodeNum": 64
   },
@@ -751,7 +751,7 @@
       "Advice": ""
     },
     "MusclesString": "Buttocks,Quadriceps,ErectorSpinae,Thighs",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,BarbellExist",
     "DifficultLevel": 2,
     "CodeNum": 65
   },
@@ -763,7 +763,7 @@
       "Advice": ""
     },
     "MusclesString": "Quadriceps,Buttocks,Thighs",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 66
   },
@@ -799,7 +799,7 @@
       "Advice": "Выбирайте вес так, чтобы с ним вы смогли сделать 3–4 подхода по 15–20 раз. "
     },
     "MusclesString": "Quadriceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 69
   },
@@ -847,7 +847,7 @@
       "Advice": "Упражнение нужно выполнять в умеренном и плавном темпе, без рывков и ускорений. "
     },
     "MusclesString": "Buttocks,Thighs,ErectorSpinae,Caviar",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 73
   },
@@ -859,7 +859,7 @@
       "Advice": "Выполнять упражнение нужно в умеренном темпе."
     },
     "MusclesString": "Thighs,Caviar",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 74
   },
@@ -871,7 +871,7 @@
       "Advice": ""
     },
     "MusclesString": "Thighs,Caviar",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 75
   },
@@ -883,7 +883,7 @@
       "Advice": ""
     },
     "MusclesString": "Thighs,Caviar",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 76
   },
@@ -895,7 +895,7 @@
       "Advice": ""
     },
     "MusclesString": "Caviar,ShinCamboloid",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 77
   },
@@ -907,7 +907,7 @@
       "Advice": "Выполнять упражнение надлежит в медленном или умеренном темпе. Угол сгибания и разгибания голеностопного сустава не должен превышать 30 – 45 градусов. "
     },
     "MusclesString": "Caviar,ShinCamboloid",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 78
   },
@@ -919,7 +919,7 @@
       "Advice": "Чтобы добиться лучшей устойчивости, держитесь руками за рукоятки на раме, к которой крепятся валики или за края сиденья. "
     },
     "MusclesString": "Caviar,ShinCamboloid",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 79
   },
@@ -931,7 +931,7 @@
       "Advice": "Используйте в тренажёре такой вес, с которым сможете работать, максимально сгибая голеностопный сустав, если Вам не удаётся полностью поднять носки вверх (до ощущения, что сухожилия с задней стороны лодыжки максимально натянуты), значит, выбранный вес слишком большой. "
     },
     "MusclesString": "ShinAnteriorTibialis",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 80
   },
@@ -955,7 +955,7 @@
       "Advice": "Отжимания на брусьях являются крайне травмоопасным упражнением, но только в случае несоблюдения техники выполнения. "
     },
     "MusclesString": "Triceps,ShouldersFront,Chest",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 3,
     "CodeNum": 82
   },
@@ -1003,7 +1003,7 @@
       "Advice": ""
     },
     "MusclesString": "ShouldersFront,ShouldersMiddle,ShouldersBack,Trapezium",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 86
   },
@@ -1015,7 +1015,7 @@
       "Advice": ""
     },
     "MusclesString": "Abdominal,Quadriceps",
-    "Tags": "DatabaseExercise,ExerciseByReps",
+    "Tags": "DatabaseExercise,ExerciseByReps,MachineExist",
     "DifficultLevel": 2,
     "CodeNum": 87
   },
@@ -1027,7 +1027,7 @@
       "Advice": "Выполните как минимум 20-25 повторений в не менее чем четырех подходах."
     },
     "MusclesString": "Abdominal,Quadriceps",
-    "Tags": "DatabaseExercise,ExerciseByReps",
+    "Tags": "DatabaseExercise,ExerciseByReps,MachineExist",
     "DifficultLevel": 3,
     "CodeNum": 88
   },
@@ -1051,7 +1051,7 @@
       "Advice": "Быстрая прогулка подходит для кардиотренировки и общего укрепления организма. Перед началом можно выполнить легкую разминку. Начинайте с 15–20 минут и постепенно увеличивайте продолжительность до 40–60 минут. Оптимальный темп — когда дыхание учащается, но вы всё ещё можете разговаривать без одышки. Для повышения эффективности можно чередовать участки более быстрого и более медленного темпа."
     },
     "MusclesString": "Cardio,Quadriceps,Thighs,Caviar",
-    "Tags": "ExerciseByTime,DatabaseExercise",
+    "Tags": "ExerciseByTime,DatabaseExercise,CanDoAtHome",
     "DifficultLevel": 1,
     "CodeNum": 90
   },
@@ -1063,7 +1063,7 @@
       "Advice": "Необходимо мягко приземляться на носок, амортизируя приземление и только потом ставить пятку. Во время бега ноги должны быть всегда немного согнуты в коленях, бег должен быть мягким и бесшумным, не нужно колотить пятками по земле, разбивая ноги."
     },
     "MusclesString": "Cardio,Quadriceps,Thighs,Caviar",
-    "Tags": "ExerciseByTime,DatabaseExercise",
+    "Tags": "ExerciseByTime,DatabaseExercise,CanDoAtHome",
     "DifficultLevel": 1,
     "CodeNum": 91
   },
@@ -1075,7 +1075,7 @@
       "Advice": "Перед занятиями на велотренажере надо вычислить максимальную частоту пульса (МЧП), которая зависит от возраста. Формула расчета: «МЧП = 220 - возраст в годах». Если Вам 35 лет, то МЧП = 185 ударов/мин. Рекомендуется большую часть тренировки проводить при пульсе, равном 70 – 75% от МЧП и не выходить за 80% МЧП, это чревато перегрузкой сердечно-сосудистой системы. Новичкам следует начинать с тренировок продолжительностью до 30 минут, постепенно увеличивая длительность и нагрузку. Оптимальная длительность тренировки на велотренажерах 40 - 60 минут."
     },
     "MusclesString": "Cardio,Quadriceps,Thighs",
-    "Tags": "ExerciseByTime,DatabaseExercise",
+    "Tags": "ExerciseByTime,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 92
   },
@@ -1147,7 +1147,7 @@
       "Advice": "Используйте вес, который позволит вам поддерживать правильную форму, но при этом будет напрягать мышцы. Делайте движения медленными и контролируемыми, чтобы получить максимальную отдачу от упражнения и избежать травм. Чтобы увеличить сложность упражнения, вы можете использовать более тяжелый вес или выполнять больше повторений."
     },
     "MusclesString": "WidestBack,Biceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 100
   },
@@ -1159,7 +1159,7 @@
       "Advice": "1. В нижней точке движения сводим лопатки. Это позволяет сделать акцент на мышцах спины. При сведении лопаток в работу включаются: трапециевидные, ромбовидные и задние дельтовидные мышцы. 2. В нижней точке упражнения фиксируем движение на 1-2 секунды, в этом момент максимально напрягаем мышцы спины. Выполняя упражнение с фиксацией, позволяет проработать хорошую форму и рельеф, также помогает изолировать мышцы спины (бицепсы и предплечья напрягаются в меньшей степени)."
     },
     "MusclesString": "WidestBack,MiddleBack,Trapezium,Biceps,ShouldersBack",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 101
   },
@@ -1291,7 +1291,7 @@
       "Advice": "Рекомендуется выполнять в самом начале или перед окончание тренировки."
     },
     "MusclesString": "Chest,ShouldersFront,ShouldersMiddle,Triceps,Biceps",
-    "Tags": "ExerciseByRepsAndWeight,DumbbellExist,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DumbbellExist,DatabaseExercise,BenchExist",
     "DifficultLevel": 2,
     "CodeNum": 112
   },
@@ -1387,7 +1387,7 @@
       "Advice": "Во время выполнения упражнения держите локти чуть согнутыми. Держать локти прямыми можно с малым весом, но лучше изначально осваивать технику, которая поможет избежать травм. Чуть сгибая руки в локтях, вы перенесете нагрузку с суставов на мышцы. Не раскачивайтесь туловищем."
     },
     "MusclesString": "ShouldersFront,ShouldersMiddle,Chest,Trapezium",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,BarbellExist",
     "DifficultLevel": 2,
     "CodeNum": 120
   },
@@ -1423,7 +1423,7 @@
       "Advice": ""
     },
     "MusclesString": "Chest,ShouldersFront,Triceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 123
   },
@@ -1435,7 +1435,7 @@
       "Advice": "Перед выполнением упражнения разомните тазобедренные суставы и потяните паховые связки. Это позволит мышцам лучше воспринимать нагрузку, а также увеличит амплитуду движений. Следите за тем, чтобы спина оставалась ровной. Ни в коем случае не горбите спину на последних повторениях! Если у вас не осталось сил, сократите упражнение или помогите себе преодолеть сопротивление с помощью рук. Работайте медленно и избегайте резких движений. Старайтесь не использовать силу инерции."
     },
     "MusclesString": "Buttocks,Quadriceps,Abdominal",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 124
   },
@@ -1447,7 +1447,7 @@
       "Advice": "Следите за тем, чтобы движение совершалось только за счёт тазобедренного сустава. Коленные и голеностопные суставы не задействуются. Избегайте использования силы инерции в своих движениях. Не стоит сводить ноги до конца. Пусть мышцы постоянно остаются в напряжении. Разверните носки наружу. Так ягодицы получат большую нагрузку."
     },
     "MusclesString": "Buttocks,Quadriceps,Abdominal",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 125
   },
@@ -1459,7 +1459,7 @@
       "Advice": "Самое главное и самое непростое – нужно держать прямо поясничный отдел. Спину нельзя прогибать или выгибать, она должна быть абсолютно прямая. Живот втянут, но не забывай следить за дыханием, задерживать его не нужно ни в коем случае."
     },
     "MusclesString": "Abdominal,Thighs,MiddleBack,ShouldersFront,Buttocks",
-    "Tags": "ExerciseByTime,DatabaseExercise",
+    "Tags": "ExerciseByTime,DatabaseExercise,CanDoAtHome",
     "DifficultLevel": 2,
     "CodeNum": 126
   },
@@ -1471,7 +1471,7 @@
       "Advice": "Многие (в особенности, желающие похудеть быстро) используют термобельё для занятий. Ни в коем случае! Нагрузка на сердце будет колоссальной. Влага должна отводиться свободно. • Часто приходится видеть, как занимающиеся (и дамы, и представители сильного пола) буквально «лежат» на поручнях. Не стоит так поступать! На данном виде тренажёра развиваются совершенно конкретные (ножные, поясные) мышцы, и не нужно снимать с них нагрузку, переводя её на руки и плечи. "
     },
     "MusclesString": "Quadriceps,Thighs,Caviar,Cardio",
-    "Tags": "ExerciseByTime,DatabaseExercise",
+    "Tags": "ExerciseByTime,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 127
   },
@@ -1482,8 +1482,8 @@
       "Execution": "Во время работы давите на платформу пяткой и старайтесь минимально сгибать колено. Движение должно идти от таза, а не от бедра, чтобы нагрузка легла именно на ягодицы, а не на бёдра.",
       "Advice": "Не заваливайтесь на тренажёр. Распределяйте нагрузку равномерно от рук по спине до таза. Не скидывайте всю ответственность на руки – ягодицы не получат достойной нагрузки."
     },
-    "MusclesString": "Quadriceps,Thighs,Caviar",
-    "Tags": "ExerciseByTime,DatabaseExercise",
+    "MusclesString": "Quadriceps,Thighs,Caviar,Cardio",
+    "Tags": "ExerciseByTime,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 128
   },
@@ -1495,7 +1495,7 @@
       "Advice": "На протяжении всей амплитуды выполняйте движения плавно и подконтрольно. Не двигайте плечами и ни в коем случае не ставьте гантели на грудь в нижней точке. Чтобы сделать выполнение упражнения максимально эффективным, придерживайтесь следующего принципа – движение гантелей в верхнюю точку должно происходить в два раза быстрее, чем движение вниз."
     },
     "MusclesString": "Triceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,DumbbellExist,BenchExist",
     "DifficultLevel": 2,
     "CodeNum": 129
   },
@@ -1507,7 +1507,7 @@
       "Advice": "Поднимайте блин быстрее, чем опускаете. Держите мышцы кора напряженными на протяжении всего упражнения. Колени должны быть все время слегка согнуты, чтобы уменьшить напряжение спины."
     },
     "MusclesString": "ShouldersFront",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,BarbellExist",
     "DifficultLevel": 2,
     "CodeNum": 130
   },
@@ -1579,7 +1579,7 @@
       "Advice": "Не стоит выбирать большой вес, лучше сделать больше повторений."
     },
     "MusclesString": "Triceps",
-    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise",
+    "Tags": "ExerciseByRepsAndWeight,DatabaseExercise,MachineExist",
     "DifficultLevel": 1,
     "CodeNum": 136
   },
@@ -1658,8 +1658,8 @@
   {
     "Name": "Попеременные махи руками вверх-вниз",
     "Description": {
-      "StartPosition": "Встаньте прямо, ноги на ширине плеч, руки вытянуты вдоль тела.",
-      "Execution": "Поднимайте одну руку вверх, одновременно опуская другую вниз. Затем меняйте стороны в ритмичном темпе, сохраняя руки прямыми.",
+      "StartPosition": "Встаньте прямо, ноги на ширине плеч, руки вытянуты вдоль тела, легко сжаты в кулаки.",
+      "Execution": "Поднимайте одну руку вверх, одновременно опуская другую вниз. Затем меняйте положение рук в ритмичном темпе, сохраняя руки прямыми.",
       "Advice": "Держите корпус неподвижным, не вращайте туловище. Выполняйте упражнение плавно, контролируя амплитуду движений."
     },
     "MusclesString": "Trapezium,ShouldersFront,Abdominal",

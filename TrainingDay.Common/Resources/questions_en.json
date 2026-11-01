@@ -1,5 +1,28 @@
 ﻿[
   {
+    "title": "Gender:",
+    "instruction": "Gender: ",
+    "number": 7,
+    "isMultiple": false,
+    "answers": [
+      {"answer": "Man", "option": "Male"},
+      {"answer": "Woman", "option": "Female"}
+    ]
+  },
+  {
+    "title": "Workout goals:",
+    "instruction": "Workout goals: ",
+    "number": 2,
+    "isMultiple": true,
+    "answers": [
+      {"answer": "Weight loss", "option": "WeightLoss"},
+      {"answer": "Muscle gain", "option": "MuscleGain"},
+      {"answer": "Endurance improvement", "option": "Endurance"},
+      {"answer": "Strength increase", "option": "Strength"},
+      {"answer": "Overall fitness", "option": "OverallFitness"}
+    ]
+  },
+  {
     "title": "Your level:",
     "instruction": "My level: ",
     "number": 1,
@@ -11,18 +34,6 @@
     ]
   },
   {
-    "title": "Workout goals:",
-    "instruction": "Workout goals: ",
-    "number": 2,
-    "isMultiple": true,
-    "answers": [
-      {"answer": "Weight loss", "option": "Weight loss"},
-      {"answer": "Muscle gain", "option": "Muscle gain"},
-      {"answer": "Endurance improvement", "option": "Endurance improvement"},
-      {"answer": "Strength increase", "option": "Strength increase"}
-    ]
-  },
-  {
     "title": "Equipment:",
     "instruction": "In exercises should be equipment: ",
     "number": 3,
@@ -30,35 +41,11 @@
     "answers": [
       {"answer": "Dumbbells", "option": "Dumbbells"},
       {"answer": "Barbell", "option": "Barbell"},
-      {"answer": "Pull-up bar", "option": "Pull-up bar"},
+      {"answer": "Pull-up bar", "option": "PullUpBar"},
       {"answer": "Machines", "option": "Machines"},
       {"answer": "Bench", "option": "Bench"},
-      {"answer": "Yoga mat", "option": "Yoga mat"},
+      {"answer": "Yoga mat", "option": "YogaMat"},
       {"answer": "Bodyweight", "option": "Bodyweight"}
-    ]
-  },
-  {
-    "title": "Types of exercises:",
-    "instruction": "Types of exercises:",
-    "number": 4,
-    "isMultiple": true,
-    "answers": [
-      {
-        "answer": "Supersets",
-        "option": "Supersets"
-      },
-      {
-        "answer": "Pyramid Direct (weight increases, reps decreases)",
-        "option": "Pyramid Direct (weight increases, reps decreases)"
-      },
-      {
-        "answer": "Pyramid Back (weight decreases, reps increases)",
-        "option": "Pyramid Back (weight decreases, reps increases)"
-      },
-      {
-        "answer": "Ladder (increase/decrease repetitions)",
-        "option": "Ladder (increase/decrease repetitions)"
-      }
     ]
   },
   {
@@ -81,11 +68,39 @@
     "number": 6,
     "isMultiple": false,
     "answers": [
-      {"answer": "Around 30 minutes", "option": "30 minutes"},
-      {"answer": "30-60 minutes", "option": "60 minutes"},
-      {"answer": "60-90 minutes", "option": "90 minutes"},
-      {"answer": "near 2 hours", "option": "2 hours"},
-      {"answer": "near 3 hours", "option": "3 hours"}
+      {"answer": "Around 30 minutes", "option": "Minutes30"},
+      {"answer": "30-60 minutes", "option": "Minutes60"},
+      {"answer": "60-90 minutes", "option": "Minutes90"},
+      {"answer": "near 2 hours", "option": "Minutes120"},
+      {"answer": "near 3 hours", "option": "Minutes180"}
+    ]
+  },
+  {
+    "title": "Types of exercises:",
+    "instruction": "Types of exercises:",
+    "number": 4,
+    "isMultiple": true,
+    "answers": [
+      {
+        "answer": "Default",
+        "option": "Default"
+      },
+      {
+        "answer": "Supersets",
+        "option": "Supersets"
+      },
+      {
+        "answer": "Pyramid Direct (weight increases, reps decreases)",
+        "option": "PyramidDirect"
+      },
+      {
+        "answer": "Pyramid Back (weight decreases, reps increases)",
+        "option": "PyramidBack"
+      },
+      {
+        "answer": "Ladder (increase/decrease repetitions)",
+        "option": "Ladder"
+      }
     ]
   }
 ]

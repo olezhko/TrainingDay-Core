@@ -12,6 +12,8 @@ public enum ExerciseTags
     [Description("Базовое", "Default", "Default")] DatabaseExercise,
     [Description("На Повторения", "Repetitions", "Wiederholungen")] ExerciseByReps,
     [Description("Растяжка", "Flexibility", "Flexibility")] Flexibility,
+    [Description("Тренажер", "Machine", "Maschine")] MachineExist,
+    [Description("Турник", "Pull-up bar", "Klimmzugstange")] PullUpBarExist,
 }
 
 public enum MusclesEnum
