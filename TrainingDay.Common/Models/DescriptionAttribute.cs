@@ -1,15 +1,8 @@
 ﻿namespace TrainingDay.Common.Models;
 
-public class DescriptionAttribute : Attribute
+public sealed class DescriptionAttribute(string infoRu, string infoEn, string infoDe) : Attribute
 {
-    public string InfoRu;
-    public string InfoEn;
-    public string InfoDe;
-
-    public DescriptionAttribute(string infoRu, string infoEn, string infoDe)
-    {
-        InfoEn = infoEn;
-        InfoRu = infoRu;
-        InfoDe = infoDe;
-    }
+    public string InfoRu = infoRu;
+    public string InfoEn = infoEn;
+    public string InfoDe = infoDe;
 }
