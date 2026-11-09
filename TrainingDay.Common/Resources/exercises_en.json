@@ -1356,13 +1356,13 @@
     "CodeNum": 115
   },
   {
-    "Name": "Backward-facing reverse pushup",
+    "Name": "Bodyweight Calf Raise",
     "Description": {
-      "StartPosition": "Start by sitting on the floor with your knees bent and hands on the floor beneath your shoulders. ",
-      "Execution": "Push off the floor, straightening your upper body and arms so your shoulders are directly above your hands. With your hips pushing your body upward, straighten your legs so your body is supported only by your hands and heels. Hold that position for several seconds, then slowly lower your body until your butt touches the floor. That’s 1 rep.",
-      "Advice": ""
+      "StartPosition": "Stand up straight with your feet hip-width apart. Rest your hands lightly against a wall or a chair for balance if you need to.",
+      "Execution": "Exhale as you rise onto the balls of your feet as high as you can. Hold for a second at the top. Inhale as you slowly lower your heels back to the floor, then repeat.",
+      "Advice": "Keep your knees straight but not locked, and do not rock your body forward. Lower your heels slowly. To increase the difficulty, stand with the balls of your feet on a step or do the exercise on one leg."
     },
-    "MusclesString": "Triceps",
+    "MusclesString": "Caviar,ShinCamboloid",
     "Tags": "CanDoAtHome,DatabaseExercise,ExerciseByReps",
     "DifficultLevel": 1,
     "CodeNum": 116
@@ -1870,17 +1870,5 @@
     "Tags": "CanDoAtHome,DatabaseExercise,ExerciseByReps",
     "DifficultLevel": 1,
     "CodeNum": 158
-  },
-  {
-    "Name": "Bodyweight Calf Raise",
-    "Description": {
-      "StartPosition": "Stand up straight with your feet hip-width apart. Rest your hands lightly against a wall or a chair for balance if you need to.",
-      "Execution": "Exhale as you rise onto the balls of your feet as high as you can. Hold for a second at the top. Inhale as you slowly lower your heels back to the floor, then repeat.",
-      "Advice": "Keep your knees straight but not locked, and do not rock your body forward. Lower your heels slowly. To increase the difficulty, stand with the balls of your feet on a step or do the exercise on one leg."
-    },
-    "MusclesString": "Caviar,ShinCamboloid",
-    "Tags": "CanDoAtHome,DatabaseExercise,ExerciseByReps",
-    "DifficultLevel": 1,
-    "CodeNum": 159
   }
 ]
