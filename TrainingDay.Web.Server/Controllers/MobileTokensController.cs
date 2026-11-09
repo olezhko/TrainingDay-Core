@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using TrainingDay.Common.Communication;
-using TrainingDay.Web.Database;
-using TrainingDay.Web.Entities;
+using TrainingDay.Web.Server.Extensions;
+using TrainingDay.Web.Server.Mapper;
 using TrainingDay.Web.Server.Models.MobileTokens;
+using TrainingDay.Web.Services.MobileTokens;
 
 namespace TrainingDay.Web.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MobileTokensController(TrainingDayContext context) : ControllerBase
+    public class MobileTokensController(IMobileTokenManager manager) : ControllerBase
     {
         [HttpPost]
         public async Task<IActionResult> PostMobileTokenAsync([FromBody] FirebaseTokenDto firebaseToken, CancellationToken cancellationToken)
@@ -20,27 +20,7 @@ namespace TrainingDay.Web.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var token = context.MobileTokens.FirstOrDefault(item => item.Token == firebaseToken.Token);
-            if (token != null)
-            {
-                token.Language = firebaseToken.Language;
-                token.Zone = firebaseToken.Zone;
-                token.LastSend = DateTime.Now;
-                context.Update(token);
-                await context.SaveChangesAsync(cancellationToken);
-                return Ok();
-            }
-
-            MobileToken newItem = new()
-            {
-                Token = firebaseToken.Token,
-                Zone = firebaseToken.Zone,
-                Language = firebaseToken.Language,
-                LastSend = DateTime.Now
-            };
-
-            context.MobileTokens.Add(newItem);
-            await context.SaveChangesAsync(cancellationToken);
+            await manager.RegisterAsync(firebaseToken, cancellationToken);
             return Ok();
         }
 
@@ -52,60 +32,25 @@ namespace TrainingDay.Web.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var mobileToken = await context.MobileTokens.SingleOrDefaultAsync(m => m.Token == token.Token, cancellationToken: cancellationToken);
-            if (mobileToken == null)
+            var result = await manager.RecordActionAsync(token, cancellationToken);
+            if (result.IsFailure)
             {
-                return NotFound(token);
+                // Keep the original 404 body (the posted action) for existing app versions.
+                return result.Error == MobileTokenErrors.NotFound ? NotFound(token) : this.Problem(result.Error);
             }
-
-            switch (token.Action)
-            {
-                case MobileActions.Enter:
-                    mobileToken.LastSend = DateTime.UtcNow;
-                    break;
-                case MobileActions.Workout:
-                    mobileToken.LastWorkoutDateTime = DateTime.UtcNow;
-                    break;
-                case MobileActions.Weight:
-                    mobileToken.LastBodyControlDateTime = DateTime.UtcNow;
-                    break;
-                default:
-                    break;
-            }
-
-            context.Update(mobileToken);
-            await context.SaveChangesAsync(cancellationToken);
 
             return Ok();
         }
 
 #if !DEBUG
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
 #endif
 
         [HttpGet]
         public async Task<IActionResult> GetMobileTokensAsync([FromQuery] GetMobileTokensFilter filter, CancellationToken cancellationToken)
         {
-            var query = context.MobileTokens
-                    .AsNoTracking();
-
-            if (filter.LastActiveDays is not null)
-            {
-                query = query.Where(item => (DateTime.Now - item.LastSend) < TimeSpan.FromDays(filter.LastActiveDays.Value));
-            }
-
-            var ret = await query
-                .Select(item => new MobileTokenDto()
-                {
-                    Language = item.Language,
-                    Token = item.Token,
-                    Zone = item.Zone,
-                    LastSend = item.LastSend,
-                    Id = item.Id,
-                    LastBodyControlDateTime = item.LastBodyControlDateTime,
-                    LastWorkoutDateTime = item.LastWorkoutDateTime
-                })
-                .ToListAsync(cancellationToken);
+            var tokens = await manager.GetAllAsync(filter.LastActiveDays, cancellationToken);
+            var ret = tokens.Select(item => item.ToDto()).ToList();
 
             return Ok(new MobileTokensDto()
             {
@@ -116,7 +61,7 @@ namespace TrainingDay.Web.Server.Controllers
 
         [HttpGet("{token}")]
 #if !DEBUG
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
 #endif
         public async Task<IActionResult> GetMobileTokenAsync([FromRoute] string token, CancellationToken cancellationToken)
         {
@@ -125,50 +70,37 @@ namespace TrainingDay.Web.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var mobileToken = await context.MobileTokens.SingleOrDefaultAsync(m => m.Token == token, cancellationToken);
-
-            if (mobileToken == null)
+            var result = await manager.GetAsync(token, cancellationToken);
+            if (result.IsFailure)
             {
-                return NotFound();
+                return this.Problem(result.Error);
             }
 
-            return Ok(mobileToken);
+            return Ok(result.Value.ToDto());
         }
 
         [HttpDelete("{token}")]
 #if !DEBUG
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
 #endif
         public async Task<IActionResult> DeleteAsync([FromRoute] string token, CancellationToken cancellationToken)
         {
-            var mobileToken = await context.MobileTokens.SingleOrDefaultAsync(m => m.Token == token, cancellationToken);
-            if (mobileToken == null)
+            var result = await manager.DeleteAsync(token, cancellationToken);
+            if (result.IsFailure)
             {
-                return NotFound(token);
+                return this.Problem(result.Error);
             }
 
-            context.MobileTokens.Remove(mobileToken);
-            await context.SaveChangesAsync(cancellationToken);
-
-            return Ok(mobileToken);
+            return Ok(result.Value.ToDto());
         }
 
         [HttpDelete("unused")]
 #if !DEBUG
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
 #endif
         public async Task<IActionResult> RemoveUnusedTokensAsync(CancellationToken cancellationToken)
         {
-            foreach (var contextMobileToken in context.MobileTokens)
-            {
-                if (contextMobileToken.LastSend == new DateTime())
-                {
-                    context.MobileTokens.Remove(contextMobileToken);
-                    continue;
-                }
-            }
-
-            await context.SaveChangesAsync(cancellationToken);
+            await manager.RemoveUnusedAsync(cancellationToken);
             return Ok();
         }
     }

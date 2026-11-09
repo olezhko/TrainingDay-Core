@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using TrainingDay.Web.Data.Results;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Entities;
 using TrainingDay.Web.Entities.MobileItems;
@@ -37,7 +38,7 @@ public class JwtTokenService(
         };
     }
 
-    public async Task<TokenResult?> RefreshAsync(string refreshToken, CancellationToken cancellationToken = default)
+    public async Task<Result<TokenResult>> RefreshAsync(string refreshToken, CancellationToken cancellationToken = default)
     {
         var existing = await context.RefreshTokens
             .Include(item => item.User)
@@ -45,7 +46,7 @@ public class JwtTokenService(
 
         if (existing == null || !existing.IsActive)
         {
-            return null;
+            return AuthErrors.InvalidRefreshToken;
         }
 
         var newRefreshToken = CreateRefreshTokenEntity(existing.UserId);

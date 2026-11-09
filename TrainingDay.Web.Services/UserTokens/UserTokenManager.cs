@@ -1,52 +1,53 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TrainingDay.Common.Communication;
-using TrainingDay.Web.Data.UserToken;
+using TrainingDay.Web.Data.Results;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Entities;
 using TrainingDay.Web.Entities.MobileItems;
+using TrainingDay.Web.Services.MobileTokens.Models;
+using TrainingDay.Web.Services.UserTokens.Models;
 
 namespace TrainingDay.Web.Services.UserTokens;
 
 public class UserTokenManager(TrainingDayContext context, ILogger<UserTokenManager> logger) : IUserTokenManager
 {
-    public async Task<List<UserTokenModel>> GetItems(int page, int pageSize)
+    public async Task<List<UserTokenModel>> GetItemsAsync(int page, int pageSize, CancellationToken token)
     {
-        List<UserTokenModel> result = new List<UserTokenModel>();
-        List<UserMobileToken> userTokens = await context.UserTokens.AsNoTracking()
+        // One query instead of two extra queries per row.
+        return await context.UserTokens.AsNoTracking()
+            .OrderBy(item => item.Id)
             .Skip((page - 1) * pageSize).Take(pageSize)
-            .ToListAsync();
-
-        foreach (UserMobileToken userToken in userTokens)
-        {
-            var user = await context.MobileUsers.FirstOrDefaultAsync(a => a.Id == userToken.UserId);
-            List<MobileToken> tokens = await context.MobileTokens.AsNoTracking().Where(item => item.Id == userToken.TokenId).ToListAsync();
-            result.Add(new UserTokenModel()
+            .Select(item => new UserTokenModel()
             {
-                Tokens = tokens,
-                UserMail = user.Email,
-                UserName = user.UserName,
-                UserId = user.Id,
-            });
-        }
-
-        return result;
+                Tokens = context.MobileTokens
+                    .Where(mobileToken => mobileToken.Id == item.TokenId)
+                    .Select(mobileToken => new MobileTokenModel
+                    {
+                        Id = mobileToken.Id,
+                        Token = mobileToken.Token,
+                        Language = mobileToken.Language,
+                        Zone = mobileToken.Zone,
+                        LastSend = mobileToken.LastSend,
+                        LastWorkoutDateTime = mobileToken.LastWorkoutDateTime,
+                        LastBodyControlDateTime = mobileToken.LastBodyControlDateTime,
+                    })
+                    .ToList(),
+                UserMail = item.User.Email,
+                UserName = item.User.UserName,
+                UserId = item.User.Id,
+            })
+            .ToListAsync(token);
     }
 
     public async Task RemoveNotExistToken(MobileToken token)
     {
+        // Only the device link goes away; the user account and its synced data are kept.
         UserMobileToken userToken = await context.UserTokens.FirstOrDefaultAsync(item => item.TokenId == token.Id);
         if (userToken != null)
         {
             logger.LogInformation($"Remove UserToken {userToken.Id}");
             context.UserTokens.Remove(userToken);
-
-            var user = await context.MobileUsers.FindAsync(userToken.UserId);
-            if (user != null)
-            {
-                logger.LogInformation($"Remove user {user.Id}");
-                context.Remove(user);
-            }
         }
 
         context.MobileTokens.Remove(token);
@@ -55,21 +56,21 @@ public class UserTokenManager(TrainingDayContext context, ILogger<UserTokenManag
         await context.SaveChangesAsync();
     }
 
-    public async Task ConnectTokenUser(MobileUserToken repo, CancellationToken token)
+    public async Task<Result> ConnectTokenUser(MobileUserToken repo, CancellationToken token)
     {
-        var mobileToken = await context.MobileTokens.FirstOrDefaultAsync(a => a.Token == repo.Token);
+        var mobileToken = await context.MobileTokens.FirstOrDefaultAsync(a => a.Token == repo.Token, token);
         if (mobileToken is null)
         {
-            throw new KeyNotFoundException($"Token not found: {repo.Token}");
+            return UserTokenErrors.TokenNotFound;
         }
 
-        var user = await context.MobileUsers.FirstOrDefaultAsync(a => a.Id == repo.UserId);
+        var user = await context.MobileUsers.FirstOrDefaultAsync(a => a.Id == repo.UserId, token);
         if (user is null)
         {
-            throw new KeyNotFoundException($"User not found: {repo.UserId}");
+            return UserTokenErrors.UserNotFound;
         }
 
-        var userExist = context.UserTokens.FirstOrDefault(item => item.UserId == user.Id);
+        var userExist = await context.UserTokens.FirstOrDefaultAsync(item => item.UserId == user.Id, token);
         if (userExist is null)
         {
             var newUserToken = new UserMobileToken()
@@ -83,9 +84,9 @@ public class UserTokenManager(TrainingDayContext context, ILogger<UserTokenManag
         else
         {
             userExist.TokenId = mobileToken.Id;
-            context.Update(userExist);
         }
 
         await context.SaveChangesAsync(token);
+        return Result.Success();
     }
 }

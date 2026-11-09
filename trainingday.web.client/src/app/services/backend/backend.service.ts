@@ -7,6 +7,7 @@ import { catchError } from 'rxjs/operators';
 import { BlogPostEditViewModel, BlogPreview } from '../../data/blog/blog-preview.model';
 import { BlogDetails } from '../../data/blog/blog-details.model';
 import { environment } from '../../../environment/environment';
+import { toBlogCultureId, toContentCulture } from '../culture/content-culture';
 
 @Injectable({
   providedIn: 'root'
@@ -79,7 +80,7 @@ export class BackendService {
 
   getBlogPosts(culture: string, page: number, pageSize: number): Observable<BlogPreview[]> {
     let params = new HttpParams()
-      .set('culture', culture == 'en'? 1 : 2)
+      .set('culture', toBlogCultureId(toContentCulture(culture)))
       .set('page', page)
       .set('pageSize', pageSize);
     return this.http.get<BlogPreview[]>(`${this.baseUrl}/search`, { params });

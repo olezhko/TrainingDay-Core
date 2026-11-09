@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TrainingDay.Common.Communication;
-using TrainingDay.Web.Data.UserToken;
+using TrainingDay.Web.Server.Extensions;
+using TrainingDay.Web.Server.Mapper;
+using TrainingDay.Web.Server.Models.UserTokens;
 using TrainingDay.Web.Services.UserTokens;
 
 namespace TrainingDay.Web.Server.Controllers
@@ -9,10 +12,13 @@ namespace TrainingDay.Web.Server.Controllers
     [Route("[controller]")]
     public class UserTokenController(IUserTokenManager manager) : ControllerBase
     {
+        // Lists every user's email, so admins only.
         [HttpGet]
-        public async Task<List<UserTokenModel>> GetItems(int page, int pageSize)
+        [Authorize(Roles = "Admin")]
+        public async Task<List<UserTokenDto>> GetItems(int page, int pageSize, CancellationToken cancellationToken)
         {
-            return await manager.GetItems(page, pageSize);
+            var items = await manager.GetItemsAsync(page, pageSize, cancellationToken);
+            return [.. items.Select(item => item.ToDto())];
         }
 
         [HttpPost("connect")]
@@ -23,7 +29,11 @@ namespace TrainingDay.Web.Server.Controllers
                 return BadRequest();
             }
 
-            await manager.ConnectTokenUser(repo, cancellationToken);
+            var result = await manager.ConnectTokenUser(repo, cancellationToken);
+            if (result.IsFailure)
+            {
+                return this.Problem(result.Error);
+            }
 
             return Ok();
         }

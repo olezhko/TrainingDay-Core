@@ -48,6 +48,13 @@ Project dependency chain (top depends on bottom):
   `DeepSeekService` (chat completions with the exercise list in the prompt); `AI:Provider` (`OpenAI`/`DeepSeek`) picks one
   per request. Shared prompt rules live in `OpenAI/ExerciseAiPrompt.cs`.
   Background work runs through `ConsumeScopedServiceHostedService` → `IScopedProcessingService`.
+  Controllers never use `TrainingDayContext` directly; they call a manager.
+  Managers never return or accept EF entities: they map entity ↔ domain model (`<Feature>/Models/*Model`, mappers in
+  `Services/Mapping/`), and controllers map domain model ↔ API DTO in `Server/Mapper/`.
+  Expected failures (not found, unknown culture, …) are returned, not thrown: managers return `Result`/`Result<T>`
+  (`TrainingDay.Web.Data/Results`) with an `Error` defined in the feature's static `*Errors` class
+  (e.g. `Exercises/ExerciseErrors.cs`). Controllers check `result.IsFailure` and return `this.Problem(result.Error)`
+  (`Extensions/ResultExtensions.cs`, maps `ErrorType` to the status code).
 - `TrainingDay.Web.Database`: `TrainingDayContext` (EF Core, MySQL via `MySql.EntityFrameworkCore`, ASP.NET Identity
   with `MobileUser` / `IdentityRole<Guid>`), migrations, `AuditSaveChangesInterceptor`, `ExercisesInitializer` seed data.
 - `TrainingDay.Web.Data`: DTOs/view models and repository interfaces shared by services.
@@ -61,7 +68,10 @@ and the `Admin`/`User` roles are created. Firebase is initialized from `Training
 `OpenAI`, `ApiSettings` config sections.
 
 Auth: two schemes are combined in the default policy — Identity cookies (website) and JWT bearer (mobile app).
-For `/api/*` paths the cookie handler returns 401/403 instead of redirecting. Rate limiting is configured in
+For `/api/*` paths the cookie handler returns 401/403 instead of redirecting.
+Account logic (register, login, password reset, email confirmation, settings, delete, current user id) lives in
+`Services/Accounts/IAccountManager`; controllers don't touch `UserManager`/`SignInManager`/`MobileUser`. Its errors go
+out as plain text via `this.PlainError(error)` because existing app versions read them as strings. Rate limiting is configured in
 `Extensions/RateLimitingExtensions.cs`.
 
 Frontend (`trainingday.web.client`): Angular 17 standalone components, NgRx (exercise store in `services/ngrx`),

@@ -7,6 +7,7 @@ using Serilog;
 using System.Text;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Server.Extensions;
+using TrainingDay.Web.Server.Middleware;
 using TrainingDay.Web.Services;
 
 Serilog.Core.Logger logger = new LoggerConfiguration()
@@ -26,13 +27,21 @@ try
     var conString = builder.Configuration.GetConnectionString("DefaultConnection");
     builder.Services.AddDbContext<TrainingDayContext>(options => options.UseMySQL(conString));
 
+    // Credentials (the auth cookie) are allowed, so only our own site may call the API from a browser.
+    // The mobile app sends no Origin header and is not affected.
+    var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
+    if (allowedOrigins is not { Length: > 0 })
+    {
+        allowedOrigins = ["https://trainingday.space", "https://www.trainingday.space"];
+    }
+
     var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
     builder.Services.AddCors(options =>
     {
         options.AddPolicy(MyAllowSpecificOrigins, corsPolicyBuilder =>
         {
             corsPolicyBuilder
-                .SetIsOriginAllowed(_ => true)
+                .WithOrigins(allowedOrigins)
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials();
@@ -40,6 +49,8 @@ try
     });
 
     builder.Services.AddControllers();
+    builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+    builder.Services.AddProblemDetails();
     builder.Services.InstallServices(builder.Configuration, builder.Environment);
 
     var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>() ?? new JwtSettings();
@@ -74,11 +85,16 @@ try
 
     var app = builder.Build();
 
+    app.UseExceptionHandler();
+
     // Prerendered pages live in folders (e.g. blogs/19/index.html); serve them at /blogs/19 without redirecting to /blogs/19/.
     app.UseDefaultFiles(new DefaultFilesOptions { RedirectToAppendTrailingSlash = false });
 
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
 
     app.UseHttpsRedirection();
     app.UseStaticFiles();

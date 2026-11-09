@@ -1,22 +1,22 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using TrainingDay.Common.Communication;
 using TrainingDay.Common.Extensions;
 using TrainingDay.Common.Models;
 using TrainingDay.Web.Data.OpenAI;
-using TrainingDay.Web.Database;
+using TrainingDay.Web.Server.Extensions;
 using TrainingDay.Web.Server.Mapper;
 using TrainingDay.Web.Server.ViewModels.Exercises;
 using TrainingDay.Web.Services.Exercises;
+using TrainingDay.Web.Services.Exercises.Models;
 
 namespace TrainingDay.Web.Server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ExercisesController(TrainingDayContext context,
+public class ExercisesController(
         IExerciseManager mngExercise,
         IAiService aiService,
         IWebHostEnvironment environment) : ControllerBase
@@ -30,109 +30,83 @@ public class ExercisesController(TrainingDayContext context,
         [FromQuery] string twoLetterCulture,
         CancellationToken cancellationToken)
     {
-        var query = context.Exercises
-            .Include(item => item.Culture)
-            .AsNoTracking()
-            .Where(item => item.Culture.Code == twoLetterCulture);
+        var filter = new ExerciseSearchFilter(
+            twoLetterCulture,
+            filterName,
+            selectedMuscle ?? [],
+            selectedTags ?? [],
+            selectedDifficulty ?? []);
 
-        if (!string.IsNullOrEmpty(filterName))
-        {
-            query = query.Where(item => item.Name.Contains(filterName, StringComparison.CurrentCultureIgnoreCase));
-        }
-
-        var entities = await query.OrderBy(item => item.CodeNum).ToListAsync(cancellationToken);
-        IEnumerable<ExerciseViewModel> result = entities.Select(item => new ExerciseViewModel(item));
-
-        if (selectedMuscle != null && selectedMuscle.Length > 0)
-        {
-            result = result.Where(item => selectedMuscle.Any(m => item.Muscles.Contains(m)));
-        }
-
-        if (selectedTags != null && selectedTags.Length > 0)
-        {
-            result = result.Where(item => selectedTags.Any(t => item.Tags.Contains(t)));
-        }
-
-        if (selectedDifficulty != null && selectedDifficulty.Length > 0)
-        {
-            result = result.Where(item => selectedDifficulty.Contains(item.DifficultType));
-        }
-
-        return Ok(result.ToList());
+        var exercises = await mngExercise.SearchAsync(filter, cancellationToken);
+        return Ok(exercises.Select(item => item.ToViewModel()).ToList());
     }
 
     [HttpGet]
-    public async Task<IActionResult> DetailsAsync(int? codeNum, string twoLetterCulture)
+    public async Task<IActionResult> DetailsAsync(int? codeNum, string twoLetterCulture, CancellationToken cancellationToken)
     {
-        var exercise = await context.Exercises.Include(item => item.Culture)
-                .AsNoTracking()
-            .SingleOrDefaultAsync(item => item.CodeNum == codeNum && item.Culture.Code == twoLetterCulture);
-
-        if (exercise == null)
+        if (codeNum == null)
         {
             return NotFound();
         }
 
-        return Ok(exercise.ToViewModel());
+        var result = await mngExercise.GetByCodeAsync(codeNum.Value, twoLetterCulture, cancellationToken);
+        if (result.IsFailure)
+        {
+            return this.Problem(result.Error);
+        }
+
+        return Ok(result.Value.ToViewModel());
     }
 
-    // POST: ExerciseViewModels/Create
     [HttpPost]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> CreateAsync([FromBody] ExerciseViewModel model)
+    public async Task<IActionResult> CreateAsync([FromBody] ExerciseViewModel model, CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        var exercise = model.ToEntity();
-        context.Exercises.Add(exercise);
-        await context.SaveChangesAsync();
-        return Ok(exercise);
+        var result = await mngExercise.CreateAsync(model.ToModel(), cancellationToken);
+        if (result.IsFailure)
+        {
+            return this.Problem(result.Error);
+        }
+
+        return Ok(result.Value.ToViewModel());
     }
 
     [HttpPost("image")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> SetImageAsync(UploadImageModel model, CancellationToken token)
     {
-        if (model.ImageFile != null)
+        if (model.ImageFile == null)
         {
-            using (var memoryStream = new MemoryStream())
-            {
-                await model.ImageFile.CopyToAsync(memoryStream);
-
-                // Upload the file if less than 2 MB
-                if (memoryStream.Length < 2097152)
-                {
-                    var folder = Path.Combine(environment.WebRootPath, "exercise_images");
-                    string filePath = Path.Combine(folder, model.CodeNum + ".jpg");
-                    using (Stream fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await model.ImageFile.CopyToAsync(fileStream);
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("File", "The file is too large.");
-                }
-            }
-
-            return Ok();
+            return BadRequest();
         }
 
-        return BadRequest();
+        await using var content = model.ImageFile.OpenReadStream();
+        var folder = Path.Combine(environment.WebRootPath, "exercise_images");
+        var result = await mngExercise.SaveImageAsync(model.CodeNum, content, model.ImageFile.Length, folder, token);
+        if (result.IsFailure)
+        {
+            return this.Problem(result.Error);
+        }
+
+        return Ok();
     }
 
     [HttpGet("editor")]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> GetEditParamsAsync(string cu)
+    public async Task<IActionResult> GetEditParamsAsync(string cu, CancellationToken cancellationToken)
     {
-        var culture = new CultureInfo(cu);
+        var lastCode = await mngExercise.GetLastCodeAsync(cu, cancellationToken);
+        if (lastCode.IsFailure)
+        {
+            return this.Problem(lastCode.Error);
+        }
 
-        var cul = await context.Cultures
-            .AsNoTracking()
-            .FirstOrDefaultAsync(item => item.Code == cu);
+        var culture = new CultureInfo(cu);
 
         EditParameters model = new EditParameters();
         model.AllMuscles = new List<SelectListItem>();
@@ -157,15 +131,14 @@ public class ExercisesController(TrainingDayContext context,
             });
         }
 
-        model.OfferedCode = mngExercise.GetLastCode(cul.Id);
+        model.OfferedCode = lastCode.Value;
 
         return Ok(model);
     }
 
-    // PUT: ExerciseViewModels/Edit/5
     [HttpPut("{id}")]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> EditAsync([FromRoute] int id, [FromBody] ExerciseViewModel exerciseViewModel)
+    public async Task<IActionResult> EditAsync([FromRoute] int id, [FromBody] ExerciseViewModel exerciseViewModel, CancellationToken cancellationToken)
     {
         if (id != exerciseViewModel.Id)
         {
@@ -177,42 +150,26 @@ public class ExercisesController(TrainingDayContext context,
             return BadRequest(ModelState);
         }
 
-        var existing = await context.Exercises.FindAsync(id);
-        if (existing == null)
+        var result = await mngExercise.UpdateAsync(id, exerciseViewModel.ToModel(), cancellationToken);
+        if (result.IsFailure)
         {
-            return NotFound();
+            return this.Problem(result.Error);
         }
 
-        var updated = exerciseViewModel.ToEntity();
-        existing.Name = updated.Name;
-        existing.CodeNum = updated.CodeNum;
-        existing.Description = updated.Description;
-        existing.MusclesString = updated.MusclesString;
-        existing.TagsValue = updated.TagsValue;
-        existing.DifficultType = updated.DifficultType;
-
-        await context.SaveChangesAsync();
-        return Ok(existing);
+        return Ok(result.Value.ToViewModel());
     }
 
     [HttpDelete("{id}")]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> DeleteAsync(int id)
+    public async Task<IActionResult> DeleteAsync(int id, CancellationToken cancellationToken)
     {
-        if (!ExerciseExists(id))
+        var result = await mngExercise.DeleteAsync(id, cancellationToken);
+        if (result.IsFailure)
         {
-            return NotFound();
+            return this.Problem(result.Error);
         }
 
-        var exerciseViewModel = await context.Exercises.FindAsync(id);
-        context.Exercises.Remove(exerciseViewModel);
-        await context.SaveChangesAsync();
         return Ok();
-    }
-
-    private bool ExerciseExists(int id)
-    {
-        return context.Exercises.Any(e => e.Id == id);
     }
 
     [HttpPost("query")]
@@ -237,7 +194,7 @@ public class ExercisesController(TrainingDayContext context,
         }
 
         var queryResponse = await aiService.GetExercisesByQueryAsync(query.Query, token);
-        var response = await mngExercise.GetExercisesByCodesAsync(queryResponse.Exercises.Select(item => item.Guid), token);
-        return Ok(response);
+        var exercises = await mngExercise.GetExercisesByCodesAsync(queryResponse.Exercises.Select(item => item.Guid), token);
+        return Ok(exercises.Select(item => item.ToResponse()).ToList());
     }
 }

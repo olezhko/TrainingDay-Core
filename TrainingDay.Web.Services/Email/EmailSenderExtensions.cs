@@ -1,8 +1,7 @@
 ﻿using System.Text.Encodings.Web;
 using System.Text;
-using TrainingDay.Web.Services.Email;
 
-namespace TrainingDay.Web.Server.Extensions;
+namespace TrainingDay.Web.Services.Email;
 
 public static class EmailSenderExtensions
 {

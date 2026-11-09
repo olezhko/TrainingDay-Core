@@ -4,6 +4,6 @@ namespace TrainingDay.Web.Services.YoutubeVideo
 {
 	public interface IYoutubeVideoCatalog
 	{
-		Task<List<YoutubeVideoItem>> GetVideoItemsAsync(string search, int maxCount = 10);
+		Task<List<YoutubeVideoItem>> GetVideoItemsAsync(string search, int maxCount = 10, CancellationToken token = default);
 	}
 }

@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TrainingDay.Common.Communication;
 using TrainingDay.Web.Data.BlogPosts;
 using TrainingDay.Web.Data.Blogs;
+using TrainingDay.Web.Data.Results;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Entities;
 using TrainingDay.Web.Services.Firebase;
@@ -10,94 +12,105 @@ using TrainingDay.Web.Services.Mapping;
 
 namespace TrainingDay.Web.Services.Blogs;
 
-public class BlogPostsManager(TrainingDayContext context, ILogger<BlogPostsManager> logger, IFirebaseService firebaseService) : IBlogPostsManager
+public class BlogPostsManager(TrainingDayContext context, ILogger<BlogPostsManager> logger, IServiceScopeFactory scopeFactory) : IBlogPostsManager
 {
-    public EditorData CreateEditorData()
+    public async Task<EditorData> CreateEditorDataAsync(CancellationToken token)
     {
         var result = new EditorData();
 
-        foreach (var post in context.Posts)
-        {
-            if (post.TagsString != null)
-            {
-                var tags = post.TagsString.Split(",").ToList();
-                foreach (var newTag in tags
-                             .Select(tag => new SelectItem<string>(tag, tag))
-                             .Where(newTag => result.Tags.All(item => item.Value != newTag.Value)))
-                {
-                    result.Tags.Add(newTag);
-                }
-            }
-        }
+        // Only the tag strings are needed, not the full posts with their content.
+        var tagStrings = await context.Posts.AsNoTracking()
+            .Where(post => post.TagsString != null)
+            .Select(post => post.TagsString)
+            .ToListAsync(token);
 
-        result.Cultures = context.Cultures.Select(item => new SelectItem<int>(item.Name, item.Id)).ToList();
+        result.Tags = tagStrings
+            .SelectMany(tags => tags.Split(","))
+            .Distinct()
+            .Select(tag => new SelectItem<string>(tag, tag))
+            .ToList();
+
+        result.Cultures = await context.Cultures.AsNoTracking()
+            .Select(item => new SelectItem<int>(item.Name, item.Id))
+            .ToListAsync(token);
 
         return result;
     }
 
-    public async Task<BlogPost> Create(BlogPostEditViewModel blogPost)
+    public async Task<Result<BlogPostEditViewModel>> CreateAsync(BlogPostEditViewModel blogPost, CancellationToken token)
     {
-        var blog = blogPost.ToEntity();
-        context.Add(blog.BlogPost);
-
-        await context.SaveChangesAsync();
-
-        context.Add(new BlogPostCulture()
+        if (!Enum.IsDefined(typeof(BlogsCultureTypes), blogPost.CultureId))
         {
-            BlogPostId = blog.BlogPost.Id,
-            CultureId = blog.CultureId
-        });
+            return BlogPostErrors.UnknownCulture;
+        }
 
-        await context.SaveChangesAsync();
+        // The culture row references the new post through its navigation, so one save inserts both.
+        var blog = blogPost.ToEntity();
+        context.Add(blog);
+        await context.SaveChangesAsync(token);
 
-        var culture = await context.Cultures.FindAsync(blog.CultureId);
+        StartSendBlogNotify(blogPost.Title, ((BlogsCultureTypes)blogPost.CultureId).ToLanguageCode());
 
-        StartSendBlogNotify(blogPost.Title, culture.Code);
-
-        return blog.BlogPost;
+        return blog.ToViewModel();
     }
 
+    // Runs after the request has finished, so it needs its own scope: the request's DbContext is disposed by then.
     private void StartSendBlogNotify(string message, string culture)
     {
         _ = Task.Run(async () =>
         {
-            var tokens = context.MobileTokens.AsNoTracking()
-                .Where(item => string.Equals(item.Language, culture, StringComparison.OrdinalIgnoreCase));
-            foreach (var tokenItem in tokens)
+            try
             {
-                try
+                using var scope = scopeFactory.CreateScope();
+                var scopedContext = scope.ServiceProvider.GetRequiredService<TrainingDayContext>();
+                var scopedFirebase = scope.ServiceProvider.GetRequiredService<IFirebaseService>();
+
+                // Plain equality translates to SQL; the MySQL column collation makes it case-insensitive.
+                var tokens = await scopedContext.MobileTokens.AsNoTracking()
+                    .Where(item => item.Language == culture)
+                    .Select(item => item.Token)
+                    .ToListAsync();
+
+                foreach (var token in tokens)
                 {
-                    var title = "New Blog";
-                    await firebaseService.SendMessage(tokenItem.Token, title, message, PushNotificationItem.BlogType, null);
+                    await scopedFirebase.SendMessage(token, "New Blog", message, PushNotificationItem.BlogType, null);
                 }
-                catch (Exception e)
-                {
-                    logger.LogError(e.ToString());
-                }
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e, "Failed to send blog notifications");
             }
         });
     }
 
-    public async Task<BlogPost> Edit(BlogPostEditViewModel blogPost)
+    public async Task<Result<BlogPostEditViewModel>> EditAsync(BlogPostEditViewModel blogPost, CancellationToken token)
     {
-        var blog = blogPost.ToEntity();
-        context.Update(blog);
-        await context.SaveChangesAsync();
-
-        return blog.BlogPost;
-    }
-
-    public async Task<bool> Delete(int id)
-    {
-        var blogPost = await context.Posts.SingleOrDefaultAsync(m => m.Id == id);
-        if (blogPost != null)
+        // Update() on a missing row would fail on save with a concurrency exception.
+        var exists = await context.PostCultures.AnyAsync(
+            item => item.Id == blogPost.Id && item.BlogPostId == blogPost.BlogId, token);
+        if (!exists)
         {
-            context.Posts.Remove(blogPost);
-            await context.SaveChangesAsync();
-            return true;
+            return BlogPostErrors.NotFound;
         }
 
-        return false;
+        var blog = blogPost.ToEntity();
+        context.Update(blog);
+        await context.SaveChangesAsync(token);
+
+        return blog.ToViewModel();
+    }
+
+    public async Task<Result> DeleteAsync(int id, CancellationToken token)
+    {
+        var blogPost = await context.Posts.SingleOrDefaultAsync(m => m.Id == id, token);
+        if (blogPost == null)
+        {
+            return BlogPostErrors.NotFound;
+        }
+
+        context.Posts.Remove(blogPost);
+        await context.SaveChangesAsync(token);
+        return Result.Success();
     }
 
     public async Task<IEnumerable<BlogPostEditViewModel>> Get(BlogsCultureTypes culture, int page, int pageSize, CancellationToken token)
@@ -114,19 +127,29 @@ public class BlogPostsManager(TrainingDayContext context, ILogger<BlogPostsManag
         return result.Select(item => item.ToViewModel());
     }
 
-    public async Task<BlogPostEditViewModel?> GetAsync(int id, CancellationToken token)
+    public async Task<IReadOnlyList<BlogSitemapItem>> GetSitemapItemsAsync(BlogsCultureTypes culture, CancellationToken token)
+    {
+        return await context.PostCultures
+            .AsNoTracking()
+            .Where(item => item.CultureId == (int)culture)
+            .OrderByDescending(item => item.BlogPost.Date)
+            .Select(item => new BlogSitemapItem(item.Id, item.BlogPost.Date))
+            .ToListAsync(token);
+    }
+
+    public async Task<Result<BlogPostEditViewModel>> GetAsync(int id, CancellationToken token)
     {
         var blogPost = await context.PostCultures
             .AsNoTracking()
             .Include(item => item.BlogPost)
             .SingleOrDefaultAsync(m => m.Id == id, cancellationToken: token);
 
-        return blogPost?.ToViewModel();
+        return blogPost is null ? BlogPostErrors.NotFound : blogPost.ToViewModel();
     }
 
     public async Task<IEnumerable<BlogResponse>> GetMobileBlogsAsync(int? cultureId, DateTime? createdFilter, CancellationToken token)
     {
-        var query = context.PostCultures.Include(item => item.BlogPost).AsNoTracking().AsQueryable();
+        var query = context.PostCultures.Include(item => item.BlogPost).AsNoTracking();
         if (createdFilter.HasValue)
         {
             query = query.Where(post => post.BlogPost.Date >= createdFilter.Value);

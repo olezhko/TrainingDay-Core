@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Xml.Linq;
-using TrainingDay.Web.Database;
+using TrainingDay.Web.Data.BlogPosts;
+using TrainingDay.Web.Services.Blogs;
+using TrainingDay.Web.Services.Exercises;
 
 namespace TrainingDay.Web.Server.Controllers;
 
 [ApiController]
 [ApiExplorerSettings(IgnoreApi = true)]
-public class SitemapController(TrainingDayContext context) : ControllerBase
+public class SitemapController(IBlogPostsManager blogPostsManager, IExerciseManager exerciseManager) : ControllerBase
 {
     private const string SiteUrl = "https://trainingday.space";
     private const string WebsiteCulture = "en";
@@ -18,19 +19,8 @@ public class SitemapController(TrainingDayContext context) : ControllerBase
     [ResponseCache(Duration = 3600)]
     public async Task<IActionResult> GetAsync(CancellationToken token)
     {
-        var blogs = await context.PostCultures
-            .AsNoTracking()
-            .Where(item => item.Culture.Code == WebsiteCulture)
-            .OrderByDescending(item => item.BlogPost.Date)
-            .Select(item => new { item.Id, item.BlogPost.Date })
-            .ToListAsync(token);
-
-        var exerciseCodes = await context.Exercises
-            .AsNoTracking()
-            .Where(item => item.Culture.Code == WebsiteCulture)
-            .OrderBy(item => item.CodeNum)
-            .Select(item => item.CodeNum)
-            .ToListAsync(token);
+        var blogs = await blogPostsManager.GetSitemapItemsAsync(BlogsCultureTypes.English, token);
+        var exerciseCodes = await exerciseManager.GetCodesAsync(WebsiteCulture, token);
 
         XNamespace ns = "http://www.sitemaps.org/schemas/sitemap/0.9";
 

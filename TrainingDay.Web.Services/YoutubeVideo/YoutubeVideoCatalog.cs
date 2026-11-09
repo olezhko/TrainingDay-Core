@@ -9,7 +9,7 @@ public class YoutubeVideoCatalog(IOptions<ApiSettings> settings) : IYoutubeVideo
 {
     private readonly ApiSettings _settings = settings.Value;
 
-    public async Task<List<YoutubeVideoItem>> GetVideoItemsAsync(string search, int maxCount = 10)
+    public async Task<List<YoutubeVideoItem>> GetVideoItemsAsync(string search, int maxCount = 10, CancellationToken token = default)
     {
         var result = new List<YoutubeVideoItem>();
 
@@ -24,7 +24,7 @@ public class YoutubeVideoCatalog(IOptions<ApiSettings> settings) : IYoutubeVideo
         searchListRequest.MaxResults = maxCount;
 
         // Call the search.list method to retrieve results matching the specified query term.
-        var searchListResponse = await searchListRequest.ExecuteAsync();
+        var searchListResponse = await searchListRequest.ExecuteAsync(token);
 
         // Add each result to the appropriate list, and then display the lists of
         // matching videos, channels, and playlists.

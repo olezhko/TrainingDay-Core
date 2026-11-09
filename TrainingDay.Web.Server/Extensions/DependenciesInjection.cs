@@ -7,6 +7,7 @@ using TrainingDay.Web.Data.OpenAI;
 using TrainingDay.Web.Data.Repositories;
 using TrainingDay.Web.Database;
 using TrainingDay.Web.Entities;
+using TrainingDay.Web.Services.Accounts;
 using TrainingDay.Web.Services;
 using TrainingDay.Web.Services.Auth;
 using TrainingDay.Web.Services.Blogs;
@@ -15,6 +16,7 @@ using TrainingDay.Web.Services.Email;
 using TrainingDay.Web.Services.Exercises;
 using TrainingDay.Web.Services.Extensions;
 using TrainingDay.Web.Services.Firebase;
+using TrainingDay.Web.Services.MobileTokens;
 using TrainingDay.Web.Services.Notification;
 using TrainingDay.Web.Services.OpenAI;
 using TrainingDay.Web.Services.Rabbit;
@@ -71,10 +73,13 @@ public static class DependenciesInjection
         services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
         services.AddScoped<IJwtTokenService, JwtTokenService>();
+        services.AddScoped<IAccountManager, AccountManager>();
 
         services.AddTransient<IYoutubeVideoCatalog, YoutubeVideoCatalog>();
+        services.AddScoped<IYoutubeVideoManager, YoutubeVideoManager>();
         services.AddScoped<IExerciseManager, ExerciseManager>();
         services.AddScoped<IUserTokenManager, UserTokenManager>();
+        services.AddScoped<IMobileTokenManager, MobileTokenManager>();
         services.AddScoped<IBlogPostsManager, BlogPostsManager>();
         services.AddScoped<ISocialWorkoutManager, SocialWorkoutManager>();
         services.AddScoped<IUserRepoManager, UserRepoManager>();

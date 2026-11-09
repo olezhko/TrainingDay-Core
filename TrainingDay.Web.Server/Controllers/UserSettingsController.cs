@@ -1,30 +1,22 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TrainingDay.Common.Models;
-using TrainingDay.Web.Entities;
+using TrainingDay.Web.Server.Extensions;
+using TrainingDay.Web.Services.Accounts;
+using TrainingDay.Web.Services.Accounts.Models;
 
 namespace TrainingDay.Web.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class UserSettingsController(UserManager<MobileUser> userManager, SignInManager<MobileUser> signInManager) : ControllerBase
+    public class UserSettingsController(IAccountManager accountManager) : ControllerBase
     {
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
-            var user = await userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-
-            return Ok(new UserSettingsDto
-            {
-                Nickname = user.UserName,
-                ShareCompletedWorkouts = user.ShareCompletedWorkouts,
-            });
+            var result = await accountManager.GetCurrentAsync(User);
+            return result.IsSuccess ? Ok(ToDto(result.Value)) : this.PlainError(result.Error);
         }
 
         [HttpPut]
@@ -35,31 +27,15 @@ namespace TrainingDay.Web.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = await userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-
-            if (!string.IsNullOrWhiteSpace(model.Nickname) && model.Nickname != user.UserName)
-            {
-                var result = await userManager.SetUserNameAsync(user, model.Nickname);
-                if (!result.Succeeded)
-                {
-                    return BadRequest(string.Join(" ", result.Errors.Select(e => e.Description)));
-                }
-
-                await signInManager.RefreshSignInAsync(user);
-            }
-
-            user.ShareCompletedWorkouts = model.ShareCompletedWorkouts;
-            await userManager.UpdateAsync(user);
-
-            return Ok(new UserSettingsDto
-            {
-                Nickname = user.UserName,
-                ShareCompletedWorkouts = user.ShareCompletedWorkouts,
-            });
+            // Plain-text errors, as before, for existing app versions.
+            var result = await accountManager.UpdateSettingsAsync(User, model.Nickname, model.ShareCompletedWorkouts);
+            return result.IsSuccess ? Ok(ToDto(result.Value)) : this.PlainError(result.Error);
         }
+
+        private static UserSettingsDto ToDto(AccountModel account) => new UserSettingsDto
+        {
+            Nickname = account.Nickname,
+            ShareCompletedWorkouts = account.ShareCompletedWorkouts,
+        };
     }
 }

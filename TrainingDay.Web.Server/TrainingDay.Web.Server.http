@@ -1,6 +1,139 @@
-@TrainingDay.Web.Server_HostAddress = http://localhost:5237
+@host = https://localhost:7081
+# Paste the accessToken from the login response here for the [Authorize] requests.
+@accessToken = paste-access-token-here
 
-GET {{TrainingDay.Web.Server_HostAddress}}/weatherforecast/
-Accept: application/json
+### ===== Auth (api/v1/Auth) =====
 
-###
+### Log in (returns accessToken + refreshToken)
+POST {{host}}/api/v1/Auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "P@ssw0rd!"
+}
+
+### Current user
+GET {{host}}/api/v1/Auth/enter
+Authorization: Bearer {{accessToken}}
+
+### Refresh tokens
+POST {{host}}/api/v1/Auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "paste-refresh-token-here"
+}
+
+### ===== Exercises =====
+
+### Search exercises (muscle/tag/difficulty are enum numbers, repeat the key for several)
+GET {{host}}/api/exercises/search?twoLetterCulture=en&filterName=press&selectedMuscle=0&selectedMuscle=1
+
+### Exercise details
+GET {{host}}/api/exercises?codeNum=1&twoLetterCulture=en
+
+### Exercise details - not found (404)
+GET {{host}}/api/exercises?codeNum=999999&twoLetterCulture=en
+
+### Exercise editor parameters (Admin)
+GET {{host}}/api/exercises/editor?cu=en
+Authorization: Bearer {{accessToken}}
+
+### AI exercise search
+POST {{host}}/api/exercises/query
+Content-Type: application/json
+
+{
+  "query": "exercises for lower back without equipment"
+}
+
+### AI exercise search - empty query (400)
+POST {{host}}/api/exercises/query
+Content-Type: application/json
+
+{
+  "query": ""
+}
+
+### ===== Blogs =====
+
+### Blog list (culture: 1 = en, 2 = ru)
+GET {{host}}/api/BlogPosts/search?culture=1&page=1&pageSize=10
+
+### Blog post
+GET {{host}}/api/BlogPosts?id=1
+
+### Blog editor data (Admin)
+GET {{host}}/api/BlogPosts/editor
+Authorization: Bearer {{accessToken}}
+
+### Mobile blog list
+GET {{host}}/api/MobileBlogs?cultureId=1
+
+### ===== Social workouts (api/v1/SocialWorkouts) =====
+
+### Feed
+GET {{host}}/api/v1/SocialWorkouts?page=1&pageSize=10
+
+### Like a workout
+POST {{host}}/api/v1/SocialWorkouts/1/like
+Authorization: Bearer {{accessToken}}
+
+### Unlike a workout
+DELETE {{host}}/api/v1/SocialWorkouts/1/like
+Authorization: Bearer {{accessToken}}
+
+### ===== Mobile tokens =====
+
+### Register or update a device token
+POST {{host}}/api/MobileTokens
+Content-Type: application/json
+
+{
+  "token": "test-device-token",
+  "language": "en",
+  "zone": "+03:00"
+}
+
+### Report an app action (0 = Enter, 1 = Workout, 2 = Weight)
+POST {{host}}/api/MobileTokens/action
+Content-Type: application/json
+
+{
+  "token": "test-device-token",
+  "action": 1
+}
+
+### List tokens active in the last 30 days (Admin)
+GET {{host}}/api/MobileTokens?lastActiveDays=30
+Authorization: Bearer {{accessToken}}
+
+### Get one token (Admin)
+GET {{host}}/api/MobileTokens/test-device-token
+Authorization: Bearer {{accessToken}}
+
+### ===== User data =====
+
+### Synced user repository
+GET {{host}}/api/v1/UserRepo
+Authorization: Bearer {{accessToken}}
+
+### User settings
+GET {{host}}/api/UserSettings
+Authorization: Bearer {{accessToken}}
+
+### YouTube videos for an exercise
+GET {{host}}/api/YouTubeVideos/bench+press
+
+### ===== Support =====
+
+### Contact form
+POST {{host}}/support/contact-me
+Content-Type: application/json
+
+{
+  "name": "Test",
+  "email": "user@example.com",
+  "message": "Hello from the .http file"
+}

@@ -7,6 +7,7 @@ import { BackendService } from '../../../services/backend/backend.service';
 import { BlogPreview } from '../../../data/blog/blog-preview.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
+import { ContentCulture, getContentCulture, toContentCulture } from '../../../services/culture/content-culture';
 
 @Component({
   selector: 'app-blog-list',
@@ -23,7 +24,7 @@ export class BlogListComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   public authService = inject(AuthService);
 
-  culture: string = 'en';
+  culture: ContentCulture = 'en';
   blogPosts = signal<BlogPreview[]>([]);
   page = 1;
   pageSize = 5;
@@ -34,11 +35,8 @@ export class BlogListComponent implements OnInit {
   }
 
   setCulture() {
-    // navigator is not available while prerendering at build time.
-    const clientCulture = typeof navigator !== 'undefined' ? navigator.language : 'en';
-
     const cultureFromRoute = this.route.snapshot.queryParams['cu'];
-    this.culture = cultureFromRoute ? cultureFromRoute : clientCulture.split('-')[0];
+    this.culture = cultureFromRoute ? toContentCulture(cultureFromRoute) : getContentCulture();
   }
 
   loadPosts() {

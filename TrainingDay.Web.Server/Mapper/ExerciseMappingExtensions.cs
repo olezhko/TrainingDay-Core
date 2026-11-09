@@ -1,28 +1,45 @@
-using Newtonsoft.Json;
-using TrainingDay.Common.Extensions;
+using System.Collections.ObjectModel;
 using TrainingDay.Common.Models;
-using TrainingDay.Web.Entities;
 using TrainingDay.Web.Server.ViewModels.Exercises;
+using TrainingDay.Web.Services.Exercises.Models;
 
 namespace TrainingDay.Web.Server.Mapper;
 
 public static class ExerciseMappingExtensions
 {
-    public static ExerciseViewModel ToViewModel(this WebExercise entity) => new ExerciseViewModel(entity);
+    public static ExerciseViewModel ToViewModel(this ExerciseModel model) => new ExerciseViewModel
+    {
+        Id = model.Id,
+        Name = model.Name,
+        CodeNum = model.CodeNum,
+        StartingPositionDescription = model.StartingPosition,
+        ExecutionDescription = model.Execution,
+        AdviceDescription = model.Advice,
+        Muscles = new ObservableCollection<MusclesEnum>(model.Muscles),
+        Tags = [.. model.Tags],
+        CultureCode = model.CultureCode,
+        DifficultType = model.DifficultType,
+    };
 
-    public static WebExercise ToEntity(this ExerciseViewModel vm) => new WebExercise
+    public static ExerciseModel ToModel(this ExerciseViewModel vm) => new ExerciseModel
     {
         Id = vm.Id,
         Name = vm.Name,
         CodeNum = vm.CodeNum,
-        Description = JsonConvert.SerializeObject(new Description
-        {
-            StartPosition = vm.StartingPositionDescription,
-            Advice = vm.AdviceDescription,
-            Execution = vm.ExecutionDescription,
-        }),
-        MusclesString = ExerciseExtensions.ConvertFromMuscleListToString(vm.Muscles.ToList()),
-        TagsValue = ExerciseExtensions.ConvertTagListToInt(vm.Tags.ToList()),
+        StartingPosition = vm.StartingPositionDescription,
+        Execution = vm.ExecutionDescription,
+        Advice = vm.AdviceDescription,
+        Muscles = [.. vm.Muscles],
+        Tags = [.. vm.Tags],
+        CultureCode = vm.CultureCode,
         DifficultType = vm.DifficultType,
     };
+
+    public static WorkoutExerciseResponse ToResponse(this WorkoutExercise model) => new WorkoutExerciseResponse(
+        model.ExerciseId,
+        model.Name,
+        model.Description,
+        model.Code,
+        [.. model.Tags.Select(tag => new NamedValueResponse(tag.Id, tag.Name))],
+        [.. model.Muscles.Select(muscle => new NamedValueResponse(muscle.Id, muscle.Name))]);
 }

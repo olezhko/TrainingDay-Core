@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TrainingDay.Web.Data.BlogPosts;
-using TrainingDay.Web.Entities;
+using TrainingDay.Web.Server.Extensions;
 using TrainingDay.Web.Services.Blogs;
 
 namespace TrainingDay.Web.Server.Controllers;
@@ -19,39 +19,43 @@ public class BlogPostsController(IBlogPostsManager blogService) : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAsync(int id, CancellationToken token)
     {
-        var blogPost = await blogService.GetAsync(id, token);
-        if (blogPost == null)
+        var result = await blogService.GetAsync(id, token);
+        if (result.IsFailure)
         {
-            return NotFound();
+            return this.Problem(result.Error);
         }
 
-        return Ok(blogPost);
+        return Ok(result.Value);
     }
 
     [HttpGet("editor")]
     [Authorize(Roles = "Admin")]
-    public IActionResult GetEditorData()
+    public async Task<IActionResult> GetEditorDataAsync(CancellationToken token)
     {
-        return Ok(blogService.CreateEditorData());
+        return Ok(await blogService.CreateEditorDataAsync(token));
     }
 
     [HttpPost]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> CreateAsync([FromBody] BlogPostEditViewModel blogPost)
+    public async Task<IActionResult> CreateAsync([FromBody] BlogPostEditViewModel blogPost, CancellationToken token)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        var blog = await blogService.Create(blogPost);
+        var result = await blogService.CreateAsync(blogPost, token);
+        if (result.IsFailure)
+        {
+            return this.Problem(result.Error);
+        }
 
-        return Ok(blog);
+        return Ok(result.Value);
     }
 
     [HttpPut]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> EditAsync(int id, [FromBody] BlogPostEditViewModel blogPost)
+    public async Task<IActionResult> EditAsync(int id, [FromBody] BlogPostEditViewModel blogPost, CancellationToken token)
     {
         if (id != blogPost.Id)
         {
@@ -63,20 +67,25 @@ public class BlogPostsController(IBlogPostsManager blogService) : ControllerBase
             return BadRequest();
         }
 
-        var blog = await blogService.Edit(blogPost);
+        var result = await blogService.EditAsync(blogPost, token);
+        if (result.IsFailure)
+        {
+            return this.Problem(result.Error);
+        }
 
-        return Ok(blog);
+        return Ok(result.Value);
     }
 
     [HttpDelete]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> DeleteAsync(int id)
+    public async Task<IActionResult> DeleteAsync(int id, CancellationToken token)
     {
-        if (await blogService.Delete(id))
+        var result = await blogService.DeleteAsync(id, token);
+        if (result.IsFailure)
         {
-            return Ok();
+            return this.Problem(result.Error);
         }
 
-        return NotFound();
+        return Ok();
     }
 }

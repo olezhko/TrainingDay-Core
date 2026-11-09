@@ -1,3 +1,4 @@
+using TrainingDay.Web.Data.Results;
 using TrainingDay.Web.Entities;
 
 namespace TrainingDay.Web.Services.Auth;
@@ -13,6 +14,7 @@ public class TokenResult
 public interface IJwtTokenService
 {
     Task<TokenResult> IssueTokensAsync(MobileUser user, CancellationToken cancellationToken = default);
-    Task<TokenResult?> RefreshAsync(string refreshToken, CancellationToken cancellationToken = default);
+    /// <summary>Fails with <see cref="AuthErrors.InvalidRefreshToken"/> when the token is unknown, revoked or expired.</summary>
+    Task<Result<TokenResult>> RefreshAsync(string refreshToken, CancellationToken cancellationToken = default);
     Task RevokeAsync(string refreshToken, CancellationToken cancellationToken = default);
 }

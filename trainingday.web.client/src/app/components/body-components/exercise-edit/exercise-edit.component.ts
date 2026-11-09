@@ -21,6 +21,8 @@ export class ExerciseEditComponent implements OnInit {
   private fb = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
 
+  // The editor works on the English catalog; the server needs the culture to create an exercise.
+  private readonly cultureCode = 'en';
   private codeNum = 0;
   private exerciseDbId = 0;
 
@@ -48,7 +50,7 @@ export class ExerciseEditComponent implements OnInit {
       difficultType: [1, Validators.required],
     });
 
-    this.backendService.getExerciseEditParams('en')
+    this.backendService.getExerciseEditParams(this.cultureCode)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: params => {
@@ -56,7 +58,7 @@ export class ExerciseEditComponent implements OnInit {
           this.tags.set(params.allTags);
 
           if (this.codeNum) {
-            this.backendService.getExerciseDetails(this.codeNum, 'en')
+            this.backendService.getExerciseDetails(this.codeNum, this.cultureCode)
               .pipe(takeUntilDestroyed(this.destroyRef))
               .subscribe({
                 next: exercise => {
@@ -102,6 +104,7 @@ export class ExerciseEditComponent implements OnInit {
       difficultType: v.difficultType,
       muscles: v.selectedMuscles?.map((m: any) => parseInt(m.value)) ?? [],
       tags: v.selectedTags?.map((t: any) => parseInt(t.value)) ?? [],
+      cultureCode: this.cultureCode,
     };
 
     const request$ = this.exerciseDbId === 0

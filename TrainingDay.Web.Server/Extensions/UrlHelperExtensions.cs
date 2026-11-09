@@ -5,12 +5,11 @@ namespace TrainingDay.Web.Server.Extensions;
 
 public static class UrlHelperExtensions
 {
-    // Generates a link that lands on the Angular SPA, which then calls GET /api/auth/confirm
-    public static string EmailConfirmationLink(this IUrlHelper urlHelper, string userId, string code, string scheme)
+    // URL of GET /api/v1/auth/confirm without the query; AccountManager appends userId and code.
+    public static string EmailConfirmationUrl(this IUrlHelper urlHelper, string scheme)
     {
         var request = urlHelper.ActionContext.HttpContext.Request;
-        var baseUrl = $"{scheme}://{request.Host}/api/v1/auth";
-        return $"{baseUrl}/confirm?userId={WebUtility.UrlEncode(userId)}&code={WebUtility.UrlEncode(code)}";
+        return $"{scheme}://{request.Host}/api/v1/auth/confirm";
     }
 
     // Generates a link that lands on the Angular SPA reset-password page

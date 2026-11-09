@@ -1,25 +1,20 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using System.Security.Cryptography;
-using TrainingDay.Web.Entities;
 using TrainingDay.Web.Server.Extensions;
 using TrainingDay.Web.Server.ViewModels.Auth;
+using TrainingDay.Web.Services.Accounts;
 using TrainingDay.Web.Services.Auth;
-using TrainingDay.Web.Services.Email;
-using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace TrainingDay.Web.Server.Controllers;
 
+// Account errors are returned as plain text (this.PlainError) because existing app versions read the message as a string.
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
 public class AuthController(
-    UserManager<MobileUser> userManager,
-    SignInManager<MobileUser> signInManager,
+    IAccountManager accountManager,
     IJwtTokenService jwtTokenService,
-    IEmailSender emailSender,
     ILogger<AuthController> logger) : ControllerBase
 {
     const string callbackScheme = "trainingday";
@@ -69,24 +64,8 @@ public class AuthController(
         if (!ModelState.IsValid)
             return BadRequest("Invalid registration data.");
 
-        var existing = await userManager.FindByEmailAsync(model.Email);
-        if (existing != null)
-            return BadRequest("An account with this email already exists.");
-
-        var user = new MobileUser { UserName = model.Nick, Email = model.Email };
-        var result = await userManager.CreateAsync(user, model.Password);
-        if (result.Succeeded)
-        {
-            await userManager.AddToRoleAsync(user, "User");
-            logger.LogInformation("User created a new account with password.");
-            var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-            var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
-            await emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-            return Ok();
-        }
-
-        var errors = string.Join(" ", result.Errors.Select(e => e.Description));
-        return BadRequest(errors);
+        var result = await accountManager.RegisterAsync(model.Email, model.Password, model.Nick, ConfirmationUrl);
+        return result.IsSuccess ? Ok() : this.PlainError(result.Error);
     }
 
     [HttpPost("forgot")]
@@ -95,107 +74,37 @@ public class AuthController(
         if (!ModelState.IsValid)
             return BadRequest("Invalid email address.");
 
-        var user = await userManager.FindByEmailAsync(model.Email);
-        if (user == null)
-            return BadRequest("No account found with this email.");
-
-        var newPassword = GenerateRandomPassword();
-        var resetCode = await userManager.GeneratePasswordResetTokenAsync(user);
-        var resetResult = await userManager.ResetPasswordAsync(user, resetCode, newPassword);
-        if (!resetResult.Succeeded)
-        {
-            var errors = string.Join(" ", resetResult.Errors.Select(e => e.Description));
-            return BadRequest(errors);
-        }
-
-        if (!await userManager.IsEmailConfirmedAsync(user))
-        {
-            var confirmationCode = await userManager.GenerateEmailConfirmationTokenAsync(user);
-            var confirmationUrl = Url.EmailConfirmationLink(user.Id.ToString(), confirmationCode, Request.Scheme);
-            await emailSender.SendNewPasswordWithConfirmationAsync(model.Email, newPassword, confirmationUrl);
-        }
-        else
-        {
-            await emailSender.SendNewPasswordAsync(model.Email, newPassword);
-        }
-
-        logger.LogInformation($"Password reset for user {user.Email}");
-        return Ok();
-    }
-
-    private static string GenerateRandomPassword()
-    {
-        const string upper = "ABCDEFGHJKLMNPQRSTUVWXYZ";
-        const string lower = "abcdefghijkmnopqrstuvwxyz";
-        const string digits = "23456789";
-        const string special = "!@#$%^&*";
-        const string all = upper + lower + digits + special;
-
-        var chars = new[]
-        {
-            upper[RandomNumberGenerator.GetInt32(upper.Length)],
-            lower[RandomNumberGenerator.GetInt32(lower.Length)],
-            digits[RandomNumberGenerator.GetInt32(digits.Length)],
-            special[RandomNumberGenerator.GetInt32(special.Length)]
-        }.ToList();
-
-        for (int i = chars.Count; i < 12; i++)
-            chars.Add(all[RandomNumberGenerator.GetInt32(all.Length)]);
-
-        return new string(chars.OrderBy(_ => RandomNumberGenerator.GetInt32(int.MaxValue)).ToArray());
+        var result = await accountManager.ResetPasswordAsync(model.Email, ConfirmationUrl);
+        return result.IsSuccess ? Ok() : this.PlainError(result.Error);
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> LoginAsync(LoginViewModel model)
+    public async Task<IActionResult> LoginAsync(LoginViewModel model, CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
             return BadRequest("Invalid login data.");
 
-        var user = await userManager.FindByEmailAsync(model.Email);
-        if (user == null)
-            return BadRequest("No account found with this email.");
+        var result = await accountManager.LoginAsync(model.Email, model.Password, ConfirmationUrl, cancellationToken);
+        if (result.IsFailure)
+            return this.PlainError(result.Error);
 
-        if (!await userManager.IsEmailConfirmedAsync(user))
+        var (account, tokens) = result.Value;
+        return Ok(new
         {
-            logger.LogWarning("User not confirmed.");
-            var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-            var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
-            await emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-            return BadRequest("Please confirm your email before signing in.");
-        }
-
-        SignInResult result = await signInManager.PasswordSignInAsync(user.UserName!, model.Password, true, lockoutOnFailure: false);
-        if (result.Succeeded)
-        {
-            logger.LogInformation("User logged in.");
-            var tokens = await jwtTokenService.IssueTokensAsync(user);
-            var roles = await userManager.GetRolesAsync(user);
-            return Ok(new
-            {
-                email = user.Email,
-                nick = user.UserName,
-                accessToken = tokens.AccessToken,
-                accessTokenExpires = tokens.AccessTokenExpiresAt,
-                refreshToken = tokens.RefreshToken,
-                refreshTokenExpires = tokens.RefreshTokenExpiresAt,
-                role = roles.FirstOrDefault() ?? "User"
-            });
-        }
-
-        if (result.IsLockedOut)
-        {
-            logger.LogWarning("User account locked out.");
-            return BadRequest("Account is locked. Please try again later.");
-        }
-
-        return BadRequest("Invalid email or password.");
+            email = account.Email,
+            nick = account.Nickname,
+            accessToken = tokens.AccessToken,
+            accessTokenExpires = tokens.AccessTokenExpiresAt,
+            refreshToken = tokens.RefreshToken,
+            refreshTokenExpires = tokens.RefreshTokenExpiresAt,
+            role = account.Role
+        });
     }
 
     [HttpPost("logout")]
     public async Task<IActionResult> LogoutAsync()
     {
-        await signInManager.SignOutAsync();
-        logger.LogInformation("User logged out.");
+        await accountManager.SignOutAsync();
         return Ok();
     }
 
@@ -207,11 +116,14 @@ public class AuthController(
             return BadRequest(ModelState);
         }
 
-        var token = await jwtTokenService.RefreshAsync(model.RefreshToken, cancellationToken);
-        if (token == null)
+        var result = await jwtTokenService.RefreshAsync(model.RefreshToken, cancellationToken);
+        if (result.IsFailure)
         {
-            return Unauthorized("Invalid or expired refresh token.");
+            // Keep the original plain-text 401 body for existing app versions.
+            return Unauthorized(result.Error.Description);
         }
+
+        var token = result.Value;
 
         return Ok(new
         {
@@ -239,34 +151,21 @@ public class AuthController(
     [Authorize]
     public async Task<IActionResult> RemoveAccountAsync()
     {
-        var user = await userManager.GetUserAsync(User);
-        if (user == null)
-            return Unauthorized();
-
-        await signInManager.SignOutAsync();
-
-        var result = await userManager.DeleteAsync(user);
-        if (!result.Succeeded)
-        {
-            var errors = string.Join(" ", result.Errors.Select(e => e.Description));
-            return BadRequest(errors);
-        }
-
-        logger.LogInformation($"Account removed for user {user.Email}");
-        return Ok();
+        var result = await accountManager.DeleteAsync(User);
+        return result.IsSuccess ? Ok() : this.PlainError(result.Error);
     }
 
     [HttpGet("enter")]
     [Authorize]
     public async Task<IActionResult> EnterAsync()
     {
-        var user = await userManager.GetUserAsync(User);
-        if (user == null) 
-            return Unauthorized();
+        var result = await accountManager.GetCurrentAsync(User);
+        if (result.IsFailure)
+            return this.PlainError(result.Error);
 
-        var roles = await userManager.GetRolesAsync(user);
-        logger.LogInformation($"Enter {user.Email}");
-        return Ok(new { email = user.Email, nick = user.UserName, role = roles.FirstOrDefault() ?? "User" });
+        var account = result.Value;
+        logger.LogInformation("Enter {Email}", account.Email);
+        return Ok(new { email = account.Email, nick = account.Nickname, role = account.Role });
     }
 
     [HttpGet("confirm")]
@@ -277,21 +176,9 @@ public class AuthController(
             return BadRequest("Invalid confirmation link.");
         }
 
-        var user = await userManager.FindByIdAsync(userId);
-        if (user == null)
-        {
-            return NotFound("User not found.");
-        }
-
-        var result = await userManager.ConfirmEmailAsync(user, code);
-        if (result.Succeeded)
-        {
-            logger.LogInformation($"Email confirmed for user {user.Email}");
-            return Ok();
-        }
-
-        var errors = string.Join(", ", result.Errors.Select(e => e.Description));
-        logger.LogWarning($"Email confirmation failed for user {user.Email}: {errors}");
-        return BadRequest("Email confirmation failed.");
+        var result = await accountManager.ConfirmEmailAsync(userId, code);
+        return result.IsSuccess ? Ok() : this.PlainError(result.Error);
     }
+
+    private string ConfirmationUrl => Url.EmailConfirmationUrl(Request.Scheme);
 }

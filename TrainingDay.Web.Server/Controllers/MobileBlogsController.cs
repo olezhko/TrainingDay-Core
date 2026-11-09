@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TrainingDay.Common.Communication;
+using TrainingDay.Web.Server.Extensions;
 using TrainingDay.Web.Services.Blogs;
 
 namespace TrainingDay.Web.Server.Controllers;
@@ -18,14 +19,15 @@ public class MobileBlogsController(IBlogPostsManager blogPostsManager) : Control
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetMobileBlogAsync(int id, CancellationToken token)
     {
-        var blog = await blogPostsManager.GetAsync(id, token);
-
-        if (blog == null)
+        var result = await blogPostsManager.GetAsync(id, token);
+        if (result.IsFailure)
         {
-            return NotFound();
+            return this.Problem(result.Error);
         }
 
-        var result = new BlogResponse()
+        var blog = result.Value;
+
+        var response = new BlogResponse()
         {
             Id = blog.Id,
             Title = blog.Title,
@@ -34,6 +36,6 @@ public class MobileBlogsController(IBlogPostsManager blogPostsManager) : Control
             Tags = blog.Tags
         };
 
-        return Ok(result);
+        return Ok(response);
     }
 }

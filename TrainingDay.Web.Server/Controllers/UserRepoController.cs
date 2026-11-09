@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TrainingDay.Common.Models;
-using TrainingDay.Web.Entities;
+using TrainingDay.Web.Services.Accounts;
 using TrainingDay.Web.Services.UserRepo;
 
 namespace TrainingDay.Web.Server.Controllers;
@@ -10,18 +9,18 @@ namespace TrainingDay.Web.Server.Controllers;
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
 [Authorize]
-public class UserRepoController(IUserRepoManager manager, UserManager<MobileUser> userManager) : ControllerBase
+public class UserRepoController(IUserRepoManager manager, IAccountManager accountManager) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAsync(CancellationToken token)
     {
-        var user = await userManager.GetUserAsync(User);
-        if (user == null)
+        var userId = await accountManager.GetUserIdAsync(User);
+        if (userId == null)
         {
             return Unauthorized();
         }
 
-        var data = await manager.GetAsync(user.Id, token);
+        var data = await manager.GetAsync(userId.Value, token);
         return Ok(data);
     }
 
@@ -33,13 +32,13 @@ public class UserRepoController(IUserRepoManager manager, UserManager<MobileUser
             return BadRequest(ModelState);
         }
 
-        var user = await userManager.GetUserAsync(User);
-        if (user == null)
+        var userId = await accountManager.GetUserIdAsync(User);
+        if (userId == null)
         {
             return Unauthorized();
         }
 
-        await manager.UpsertAsync(user.Id, model, token);
+        await manager.UpsertAsync(userId.Value, model, token);
         return Ok();
     }
 }

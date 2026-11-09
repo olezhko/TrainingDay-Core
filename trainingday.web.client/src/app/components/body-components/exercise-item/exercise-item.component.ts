@@ -9,6 +9,7 @@ import { MusclesEnumEnglishLabels, MusclesEnum } from 'src/app/data/exercises/ex
 import { environment } from '../../../../environment/environment';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { SeoService } from 'src/app/services/seo/seo.service';
+import { getContentCulture } from 'src/app/services/culture/content-culture';
 
 @Component({
   selector: 'app-exercise-item',
@@ -33,7 +34,7 @@ export class ExerciseItemComponent implements OnInit {
   ngOnInit() {
     this.exerciseId = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.backendService.getExerciseDetails(this.exerciseId, "en")
+    this.backendService.getExerciseDetails(this.exerciseId, getContentCulture())
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (data: ExerciseDetails) => {

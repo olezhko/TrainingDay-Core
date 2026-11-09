@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { ExercisePreviewComponent } from '../exercise-preview/exercise-preview.component';
 import * as ExerciseActions from 'src/app/services/ngrx/actions/exercise.actions';
 import { selectExerciseList, selectIsLoading } from 'src/app/services/ngrx/actions/exercise.selectors';
+import { getContentCulture } from 'src/app/services/culture/content-culture';
 
 export interface MuscleOption {
   value: number;
@@ -78,12 +79,7 @@ export class ExerciseListComponent implements OnInit {
   ];
 
   private searchSubject = new Subject<string>();
-  private culture: string;
-
-  constructor() {
-    // navigator is not available while prerendering at build time.
-    this.culture = (typeof navigator !== 'undefined' && navigator.language.split('-')[0]) || 'en';
-  }
+  private culture = getContentCulture();
 
   ngOnInit(): void {
     this.searchSubject.pipe(
