@@ -63,8 +63,8 @@ Project dependency chain (top depends on bottom):
   Keep it free of server-only dependencies.
 
 Startup behavior (`Program.cs`): pending EF migrations are applied automatically on launch, exercises are seeded,
-and the `Admin`/`User` roles are created. Firebase is initialized from `TrainingDay.Web.Server/Settings/firebase.json`
-(the app won't start without it). Connection string `DefaultConnection`, plus `JwtSettings`, `EmailSettings`,
+and the `Admin`/`User` roles are created. Firebase is initialized from the `Firebase` config section, which holds the
+fields of the service-account JSON key (`private_key`, `client_email`, …); the app won't start without it. Connection string `DefaultConnection`, plus `JwtSettings`, `EmailSettings`,
 `OpenAI`, `ApiSettings` config sections.
 
 Auth: two schemes are combined in the default policy — Identity cookies (website) and JWT bearer (mobile app).

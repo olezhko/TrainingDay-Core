@@ -3,6 +3,7 @@ using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
+using System.Text.Json;
 using TrainingDay.Web.Data.OpenAI;
 using TrainingDay.Web.Data.Repositories;
 using TrainingDay.Web.Database;
@@ -100,30 +101,32 @@ public static class DependenciesInjection
 
         services.AddTransient<ISupportRepository, SupportRepository>();
 
-        string GetPathToSettingsFile(string settingsFileName)
-        {
-            var customFile = "Settings" + Path.DirectorySeparatorChar + settingsFileName;
-            if (File.Exists(customFile))
-            {
-                return customFile;
-            }
-
-            return "Settings" + Path.DirectorySeparatorChar + settingsFileName;
-        }
-
-        Stream GetStream(string settingsFileName)
-        {
-            return File.OpenRead(settingsFileName);
-        }
-
-        var firebaseFilePath = GetPathToSettingsFile("firebase.json");
-
         FirebaseApp.Create(new AppOptions()
         {
-            Credential = GoogleCredential.FromStream(GetStream(firebaseFilePath))
+            Credential = GetFirebaseCredential(configuration)
         });
 
         services.AddHostedService<ConsumeScopedServiceHostedService>();
         services.AddScoped<IScopedProcessingService, ScopedProcessingService>();
+    }
+
+    /// <summary>
+    /// Builds the Firebase service-account credential from the "Firebase" config section, which holds the fields of
+    /// the service-account JSON key (type, project_id, private_key, client_email, ...).
+    /// </summary>
+    private static GoogleCredential GetFirebaseCredential(IConfiguration configuration)
+    {
+        var section = configuration.GetSection("Firebase");
+        var fields = section.GetChildren()
+            .Where(item => item.Value != null)
+            .ToDictionary(item => item.Key, item => item.Value);
+
+        if (!fields.ContainsKey("private_key") || !fields.ContainsKey("client_email"))
+        {
+            throw new InvalidOperationException(
+                "The \"Firebase\" config section must contain the service-account key (private_key, client_email, ...).");
+        }
+
+        return GoogleCredential.FromJson(JsonSerializer.Serialize(fields));
     }
 }
